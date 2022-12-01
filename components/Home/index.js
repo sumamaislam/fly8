@@ -1,0 +1,11 @@
+export {default as Banner} from "./Banner"
+export {default as Email} from "./Email"
+export {default as Categories} from "./Categories"
+export {default as Cards} from "./Cards"
+export {default as Cards2} from "./Cards2"
+export {default as Cards3} from "./Cards3"
+export {default as Cards4} from "./Cards4"
+export {default as Raiting} from "./Raiting"
+export {default as Product} from "./product"
+export {default as Brands} from "./Brands"
+

@@ -1,4 +1,4 @@
-html,
+/* html,
 body {
   padding: 0;
   margin: 0;
@@ -23,4 +23,60 @@ a {
     color: white;
     background: black;
   }
+} */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.menus p {
+margin-top: 10px;
+font-size: 16px;
+margin-left: 5px;
+cursor: pointer;
 }
+.brand{
+  filter:opacity(0.08)
+  }
+  .brand:hover{
+    filter:opacity(1)
+  }
+  .btn{
+    display: none;
+    margin-top: -15%;
+    margin-left: 5%;
+    cursor: pointer;
+    position: absolute;
+    
+    
+  }
+  .card:hover .btn{
+  
+    /* transform: translatey(0); */
+    display: block;
+  cursor: pointer;
+    color: white;
+    background-color: #008338;
+    
+    
+  }
+  
+  .card img{
+  position: relative;
+  cursor: pointer;
+  }
+  .card img:hover {
+    filter: blur(2px);
+  }
+  .boxshadow{
+    box-shadow: 0px 1px 20px 0px ;
+-webkit-box-shadow: 0px 1px 5px 0px ;
+-moz-box-shadow: 0px 1px 10px 0px ;
+  }
+  /* Carousel{
+display: none;
+  } */
+  .thumbs-wrapper{
+    display:  none;
+  }
+  .control-dots{
+display: none;
+  }
