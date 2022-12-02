@@ -33,7 +33,7 @@ function Cards() {
                 key={index}
               >
                 <div className="justify-center flex">
-                  <Link href="#">
+                  <Link href={`/cards/${items.id}`}>
                     <img
                       className="rounded-t-lg max-w-[200px] 2xl:max-w-[250px]"
                       src={items.image[0]}

@@ -1,10 +1,16 @@
 import Link from "next/link";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { cards4 } from "../../data";
+import { addToCarts } from "../../redux/product";
 import Raiting from "./Raiting";
 
 function Cards4() {
-  return (
+ const dispatch = useDispatch();
+ const handleAdd = (items) =>{
+dispatch(addToCarts(items))
+ }
+   return (
     <div className="mt-[60px] md:mt-[100px]">
       <div className="container m-auto">
         
@@ -20,7 +26,7 @@ function Cards4() {
             >
               <div className="justify-center flex">
 
-              <Link href="#">
+              <Link href={`/cards/${items.id}`}> 
                 <img className="rounded-t-lg max-w-[200px] 2xl:max-w-[250px]" src={items.image[0]} alt="" />
               </Link>
               </div>
@@ -39,13 +45,12 @@ function Cards4() {
                 </div>
                 <div className="flex justify-center mt-[20px]">
 
-                <Link
-                  href="#"
-                  className="inline-flex items-center px-10 py-2 text-sm font-medium text-center text-[#0AA085] outline-[#0AA085] outline-1 outline  hover:bg-[#0AA085] hover:text-white "
-                  >
+              <div
+                  className="inline-flex items-center px-10 py-2 text-sm font-medium cursor-pointer text-center text-[#0AA085] outline-[#0AA085] outline-1 outline  hover:bg-[#0AA085] hover:text-white "
+                 onClick={()=>handleAdd(items)} >
                  Add to Cart
-                  
-                </Link>
+ </div>                 
+              
                       </div>
               </div>
             </div>

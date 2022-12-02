@@ -1,9 +1,15 @@
 import Link from "next/link";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { cards2 } from "../../data";
+import { addToCarts } from "../../redux/product";
 import Raiting from "./Raiting";
 
 function Cards2() {
+  const dispatch = useDispatch(); 
+const handleAdd = (data)=>{
+dispatch(addToCarts(data))
+}
   return (
     <div className="my-[60px] md:my-[100px]">
       <div className="container m-auto">
@@ -20,12 +26,12 @@ function Cards2() {
             >
               <div className="justify-center flex">
 
-              <Link href="#">
+              <Link href={`/cards/${items.id}`}>
                 <img className="rounded-t-lg max-w-[200px] 2xl:max-w-[250px]" src={items.image[0]} alt="" />
               </Link>
               </div>
               <div className="p-5">
-                <Link href="#">
+                <Link href="">
                   <h5 className=" text-[14px] 2xl:text-[16px] font-bold tracking-tight text-[black] dark:text-white">
                     {items.title}
                   </h5>
@@ -39,13 +45,12 @@ function Cards2() {
                 </div>
                 <div className="flex justify-center mt-[20px]">
 
-                <Link
-                  href="#"
-                  className="inline-flex items-center px-10 py-2 text-sm font-medium text-center text-[#0AA085] outline-[#0AA085] outline-1 outline  hover:bg-[#0AA085] hover:text-white "
-                  >
+                 <div
+                  className="inline-flex items-center px-10 py-2 text-sm font-medium text-center text-[#0AA085] cursor-pointer outline-[#0AA085] outline-1 outline  hover:bg-[#0AA085] hover:text-white "
+                 onClick={()=>handleAdd(items)} >
                 Add to Cart
                   
-                </Link>
+            </div>
                       </div>
               </div>
             </div>
