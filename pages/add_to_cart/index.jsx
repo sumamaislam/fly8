@@ -3,59 +3,96 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Footer, Header } from "../../components/common";
 import { addtocart } from "../../data";
+import { deleteCart, setTotalPrice, setTotalQuantity, updateCart } from "../../redux/product";
 
 export default function index() {
   const [total, setTotal] = useState("0");
-  const [cart, setCart] = useState(addtocart);
+  // const [cart, setCart] = useState(addtocart);
 
-  const { carts } = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+  const { carts, totalPrice } = useSelector((state) => state.product);
+  console.log(carts);
 
-  // console.log(carts)
+  const increment = (items, index) => {
+    let update = { ...items };
+    update.quantity = update.quantity + 1;
+    update.total = update.price * update.quantity;
+    dispatch(updateCart(update));
+  };
+
+  // useEffect(() => {
+  //   dispatch(setCarts([...carts]));
+  // }, [formVal]);
+  const handleDelete = (items) => {
+    dispatch(deleteCart(items.id));
+  };
+
+  const decerement = (items, index) => {
+    const updateVal = { ...items };
+    if (updateVal.quantity > 1) {
+      updateVal.quantity = updateVal.quantity - 1;
+      updateVal.total = updateVal.price * updateVal.quantity;
+    }
+    dispatch(updateCart(updateVal));
+  };
 
   useEffect(() => {
-    const newTotal = cart.reduce((a, b) => {
-      return a - -b.price * b.quantity;
-    }, 0);
-    setTotal(newTotal);
-  }, [cart]);
+    const totalAmount = carts?.reduce((a, v) => a + v.price * v.quantity, 0);
+    const totalQuantity = carts?.reduce((a, v) => a + v.quantity, 0);
+    // console.log(totalQuantity);
+    dispatch(setTotalPrice(totalAmount));
+    dispatch(setTotalQuantity(totalQuantity));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [carts]);
 
-  const increment = (data, index) => {
-    const increase = data.quantity;
-    console.log(increase + 1);
-    const item = [...cart];
-    item[index] = { ...item[index], quantity: increase + 1 };
-    setCart(item);
-  };
+  // useEffect(() => {
+  //   const newTotal = cart.reduce((a, b) => {
+  //     return a - -b.price * b.quantity;
+  //   }, 0);
+  //   setTotal(newTotal);
+  // }, [cart]);
 
-  const decerement = (data, index) => {
-    const decrease = data.quantity;
-    console.log(decrease - 1);
-    const item = [...cart];
-    item[index] = { ...item[index], quantity: decrease - 1 };
-    setCart(item);
-    if (data.quantity === 1) {
-      const filter = cart.filter((dell) => dell !== data);
-      setCart(filter);
-    }
-  };
-  const handleDelete = (data) => {
-    console.log("dell");
-    const filterd = cart.filter((items) => {
-      return data !== items;
-    });
-    setCart(filterd);
-  };
+  // const increment = (data, index) => {
+  //   const increase = data.quantity;
+  //   console.log(increase + 1);
+  //   const item = [...cart];
+  //   item[index] = { ...item[index], quantity: increase + 1 };
+  //   setCart(item);
+  // };
+
+  // const decerement = (data, index) => {
+  //   const decrease = data.quantity;
+  //   console.log(decrease - 1);
+  //   const item = [...cart];
+  //   item[index] = { ...item[index], quantity: decrease - 1 };
+  //   setCart(item);
+  //   if (data.quantity === 1) {
+  //     const filter = cart.filter((dell) => dell !== data);
+  //     setCart(filter);
+  //   }
+  // };
+  // const handleDelete = (data) => {
+  //   console.log("dell");
+  //   const filterd = cart.filter((items) => {
+  //     return data !== items;
+  //   });
+  //   setCart(filterd);
+  // };
   return (
     <div>
       <Header />
       <div className="lg:mt-[160px] md:mt-[50px] mt-[70px] container m-auto">
         <div className=" text-center  p-14">
-          {carts && carts.length > 0 && <p className="lg:text-4xl md:text-3xl text-2xl  font-semibold text-[#369688]">
-            Cart 
-          </p>}
-          { carts && carts.length > 0 && <p className="text-center  pt-[20px]">
-            You are eligible for free shipping!
-          </p>}
+          {carts && carts.length > 0 && (
+            <p className="lg:text-4xl md:text-3xl text-2xl  font-semibold text-[#369688]">
+              Cart
+            </p>
+          )}
+          {carts && carts.length > 0 && (
+            <p className="text-center  pt-[20px]">
+              You are eligible for free shipping!
+            </p>
+          )}
         </div>
         <div className="my-[2%] mb-[100px]">
           {/* <div className="w-[75%] m-auto">
@@ -188,28 +225,34 @@ export default function index() {
 
           <div class="overflow-x-auto relative w-[95%] 2xl:w-[65%] m-auto">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
-              {carts && carts.length > 0 && <thead class="text-xs  text-black h-14 uppercase bg-[#D8DF25]">
-                <tr>
-                  <th
-                    scope="col"
-                    class="py-3 px-6 md:w-[70%] md:text-[15px] text-[10px]"
-                  >
-                    PRODUCT NAME
-                  </th>
+              {carts && carts.length > 0 && (
+                <thead class="text-xs  text-black h-14 uppercase bg-[#D8DF25]">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="py-3 px-6 md:w-[70%] md:text-[15px] text-[10px]"
+                    >
+                      PRODUCT NAME
+                    </th>
 
-                  <th scope="col" class="py-3 px-6 md:text-[15px] text-[10px]">
-                    QUANTITY
-                  </th>
-                  <th scope="col" class="py-3 px-6 md:text-[15px] text-[10px] text-center">
-                    REMOVE
-                  </th>
-                </tr>
-              </thead>}
+                    <th
+                      scope="col"
+                      class="py-3 px-6 md:text-[15px] text-[10px]"
+                    >
+                      QUANTITY
+                    </th>
+                    <th
+                      scope="col"
+                      class="py-3 px-6 md:text-[15px] text-[10px] text-center"
+                    >
+                      REMOVE
+                    </th>
+                  </tr>
+                </thead>
+              )}
               <tbody>
                 {carts.map((items, index) => {
                   return (
-                  
-
                     <tr class="bg-white border-b ">
                       <td
                         scope="row"
@@ -217,12 +260,22 @@ export default function index() {
                       >
                         <div className="flex md:gap-5 gap-3 items-center">
                           <div className="md:w-[100px] w-[50px]  bg-[#D7DE26]">
-                            <img className=" hover:scale-125 transition ease-in-out delay-100 duration-700 " src={items.image[0]} alt="" />
+                            <img
+                              className=" hover:scale-125 transition ease-in-out delay-100 duration-700 "
+                              src={items.image[0]}
+                              alt=""
+                            />
                           </div>
                           <div>
-                            <p className="font-bold md:text-[16px] text-[10px] ">{items.name}</p>
-                            <p className="text-[#369688] md:text-[16px] md:my-2 text-[10px] hidden md:block">Lorem ipsum dolor sit amet.</p>
-                            <p className="font-semibold md:text-[16px] text-[10px]">${items.price}</p>
+                            <p className="font-bold md:text-[16px] text-[10px] ">
+                              {items.name}
+                            </p>
+                            <p className="text-[#369688] md:text-[16px] md:my-2 text-[10px] hidden md:block">
+                              Lorem ipsum dolor sit amet.
+                            </p>
+                            <p className="font-semibold md:text-[16px] text-[10px]">
+                              ${items.price}
+                            </p>
                           </div>
                         </div>
                       </td>
@@ -237,6 +290,7 @@ export default function index() {
                                 stroke-width="1.5"
                                 stroke="currentColor"
                                 class="md:w-4 md:h-4 w-2 h-2"
+                                onClick={() => increment(items, index)}
                               >
                                 <path
                                   stroke-linecap="round"
@@ -245,7 +299,9 @@ export default function index() {
                                 />
                               </svg>
                             </div>
-                            <div className="text-[10px] lg:text-[15px]">{items.quantity}</div>
+                            <div className="text-[10px] lg:text-[15px]">
+                              {items.quantity}
+                            </div>
                             <div className="text-[#369688]">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -254,6 +310,7 @@ export default function index() {
                                 stroke-width="1.5"
                                 stroke="currentColor"
                                 class="md:w-4 md:h-4 w-2 h-2"
+                                onClick={() => decerement(items, index)}
                               >
                                 <path
                                   stroke-linecap="round"
@@ -274,6 +331,7 @@ export default function index() {
                             stroke-width="1.5"
                             stroke="currentColor"
                             class="md:w-5 md:h-5 w-4 h-4"
+                            // onClick={() => handleDelete(items)}
                             onClick={() => handleDelete(items)}
                           >
                             <path
@@ -292,7 +350,7 @@ export default function index() {
             {carts && carts.length > 0 && (
               <div className="mt-[80px]">
                 <p className="text-center text-[#369688] font-bold text-[20px]">
-                  Subtotal: ${total}
+                  Subtotal: ${totalPrice}
                 </p>
                 <div className="flex justify-center my-[20px] mb-[120px]">
                   <Link href="/checkout">

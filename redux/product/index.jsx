@@ -1,15 +1,24 @@
-import { createSlice ,createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import { HYDRATE } from "next-redux-wrapper";
 // import request from "../request";
 // import { toast } from "react-toastify";
 // import RequestMessage from "../../src/RequestMessage";
 
-const localCarts = typeof localStorage !== "undefined" && localStorage.getItem("localCart") && JSON.parse(localStorage.getItem("localCart"));
+const localCart =
+  typeof localStorage !== "undefined" &&
+  localStorage.getItem("localCart") &&
+  JSON.parse(localStorage.getItem("localCart"));
 
 const initialState = {
   // carts: localCarts && localCarts?.carts?.length > 0 ? localCarts.carts : [],
-  carts: [],
+  // carts: [],
+  // totalPrice: 0,
+  // totalQuantity: 0,
   isLoading: false,
+
+  carts: localCart?.carts?.length > 0 ? localCart.carts : [],
+  totalPrice: localCart?.totalPrice ? localCart.totalPrice : 0,
+  totalQuantity: localCart?.totalQuantity ? localCart.totalQuantity : 0,
 };
 
 // export const sentContactRequest = createAsyncThunk("contact/sentContactRequest", async (payload, thunkAPI) => {
@@ -29,9 +38,37 @@ export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    addToCarts: (state, action) => {
-      state.carts = [...state.carts,action.payload];
+    setCarts: (state, action) => {
+      state.carts = action.payload;
     },
+    addToCarts: (state, action) => {
+      state.carts = [...state.carts, action.payload];
+      // action.payload.router.push("/cart");
+    },
+    moveToCheckout: (state, action) => {
+      state.carts = [...state.carts, action.payload];
+      // action.payload.router.push("/checkout");
+    },
+    updateCart: (state, action) => {
+      const index = state.carts.findIndex((o) => o.id === action.payload.id);
+      if (index >= 0) {
+        state.carts[index] = action.payload;
+      }
+    },
+    emptyCart: (state, action) => { 
+      state.carts = [];
+      state.totalPrice = 0;
+      state.totalQuantity = 0;
+    },
+    deleteCart: (state, action) => {
+      state.carts = state.carts.filter((c) => c.id !== action.payload);
+    },
+    setTotalPrice: (state, action) => {
+      state.totalPrice = action.payload;
+    },
+    setTotalQuantity: (state, action) => {
+      state.totalQuantity = action.payload;
+    }
   },
   extraReducers: (builder) => {
     // builder.addCase(HYDRATE, (state, action) => {
@@ -52,8 +89,7 @@ export const productSlice = createSlice({
     // });
   },
 });
-export const{
-  addToCarts
-} = productSlice.actions;
+export const { setCarts, addToCarts, moveToCheckout, updateCart, emptyCart, deleteCart, setTotalPrice, setTotalQuantity} =
+  productSlice.actions;
 
 export default productSlice.reducer;

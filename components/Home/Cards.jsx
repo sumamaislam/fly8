@@ -14,10 +14,8 @@ function Cards() {
 
   const handleAdd = (data) => {
     dispatch(addToCarts(data));
-    // router.push({ pathname: "/add_to_cart" });
-    console.log("called");
+    router.push({ pathname: "/add_to_cart" });
     console.log(router.pathname);
-    // const found=carts.find((data)=>)
   };
 
   console.log(cards[0].image);

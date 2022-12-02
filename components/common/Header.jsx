@@ -3,9 +3,8 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 
 function Header() {
-  const { carts } = useSelector((state) => state.product);
-  console.log("cart", carts.length);
-  //
+  const { totalQuantity } = useSelector((state) => state.product);
+  
   return (
     <div className=" shadow-lg fixed  top-0 z-30 w-full bg-white">
       <div className="container m-auto ">
@@ -73,11 +72,9 @@ function Header() {
                   </svg>
                 </Link>
               </p>
-              {carts && carts.length > 0 && (
                 <p className="text-[10px] absolute mt-[-25px] ml-[16px] bg-[#0AA085] px-[5px] rounded-full text-white">
-                  {/* {carts.length} */}
+                  {totalQuantity}
                 </p>
-              )}
             </div>
           </div>
         </div>
