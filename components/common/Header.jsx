@@ -71,7 +71,7 @@ function Header() {
             </div>
           </div>
 
-          <div className=" flex gap-4 pr-[20px]">
+          <div className=" flex gap-4 pr-[20px] cursor-pointer">
             <p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

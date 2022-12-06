@@ -226,7 +226,7 @@ export default function index() {
           <div class="overflow-x-auto relative w-[95%] 2xl:w-[65%] m-auto">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
               {carts && carts.length > 0 && (
-                <thead class="text-xs  text-black h-14 uppercase bg-[#D8DF25]">
+                <thead class="text-xs  text-white h-14 uppercase bg-[#369688]">
                   <tr>
                     <th
                       scope="col"
@@ -259,7 +259,7 @@ export default function index() {
                         class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white "
                       >
                         <div className="flex md:gap-5 gap-3 items-center">
-                          <div className="md:w-[100px] w-[50px]  bg-[#D7DE26]">
+                          <div className="md:w-[100px] w-[50px] ">
                             <img
                               className=" hover:scale-125 transition ease-in-out delay-100 duration-700 "
                               src={items.image[0]}
@@ -354,7 +354,7 @@ export default function index() {
                 </p>
                 <div className="flex justify-center my-[20px] mb-[120px]">
                   <Link href="/checkout">
-                    <button className="px-24 py-2 bg-[#D7DE26] font-semibold">
+                    <button className="px-24 py-2 text-white bg-[#369688] font-semibold">
                       CHECKOUT
                     </button>
                   </Link>

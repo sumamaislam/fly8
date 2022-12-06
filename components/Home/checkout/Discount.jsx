@@ -26,11 +26,11 @@ function Discount() {
                 <div className="flex gap-5 items-center">
                   <div className="relative ">
                     <img
-                      className="w-[80px]"
+                      className="w-[80px] py-[15px]"
                       src={item.image[0]}
                       alt=""
                     />
-                    <div className="absolute top-1 right-0 px-[6px] py-[1px] rounded-full border border-1 bg-white border-black text-[10px]  text-black font-bold">
+                    <div className="absolute top-2 right-0 px-[6px] py-[1px] rounded-full border border-1 bg-white border-black text-[10px]  text-black font-bold">
                     {item.quantity}
                     </div>
                   </div>
@@ -77,7 +77,7 @@ function Discount() {
         </div>
         <hr className=" border-green-700 mt-[20px]" />
 
-        <div className=" flex justify-between items-center mt-[20px]">
+        <div className=" flex justify-between items-center mt-[20px] mb-[100px]">
           <p className="text-[17px]">Total</p>
           <p>
             USD <span className="text-[26px]">${totalPrice}</span>

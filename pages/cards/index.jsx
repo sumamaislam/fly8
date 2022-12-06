@@ -12,6 +12,7 @@ const router = useRouter();
 const handleClick = (data) => {    
   console.log(data)
 dispatch(addToCarts(data)) 
+router.push({pathname:"/add_to_cart"})
 // router.push("/add_to_cart", undefined, { shallow: true });
 // router.push("/add_to_cart")
 console.log("called")
@@ -20,58 +21,66 @@ console.log(router.pathname)
   return (
     <div>
       <Header />
-      <div className="lg:mt-[160px] md:mt-[50px] mt-[70px] ">
-        <div className=" bg-[#D7DE26] text-center  p-14">
-          <p className="lg:text-4xl md:text-3xl text-2xl my-[4px] font-semibold text-[#369688]">
-            DELTA 8
+      <div className="lg:mt-[147px] md:mt-[40px] mt-[60px] ">
+        <div className=" bg-[#369688] text-center py-5">
+          <p className="lg:text-4xl md:text-3xl text-2xl my-[4px] font-semibold text-white">
+            DELTA-9o
           </p>
-          <p className="text-[16px] mt-[20px] text-center text-gray-500 font-semibold ">
-            {" "}
+          <p className="text-[16px] mt-[20px] text-center text-white font-semibold ">
+           
             Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum
             dolor sit amet.
           </p>
+          <p className="text-[16px] mt-[10px] text-center text-white font-semibold ">
+           
+            Lorem ipsum dolor sit amet Lorem ipsum dolor 
+          </p>
         </div>
         <div className="container m-auto">
-          <div className="wrapper antialiased text-gray-900 grid xl:grid-cols-4 lg:grid-cols-2 grid-cols-1 justify-center gap-10 px-[20px] my-[100px]">
+          <div className="wrapper antialiased text-gray-900 grid xl:grid-cols-4 lg:grid-cols-2 grid-cols-1 justify-center gap-4 px-[20px] my-[60px]">
             {cards.map((items, index) => {
               return (
                 <div className="" key={index}>
                  <Link href={`/cards/${items.id}`}> <img
                     src={items.image[0]}
                     alt="product image"
-                    className="w-full  object-cover object-center rounded-lg boxshadow"
+                    className="w-[300px] py-10 object-cover object-center rounded-lg m-auto border"
                     />
                     </Link>
-                  <div className="relative px-4 -mt-16  ">
-                    <div className="bg-white p-6 rounded-lg shadow-lg">
+                  <div className="relative px-8 -mt-11 m-auto w-[300px]">
+                    <div className="bg-white p-3 rounded-lg shadow-lg border ">
                       <div className="flex items-baseline">
-                        <span className="bg-[#D7DE26] text-teal-800 text-[11px] px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
+                        {/* <span className="bg-[#D7DE26] text-teal-800 text-[11px] px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
                           New
-                        </span>
-                        <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
+                        </span> */}
+                        <div className=" text-gray-600 uppercase text-md font-bold ">
                           {items.name}
                         </div>
                       </div>
 
-                      <h4 className="mt-3 text-md font-semibold uppercase leading-tight truncate">
+                      <h4 className="mt-2 text-[10px] font-semibold uppercase leading-tight truncate">
                         {items.title}
                       </h4>
 
-                      <div className="mt-1"> {items.price}</div>
+                      <div className="mt-1  text-xs "> {items.price}</div>
+                      <div className="flex items-center justify-between">
+
                       <div className="">
                         <Raiting />
                       </div>
-                      <div className="flex justify-center mt-[20px]">
-                        <Link
-                          href="#"
-                          className="inline-flex items-center px-10 py-2 text-sm font-medium text-center text-[#0AA085] outline-[#0AA085] outline-1 outline  hover:bg-[#0AA085] hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      <div className="flex justify-center mt-[5px]">
+                        <div
+                          className="inline-flex items-center px-3 py-1 text-xs font-medium text-center text-[#0AA085] outline-[#0AA085] outline-1 outline  hover:bg-[#0AA085] hover:text-white cursor-pointer  "
                        onClick={()=>handleClick(items)}
                        >
                           
                         Add to Cart
-                        </Link>
+                       </div>
                       </div>
-                      <div></div>
+                      </div>
+                      <div>
+                        
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -49,7 +49,7 @@ export default function Detail() {
                     href="#"
                     className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
                   >
-                    Projects
+                    View Flavours
                   </Link>
                 </div>
               </li>
@@ -68,7 +68,7 @@ export default function Detail() {
                     ></path>
                   </svg>
                   <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
-                    Flowbite
+                    Product Details
                   </span>
                 </div>
               </li>
@@ -76,18 +76,18 @@ export default function Detail() {
           </nav>
         </div>
 
-        <div className="flex lg:flex-row flex-col justify-center gap-8 px-[10px] py-[50px]">
+        <div className="flex lg:flex-row flex-col justify-center gap-12 px-[10px] py-[50px]">
           <div className="flex  gap-4">
-            <div className="w-[100px] ]">
+            <div className="w-[100px] ">
               {details.image.map((items, index) => {
                 return (
                   <div
-                    className="mb-[10px]"
+                    className="mb-[10px] py-[10px]"
                     key={index}
                     onClick={() => setShow(items)}
                   >
                     <img
-                      className={`bg-[#D8DF21]  border-black ${
+                      className={`  border-black p-2 ${
                         show === items ? "border-2 " : ""
                       } `}
                       src={items}
@@ -97,13 +97,13 @@ export default function Detail() {
                 );
               })}
             </div>
-            <div className="max-w-[600px] ">
-              <img className="bg-[#0AA085]" src={show} alt="" />
+            <div className="max-w-[500px] ">
+              <img className="" src={show} alt="" />
             </div>
           </div>
           <div>
-            <p className="text-[#0AA085] text-[14px]">{details.name}</p>
-            <p className="text-2xl font-semibold text-[#0AA085] ">
+            <p className="text-[14px]">{details.name}</p>
+            <p className="text-2xl font-semibold text-black ">
               {details.title}
             </p>
             <div className="flex items-center gap-2">
@@ -114,7 +114,7 @@ export default function Detail() {
               <div className="w-full">
                 <Link href="/add_to_cart">
                   <button
-                    className="w-full p-3 flex justify-center items-center gap-2 text-black font-bold bg-[#D8DF21]"
+                    className="w-full p-3 flex justify-center items-center gap-2 text-white font-bold bg-[#0AA085]"
                     onClick={handleAdd}
                   >
                     <svg
@@ -155,7 +155,7 @@ export default function Detail() {
                 </button>
               </div>
             </div>
-            <div className="max-w-[700px] text-[#0AA085] text-justify">
+            <div className="max-w-[700px]  text-justify">
               <h1 className="font-semibold text-[20px] pt-2">DESCRIPTION</h1>
               <p className="pt-2">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. it amet
@@ -169,7 +169,7 @@ export default function Detail() {
             </div>
 
             <Acordion />
-            <div className="flex gap-2 my-3 text-[#0AA085]">
+            <div className="flex gap-2 my-3 ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -186,7 +186,7 @@ export default function Detail() {
               </svg>
               <p className="font-bold"> Offers</p>
             </div>
-            <div className="text-[#0AA085] pl-6">
+            <div className=" pl-6">
               <li>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
                 officiis nostrum reiciendis.

@@ -88,8 +88,8 @@ export const categories = [
 export const cards = [
   {
     id: 1,
-    image: ["/Vape Mockups/1.png", "/Vape Mockups/1.png"],
-    name: "product name",
+    image: ["/images/p1.png"],
+    name: "DELTA 11 LIVE RESIN",
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
@@ -97,8 +97,8 @@ export const cards = [
   },
   {
     id: 2,
-    image: ["/Vape Mockups/2.png"],
-    name: "product name",
+    image: ["/images/p2.png"],
+    name: "DELTA-9o",
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
@@ -106,8 +106,8 @@ export const cards = [
   },
   {
     id: 3,
-    image: ["/Vape Mockups/3.png"],
-    name: "product name",
+    image: ["/images/p1.png"],
+    name: "MASTER BLEND",
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
@@ -115,8 +115,8 @@ export const cards = [
   },
   {
     id: 4,
-    image: ["/Vape Mockups/4.png"],
-    name: "product name",
+    image: ["/images/p2.png"],
+    name: "HHC",
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
@@ -124,58 +124,58 @@ export const cards = [
   },
   {
     id: 5,
-    image: ["/Vape Mockups/5.png"],
+    image: ["/images/p1.png"],
     name: "product name",
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
     quantity: 1,
   },
-  {
-    id: 6,
-    image: ["/Vape Mockups/9.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-    quantity: 1,
-  },
-  {
-    id: 7,
-    image: ["/Vape Mockups/7.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-    quantity: 1,
-  },
-  {
-    id: 8,
-    image: ["/Vape Mockups/8.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-    quantity: 1,
-  },
-  {
-    id: 9,
-    image: ["/Vape Mockups/6.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-    quantity: 1,
-  },
-  {
-    id: 10,
-    image: ["/Vape Mockups/3.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-    quantity: 1,
-  },
+  // {
+  //   id: 6,
+  //   image: ["/images/p1.png"],
+  //   name: "product name",
+  //   title:
+  //     "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+  //   price: " 45.99",
+  //   quantity: 1,
+  // },
+  // {
+  //   id: 7,
+  //   image: ["/images/p1.png"],
+  //   name: "product name",
+  //   title:
+  //     "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+  //   price: " 45.99",
+  //   quantity: 1,
+  // },
+  // {
+  //   id: 8,
+  //   image: ["/Vape Mockups/8.png"],
+  //   name: "product name",
+  //   title:
+  //     "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+  //   price: " 45.99",
+  //   quantity: 1,
+  // },
+  // {
+  //   id: 9,
+  //   image: ["/Vape Mockups/6.png"],
+  //   name: "product name",
+  //   title:
+  //     "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+  //   price: " 45.99",
+  //   quantity: 1,
+  // },
+  // {
+  //   id: 10,
+  //   image: ["/Vape Mockups/3.png"],
+  //   name: "product name",
+  //   title:
+  //     "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+  //   price: " 45.99",
+  //   quantity: 1,
+  // },
 ];
 
 export const cards2 = [
@@ -435,10 +435,10 @@ export const cards4 = [
 export const details = {
   id: 1,
   image: [
-    "/Vape Mockups/1.png",
-    "/Vape Mockups/2.png",
-    "/Vape Mockups/3.png",
-    "/Vape Mockups/4.png",
+    "/images/p2.png",
+    "/images/p1.png",
+    // "/images/p2.png",
+    // "/images/p1.png",
   ],
   name: "product name",
   title:
