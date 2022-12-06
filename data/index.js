@@ -93,7 +93,7 @@ export const cards = [
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
-    quantity:1
+    quantity: 1,
   },
   {
     id: 2,
@@ -102,7 +102,7 @@ export const cards = [
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
-    quantity:1
+    quantity: 1,
   },
   {
     id: 3,
@@ -111,7 +111,7 @@ export const cards = [
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
-    quantity:1
+    quantity: 1,
   },
   {
     id: 4,
@@ -120,9 +120,7 @@ export const cards = [
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
-    quantity:1
-    
-
+    quantity: 1,
   },
   {
     id: 5,
@@ -131,8 +129,7 @@ export const cards = [
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
-    quantity:1
-
+    quantity: 1,
   },
   {
     id: 6,
@@ -141,8 +138,7 @@ export const cards = [
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
-    quantity:1
-
+    quantity: 1,
   },
   {
     id: 7,
@@ -151,8 +147,7 @@ export const cards = [
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
-    quantity:1
-
+    quantity: 1,
   },
   {
     id: 8,
@@ -161,8 +156,7 @@ export const cards = [
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
-    quantity:1
-
+    quantity: 1,
   },
   {
     id: 9,
@@ -171,8 +165,7 @@ export const cards = [
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
-    quantity:1
-
+    quantity: 1,
   },
   {
     id: 10,
@@ -181,8 +174,7 @@ export const cards = [
     title:
       "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
     price: " 45.99",
-    quantity:1
-
+    quantity: 1,
   },
 ];
 
@@ -452,7 +444,6 @@ export const details = {
   title:
     "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
   price: " 45.99",
-
 };
 
 export const accordion = [
@@ -496,5 +487,140 @@ export const addtocart = [
     tittle: "Lorem ipsum dolor sit amet.",
     price: "30",
     quantity: 1,
+  },
+];
+
+export const flavours = [
+  {
+    id: 1,
+    name: "DELTA-9o",
+    path: "/",
+    submenu: [
+      {
+        id: 1,
+        name: "Mango Kush",
+        path: "/",
+      },
+      {
+        id: 2,
+        name: "Gelato",
+        path: "/",
+      },
+
+      {
+        id: 3,
+        name: "SourApple",
+        path: "/",
+      },
+      {
+        id: 4,
+        name: "GrandDaddy",
+        path: "/",
+      },
+      {
+        id: 5,
+        name: "BlueDream",
+        path: "/",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "DELTA 11 LIVE RESIN",
+    path: "/",
+    submenu: [
+      {
+        id: 1,
+        name: "AK-47",
+        path: "/",
+      },
+      {
+        id: 2,
+        name: "Train Wreck",
+        path: "/",
+      },
+
+      {
+        id: 3,
+        name: "Purple Punch",
+        path: "/",
+      },
+      {
+        id: 4,
+        name: "Wedding Cake",
+        path: "/",
+      },
+      {
+        id: 5,
+        name: "Rainbow Candy ",
+        path: "/",
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "Master Blend",
+    path: "/",
+    submenu: [
+      {
+        id: 1,
+        name: "Gushers",
+        path: "/",
+      },
+      {
+        id: 2,
+        name: "Dubion Poison",
+        path: "/",
+      },
+
+      {
+        id: 3,
+        name: "Strawberry Cough",
+        path: "/",
+      },
+      {
+        id: 4,
+        name: "GodsGift",
+        path: "/",
+      },
+      {
+        id: 5,
+        name: "lemon Haze",
+        path: "/",
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: "HHC",
+    path: "/",
+    submenu: [
+      {
+        id: 1,
+        name: "Strawberry Lemonad",
+        path: "/",
+      },
+      {
+        id: 2,
+        name: "Pineapple Express",
+        path: "/",
+      },
+
+      {
+        id: 3,
+        name: "Movi wowie",
+        path: "/",
+      },
+      {
+        id: 4,
+        name: "BlackBerry",
+        path: "/",
+      },
+      {
+        id: 5,
+        name: "Animal cookies",
+        path: "/",
+      },
+    ],
   },
 ];

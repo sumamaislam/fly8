@@ -80,7 +80,12 @@ display: none;
   .control-dots{
 display: none;
   }
-
+  .control-arrow{
+   display: none; 
+  }
+  .carousel-status{
+    display: none;
+  }
 
   li > ul {
     transform: translatex(100%) scale(0);
@@ -91,6 +96,5 @@ display: none;
   li > button svg {
     transform: rotate(-90deg);
   }
-  /* li:hover > button svg {
-    transform: rotate(-270deg);
-  } */
+  
+  

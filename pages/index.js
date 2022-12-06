@@ -28,13 +28,13 @@ const Home = () => {
       <main>
         <Header />
         <Banner />
-        <Email />
+        {/* <Email /> */}
         <Cards />
-        <Cards2 />
+        {/* <Cards2 />
         <Categories />
         <Cards3 />
-        <Cards4 />
-        <Brands />
+        <Cards4 /> */}
+        {/* <Brands /> */}
         {/* <Product /> */}
         <Footer />
       </main>

@@ -67,7 +67,7 @@ function Cards() {
           })}
         </div>
         <div className="flex justify-center mt-[30px] md:my-[50px] cursor-pointer ">
-          <Link href="/cards">
+          {/* <Link href="/cards">
             <button className="inline-flex items-center px-16 py-2 text-sm font-medium text-center cursor-pointer text-black outline outline-[#0AA085] outline-2   hover:bg-[#0AA085] hover:text-white">
               View More
               <svg
@@ -84,10 +84,10 @@ function Cards() {
                 ></path>
               </svg>
             </button>
-          </Link>
+          </Link> */}
         </div>
       </div>
-      <hr className="mt-[50px] border-[#D8DF21]" />
+     
     </div>
   );
 }
