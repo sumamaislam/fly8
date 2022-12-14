@@ -11,13 +11,13 @@ function MyApp({ Component, pageProps }) {
   );
 
  
-  console.log("Gooddddddddddddd")
+ 
 
   useEffect(()=>{
     if (typeof localStorage !== "undefined") {
       localStorage.setItem("localCart", JSON.stringify({ carts: carts , totalPrice: totalPrice, totalQuantity: totalQuantity }));
     }
-    console.log("nnnnnnnnnnnnnnn")
+   
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[carts,totalPrice, totalQuantity])
 

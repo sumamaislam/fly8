@@ -2,17 +2,17 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="bg-[#0AA085] text-white ">
+    <div className="bg-[black] text-white mt-[100px]">
       <div className="container m-auto px-[10px]">
-        <div className="pt-[50px]">
+        {/* <div className="pt-[50px]">
           <div>
             <p className="text-center text-2xl lg:text-3xl  ">
               Join Our Newsletter And Receive A Coupon For 15% Off Your First
               Order
             </p>
           </div>
-        </div>
-        <div className="flex justify-center my-7 ">
+        </div> */}
+        {/* <div className="flex justify-center my-7 ">
           <div className="mt-[20px]">
             <input
               className="w-[200px] text-black  md:w-[450px] h-[40px] pl-2 outline outline-[black] outline-1"
@@ -25,45 +25,48 @@ function Footer() {
               Send
             </button>
           </div>
-        </div>
+        </div> */}
 
-        <div className="flex md:gap-24 lg:gap-44 justify-center py-[40px] md:py-[80px] md:flex-row flex-col gap-12 text-center md:text-left ">
-          <div className="menus">
-            <h1 className="text-[20px] font-bold mb-4">MAIN MENU</h1>
-            <p>Sale</p>
-            <p>Live Resin</p>
-            <p>CBD</p>
-            <p>Delta 8</p>
-            <p>Delta 9</p>
-            <p>Delta 10</p>
-            <p>THC-O</p>
-            <p>HHC-P</p>
-            <p>THC-B</p>
-            <p>About</p>
-            <p>Wholesale</p>
-          </div>
-          <div className="menus">
-            <h1 className="text-[20px] font-bold mb-4">SUPPORT</h1>
-            <p>Privacy Policy</p>
-            <p>Terms of Service</p>
-            <p>Returns & Refunds</p>
-            <p>Shipping Policy</p>
-            <p>Store Policies</p>
-            <p>Loyalty & Rewards</p>
-          </div>
-          <div className="md:max-w-[300px] hidden md:block">
-            <h1 className="text-[20px] font-bold mb-4">ABOUT US</h1>
+        <div className="grid py-[65px] lg:grid-cols-5 grid-col md:grid-cols-2  gap-12 justify-items-center text-center md:text-left ">
+        <div className="max-w-[323px] hidden md:block">
+            <img src="/images/logo.png" alt="Logo" class="w-[100px]" />
 
-            <p>
-              Binoid was founded by wellness enthusiasts who believe CBD should
-              be a vital part of living a healthy lifestyle. Our mission is to
-              empower CBD Wellness by providing superior products that are as
-              enjoyable as they are good for you, with zero compromises on
-              quality and ingredients.
+            <p className="pt-[25px] xl:text-[16px] text-[12px]">
+            Our Vape has always looked to encourage and support people who want to make the switch to vaping by producing high-quality e-liquids. Our Products Like E-liquids include some of the best e-liquid flavours in a range of freebase nicotine.
+
             </p>
           </div>
           <div className="menus">
-            <h1 className="text-[20px] font-bold mb-4">FOLLOW US</h1>
+            <h1 className="text-[20px] font-bold mb-[25px]">Shop</h1>
+            <p>All Products</p>
+            <p>Delta-9o</p>
+            <p>Delta-11</p>
+            <p>Master Blend</p>
+            <p>HHC</p>
+           
+          </div>
+          
+          <div className="menus">
+            <h1 className="text-[20px] font-bold mb-[25px]">Help</h1>
+            <p>Order Status</p>
+            <p>Return Policy</p>
+            <p>Shipping Information</p>
+            <p>About Us</p>
+            <p>Wholesale</p>
+         
+          </div>
+          
+          <div className="menus">
+          <h1 className="text-[20px] font-bold mb-[25px]">Connect With Us</h1>
+           <div className="flex items-center gap-[18px]">
+<div className="mt-[15px]"><img className="w-[22px]" src="/svg/call.svg" alt="" /></div>
+           <div><p>123451231545</p></div> 
+           </div>
+           <div className="flex items-center gap-[18px]">
+<div className="mt-[15px]"><img className="w-[22px]" src="/svg/call.svg" alt="" /></div>
+           <div><p>info@fly8.com</p></div> 
+           </div>
+            <h1 className="text-[20px] mt-[60px] font-bold mb-[27px]">Connect With Us</h1>
             <div className="flex gap-4 cursor-pointer justify-center">
               {/* FACEBOOK */}
 
@@ -226,9 +229,18 @@ function Footer() {
               </svg>
             </div>
           </div>
+            <div className="menus ">
+            <h1 className="text-[20px] font-bold mb-[25px]">We Accept</h1>
+            <p>Order Status</p>
+         
+         
+          </div>
+
         </div>
       </div>
-      
+    <div className="mt-[57px] bg-[#D9D9D9;]">
+      <p className="text-center text-black">Copyright 2022 fly8.com Private Limited. All rights Are Reserved</p>
+    </div>
     </div>
   );
 }

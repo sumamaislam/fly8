@@ -2,39 +2,39 @@ import React from "react";
 
 function Email() {
   return (
-    <div>
-      <div className='bg-[url("/images/email.jpg")] md:mt-[30px]  '>
-        {/* left side */}
-        <div className="container m-auto   gap-16 py-[50px] md:py-[100px] px-[10px]">
-          <div className="text-[#D8DF21] text-center">
-            <p className="  font-bold text-3xl md:text-5xl">
-             FLY 8
-            </p>
-            <p className=" font-bold text-3xl md:text-5xl pt-2">
-              SIGN UP & SAVE 10%
-            </p>
-            <p className="p-2">
-              Sign Up Today And Receive 10% OFF Your First Order.
-            </p>
-            <p className="text-[14px]">
-              (This Coupon Will Not Be Applicable On Sale Items)
-            </p>
+    <div className="mt-[109px]">
+      <div className="2xl:w-[65%] container  m-auto ">
+        <div className="flex md:gap-[59px]  justify-center items-center ">
+          <div>
+            <img
+              className="w-[300px] mt-[20px] hidden md:block"
+              src="/brands/email.png"
+              alt=""
+            />
           </div>
-          {/* right section */}
-          {/* <div className="flex ">
-            <div>
-              <input
-                className="w-[200px]  md:w-[450px] h-[40px] pl-2 outline outline-[#0AA085] outline-1"
-                type="email"
-                placeholder="Email"
-              />
+          <div>
+            <p className="xl:text-[40px] md:text-[30px] text-[20px] text-center md:text-left uppercase">
+              Get <span className="font-bold">50%</span> Discount on your first
+              order{" "}
+            </p>
+            <p className="text-[20px] pt-[28px] font-medium text-center md:text-left">
+              Sign up to take this offer
+            </p>
+            <div className="flex gap-1 mt-[30px] justify-center flex-col md:flex-row ">
+              <div className="flex justify-center md:justify-start">
+                <input
+                  className=" 2xl:w-[700px] md:w-[500px] w-[250px]   h-[48px] md:rounded-tl-[10px] md:rounded-bl-[10px] outline-1 pl-4 outline-black outline"
+                  placeholder="E-Mail Address"
+                  type="text"
+                />
+              </div>
+              <div className=" flex justify-center md:justify-start mt-[20px] md:mt-[0px]">
+                <button className=" text-[10px] mt-[-1px] py-[17px] px-6 bg-black text-white md:rounded-tr-[10px] md:rounded-br-[10px] ">
+                  SUBSCRIBE
+                </button>
+              </div>
             </div>
-            <div>
-              <button className="bg-[#D8DF21]  outline outline-[#0AA085] outline-1 font-semibold p-2 px-7">
-                Send
-              </button>
-            </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

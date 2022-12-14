@@ -28,11 +28,12 @@ a {
 @tailwind components;
 @tailwind utilities;
 .menus p {
-margin-top: 10px;
+margin-top: 15px;
 font-size: 16px;
-margin-left: 5px;
+margin-left: 0px;
 cursor: pointer;
 }
+body{font-family: 'Inter', sans-serif;}
 .brand{
   filter:opacity(0.08)
   }
@@ -98,3 +99,21 @@ display: none;
   }
   
   
+
+.seperator {
+ 
+  width: 1px;
+
+  /* box-shadow: 3px 1px 3px 0px; */
+  border: 1px solid #D3D3D3;
+filter: blur(1px);
+
+  margin-top: 20px;
+  position: absolute;
+  left: 50%;
+}
+
+.container {
+  position: relative;
+}
+

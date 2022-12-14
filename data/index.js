@@ -1,442 +1,492 @@
-export const categories = [
-  {
-    id: 1,
-    image: "/Gummies/1.png",
-    brand: "POD",
-    name: "Vaporesso Luxe x",
-    price: "RS 5,625",
-  },
-  {
-    id: 2,
-    image: "/Gummies/2.png",
-    brand: "POD",
-    name: "Vaporesso Luxe x",
-    price: "RS 5,625",
-  },
-  {
-    id: 3,
-    image: "/Gummies/3.png",
-    brand: "POD",
-    name: "Vaporesso Luxe x",
-    price: "RS 5,625",
-  },
-  {
-    id: 4,
-    image: "/Gummies/4.png",
-    brand: "POD",
-    name: "Vaporesso Luxe x",
-    price: "RS 5,625",
-  },
-  {
-    id: 5,
-    image: "/Gummies/5.png",
-    brand: "POD",
-    name: "Vaporesso Luxe x",
-    price: "RS 5,625",
-  },
-  {
-    id: 6,
-    image: "/Gummies/6.png",
-    brand: "POD",
-    name: "Vaporesso Luxe x",
-    price: "RS 5,625",
-  },
-  {
-    id: 7,
-    image: "/Gummies/1.png",
-    brand: "POD",
-    name: "Vaporesso Luxe x",
-    price: "RS 5,625",
-  },
-  {
-    id: 8,
-    image: "/Gummies/2.png",
-    brand: "POD",
-    name: "Vaporesso Luxe x",
-    price: "RS 5,625",
-  },
-  {
-    id: 9,
-    image: "/Gummies/3.png",
-    brand: "POD",
-    name: "Vaporesso Luxe x",
-    price: "RS 5,625",
-  },
-  {
-    id: 10,
-    image: "/Gummies/4.png",
-    brand: "POD",
-    name: "Vaporesso Luxe x",
-    price: "RS 5,625",
-  },
-  {
-    id: 11,
-    image: "/Gummies/5.png",
-    brand: "POD",
-    name: "Vaporesso Luxe x",
-    price: "RS 5,625",
-  },
-  {
-    id: 12,
-    image: "/Gummies/6.png",
-    brand: "POD",
-    name: "Vaporesso Luxe x",
-    price: "RS 5,625",
-  },
-];
-
 export const cards = [
   {
     id: 1,
-    image: ["/images/p1.png"],
+    image: ["/images/p.jpeg"],
     name: "DELTA 11 LIVE RESIN",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt ",
     price: " 45.99",
+    discount: "54.99",
     quantity: 1,
   },
   {
     id: 2,
-    image: ["/images/p2.png"],
+    image: ["/images/pp.jpeg"],
     name: "DELTA-9o",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
     quantity: 1,
   },
   {
     id: 3,
-    image: ["/images/p1.png"],
+    image: ["/images/ppp.jpeg"],
     name: "MASTER BLEND",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
     quantity: 1,
   },
+
   {
     id: 4,
-    image: ["/images/p2.png"],
+    image: ["/images/p.jpeg"],
     name: "HHC",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
+  },
+];
+
+
+export const delta9o = [
+  {
+    id: 1,
+    image: [
+      "/images/p.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+      "/images/pp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "MANGO KUSH ",
+    title:
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt ",
+    price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
+  },
+  {
+    id: 2,
+    image: [
+      "/images/pp.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "GELATO",
+    title:
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
+    price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
+  },
+  {
+    id: 3,
+    image: [
+      "/images/ppp.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "SOUR APPLE",
+    title:
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
+    price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
+  },
+
+  {
+    id: 4,
+    image: [
+      "/images/p.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "GRAND DADDY",
+    title:
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
+    price: " 45.99",
+    discount: "54.99",
     quantity: 1,
   },
   {
     id: 5,
-    image: ["/images/p1.png"],
-    name: "product name",
+    image: [
+      "/images/ppp.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "Blue Dream",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
     quantity: 1,
   },
-  // {
-  //   id: 6,
-  //   image: ["/images/p1.png"],
-  //   name: "product name",
-  //   title:
-  //     "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-  //   price: " 45.99",
-  //   quantity: 1,
-  // },
-  // {
-  //   id: 7,
-  //   image: ["/images/p1.png"],
-  //   name: "product name",
-  //   title:
-  //     "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-  //   price: " 45.99",
-  //   quantity: 1,
-  // },
-  // {
-  //   id: 8,
-  //   image: ["/Vape Mockups/8.png"],
-  //   name: "product name",
-  //   title:
-  //     "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-  //   price: " 45.99",
-  //   quantity: 1,
-  // },
-  // {
-  //   id: 9,
-  //   image: ["/Vape Mockups/6.png"],
-  //   name: "product name",
-  //   title:
-  //     "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-  //   price: " 45.99",
-  //   quantity: 1,
-  // },
-  // {
-  //   id: 10,
-  //   image: ["/Vape Mockups/3.png"],
-  //   name: "product name",
-  //   title:
-  //     "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-  //   price: " 45.99",
-  //   quantity: 1,
-  // },
+  //
 ];
 
-export const cards2 = [
+export const delta11 = [
   {
     id: 1,
-    image: ["/Vape Mockups/7.png"],
-    name: "product name",
+    image: [
+      "/images/p.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+      "/images/pp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "AK-47",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt ",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
   {
     id: 2,
-    image: ["/Vape Mockups/8.png"],
-    name: "product name",
+    image: [
+      "/images/pp.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "Train Wreck",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
   {
     id: 3,
-    image: ["/Vape Mockups/6.png"],
-    name: "product name",
+    image: [
+      "/images/ppp.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "Purple Punch",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
+
   {
     id: 4,
-    image: ["/Vape Mockups/4.png"],
-    name: "product name",
+    image: [
+      "/images/p.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "Wedding Cake",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
   {
     id: 5,
-    image: ["/Vape Mockups/5.png"],
-    name: "product name",
+    image: [
+      "/images/ppp.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "Rainbow Candy",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
-  {
-    id: 6,
-    image: ["/Vape Mockups/9.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-  },
-  {
-    id: 7,
-    image: ["/Vape Mockups/1.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-  },
-  {
-    id: 8,
-    image: ["/Vape Mockups/2.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-  },
-  {
-    id: 9,
-    image: ["/Vape Mockups/3.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-  },
-  {
-    id: 10,
-    image: ["/Vape Mockups/3.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-  },
+  //
 ];
 
-export const cards3 = [
+export const masterBlend = [
   {
     id: 1,
-    image: ["/Vape Mockups/1.png"],
-    name: "product name",
+    image: [
+      "/images/p.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+      "/images/pp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "Gushers",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt ",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
   {
     id: 2,
-    image: ["/Vape Mockups/2.png"],
-    name: "product name",
+    image: [
+      "/images/pp.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "Dubion Poison",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
   {
     id: 3,
-    image: ["/Vape Mockups/3.png"],
-    name: "product name",
+    image: [
+      "/images/ppp.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "Strawberry Cough",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
+
   {
     id: 4,
-    image: ["/Vape Mockups/4.png"],
-    name: "product name",
+    image: [
+      "/images/p.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "GodsGift",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
   {
     id: 5,
-    image: ["/Vape Mockups/5.png"],
-    name: "product name",
+    image: [
+      "/images/ppp.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "Lemon Haze",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
-  {
-    id: 6,
-    image: ["/Vape Mockups/9.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-  },
-  {
-    id: 7,
-    image: ["/Vape Mockups/7.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-  },
-  {
-    id: 8,
-    image: ["/Vape Mockups/8.png"],
-    name: "",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-  },
-  {
-    id: 9,
-    image: ["/Vape Mockups/6.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-  },
-  {
-    id: 10,
-    image: ["/Vape Mockups/3.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
-  },
+  //
 ];
 
-export const cards4 = [
+export const hhc = [
   {
     id: 1,
-    image: ["/Vape Mockups/1.png"],
-    name: "product name",
+    image: [
+      "/images/p.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+      "/images/pp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "Strawberry Lemonad",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt ",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
   {
     id: 2,
-    image: ["/Vape Mockups/2.png"],
-    name: "product name",
+    image: [
+      "/images/pp.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "Pineapple Express",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
   {
     id: 3,
-    image: ["/Vape Mockups/3.png"],
-    name: "product name",
+    image: [
+      "/images/ppp.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "Movi wowie",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
+
   {
     id: 4,
-    image: ["/Vape Mockups/4.png"],
-    name: "product name",
+    image: [
+      "/images/p.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "BlackBerry",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
   },
   {
     id: 5,
-    image: ["/Vape Mockups/5.png"],
-    name: "product name",
+    image: [
+      "/images/ppp.jpeg",
+      "/images/pp.jpeg",
+      "/images/p.jpeg",
+      "/images/ppp.jpeg",
+    ],
+    stock: "IN STOCK",
+    name: "Animal cookies",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+    discount: "54.99",
+    quantity: 1,
+  },
+  //
+];
+
+export const productdetail = {
+  id: 1,
+  images: [
+    " /images/pp.jpeg",
+    " /images/p.jpeg",
+    " /images/ppp.jpeg",
+    " /images/ppp.jpeg",
+  ],
+  stock: "IN STOCK",
+  title:
+    "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+  price: "45.99",
+  discount: "65.99",
+  quantity: "1",
+  flavours: [
+    {
+      id: 1,
+      name: "Flavour : DELTA-9O OF THC-P LEMON HAZE",
+    },
+    {
+      id: 2,
+      name: "DELTA-9O OF THC-P  HAZE",
+    },
+  ],
+  review: " REVIEWS (27)",
+  category: [
+    {
+      id: 1,
+      name: "Vape",
+    },
+    {
+      id: 2,
+      name: "Delta-9o",
+    },
+    {
+      id: 3,
+      name: "HHC",
+    },
+  ],
+};
+
+export const gummies = [
+  {
+    id: 1,
+    image: ["/Gummies/1.png"],
+    name: "DELTA 11 LIVE RESIN",
+    title:
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt ",
+    price: " 45.99",
+
+    quantity: 1,
   },
   {
-    id: 6,
-    image: ["/Vape Mockups/9.png"],
-    name: "product name",
+    id: 2,
+    image: ["/Gummies/2.png"],
+    name: "DELTA-9o",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+
+    quantity: 1,
   },
   {
-    id: 7,
-    image: ["/Vape Mockups/7.png"],
-    name: "product name",
+    id: 3,
+    image: ["/Gummies/3.png"],
+    name: "MASTER BLEND",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+
+    quantity: 1,
   },
   {
-    id: 8,
-    image: ["/Vape Mockups/8.png"],
-    name: "product name",
+    id: 4,
+    image: ["/Gummies/4.png"],
+    name: "HHC",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
+
+    quantity: 1,
   },
   {
-    id: 9,
-    image: ["/Vape Mockups/6.png"],
+    id: 5,
+    image: ["/Gummies/5.png"],
     name: "product name",
     title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
+      "XLIM is now in a square design and presented with a decorative Lanyard. XLIM SQ is stylish and extremely compact, fully compatible with the XLIM pods, delivering extreme flavour for both freebase and nicotine salt",
     price: " 45.99",
-  },
-  {
-    id: 10,
-    image: ["/Vape Mockups/3.png"],
-    name: "product name",
-    title:
-      "Beast Mode Blend Live Resin Disposable - 2 Pack Combo (Limited Time Sale)",
-    price: " 45.99",
+
+    quantity: 1,
   },
 ];
-// export const details = [
-//   { id: 1, image: "/Vape Mockups/1.png" },
-//   { id: 2, image: "/Vape Mockups/2.png" },
-//   { id: 3, image: "/Vape Mockups/3.png" },
-//   { id: 4, image: "/Vape Mockups/4.png" },
-// ];
+
 export const details = {
   id: 1,
   image: [
-    "/images/p2.png",
-    "/images/p1.png",
+    // "/images/p2.png",
+    // "/images/p1.png",
+    "/images/ppp.jpeg",
+    "/images/pp.jpeg",
+    "/images/p.jpeg",
+    "/images/p.jpeg",
+
     // "/images/p2.png",
     // "/images/p1.png",
   ],

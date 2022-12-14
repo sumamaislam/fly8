@@ -15,9 +15,9 @@ function Raiting() {
       <ReactStars
         count={5}
         //   onChange={ratingChanged}
-        size={18}
+        size={24}
         activeColor="#ffd700"
-        value={3}
+        value={5}
       />
     </div>
   );
