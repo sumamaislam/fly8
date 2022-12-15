@@ -213,7 +213,7 @@ function Header() {
             {/* <!-- Secondary Navbar items --> */}
             <div class="hidden md:flex items-center space-x-6 cursor-pointer">
               <img className="w-[20px]" src="/svg/search.svg" alt="" />
-              <img className="w-[20px]" src="/svg/cart.svg" alt="" onClick={()=>setShowCart(true)}/>
+              <img className="w-[20px] " src="/svg/cart.svg" alt="" onClick={()=>setShowCart(true)}/>
              <Link href="/profile"> <img className="w-[20px]" src="/svg/profile.svg" alt="" /></Link>
             </div>
             {/* <!-- Mobile menu button --> */}

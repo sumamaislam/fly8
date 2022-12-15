@@ -230,7 +230,7 @@ export default function Detail() {
                     </p>
                   </div>
                 </div>
-                <div></div>
+                
                 <div>
                   <p className="md:text-[18px] text-[15px]  font-bold">
                     $25.55

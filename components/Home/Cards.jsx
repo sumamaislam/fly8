@@ -39,10 +39,10 @@ function Cards() {
                   </Link>
                 </div>
                 <div className="pt-[15px]">
-                  <h1 className="text-[18px] xl:text-[24px] font-extrabold  text-[black] dark:text-white text-center">
+                  <h1 className="text-[18px] xl:text-[19px] font-extrabold  text-[black] dark:text-white text-center">
                     {items.name}
                   </h1>
-                  <h5 className=" text-[14px]  xl:text-[16px]  font-normal  pt-[15px] text-[#535353]  text-center ">
+                  <h5 className=" text-[14px]  xl:text-[14px]  font-normal  pt-[15px] text-[#535353]  text-center ">
                     {items.title}
                   </h5>
                   <div className="flex justify-center mt-[42px]">
