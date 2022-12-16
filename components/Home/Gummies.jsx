@@ -1,8 +1,17 @@
 import Link from "next/link";
 import React from "react";
-import { gummies } from "../../data";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+// import { gummies } from "../../data";
 
 function Gummies() {
+
+  const { gummies } = useSelector((state)=>state.home)
+
+  useEffect(()=>{
+  console.log("coolit",gummies);
+  },[gummies]);
+
   return (
     <div>
       <div className="mt-[100px] ">
@@ -11,14 +20,14 @@ function Gummies() {
             Gummies Category
           </h1>
           <div className="grid xl:gap-20 gap-12 lg:grid-cols-4 md:grid-cols-2 mt-[40px] justify-center ">
-            {gummies.slice(0, 4).map((items, index) => {
+            {gummies && gummies.data && gummies.data.data && gummies.data.data.map((items, index) => {
               return (
-                <div className="max-w-sm     " key={index}>
+                <div className="max-w-sm" key={index}>
                   <div className="justify-center flex ">
                     <Link href={`/cards/${items.id}`}>
                       <img
-                        className="rounded-t-lg   "
-                        src={items.image[0]}
+                        className="rounded-t-lg"
+                        src={items.thumbnail}
                         alt=""
                       />
                     </Link>

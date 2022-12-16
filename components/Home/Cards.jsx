@@ -13,7 +13,7 @@ function Cards() {
   const { vapes } = useSelector((state) => state.home);
 
   useEffect(() => {
-    console.log(vapes);
+    console.log("vapessss",vapes.data.data);
   }, [vapes]);
 
   const handleAdd = (data) => {
@@ -30,17 +30,18 @@ function Cards() {
           Vape Category
         </h1>
         <div className="grid xl:gap-20 gap-12 lg:grid-cols-4 md:grid-cols-2 mt-[28px] justify-center ">
-          {cards.slice(0, 4).map((items, index) => {
+          {vapes && vapes.data && vapes.data.data && vapes.data.data.length > 0 && vapes.data.data.map((items, index) => {
             return (
               <div className="max-w-sm " key={index}>
                 <div className="justify-center flex ">
-                  <Link href={`/cards/${items.id}`}>
+                  {/* <Link href={`/cards/${items.link}`}> */}
                     <img
-                      className="rounded-t-lg   "
-                      src={items.image[0]}
+                      className="rounded-t-lg"
+                      src={items.thumbnail
+                      }
                       alt=""
                     />
-                  </Link>
+                  {/* </Link> */}
                 </div>
                 <div className="pt-[15px]">
                   <h1 className="text-[18px] xl:text-[19px] font-extrabold  text-[black] dark:text-white text-center">
