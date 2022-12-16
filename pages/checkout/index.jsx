@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Address from "../../components/Home/checkout/Address";
 import Payments from "../../components/Home/checkout/Payments";
 import Shippings from "../../components/Home/checkout/Shippings";
+import { navDataRequest } from "../../redux/home";
+import { wrapper } from "../../store";
 
 function index() {
 
@@ -16,3 +18,8 @@ function index() {
 }
 
 export default index;
+
+
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+  await store.dispatch(navDataRequest());
+});

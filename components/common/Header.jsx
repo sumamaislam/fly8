@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { flavours } from "../../data";
 
 import { useEffect } from "react";
@@ -10,8 +10,14 @@ import Cart from "../Home/Cart";
 // import { flavours } from "../../data";
 
 function Header() {
-  const [showCart ,setShowCart] = useState(false)
-  // const { totalQuantity } = useSelector((state) => state.product);
+  const [showCart, setShowCart] = useState(false);
+
+  const { header } = useSelector((state) => state.home);
+
+  useEffect(() => {
+    console.log(header);
+  }, [header]);
+
   // const [headerColor, setHeaderColor] = useState(false);
   // const handleColorChange = () => {
   //   if (window.scrollY > 50) {
@@ -22,7 +28,7 @@ function Header() {
   // };
   // useEffect(() => {
   //   window.addEventListener("scroll", handleColorChange);
-    // return () => window.removeEventListener("scroll", handleColorChange);
+  // return () => window.removeEventListener("scroll", handleColorChange);
   // }, []);
 
   return (
@@ -154,19 +160,32 @@ function Header() {
         // }`}
         className="fixed z-10 top-0 shadow-lg w-full bg-black bg-opacity-[60%]"
       >
-        {showCart && <Cart setShowCart={setShowCart}/>}
+        {showCart && <Cart setShowCart={setShowCart} />}
         <div class="container m-auto px-4 h-[64px]">
           <div class="flex justify-between ">
             <div class="flex space-x-7">
               <div>
                 {/* <!-- Website Logo --> */}
                 <Link href="/" class="flex items-center py-4 px-2">
-                  <img src="/images/logo.png" alt="Logo" class="w-[65px]" />
+                  <img src={header?.logo} alt="Logo" class="w-[65px]" />
                 </Link>
               </div>
               {/* <!-- Primary Navbar items --> */}
               <div class="flex-col z-10 absolute md:static flex md:flex-row items-center gap-[20px] ">
-                <Link
+                {header &&
+                  header.data.length > 0 &&
+                  header.data.map((item, index) => {
+                    return (
+                      <Link
+                        key={index}
+                        href={item.link}
+                        class="py-4 px-2  lg:text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white  "
+                      >
+                        {item.name}
+                      </Link>
+                    );
+                  })}
+                {/* <Link
                   href=""
                   class="py-4 px-2  lg:text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white  "
                 >
@@ -207,14 +226,22 @@ function Header() {
                   class="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
                 >
                   Contact Us
-                </Link>
+                </Link> */}
               </div>
             </div>
             {/* <!-- Secondary Navbar items --> */}
             <div class="hidden md:flex items-center space-x-6 cursor-pointer">
               <img className="w-[20px]" src="/svg/search.svg" alt="" />
-              <img className="w-[20px] " src="/svg/cart.svg" alt="" onClick={()=>setShowCart(true)}/>
-             <Link href="/profile"> <img className="w-[20px]" src="/svg/profile.svg" alt="" /></Link>
+              <img
+                className="w-[20px] "
+                src="/svg/cart.svg"
+                alt=""
+                onClick={() => setShowCart(true)}
+              />
+              <Link href="/profile">
+                {" "}
+                <img className="w-[20px]" src="/svg/profile.svg" alt="" />
+              </Link>
             </div>
             {/* <!-- Mobile menu button --> */}
             <div class="md:hidden flex items-center">
@@ -235,7 +262,6 @@ function Header() {
             </div>
           </div>
         </div>
-       
       </nav>
     </div>
   );

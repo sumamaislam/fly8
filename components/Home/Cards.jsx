@@ -1,16 +1,20 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cards } from "../../data";
 import { addToCarts } from "../../redux/product";
-
 
 function Cards() {
   const dispatch = useDispatch();
   const router = useRouter();
   const [btnText, setBtnText] = useState(["ADD To Cart", "ADDED To Cart"]);
-  const { carts } = useSelector((state) => state.product);
+  const { vapes } = useSelector((state) => state.home);
+
+  useEffect(() => {
+    console.log(vapes);
+  }, [vapes]);
 
   const handleAdd = (data) => {
     dispatch(addToCarts(data));
@@ -28,7 +32,7 @@ function Cards() {
         <div className="grid xl:gap-20 gap-12 lg:grid-cols-4 md:grid-cols-2 mt-[28px] justify-center ">
           {cards.slice(0, 4).map((items, index) => {
             return (
-              <div className="max-w-sm     " key={index}>
+              <div className="max-w-sm " key={index}>
                 <div className="justify-center flex ">
                   <Link href={`/cards/${items.id}`}>
                     <img
@@ -47,7 +51,12 @@ function Cards() {
                   </h5>
                   <div className="flex justify-center mt-[42px]">
                     <Link
-                      href={`${items.id === 1 && "/delta11" || items.id === 2 && "/cards" || items.id === 3 && "/masterblend" || items.id === 4 && "/hhc" }`}
+                      href={`${
+                        (items.id === 1 && "/delta11") ||
+                        (items.id === 2 && "/cards") ||
+                        (items.id === 3 && "/masterblend") ||
+                        (items.id === 4 && "/hhc")
+                      }`}
                       className=" items-center hover:animate-bounce text-[14px] xl:text-[18px] font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "
                       onClick={() => handleAdd(items)}
                     >
@@ -59,7 +68,6 @@ function Cards() {
             );
           })}
         </div>
-       
       </div>
     </div>
   );

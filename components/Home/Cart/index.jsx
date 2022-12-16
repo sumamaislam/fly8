@@ -152,7 +152,7 @@ export default function Cart({ setShowCart }) {
                   <div class="mt-8">
                     <div class="flow-root">
                       <ul role="list" class="-my-6 divide-y divide-gray-200">
-                        <li class="flex py-2">
+                        {<li class="flex py-2">
                           <div className="flex gap-4">
                             <div>
                               <img
@@ -164,10 +164,60 @@ export default function Cart({ setShowCart }) {
                             <div>
                               <div>
                                 <p className="text-[12px] font-bold">
-                                  DELTA-9O HIGH POTENCY VAPE{" "}
+                                  DELTA-9O HIGH POTENCY VAPE
                                   <span className="text-[10px]">
                                     WITH 2 PACK COMBO
-                                  </span>{" "}
+                                  </span>
+                                </p>
+                              </div>
+                              <div className="mt-[10px] flex gap-[25px] items-center ">
+                                <div className="flex gap-[20px] border items-center rounded-md h-[25px] bg-[ #E9EFEE] px-[16px]">
+                                  <div>
+                                    <img
+                                      src="/svg/arrowleft.svg"
+                                      alt=""
+                                      onClick={() => decerement()}
+                                    />
+                                  </div>
+                                  <div>
+                                    <p className="text-[15px] font-bold">1</p>
+                                  </div>
+                                  <div>
+                                    <img
+                                      src="/svg/arrowright.svg"
+                                      alt=""
+                                      onClick={() => increment()}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                              <div>
+                                <p className="text-right font-bold">$245.99</p>
+                              </div>
+                            </div>
+                            <div>
+                              <img src="/svg/cross.png" alt="" onClick={() => handleDelete()}/>
+                            </div>
+                          </div>
+                          {/* <hr className="border-[10px] shadow-lg" /> */}
+                        </li>}
+
+                        {/* <li class="flex py-2">
+                          <div className="flex gap-4">
+                            <div>
+                              <img
+                                className="h-24 w-24"
+                                src="/images/p1.jpeg"
+                                alt=""
+                              />
+                            </div>
+                            <div>
+                              <div>
+                                <p className="text-[12px] font-bold">
+                                  DELTA-9O HIGH POTENCY VAPE
+                                  <span className="text-[10px]">
+                                    WITH 2 PACK COMBO
+                                  </span>
                                 </p>
                               </div>
                               <div className="mt-[10px] flex gap-[25px] items-center ">
@@ -176,7 +226,6 @@ export default function Cart({ setShowCart }) {
                                     <img src="/svg/arrowleft.svg" alt="" />
                                   </div>
                                   <div>
-                                    {" "}
                                     <p className="text-[15px] font-bold">1</p>
                                   </div>
                                   <div>
@@ -192,53 +241,8 @@ export default function Cart({ setShowCart }) {
                               <img src="/svg/cross.png" alt="" />
                             </div>
                           </div>
-                        </li>
-                        <hr className="border-[10px] shadow-lg" />
-
-                        <li class="flex py-2">
-                          <div className="flex gap-4">
-                            <div>
-                              <img
-                                className="h-24 w-24"
-                                src="/images/p1.jpeg"
-                                alt=""
-                              />
-                            </div>
-                            <div>
-                              <div>
-                                <p className="text-[12px] font-bold">
-                                  DELTA-9O HIGH POTENCY VAPE{" "}
-                                  <span className="text-[10px]">
-                                    WITH 2 PACK COMBO
-                                  </span>{" "}
-                                </p>
-                              </div>
-                              <div className="mt-[10px] flex gap-[25px] items-center ">
-                                <div className="flex gap-[20px] border items-center rounded-md h-[25px] bg-[ #E9EFEE] px-[16px]">
-                                  <div>
-                                    <img src="/svg/arrowleft.svg" alt="" />
-                                  </div>
-                                  <div>
-                                    {" "}
-                                    <p className="text-[15px] font-bold">1</p>
-                                  </div>
-                                  <div>
-                                    <img src="/svg/arrowright.svg" alt="" />
-                                  </div>
-                                </div>
-                              </div>
-                              <div>
-                                <p className="text-right font-bold">$245.99</p>
-                              </div>
-                            </div>
-                            <div>
-                              <img src="/svg/cross.png" alt="" />
-                            </div>
-                          </div>
-                        </li>
-                        <hr className="border-[10px] shadow-lg" />
-
-                        {/* <!-- More products... --> */}
+                        </li> */}
+                        {/* <hr className="border-[10px] shadow-lg" /> */}
                       </ul>
                     </div>
                   </div>

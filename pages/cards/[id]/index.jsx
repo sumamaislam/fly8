@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { addToCarts } from "../../../redux/product";
 import { Raiting } from "../../../components/Home";
 import Cart from "../../../components/Home/Cart";
+import { wrapper } from "../../../store";
+import { navDataRequest } from "../../../redux/home";
 export default function Detail() {
   const [show, setShow] = useState(details.image[0]);
   const [detail, setDetail] = useState("a");
@@ -578,4 +580,9 @@ export default function Detail() {
       <Footer />
     </div>
   );
-}
+};
+
+
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+  await store.dispatch(navDataRequest());
+});

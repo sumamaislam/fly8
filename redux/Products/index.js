@@ -27,6 +27,8 @@ export const sentProductRequest = createAsyncThunk(
     }
   }
 );
+
+
 export const productDataSlice = createSlice({
   name: "productData",
   initialState,

@@ -16,6 +16,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Gummies from "../components/Home/Gummies";
 import Commitment from "../components/Home/Commitment";
+import { wrapper } from "../store";
+import { navDataRequest, vapeDataRequest } from "../redux/home";
 
 
 const Home = () => {
@@ -32,15 +34,20 @@ const Home = () => {
       <main>
         <Header />
         <Banner />
-         <Cards />
+        <Cards />
         <Gummies/> 
         <Commitment/>
         <Email />
         <Footer />
-    
       </main>
     </div>
   );
 };
 
 export default Home;
+
+
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+  await store.dispatch(navDataRequest());
+  await store.dispatch(vapeDataRequest());
+});

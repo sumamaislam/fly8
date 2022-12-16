@@ -8,6 +8,8 @@ import Login from "../../components/profile/Login";
 import PaymentCard from "../../components/Profile/PaymentCard";
 import Subscription from "../../components/Profile/Subscription";
 import User from "../../components/Profile/User";
+import { navDataRequest } from "../../redux/home";
+import { wrapper } from "../../store";
 
 function Profile() {
   const [show, setShow] = useState("orders");
@@ -26,3 +28,8 @@ function Profile() {
 }
 
 export default Profile;
+
+
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+  await store.dispatch(navDataRequest());
+});

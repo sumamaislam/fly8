@@ -1,18 +1,18 @@
-import { getSession, signOut } from "next-auth/react";
+// import { getSession, signOut } from "next-auth/react";
 import Router from "next/router";
 
 export const requestInterceptor = async (config) => {
-  const session = await getSession();
-  if (session?.user?.token) {
-    let token = session?.user?.token;
-    if (token) {
-      try {
-        config.headers.common.Authorization = "Bearer " + token;
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  }
+  // const session = await getSession();
+  // if (session?.user?.token) {
+  //   let token = session?.user?.token;
+  //   if (token) {
+  //     try {
+  //       config.headers.common.Authorization = "Bearer " + token;
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   }
+  // }
 
   return config;
 };
@@ -31,7 +31,7 @@ export const errorInterceptor = (error) => {
       !error.response.config.__isRetryRequest // eslint-disable-line no-underscore-dangle
     ) {
       console.log(error.response.data);
-      signOut({ redirect: false }).then(() => Router.push("/"));
+      // signOut({ redirect: false }).then(() => Router.push("/"));
     }
     return Promise.reject(error);
   }

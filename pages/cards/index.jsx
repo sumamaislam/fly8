@@ -6,6 +6,8 @@ import Link from "next/link";
 import { addToCarts } from "../../redux/product";
 import { useDispatch } from "react-redux";
 import Router, { useRouter } from "next/router";
+import { wrapper } from "../../store";
+import { navDataRequest } from "../../redux/home";
 export default function index() {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -179,4 +181,8 @@ export default function index() {
       <Footer />
     </div>
   );
-}
+};
+
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+  await store.dispatch(navDataRequest());
+});
