@@ -56,7 +56,7 @@ function Login() {
             </form>
           </div>
           {/* line */}
-          <div class="seperator 2xl:h-[35%] xl:h-[43%] lg:h-[57%] md:h-[25%]"></div>
+          <div className="seperator 2xl:h-[35%] xl:h-[43%] lg:h-[57%] md:h-[25%]"></div>
           {/* right side registration form  */}
           <div className="mt-[100px] md:w-[550px] w-[270px] m-auto">
             <p className="font-bold">REGISTER</p>

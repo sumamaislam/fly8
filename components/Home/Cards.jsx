@@ -11,11 +11,7 @@ function Cards() {
   const router = useRouter();
   const [btnText, setBtnText] = useState(["ADD To Cart", "ADDED To Cart"]);
   const { vapes } = useSelector((state) => state.home);
-
-  useEffect(() => {
-    console.log("vapessss",vapes.data.data);
-  }, [vapes]);
-
+  
   const handleAdd = (data) => {
     dispatch(addToCarts(data));
     // router.push({ pathname: "/add_to_cart" });
@@ -30,7 +26,7 @@ function Cards() {
           Vape Category
         </h1>
         <div className="grid xl:gap-20 gap-12 lg:grid-cols-4 md:grid-cols-2 mt-[28px] justify-center ">
-          {vapes && vapes.data && vapes.data.data && vapes.data.data.length > 0 && vapes.data.data.map((items, index) => {
+          {vapes && vapes.data && vapes.data.data &&  vapes?.data?.data?.map((items, index) => {
             return (
               <div className="max-w-sm " key={index}>
                 <div className="justify-center flex ">

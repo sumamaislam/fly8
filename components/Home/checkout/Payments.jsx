@@ -220,14 +220,14 @@ function Payments({ setShow }) {
                 </p>
                 <div className="  mt-4 border py-3 px-[25px] border-[#000000] rounded-lg">
                   <div className="flex gap-5">
-                    <div class="flex items-center ">
+                    <div className="flex items-center ">
                       <input
                         id="country-option-1"
                         type="radio"
                         checked={!showModal ? true : false}
                         name="countries"
                         value="USA"
-                        class="h-4 w-4 border-gray-300  focus:ring-black "
+                        className="h-4 w-4 border-gray-300  focus:ring-black "
                         aria-labelledby="country-option-1"
                         aria-describedby="country-option-1"
                         onClick={() => setShowModal(false)}
@@ -248,7 +248,7 @@ function Payments({ setShow }) {
                         checked={showModal ? true : false}
                         name="countries"
                         value="USA"
-                        class="h-4 w-4 border-gray-300  focus:ring-black "
+                        className="h-4 w-4 border-gray-300  focus:ring-black "
                         aria-labelledby="country-option-1"
                         aria-describedby="country-option-1"
                         onClick={() => setShowModal(true)}
@@ -379,10 +379,10 @@ function Payments({ setShow }) {
             <div className="font-semibold text-[22px] ">
               <p>Product Information</p>
             </div>
-            <div class="mt-8 w-full">
-              <div class="flow-root ">
-                <ul role="list" class="-my-6 divide-y divide-gray-200">
-                  <li class="flex py-2 justify-between ">
+            <div className="mt-8 w-full">
+              <div className="flow-root ">
+                <ul role="list" className="-my-6 divide-y divide-gray-200">
+                  <li className="flex py-2 justify-between ">
                     <div className="flex items-center gap-7">
                       <div className="relative">
                         <img
@@ -421,7 +421,7 @@ function Payments({ setShow }) {
                     </div>
                   </li>
                   <hr className="border-[10px] shadow-lg" />
-                  <li class="flex py-2 justify-between">
+                  <li className="flex py-2 justify-between">
                     <div className="flex items-center gap-7">
                       <div className="relative">
                         <img
@@ -461,7 +461,7 @@ function Payments({ setShow }) {
                   </li>
 
                   <hr className="border-[10px] shadow-lg" />
-                  <li class="flex py-2 justify-between">
+                  <li className="flex py-2 justify-between">
                     <div className="flex items-center gap-7">
                       <div className="relative">
                         <img

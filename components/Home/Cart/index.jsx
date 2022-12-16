@@ -92,7 +92,7 @@ export default function Cart({ setShowCart }) {
   //   setCart(filterd);
   // };
   return (
-    <div class="relative z-10">
+    <div className="relative z-10">
       {/* <!--
     Background backdrop, show/hide based on slide-over state.
 
@@ -103,11 +103,11 @@ export default function Cart({ setShowCart }) {
       From: "opacity-100"
       To: "opacity-0"
   --> */}
-      {/* <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div> */}
+      {/* <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div> */}
 
-      <div class="fixed inset-0 overflow-hidden">
-        <div class="absolute inset-0 overflow-hidden">
-          <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+      <div className="fixed inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
             {/* <!--
           Slide-over panel, show/hide based on slide-over state.
 
@@ -118,22 +118,22 @@ export default function Cart({ setShowCart }) {
             From: "translate-x-0"
             To: "translate-x-full"
         --> */}
-            <div class="pointer-events-auto w-screen max-w-md">
-              <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                <div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
-                  <div class="flex items-start gap-36">
+            <div className="pointer-events-auto w-screen max-w-md">
+              <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
+                  <div className="flex items-start gap-36">
                     <img
                       src="/svg/back.svg"
                       alt=""
                       className="cursor-pointer"
                       onClick={() => setShowCart(false)}
                     />
-                    <div class=" flex h-7 items-center justify-center">
+                    <div className=" flex h-7 items-center justify-center">
                       <button
                         type="button"
-                        class="-m-2 p-2  text-gray-400 hover:text-gray-500"
+                        className="-m-2 p-2  text-gray-400 hover:text-gray-500"
                       >
-                        <span class="sr-only">Close panel</span>
+                        <span className="sr-only">Close panel</span>
                         {/* <!-- Heroicon name: outline/x-mark --> */}
                         <img
                           className="w-[20px]"
@@ -149,10 +149,10 @@ export default function Cart({ setShowCart }) {
                     </p>
                   </div>
                   <hr className="border mt-[5px]" />
-                  <div class="mt-8">
-                    <div class="flow-root">
-                      <ul role="list" class="-my-6 divide-y divide-gray-200">
-                        {<li class="flex py-2">
+                  <div className="mt-8">
+                    <div className="flow-root">
+                      <ul role="list" className="-my-6 divide-y divide-gray-200">
+                        {<li className="flex py-2">
                           <div className="flex gap-4">
                             <div>
                               <img
@@ -202,7 +202,7 @@ export default function Cart({ setShowCart }) {
                           {/* <hr className="border-[10px] shadow-lg" /> */}
                         </li>}
 
-                        {/* <li class="flex py-2">
+                        {/* <li className="flex py-2">
                           <div className="flex gap-4">
                             <div>
                               <img
@@ -248,8 +248,8 @@ export default function Cart({ setShowCart }) {
                   </div>
                 </div>
 
-                <div class="border-t border-gray-200 py-6 px-4 sm:px-6">
-                  <div class="flex justify-between text-base font-medium text-gray-900">
+                <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
+                  <div className="flex justify-between text-base font-medium text-gray-900">
                     <p>Subtotal</p>
                     <p>$262.00</p>
                   </div>
@@ -275,10 +275,10 @@ export default function Cart({ setShowCart }) {
                     </div>
                   </form>
 
-                  <div class="mt-6">
+                  <div className="mt-6">
                     <Link
                       href="/checkout"
-                      class="flex items-center justify-center rounded-md text-[14px] bg-black border px-6 py-3 text-base font-medium text-white "
+                      className="flex items-center justify-center rounded-md text-[14px] bg-black border px-6 py-3 text-base font-medium text-white "
                     >
                       PROCEED TO CHECKOUT
                     </Link>
@@ -358,7 +358,7 @@ export default function Cart({ setShowCart }) {
                               viewBox="0 0 24 24"
                               stroke-width="1.5"
                               stroke="currentColor"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                             >
                               <path
                                 stroke-linecap="round"
@@ -378,7 +378,7 @@ export default function Cart({ setShowCart }) {
                               viewBox="0 0 24 24"
                               stroke-width="1.5"
                               stroke="currentColor"
-                              class="w-4 h-4 "
+                              className="w-4 h-4 "
                             >
                               <path
                                 stroke-linecap="round"
@@ -397,7 +397,7 @@ export default function Cart({ setShowCart }) {
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
                             stroke="currentColor"
-                            class="w-6 h-6"
+                            className="w-6 h-6"
                             onClick={() => handleDelete(items)}
                           >
                             <path
@@ -444,27 +444,27 @@ export default function Cart({ setShowCart }) {
   /* )} */
 }
 
-//     <div class="overflow-x-auto relative w-[95%] 2xl:w-[65%] m-auto">
-//       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+//     <div className="overflow-x-auto relative w-[95%] 2xl:w-[65%] m-auto">
+//       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
 //         {carts && carts.length > 0 && (
-//           <thead class="text-xs  text-white h-14 uppercase bg-[#369688]">
+//           <thead className="text-xs  text-white h-14 uppercase bg-[#369688]">
 //             <tr>
 //               <th
 //                 scope="col"
-//                 class="py-3 px-6 md:w-[70%] md:text-[15px] text-[10px]"
+//                 className="py-3 px-6 md:w-[70%] md:text-[15px] text-[10px]"
 //               >
 //                 PRODUCT NAME
 //               </th>
 
 //               <th
 //                 scope="col"
-//                 class="py-3 px-6 md:text-[15px] text-[10px]"
+//                 className="py-3 px-6 md:text-[15px] text-[10px]"
 //               >
 //                 QUANTITY
 //               </th>
 //               <th
 //                 scope="col"
-//                 class="py-3 px-6 md:text-[15px] text-[10px] text-center"
+//                 className="py-3 px-6 md:text-[15px] text-[10px] text-center"
 //               >
 //                 REMOVE
 //               </th>
@@ -474,10 +474,10 @@ export default function Cart({ setShowCart }) {
 //         <tbody>
 //           {carts.map((items, index) => {
 //             return (
-//               <tr class="bg-white border-b ">
+//               <tr className="bg-white border-b ">
 //                 <td
 //                   scope="row"
-//                   class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white "
+//                   className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white "
 //                 >
 //                   <div className="flex md:gap-5 gap-3 items-center">
 //                     <div className="md:w-[100px] w-[50px] ">
@@ -500,7 +500,7 @@ export default function Cart({ setShowCart }) {
 //                     </div>
 //                   </div>
 //                 </td>
-//                 <td class="py-4 px-6 ">
+//                 <td className="py-4 px-6 ">
 //                   <div className="flex cursor-pointer  ">
 //                     <div className="border flex gap-2 md:gap-4 items-center p-1 md:p-2 ">
 //                       <div className="flex gap-5 justify-start items-center text-[#369688]">
@@ -510,7 +510,7 @@ export default function Cart({ setShowCart }) {
 //                           viewBox="0 0 24 24"
 //                           stroke-width="1.5"
 //                           stroke="currentColor"
-//                           class="md:w-4 md:h-4 w-2 h-2"
+//                           className="md:w-4 md:h-4 w-2 h-2"
 //                           onClick={() => increment(items, index)}
 //                         >
 //                           <path
@@ -530,7 +530,7 @@ export default function Cart({ setShowCart }) {
 //                           viewBox="0 0 24 24"
 //                           stroke-width="1.5"
 //                           stroke="currentColor"
-//                           class="md:w-4 md:h-4 w-2 h-2"
+//                           className="md:w-4 md:h-4 w-2 h-2"
 //                           onClick={() => decerement(items, index)}
 //                         >
 //                           <path
@@ -543,7 +543,7 @@ export default function Cart({ setShowCart }) {
 //                     </div>
 //                   </div>
 //                 </td>
-//                 <td class="py-4 px-6">
+//                 <td className="py-4 px-6">
 //                   <div className="text-[#369688] font-bold flex justify-center cursor-pointer">
 //                     <svg
 //                       xmlns="http://www.w3.org/2000/svg"
@@ -551,7 +551,7 @@ export default function Cart({ setShowCart }) {
 //                       viewBox="0 0 24 24"
 //                       stroke-width="1.5"
 //                       stroke="currentColor"
-//                       class="md:w-5 md:h-5 w-4 h-4"
+//                       className="md:w-5 md:h-5 w-4 h-4"
 //                       // onClick={() => handleDelete(items)}
 //                       onClick={() => handleDelete(items)}
 //                     >

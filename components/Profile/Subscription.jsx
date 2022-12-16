@@ -30,14 +30,14 @@ function Subscription() {
               <div className=" border rounded-md bg-[#CEF1CD]">
                 <div className="flex justify-between gap-12 w-full h-[25px]  px-2 items-center  rounded-md ">
                   <div className="flex gap-3">
-                    <div class="flex items-center">
+                    <div className="flex items-center">
                       <input
                         id="country-option-1"
                         type="radio"
                         checked={offers}
                         name="countries"
                         value="USA"
-                        class="h-4 w-4 border-gray-300  focus:ring-black "
+                        className="h-4 w-4 border-gray-300  focus:ring-black "
                         aria-labelledby="country-option-1"
                         aria-describedby="country-option-1"
                         onClick={() => setOffers(true)}
@@ -58,14 +58,14 @@ function Subscription() {
                 {offers && (
                   <div className="px-2  pb-[15px] ">
                     <div className="flex gap-3">
-                      <div class="flex items-center">
+                      <div className="flex items-center">
                         <input
                           id="country-option-1"
                           type="radio"
                       
                           name="countries"
                           value="USA"
-                          class="h-4 w-4 border-gray-300  focus:ring-black "
+                          className="h-4 w-4 border-gray-300  focus:ring-black "
                           aria-labelledby="country-option-1"
                           aria-describedby="country-option-1"
                        
@@ -78,14 +78,14 @@ function Subscription() {
                       </div>
                     </div>
                     <div className="flex gap-3 pt-2">
-                      <div class="flex items-center">
+                      <div className="flex items-center">
                         <input
                           id="country-option-1"
                           type="radio"
                        
                           name="countries"
                           value="USA"
-                          class="h-4 w-4 border-gray-300  focus:ring-black "
+                          className="h-4 w-4 border-gray-300  focus:ring-black "
                           aria-labelledby="country-option-1"
                           aria-describedby="country-option-1"
                          
@@ -98,14 +98,14 @@ function Subscription() {
                       </div>
                     </div>
                     <div className="flex gap-3 pt-2">
-                      <div class="flex items-center">
+                      <div className="flex items-center">
                         <input
                           id="country-option-1"
                           type="radio"
                          
                           name="countries"
                           value="USA"
-                          class="h-4 w-4 border-gray-300  focus:ring-black "
+                          className="h-4 w-4 border-gray-300  focus:ring-black "
                           aria-labelledby="country-option-1"
                           aria-describedby="country-option-1"
                          
@@ -118,14 +118,14 @@ function Subscription() {
                       </div>
                     </div>
                     <div className="flex gap-3 pt-2">
-                      <div class="flex items-center">
+                      <div className="flex items-center">
                         <input
                           id="country-option-1"
                           type="radio"
                           
                           name="countries"
                           value="USA"
-                          class="h-4 w-4 border-gray-300  focus:ring-black "
+                          className="h-4 w-4 border-gray-300  focus:ring-black "
                           aria-labelledby="country-option-1"
                           aria-describedby="country-option-1"   
                         />
@@ -172,14 +172,14 @@ function Subscription() {
               <div className=" border rounded-md bg-[#CEF1CD]">
                 <div className="flex justify-between gap-[174px] w-full h-[55px]  px-2 items-center  rounded-md ">
                   <div className="flex gap-3">
-                    <div class="flex items-center">
+                    <div className="flex items-center">
                       <input
                         id="country-option-1"
                         type="radio"
                         checked={offers}
                         name="countries"
                         value="USA"
-                        class="h-4 w-4 border-gray-300  focus:ring-black "
+                        className="h-4 w-4 border-gray-300  focus:ring-black "
                         aria-labelledby="country-option-1"
                         aria-describedby="country-option-1"
                         onClick={() => setOffers(true)}
@@ -201,14 +201,14 @@ function Subscription() {
                   <div className="px-2  pb-[15px] ">
                     
                     <div className="flex gap-3 pt-2">
-                      <div class="flex items-center">
+                      <div className="flex items-center">
                         <input
                           id="country-option-1"
                           type="radio"
                        
                           name="countries"
                           value="USA"
-                          class="h-4 w-4 border-gray-300  focus:ring-black "
+                          className="h-4 w-4 border-gray-300  focus:ring-black "
                           aria-labelledby="country-option-1"
                           aria-describedby="country-option-1"
                          
@@ -221,14 +221,14 @@ function Subscription() {
                       </div>
                     </div>
                     <div className="flex gap-3 pt-2">
-                      <div class="flex items-center">
+                      <div className="flex items-center">
                         <input
                           id="country-option-1"
                           type="radio"
                          
                           name="countries"
                           value="USA"
-                          class="h-4 w-4 border-gray-300  focus:ring-black "
+                          className="h-4 w-4 border-gray-300  focus:ring-black "
                           aria-labelledby="country-option-1"
                           aria-describedby="country-option-1"
                          
@@ -241,14 +241,14 @@ function Subscription() {
                       </div>
                     </div>
                     <div className="flex gap-3 pt-2">
-                      <div class="flex items-center">
+                      <div className="flex items-center">
                         <input
                           id="country-option-1"
                           type="radio"
                           
                           name="countries"
                           value="USA"
-                          class="h-4 w-4 border-gray-300  focus:ring-black "
+                          className="h-4 w-4 border-gray-300  focus:ring-black "
                           aria-labelledby="country-option-1"
                           aria-describedby="country-option-1"   
                         />

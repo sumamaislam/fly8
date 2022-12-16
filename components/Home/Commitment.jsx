@@ -14,8 +14,8 @@ function Commitment() {
           <div className="mt-[65px] flex gap-8 md:flex-row flex-col items-center justify-between ">
             {quality &&
               quality.data &&
-              quality.data.length > 0 &&
-              quality.data.map((items, index) => {
+              // quality.data.length > 0 &&
+              quality?.data?.map((items, index) => {
                 return (
                   <div className="w-[300px]" key={index}>
                     <img

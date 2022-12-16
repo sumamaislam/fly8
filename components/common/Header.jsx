@@ -50,18 +50,18 @@ function Header() {
     //             <ul className="flex gap-8 justify-center font-semibold text-[#0AA085]  ">
     //               {flavours.map((data, index) => {
     //                 return (
-    //                   <div class="group inline-block" key={index}>
+    //                   <div className="group inline-block" key={index}>
     //                     <button
     //                       aria-haspopup="true"
     //                       aria-controls="menu"
-    //                       class="outline-none focus:outline-none px-3 py-1 bg-white rounded-sm flex items-center "
+    //                       className="outline-none focus:outline-none px-3 py-1 bg-white rounded-sm flex items-center "
     //                     >
-    //                       <span class=" font-semibold w-fit text-[18px]">
+    //                       <span className=" font-semibold w-fit text-[18px]">
     //                         {data.name}
     //                       </span>
     //                       <span>
     //                         <svg
-    //                           class="fill-current h-4 w-4 transform group-hover:-rotate-180
+    //                           className="fill-current h-4 w-4 transform group-hover:-rotate-180
     //       transition duration-150 ease-in-out"
     //                           xmlns="http://www.w3.org/2000/svg"
     //                           viewBox="0 0 20 20"
@@ -73,13 +73,13 @@ function Header() {
     //                     <ul
     //                       id="menu"
     //                       aria-hidden="true"
-    //                       class="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
+    //                       className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
     // transition duration-150 ease-in-out origin-top min-w-[200px] cursor-pointer"
     //                     >
     //                       {data.submenu?.map((items, index2) => {
     //                         return (
     //                           <li
-    //                             class="rounded-sm px-3 py-2 hover:bg-gray-100"
+    //                             className="rounded-sm px-3 py-2 hover:bg-gray-100"
     //                             key={index2}
     //                           >
     //                             {items.name}
@@ -161,25 +161,25 @@ function Header() {
         className="fixed z-10 top-0 shadow-lg w-full bg-black bg-opacity-[60%]"
       >
         {showCart && <Cart setShowCart={setShowCart} />}
-        <div class="container m-auto px-4 h-[64px]">
-          <div class="flex justify-between ">
-            <div class="flex space-x-7">
+        <div className="container m-auto px-4 h-[64px]">
+          <div className="flex justify-between ">
+            <div className="flex space-x-7">
               <div>
                 {/* <!-- Website Logo --> */}
-                <Link href="/" class="flex items-center py-4 px-2">
-                  <img src={header?.logo} alt="Logo" class="w-[65px]" />
+                <Link href="/" className="flex items-center py-4 px-2">
+                  <img src={header?.logo} alt="Logo" className="w-[65px]" />
                 </Link>
               </div>
               {/* <!-- Primary Navbar items --> */}
-              <div class="flex-col z-10 absolute md:static flex md:flex-row items-center gap-[20px] ">
+              <div className="flex-col z-10 absolute md:static flex md:flex-row items-center gap-[20px] ">
                 {header &&
-                  header.data.length > 0 &&
-                  header.data.map((item, index) => {
+                  // header.data.length > 0 &&
+                  header?.data?.map((item, index) => {
                     return (
                       <Link
                         key={index}
                         href={item.link}
-                        class="py-4 px-2  lg:text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white  "
+                        className="py-4 px-2  lg:text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white  "
                       >
                         {item.name}
                       </Link>
@@ -187,50 +187,50 @@ function Header() {
                   })}
                 {/* <Link
                   href=""
-                  class="py-4 px-2  lg:text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white  "
+                  className="py-4 px-2  lg:text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white  "
                 >
                   Delta-9o
                 </Link>
                 <Link
                   href=""
-                  class="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
+                  className="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
                 >
                   Delta-11
                 </Link>
                 <Link
                   href=""
-                  class="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white"
+                  className="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white"
                 >
                   Master Blend
                 </Link>
                 <Link
                   href=""
-                  class="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
+                  className="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
                 >
                   HHC
                 </Link>
                 <Link
                   href=""
-                  class="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
+                  className="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
                 >
                   Shop All
                 </Link>
                 <Link
                   href=""
-                  class="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
+                  className="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
                 >
                   About Us
                 </Link>
                 <Link
                   href=""
-                  class="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
+                  className="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
                 >
                   Contact Us
                 </Link> */}
               </div>
             </div>
             {/* <!-- Secondary Navbar items --> */}
-            <div class="hidden md:flex items-center space-x-6 cursor-pointer">
+            <div className="hidden md:flex items-center space-x-6 cursor-pointer">
               <img className="w-[20px]" src="/svg/search.svg" alt="" />
               <img
                 className="w-[20px] "
@@ -244,10 +244,10 @@ function Header() {
               </Link>
             </div>
             {/* <!-- Mobile menu button --> */}
-            <div class="md:hidden flex items-center">
-              <button class="outline-none mobile-menu-button">
+            <div className="md:hidden flex items-center">
+              <button className="outline-none mobile-menu-button">
                 <svg
-                  class=" w-6 h-6 text-gray-500 hover:text-green-500 "
+                  className=" w-6 h-6 text-gray-500 hover:text-green-500 "
                   x-show="!showMenu"
                   fill="none"
                   stroke-linecap="round"

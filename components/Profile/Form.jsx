@@ -89,7 +89,7 @@ function Form() {
                   </div>
                 </div>
               </form>
-              <div class="seperator 2xl:h-[55%] xl:h-[63%] lg:h-[83%] md:h-[45%]"></div>
+              <div className="seperator 2xl:h-[55%] xl:h-[63%] lg:h-[83%] md:h-[45%]"></div>
               <form>
                 
                 <div className="mt-[10px] text-[12px]  flex items-center gap-2">

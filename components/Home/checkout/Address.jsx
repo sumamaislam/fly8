@@ -220,10 +220,10 @@ console.log(input)
             <div className="font-semibold text-[22px] ">
               <p>Product Information</p>
             </div>
-            <div class="mt-8 w-full">
-              <div class="flow-root ">
-                <ul role="list" class="-my-6 divide-y divide-gray-200">
-                  <li class="flex py-2 justify-between ">
+            <div className="mt-8 w-full">
+              <div className="flow-root ">
+                <ul role="list" className="-my-6 divide-y divide-gray-200">
+                  <li className="flex py-2 justify-between ">
                     <div className="flex items-center gap-7">
                       <div className="relative" >
                         <img
@@ -260,7 +260,7 @@ console.log(input)
                     </div>
                   </li>
                   <hr className="border-[10px] shadow-lg" />
-                  <li class="flex py-2 justify-between">
+                  <li className="flex py-2 justify-between">
                     <div className="flex items-center gap-7">
                     <div className="relative" >
                         <img
@@ -298,7 +298,7 @@ console.log(input)
                   </li>
 
                   <hr className="border-[10px] shadow-lg" />
-                  <li class="flex py-2 justify-between">
+                  <li className="flex py-2 justify-between">
                     <div className="flex items-center gap-7">
                     <div className="relative" >
                         <img

@@ -184,14 +184,14 @@ export default function Detail() {
             <div className="mt-[25px]  ">
               <div className="flex justify-between  w-full h-[45px] p-4 items-center rounded-md  border">
                 <div className="flex gap-3">
-                  <div class="flex items-center">
+                  <div className="flex items-center">
                     <input
                       id="country-option-1"
                       type="radio"
                       checked={!offers}
                       name="countries"
                       value="USA"
-                      class="h-4 w-4 border-gray-300  focus:ring-black "
+                      className="h-4 w-4 border-gray-300  focus:ring-black "
                       aria-labelledby="country-option-1"
                       aria-describedby="country-option-1"
                       onClick={() => setOffers(false)}
@@ -213,14 +213,14 @@ export default function Detail() {
             <div className="mt-[15px] border rounded-md bg-[#CEF1CD]">
               <div className="flex justify-between  w-full h-[45px] p-4 items-center  rounded-md ">
                 <div className="flex gap-3">
-                  <div class="flex items-center">
+                  <div className="flex items-center">
                     <input
                       id="country-option-1"
                       type="radio"
                       checked={offers}
                       name="countries"
                       value="USA"
-                      class="h-4 w-4 border-gray-300  focus:ring-black "
+                      className="h-4 w-4 border-gray-300  focus:ring-black "
                       aria-labelledby="country-option-1"
                       aria-describedby="country-option-1"
                       onClick={() => setOffers(true)}
@@ -243,14 +243,14 @@ export default function Detail() {
               {offers && (
                 <div className="px-12  pb-[15px] ">
                   <div className="flex gap-3">
-                    <div class="flex items-center">
+                    <div className="flex items-center">
                       <input
                         id="country-option-1"
                         type="radio"
                         //  checked={ offers ? true : false}
                         name="countries"
                         value="USA"
-                        class="h-4 w-4 border-gray-300  focus:ring-black "
+                        className="h-4 w-4 border-gray-300  focus:ring-black "
                         aria-labelledby="country-option-1"
                         aria-describedby="country-option-1"
                         //  onClick={()=>setOffers(false)}
@@ -263,14 +263,14 @@ export default function Detail() {
                     </div>
                   </div>
                   <div className="flex gap-3 pt-2">
-                    <div class="flex items-center">
+                    <div className="flex items-center">
                       <input
                         id="country-option-1"
                         type="radio"
                         // checked={ !showModel ? true : false}
                         name="countries"
                         value="USA"
-                        class="h-4 w-4 border-gray-300  focus:ring-black "
+                        className="h-4 w-4 border-gray-300  focus:ring-black "
                         aria-labelledby="country-option-1"
                         aria-describedby="country-option-1"
                         // onClick={()=>setShowModel(false)}
@@ -283,14 +283,14 @@ export default function Detail() {
                     </div>
                   </div>
                   <div className="flex gap-3 pt-2">
-                    <div class="flex items-center">
+                    <div className="flex items-center">
                       <input
                         id="country-option-1"
                         type="radio"
                         // checked={ !showModel ? true : false}
                         name="countries"
                         value="USA"
-                        class="h-4 w-4 border-gray-300  focus:ring-black "
+                        className="h-4 w-4 border-gray-300  focus:ring-black "
                         aria-labelledby="country-option-1"
                         aria-describedby="country-option-1"
                         // onClick={()=>setShowModel(false)}
@@ -303,14 +303,14 @@ export default function Detail() {
                     </div>
                   </div>
                   <div className="flex gap-3 pt-2">
-                    <div class="flex items-center">
+                    <div className="flex items-center">
                       <input
                         id="country-option-1"
                         type="radio"
                         // checked={ !showModel ? true : false}
                         name="countries"
                         value="USA"
-                        class="h-4 w-4 border-gray-300  focus:ring-black "
+                        className="h-4 w-4 border-gray-300  focus:ring-black "
                         aria-labelledby="country-option-1"
                         aria-describedby="country-option-1"
                         // onClick={()=>setShowModel(false)}

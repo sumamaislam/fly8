@@ -48,12 +48,12 @@ function Account({ show, setShow }) {
                 />
               </div>
 
-              <h5 class={`text-[11px] md:text-[14px] pt-[15px] font-semibold text-center  ${show === "orders" && "text-white"}`}>
+              <h5 className={`text-[11px] md:text-[14px] pt-[15px] font-semibold text-center  ${show === "orders" && "text-white"}`}>
                 ORDERS
               </h5>
             </div>
             <div
-              class={`bg-white border md:p-10 p-2 border-black m-auto rounded-lg shadow-md mb-[15px] cursor-pointer ${
+              className={`bg-white border md:p-10 p-2 border-black m-auto rounded-lg shadow-md mb-[15px] cursor-pointer ${
                 show === "address" && "bg-black text-white"
               }`}
               onClick={() => setShow("address")}
@@ -67,12 +67,12 @@ function Account({ show, setShow }) {
                 />
               </div>
 
-              <h5 class={`text-[11px] md:text-[14px] pt-[15px] font-semibold text-center  ${show === "accounts" && "text-white"}`  }>
+              <h5 className={`text-[11px] md:text-[14px] pt-[15px] font-semibold text-center  ${show === "accounts" && "text-white"}`  }>
                 ORDERS
               </h5>
             </div>
             <div
-              class={`bg-white border md:p-10 p-2 border-black m-auto rounded-lg shadow-md mb-[15px] cursor-pointer ${
+              className={`bg-white border md:p-10 p-2 border-black m-auto rounded-lg shadow-md mb-[15px] cursor-pointer ${
                 show === "account" && "bg-black text-white"
               }`}
               onClick={() => setShow("account")}
@@ -91,7 +91,7 @@ function Account({ show, setShow }) {
               </h5>
             </div>
             <div
-              class={`bg-white border md:p-10 p-2 border-black m-auto rounded-lg shadow-md mb-[15px] cursor-pointer  ${
+              className={`bg-white border md:p-10 p-2 border-black m-auto rounded-lg shadow-md mb-[15px] cursor-pointer  ${
                 show === "payment" && "bg-black text-white"
               }`}
               onClick={() => setShow("payment")}
@@ -105,12 +105,12 @@ function Account({ show, setShow }) {
                 />
               </div>
 
-              <h5 class={`text-[11px] md:text-[14px] md:pt-[32px] pt-[20px] font-semibold text-center ${show === "payment" && "text-white"}`} >
+              <h5 className={`text-[11px] md:text-[14px] md:pt-[32px] pt-[20px] font-semibold text-center ${show === "payment" && "text-white"}`} >
                 ORDERS
               </h5>
             </div>
             <div
-              class={`bg-white border md:p-10 p-2 border-black m-auto rounded-lg shadow-md mb-[15px] cursor-pointer ${
+              className={`bg-white border md:p-10 p-2 border-black m-auto rounded-lg shadow-md mb-[15px] cursor-pointer ${
                 show === "subscription" && "bg-black text-white"
               }`}
               onClick={() => setShow("subscription")}
@@ -124,7 +124,7 @@ function Account({ show, setShow }) {
                 />
               </div>
 
-              <h5 class={` text-[11px] md:text-[14px] pt-[15px] font-semibold text-center  ${show === "subscription" && "text-white"}` }>
+              <h5 className={` text-[11px] md:text-[14px] pt-[15px] font-semibold text-center  ${show === "subscription" && "text-white"}` }>
                 ORDERS
               </h5>
             </div>
@@ -153,114 +153,114 @@ function Account({ show, setShow }) {
 
         {showData && show === "orders" && (
           <div className="mt-[40px]">
-            <div class="flex flex-col">
-              <div class="sm:-mx-6 lg:-mx-8">
-                <div class=" inline-block min-w-full sm:px-6 lg:px-8">
-                  <div class="overflow-hidden">
-                    <table class="min-w-full border text-center">
-                      <thead class="border-b bg-black text-white">
+            <div className="flex flex-col">
+              <div className="sm:-mx-6 lg:-mx-8">
+                <div className=" inline-block min-w-full sm:px-6 lg:px-8">
+                  <div className="overflow-hidden">
+                    <table className="min-w-full border text-center">
+                      <thead className="border-b bg-black text-white">
                         <tr>
                           <th
                             scope="col"
-                            class="md:text-sm  text-[10px] font-medium px-1 py-2 "
+                            className="md:text-sm  text-[10px] font-medium px-1 py-2 "
                           >
                             Sr. #
                           </th>
                           <th
                             scope="col"
-                            class="md:text-sm  text-[10px] font-medium  px-2 py-2 "
+                            className="md:text-sm  text-[10px] font-medium  px-2 py-2 "
                           >
                             Order Number
                           </th>
                           <th
                             scope="col"
-                            class="md:text-sm  text-[10px] font-medium px-2 py-2 "
+                            className="md:text-sm  text-[10px] font-medium px-2 py-2 "
                           >
                             Order Placement Date
                           </th>
                           <th
                             scope="col"
-                            class="md:text-sm  text-[10px] font-medium  px-2 py-2 "
+                            className="md:text-sm  text-[10px] font-medium  px-2 py-2 "
                           >
                             Delivery Date
                           </th>
                           <th
                             scope="col"
-                            class="md:text-sm  text-[10px] font-medium  px-2 py-2"
+                            className="md:text-sm  text-[10px] font-medium  px-2 py-2"
                           >
                             Order Status
                           </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="border-b">
-                          <td class="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[10px] ">
+                        <tr className="border-b">
+                          <td className="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[10px] ">
                             01
                           </td>
-                          <td class=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
+                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
                             ABC-234
                           </td>
-                          <td class=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
+                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
                             12-12-2022
                           </td>
-                          <td class=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
+                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
                             15-12-2022
                           </td>
-                          <td class=" text-gray-900 font-light px-2 py-2 whitespace-nowrap md:text-sm  text-[10px] ">
+                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap md:text-sm  text-[10px] ">
                             PENDING
                           </td>
                         </tr>
 
-                        <tr class="border-b">
-                          <td class="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[10px] ">
+                        <tr className="border-b">
+                          <td className="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[10px] ">
                             01
                           </td>
-                          <td class=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
+                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
                             ABC-234
                           </td>
-                          <td class=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
+                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
                             12-12-2022
                           </td>
-                          <td class=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
+                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
                             15-12-2022
                           </td>
-                          <td class="  font-light px-2 py-2 whitespace-nowrap md:text-sm  text-green-500 text-[10px] ">
+                          <td className="  font-light px-2 py-2 whitespace-nowrap md:text-sm  text-green-500 text-[10px] ">
                             DELIVERED
                           </td>
                         </tr>
 
-                        <tr class="border-b">
-                          <td class="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[10px] ">
+                        <tr className="border-b">
+                          <td className="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[10px] ">
                             01
                           </td>
-                          <td class=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
+                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
                             ABC-234
                           </td>
-                          <td class=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
+                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
                             12-12-2022
                           </td>
-                          <td class=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
+                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
                             15-12-2022
                           </td>
-                          <td class=" text-red-500 font-light px-2 py-2 whitespace-nowrap md:text-sm  text-[10px] ">
+                          <td className=" text-red-500 font-light px-2 py-2 whitespace-nowrap md:text-sm  text-[10px] ">
                             NOT DELIVERED
                           </td>
                         </tr>
 
-                        <tr class="border-b">
-                          <td class="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[10px] ">
+                        <tr className="border-b">
+                          <td className="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[10px] ">
                             01
                           </td>
-                          <td class=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
+                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
                             ABC-234
                           </td>
-                          <td class=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
+                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
                             12-12-2022
                           </td>
-                          <td class=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
+                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[10px] ">
                             15-12-2022
                           </td>
-                          <td class=" font-light px-2 py-2 whitespace-nowrap md:text-sm text-green-500 text-[10px] ">
+                          <td className=" font-light px-2 py-2 whitespace-nowrap md:text-sm text-green-500 text-[10px] ">
                             DELIVERED
                           </td>
                         </tr>
