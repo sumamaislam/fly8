@@ -8,10 +8,6 @@ function Gummies() {
 
   const { gummies } = useSelector((state)=>state.home)
 
-  useEffect(()=>{
-  console.log("coolit",gummies);
-  },[gummies]);
-
   return (
     <div>
       <div className="mt-[100px] ">
@@ -34,17 +30,16 @@ function Gummies() {
                   </div>
                   <div className="pt-[15px]">
                     <h1 className="text-[18px] xl:text-[19px] font-extrabold  text-[black] dark:text-white text-center">
-                      {items.name}
+                      {items.title}
                     </h1>
                     <h5 className=" text-[14px]  xl:text-[14px]  font-normal  pt-[15px] text-[#535353]  text-center ">
-                      {items.title}
+                      {items.details}
                     </h5>
 
                     <div className="flex justify-center mt-[42px]">
                       <Link
                         href="/cards"
                         className=" items-center hover:animate-bounce text-[14px] xl:text-[18px] font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "
-                        onClick={() => handleAdd(items)}
                       >
                         Get Your Flavour
                       </Link>

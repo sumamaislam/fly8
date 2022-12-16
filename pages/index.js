@@ -19,7 +19,6 @@ import Commitment from "../components/Home/Commitment";
 import { wrapper } from "../store";
 import { bannerDataRequest, footerDataRequest, gummiesDataRequest, navDataRequest, qualityDataRequest, vapeDataRequest } from "../redux/home";
 
-
 const Home = () => {
 
   return (

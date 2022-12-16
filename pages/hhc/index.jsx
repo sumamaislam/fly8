@@ -3,7 +3,6 @@ import { Footer, Header } from "../../components/common";
 import { Raiting } from "../../components/Home";
 import {  hhc, masterBlend} from "../../data";
 import Link from "next/link";
-import { addToCarts } from "../../redux/product";
 import { useDispatch } from "react-redux";
 import Router, { useRouter } from "next/router";
 import { wrapper } from "../../store";
@@ -13,7 +12,6 @@ export default function index() {
   const router = useRouter();
   const handleClick = (data) => {
     console.log(data);
-    dispatch(addToCarts(data));
     // router.push({ pathname: "/add_to_cart" });
     // router.push("/add_to_cart", undefined, { shallow: true });
     // router.push("/add_to_cart")

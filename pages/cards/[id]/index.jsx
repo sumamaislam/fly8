@@ -4,11 +4,11 @@ import Link from "next/link";
 import { cards, delta9o, details, productdetail } from "../../../data";
 import Acordion from "../../../components/common/Acordion";
 import { useDispatch } from "react-redux";
-import { addToCarts } from "../../../redux/product";
 import { Raiting } from "../../../components/Home";
 import Cart from "../../../components/Home/Cart";
 import { wrapper } from "../../../store";
 import { navDataRequest } from "../../../redux/home";
+import { addToCarts } from "../../../redux/product";
 export default function Detail() {
   const [show, setShow] = useState(details.image[0]);
   const [detail, setDetail] = useState("a");
@@ -17,8 +17,9 @@ export default function Detail() {
 
   const dispatch = useDispatch();
 
-  const handleAdd = () => {
+  const handleAdd = (items) => {
     setCarts(true);
+    dispatch(addToCarts())
   };
   console.log("HHi",productdetail);
 
@@ -557,7 +558,7 @@ export default function Detail() {
                       <Link href={`/cards/${items.id}`}>
                         <button
                           className=" items-center flex gap-2 hover:animate-bounce text-[14px] xl:text-[15px] font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "
-                          // onClick={() => handleAdd(items)}
+                          onClick={() => handleAdd(items)}
                         >
                           <span>
                             <img

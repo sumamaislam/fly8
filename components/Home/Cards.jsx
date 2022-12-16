@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cards } from "../../data";
-import { addToCarts } from "../../redux/product";
 
 function Cards() {
   const dispatch = useDispatch();
@@ -13,7 +12,6 @@ function Cards() {
   const { vapes } = useSelector((state) => state.home);
 
   const handleAdd = (data) => {
-    dispatch(addToCarts(data));
     // router.push({ pathname: "/add_to_cart" });
     // console.log(router.pathname);
   };
@@ -55,7 +53,6 @@ function Cards() {
                         (index === 3 && "/hhc")
                       }`}
                       className=" items-center hover:animate-bounce text-[14px] xl:text-[18px] font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "
-                      onClick={() => handleAdd(items)}
                     >
                       Get Your Flavour
                     </Link>
