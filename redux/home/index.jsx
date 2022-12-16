@@ -12,7 +12,8 @@ const initialState = {
   vapes: {},
   image: {},
   gummies: {},
-  quality: {}
+  quality: {},
+  footer: {}
 };
 
 export const navDataRequest = createAsyncThunk(
@@ -22,6 +23,24 @@ export const navDataRequest = createAsyncThunk(
       let response;
       response = await request
         .get(`featured-links`)
+        .then((response) => response.data);
+      // toast(<RequestMessage message="Message sent successfully!" />);
+      return response;
+    } catch (error) {
+      console.log("Error", error);
+      // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);
+      return null;
+    }
+  }
+);
+
+export const footerDataRequest = createAsyncThunk(
+  "footer/footerDataRequest",
+  async (_, thunkAPI) => {
+    try {
+      let response;
+      response = await request
+        .get(`footer`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
@@ -120,6 +139,7 @@ export const homeDataSlice = createSlice({
       state.vapes = action?.payload?.home?.vapes ? action.payload.home.vapes : state?.vapes;
       state.gummies = action?.payload?.home?.gummies ? action.payload.home.gummies : state?.gummies;
       state.quality = action?.payload?.home?.quality ? action.payload.home.quality : state?.quality;
+      state.footer = action?.payload?.home?.footer ? action.payload.home.footer : state?.footer;
       // state.home = action?.payload?.home ? action.payload.home : state?.home;
       // state.footer = action?.payload?.footer ? action.payload.footer : state?.footer;
       // state.header = action?.payload?.header ? action.payload.header : state?.header;
@@ -188,6 +208,17 @@ export const homeDataSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(qualityDataRequest.rejected, (state, action) => {
+      state.isLoading = false;
+      console.log("Error:", { message: action.payload.message });
+    });
+    builder.addCase(footerDataRequest.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(footerDataRequest.fulfilled, (state, action) => {
+      state.footer = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(footerDataRequest.rejected, (state, action) => {
       state.isLoading = false;
       console.log("Error:", { message: action.payload.message });
     });

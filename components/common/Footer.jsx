@@ -1,6 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 function Footer() {
+
+  const { footer } = useSelector((state)=>state.home);
+
   return (
     <div className="bg-[black] text-white mt-[100px]">
       <div className="container m-auto px-[10px]">
@@ -29,11 +33,10 @@ function Footer() {
 
         <div className="grid py-[65px] lg:grid-cols-5 grid-col md:grid-cols-2  gap-12 justify-items-center text-center md:text-left ">
         <div className="max-w-[323px] hidden md:block">
-            <img src="/images/logo.png" alt="Logo" class="w-[100px]" />
+            <img src={footer && footer?.logo} alt="Logo" class="w-[100px]" />
 
             <p className="pt-[25px] xl:text-[16px] text-[12px]">
-            Our Vape has always looked to encourage and support people who want to make the switch to vaping by producing high-quality e-liquids. Our Products Like E-liquids include some of the best e-liquid flavours in a range of freebase nicotine.
-
+            {footer && footer?.footer_text}
             </p>
           </div>
           <div className="menus">
