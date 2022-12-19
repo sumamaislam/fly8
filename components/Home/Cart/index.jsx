@@ -9,10 +9,9 @@ import {
 } from "../../../redux/product";
 
 export default function Cart({ setShowCart }) {
-  const [total, setTotal] = useState("0");
-
   const dispatch = useDispatch();
   const { carts, totalPrice } = useSelector((state) => state.product);
+  console.log("carts11111111111", carts);
 
   const increment = (items, index) => {
     let update = { ...items };
@@ -35,11 +34,13 @@ export default function Cart({ setShowCart }) {
   };
 
   useEffect(() => {
-    const totalAmount = carts?.reduce((a, v) => a + v.price * v.quantity, 0);
-    const totalQuantity = carts?.reduce((a, v) => a + v.quantity, 0);
-    // console.log(totalQuantity);
-    dispatch(setTotalPrice(totalAmount));
-    dispatch(setTotalQuantity(totalQuantity));
+    if (carts) {
+      const totalAmount = carts?.reduce((a, v) => a + v.price * v.quantity, 0);
+      const totalQuantity = carts?.reduce((a, v) => a + v.quantity, 0);
+      // console.log(totalQuantity);
+      dispatch(setTotalPrice(totalAmount));
+      dispatch(setTotalQuantity(totalQuantity));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carts]);
 
@@ -88,32 +89,10 @@ export default function Cart({ setShowCart }) {
   //   setCart(filterd);
   // };
   return (
-    <div className="relative z-10 background: rgba(0, 0, 0, 0.5);">
-      {/* <!--
-    Background backdrop, show/hide based on slide-over state.
-
-    Entering: "ease-in-out duration-500"
-      From: "opacity-0"
-      To: "opacity-100"
-    Leaving: "ease-in-out duration-500"
-      From: "opacity-100"
-      To: "opacity-0"
-  --> */}
-      {/* <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div> */}
-
+    <div className="relative z-10 background: rgba(0, 0, 0, 0.5) z-50">
       <div className="fixed inset-0 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-            {/* <!--
-          Slide-over panel, show/hide based on slide-over state.
-
-          Entering: "transform transition ease-in-out duration-500 sm:duration-700"
-            From: "translate-x-full"
-            To: "translate-x-0"
-          Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
-            From: "translate-x-0"
-            To: "translate-x-full"
-        --> */}
             <div className="pointer-events-auto w-screen max-w-md">
               <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                 <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
@@ -147,98 +126,75 @@ export default function Cart({ setShowCart }) {
                   <hr className="border mt-[5px]" />
                   <div className="mt-8">
                     <div className="flow-root">
-                      <ul role="list" className="-my-6 divide-y divide-gray-200">
-                        {<li className="flex py-2">
-                          <div className="flex gap-4">
-                            <div>
-                              <img
-                                className="h-24 w-24"
-                                src="/images/p1.jpeg"
-                                alt=""
-                              />
-                            </div>
-                            <div>
-                              <div>
-                                <p className="text-[12px] font-bold">
-                                  DELTA-9O HIGH POTENCY VAPE
-                                  <span className="text-[10px]">
-                                    WITH 2 PACK COMBO
-                                  </span>
-                                </p>
-                              </div>
-                              <div className="mt-[10px] flex gap-[25px] items-center ">
-                                <div className="flex gap-[20px] border items-center rounded-md h-[25px] bg-[ #E9EFEE] px-[16px]">
+                      <ul
+                        role="list"
+                        className="-my-6 divide-y divide-gray-200"
+                      >
+                        {carts &&
+                          carts.length > 0 &&
+                          carts?.map((item, index) => {
+                            return (
+                              <li className="flex py-2">
+                                <div className="flex gap-4">
                                   <div>
                                     <img
-                                      src="/svg/arrowleft.svg"
+                                      className="h-24 w-24"
+                                      src="/images/p1.jpeg"
                                       alt=""
-                                      onClick={() => decerement()}
                                     />
                                   </div>
                                   <div>
-                                    <p className="text-[15px] font-bold">1</p>
+                                    <div>
+                                      <p className="text-[12px] font-bold">
+                                        DELTA-9O HIGH POTENCY VAPE
+                                        <span className="text-[10px]">
+                                          WITH 2 PACK COMBO
+                                        </span>
+                                      </p>
+                                    </div>
+                                    <div className="mt-[10px] flex gap-[25px] items-center ">
+                                      <div className="flex gap-[20px] border items-center rounded-md h-[25px] bg-[ #E9EFEE] px-[16px]">
+                                        <div>
+                                          <img
+                                            src="/svg/arrowleft.svg"
+                                            alt=""
+                                            onClick={() => decerement()}
+                                          />
+                                        </div>
+                                        <div>
+                                          <p className="text-[15px] font-bold">
+                                            1
+                                          </p>
+                                        </div>
+                                        <div>
+                                          <img
+                                            src="/svg/arrowright.svg"
+                                            alt=""
+                                            onClick={() => increment()}
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <p className="text-right font-bold">
+                                        $245.99
+                                      </p>
+                                    </div>
                                   </div>
                                   <div>
                                     <img
-                                      src="/svg/arrowright.svg"
+                                      src="/svg/cross.png"
                                       alt=""
-                                      onClick={() => increment()}
+                                      onClick={() => handleDelete()}
                                     />
                                   </div>
                                 </div>
-                              </div>
-                              <div>
-                                <p className="text-right font-bold">$245.99</p>
-                              </div>
-                            </div>
-                            <div>
-                              <img src="/svg/cross.png" alt="" onClick={() => handleDelete()}/>
-                            </div>
-                          </div>
-                          {/* <hr className="border-[10px] shadow-lg" /> */}
-                        </li>}
-
-                        {/* <li className="flex py-2">
-                          <div className="flex gap-4">
-                            <div>
-                              <img
-                                className="h-24 w-24"
-                                src="/images/p1.jpeg"
-                                alt=""
-                              />
-                            </div>
-                            <div>
-                              <div>
-                                <p className="text-[12px] font-bold">
-                                  DELTA-9O HIGH POTENCY VAPE
-                                  <span className="text-[10px]">
-                                    WITH 2 PACK COMBO
-                                  </span>
-                                </p>
-                              </div>
-                              <div className="mt-[10px] flex gap-[25px] items-center ">
-                                <div className="flex gap-[20px] border items-center rounded-md h-[25px] bg-[ #E9EFEE] px-[16px]">
-                                  <div>
-                                    <img src="/svg/arrowleft.svg" alt="" />
-                                  </div>
-                                  <div>
-                                    <p className="text-[15px] font-bold">1</p>
-                                  </div>
-                                  <div>
-                                    <img src="/svg/arrowright.svg" alt="" />
-                                  </div>
-                                </div>
-                              </div>
-                              <div>
-                                <p className="text-right font-bold">$245.99</p>
-                              </div>
-                            </div>
-                            <div>
-                              <img src="/svg/cross.png" alt="" />
-                            </div>
-                          </div>
-                        </li> */}
-                        {/* <hr className="border-[10px] shadow-lg" /> */}
+                              </li>
+                            );
+                          })}
+                          {
+                            carts.length === 0 && <p>Your Cart is empty</p>
+                          }
                       </ul>
                     </div>
                   </div>

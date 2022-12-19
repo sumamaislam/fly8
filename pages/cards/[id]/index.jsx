@@ -3,12 +3,12 @@ import { Footer, Header } from "../../../components/common";
 import Link from "next/link";
 import { cards, delta9o, details, productdetail } from "../../../data";
 import Acordion from "../../../components/common/Acordion";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Raiting } from "../../../components/Home";
 import Cart from "../../../components/Home/Cart";
 import { wrapper } from "../../../store";
 import { navDataRequest } from "../../../redux/home";
-import { addToCarts } from "../../../redux/product";
+import { addToCarts, getProductById } from "../../../redux/product";
 export default function Detail() {
   const [show, setShow] = useState(details.image[0]);
   const [detail, setDetail] = useState("a");
@@ -16,20 +16,22 @@ export default function Detail() {
   const [carts, setCarts] = useState(false);
 
   const dispatch = useDispatch();
+  const { selectedProduct } = useSelector((state) => state.product);
+  console.log("oooooooo",selectedProduct)
 
   const handleAdd = (items) => {
     setCarts(true);
-    dispatch(addToCarts(items))
+    dispatch(addToCarts(items));
   };
 
-  console.log("HHi",productdetail);
+  console.log("HHi", productdetail);
 
   return (
     <div>
       <Header />
       {carts && <Cart showCart={carts} setShowCart={setCarts} />}
       <div className=" 2xl:w-[65%] md:w-[80%] container m-auto">
-        <div className="container  m-auto ">
+        <div className="container m-auto">
           <div>
             <nav className="flex mt-[5rem] " aria-label="Breadcrumb">
               <ol className="inline-flex items-center space-x-1 md:space-x-3">
@@ -93,9 +95,9 @@ export default function Detail() {
         <div className="flex flex-col lg:flex-row  justify-center gap-[40px] lg:gap-[80px] 2xl:gap-[100px] px-[10px] mt-[31px]">
           <div className=" ">
             <div className="max-w-[700px] border ">
-              <img className="" src={show} alt="" />
+              <img className="" src={selectedProduct?.thumbnail} alt="" />
             </div>
-            <div className="flex lg:gap-[36px] gap-2 justify-center lg:justify-start">
+            {/* <div className="flex lg:gap-[36px] gap-2 justify-center lg:justify-start">
               {productdetail?.images?.map((items, index) => {
                 return (
                   <div
@@ -115,18 +117,18 @@ export default function Detail() {
                   </div>
                 );
               })}
-            </div>
+            </div> */}
           </div>
           {/* right side */}
           <div>
             {/* Instock btn */}
             <button className="text-[15px] bg-[#5FB75D] px-[7px]  rounded-md text-white uppercase">
-             {productdetail.stock}
+              {productdetail.stock}
             </button>
 
             {/* tittle */}
             <p className="md:text-[25px] text-[16px] font-normal mt-[15px] text-black ">
-              {productdetail.title}
+              {selectedProduct?.name}
             </p>
             <div className="flex items-center gap-[52px]">
               {/* raiting */}
@@ -134,13 +136,13 @@ export default function Detail() {
                 <Raiting />
               </div>
               <p className="md:text-[15px] text-[12px] text-[#5FB75D] mt-[3px] font-bold">
-              {productdetail.review }
+                {productdetail.review}
               </p>
             </div>
             {/* price */}
             <div className="flex items-center md:gap-[40px] gap-[20px] mt-[5px]">
               <p className="font-bold md:text-[20px] text-[15px] text-[#EB001B]">
-                ${ productdetail.price}
+                ${selectedProduct?.price}
               </p>
               <p className=" line-through md:text-[20px] text-[15px]">
                 ${productdetail.discount}
@@ -156,7 +158,10 @@ export default function Detail() {
               >
                 <option className="md:text-[18px]" value="">
                   {" "}
-                  <span className="font-extrabold  "> {productdetail?.flavours[0]?.name}</span>
+                  <span className="font-extrabold  ">
+                    {" "}
+                    {productdetail?.flavours[0]?.name}
+                  </span>
                 </option>
                 <option value="">{productdetail?.flavours[1]?.name}</option>
               </select>
@@ -175,7 +180,9 @@ export default function Detail() {
                 </div>
                 <div>
                   {" "}
-                  <p className="text-[15px] font-bold">{productdetail.quantity}</p>
+                  <p className="text-[15px] font-bold">
+                    {productdetail.quantity}
+                  </p>
                 </div>
                 <div>
                   <img src="/svg/arrowright.svg" alt="" />
@@ -234,7 +241,7 @@ export default function Detail() {
                     </p>
                   </div>
                 </div>
-                
+
                 <div>
                   <p className="md:text-[18px] text-[15px]  font-bold">
                     $25.55
@@ -329,10 +336,11 @@ export default function Detail() {
             </div>
             {/* BUTTON ADD TO CART */}
             {/* <Link href="/add_to_cart"> */}
-            <div className="w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md cursor-pointer"  onClick={()=>handleAdd()}>
-              <button className="" >
-                ADD TO CART
-              </button>
+            <div
+              className="w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md cursor-pointer"
+              onClick={() => handleAdd()}
+            >
+              <button className="">ADD TO CART</button>
             </div>
             {/* </Link> */}
             {/* RESTRICTION LINE */}
@@ -348,11 +356,12 @@ export default function Detail() {
               {/* <p className="md:text-[15px] text-[12px] pt-[5px]">{productdetail.category}</p>
               <p className="md:text-[15px] text-[12px] pt-[5px]">STARTER KIT</p>
               <p className="md:text-[15px] text-[12px] pt-[5px]">DELTA-9o</p> */}
-              {productdetail?.category?.map((items , index)=>{
+              {productdetail?.category?.map((items, index) => {
                 return (
-                   <p className="md:text-[15px] text-[12px] pt-[5px]">{items.name}</p>
-                )
-
+                  <p className="md:text-[15px] text-[12px] pt-[5px]">
+                    {items.name}
+                  </p>
+                );
               })}
             </div>
             <div className=" mt-[15px] md:text-[20px] text-[16px] flex gap-8 ">
@@ -582,13 +591,7 @@ export default function Detail() {
       <Footer />
     </div>
   );
-};
-
-
-export const getStaticProps = wrapper.getStaticProps((store) => async () => {
-  await store.dispatch(navDataRequest());
-});
-
+}
 
 export const getStaticPaths = async () => {
   // const products = await initStore().dispatch(getProducts());
@@ -604,3 +607,10 @@ export const getStaticPaths = async () => {
     fallback: true, // can also be true or 'blocking'
   };
 };
+
+export const getStaticProps = wrapper.getStaticProps((store) => async (ctx) => {
+  if (ctx?.params?.id) {
+    await store.dispatch(getProductById(ctx?.params?.id));
+  }
+  await store.dispatch(navDataRequest());
+});

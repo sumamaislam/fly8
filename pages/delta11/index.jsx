@@ -9,6 +9,7 @@ import { wrapper } from "../../store";
 import { navDataRequest } from "../../redux/home";
 import { sentgummiesRequest, sentvapeRequest } from "../../redux/product";
 export default function Delta11() {
+  
   const { vapesData } = useSelector((state) => state.product);
   const { gummiesData } = useSelector((state) => state.product);
 
