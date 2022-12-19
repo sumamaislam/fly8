@@ -20,8 +20,8 @@ export default function Cart({ setShowCart }) {
     dispatch(updateCart(update));
   };
 
-  const handleDelete = (items) => {
-    dispatch(deleteCart(items.id));
+  const handleDelete = (id) => {
+    dispatch(deleteCart(id));
   };
 
   const decerement = (items, index) => {
@@ -139,17 +139,14 @@ export default function Cart({ setShowCart }) {
                                   <div>
                                     <img
                                       className="h-24 w-24"
-                                      src="/images/p1.jpeg"
+                                      src={item.thumbnail}
                                       alt=""
                                     />
                                   </div>
                                   <div>
                                     <div>
                                       <p className="text-[12px] font-bold">
-                                        DELTA-9O HIGH POTENCY VAPE
-                                        <span className="text-[10px]">
-                                          WITH 2 PACK COMBO
-                                        </span>
+                                        {item.name}
                                       </p>
                                     </div>
                                     <div className="mt-[10px] flex gap-[25px] items-center ">
@@ -158,7 +155,7 @@ export default function Cart({ setShowCart }) {
                                           <img
                                             src="/svg/arrowleft.svg"
                                             alt=""
-                                            onClick={() => decerement()}
+                                            onClick={() => decerement(item)}
                                           />
                                         </div>
                                         <div>
@@ -170,14 +167,14 @@ export default function Cart({ setShowCart }) {
                                           <img
                                             src="/svg/arrowright.svg"
                                             alt=""
-                                            onClick={() => increment()}
+                                            onClick={() => increment(item)}
                                           />
                                         </div>
                                       </div>
                                     </div>
                                     <div>
                                       <p className="text-right font-bold">
-                                        $245.99
+                                        ${item.price}
                                       </p>
                                     </div>
                                   </div>
@@ -185,7 +182,7 @@ export default function Cart({ setShowCart }) {
                                     <img
                                       src="/svg/cross.png"
                                       alt=""
-                                      onClick={() => handleDelete()}
+                                      onClick={() => handleDelete(item.id)}
                                     />
                                   </div>
                                 </div>
@@ -203,7 +200,7 @@ export default function Cart({ setShowCart }) {
                 <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                   <div className="flex justify-between text-base font-medium text-gray-900">
                     <p>Subtotal</p>
-                    <p>$262.00</p>
+                    <p>${totalPrice}</p>
                   </div>
                   <form onSubmit={handleSubmit}>
                     <div>

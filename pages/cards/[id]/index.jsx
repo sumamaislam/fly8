@@ -19,9 +19,9 @@ export default function Detail() {
   const { selectedProduct } = useSelector((state) => state.product);
   console.log("oooooooo",selectedProduct)
 
-  const handleAdd = (items) => {
+  const handleAdd = () => {
     setCarts(true);
-    dispatch(addToCarts(items));
+    dispatch(addToCarts(selectedProduct));
   };
 
   console.log("HHi", productdetail);
@@ -338,7 +338,7 @@ export default function Detail() {
             {/* <Link href="/add_to_cart"> */}
             <div
               className="w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md cursor-pointer"
-              onClick={() => handleAdd()}
+              onClick={handleAdd}
             >
               <button className="">ADD TO CART</button>
             </div>
