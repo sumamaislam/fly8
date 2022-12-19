@@ -10,7 +10,6 @@ import {
 
 export default function Cart({ setShowCart }) {
   const [total, setTotal] = useState("0");
-  // const [cart, setCart] = useState(addtocart);
 
   const dispatch = useDispatch();
   const { carts, totalPrice } = useSelector((state) => state.product);
@@ -22,9 +21,6 @@ export default function Cart({ setShowCart }) {
     dispatch(updateCart(update));
   };
 
-  // useEffect(() => {
-  //   dispatch(setCarts([...carts]));
-  // }, [formVal]);
   const handleDelete = (items) => {
     dispatch(deleteCart(items.id));
   };
@@ -92,7 +88,7 @@ export default function Cart({ setShowCart }) {
   //   setCart(filterd);
   // };
   return (
-    <div className="relative z-10">
+    <div className="relative z-10 background: rgba(0, 0, 0, 0.5);">
       {/* <!--
     Background backdrop, show/hide based on slide-over state.
 

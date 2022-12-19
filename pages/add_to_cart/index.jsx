@@ -13,7 +13,6 @@ import {
 
 export default function AddToCart({ setShowCart }) {
   const [total, setTotal] = useState("0");
-  // const [cart, setCart] = useState(addtocart);
 
   const dispatch = useDispatch();
   const { carts, totalPrice } = useSelector((state) => state.product);
@@ -25,9 +24,6 @@ export default function AddToCart({ setShowCart }) {
     dispatch(updateCart(update));
   };
 
-  // useEffect(() => {
-  //   dispatch(setCarts([...carts]));
-  // }, [formVal]);
   const handleDelete = (items) => {
     dispatch(deleteCart(items.id));
   };

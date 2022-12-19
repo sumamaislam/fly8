@@ -1,11 +1,12 @@
 import React from "react";
 import { Footer, Header } from "../../components/common";
 import { Raiting } from "../../components/Home";
-import {  delta11} from "../../data";
+import { delta11 } from "../../data";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Router, { useRouter } from "next/router";
 import { wrapper } from "../../store";
+<<<<<<< Updated upstream
 import { footerDataRequest, navDataRequest } from "../../redux/home";
 export default function index() {
   const dispatch = useDispatch();
@@ -19,10 +20,21 @@ export default function index() {
     console.log(router.pathname);
   };
   
+=======
+import { navDataRequest } from "../../redux/home";
+import { sentgummiesRequest, sentvapeRequest } from "../../redux/product";
+export default function Delta11() {
+  const { vapesData } = useSelector((state) => state.product);
+  const { gummiesData } = useSelector((state) => state.product);
+
+  console.log("vapesss", vapesData);
+  console.log("gummkmm", gummiesData);
+
+>>>>>>> Stashed changes
   return (
     <div>
       <Header />
-      
+
       <div className="container  m-auto ">
         <div>
           <nav className="flex mt-[5rem] " aria-label="Breadcrumb">
@@ -64,20 +76,22 @@ export default function index() {
       <div className="mt-[15px]">
         <img className="h-[300px] w-full" src="/banner/delta.png" alt="" />
       </div>
-     
+
       <div className="text-center font-bold text-[#5FB75D]">
-        <h1 className="pt-[100px] text-[35px] font-bold text-[#5FB75D]">EXCITING FLAVORS OF DELTA 11 LIVE RESIN</h1>
+        <h1 className="pt-[100px] text-[35px] font-bold text-[#5FB75D]">
+          EXCITING FLAVORS OF DELTA 11 LIVE RESIN
+        </h1>
       </div>
       <div className=" mt-[100px] container m-auto 2xl:w-[65%]">
         <div className="grid xl:gap-20 gap-12 lg:grid-cols-3 md:grid-cols-2 mt-[28px] justify-center ">
-          {delta11.map((items, index) => {
+          {vapesData?.DELTA_11_LIVE_RESIN?.map((items, index) => {
             return (
-              <div className="   " key={index}>
+              <div className="" key={index}>
                 <div className="justify-center flex ">
                   <Link href={`/cards/${items.id}`}>
                     <img
                       className="rounded-t-lg   "
-                      src={items.image[0]}
+                      src={items.thumbnail}
                       alt=""
                     />
                   </Link>
@@ -178,10 +192,14 @@ export default function index() {
       <Footer />
     </div>
   );
-};
-
+}
 
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   await store.dispatch(navDataRequest());
+<<<<<<< Updated upstream
   await store.dispatch(footerDataRequest());
+=======
+  await store.dispatch(sentvapeRequest());
+  await store.dispatch(sentgummiesRequest());
+>>>>>>> Stashed changes
 });

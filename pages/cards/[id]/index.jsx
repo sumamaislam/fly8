@@ -19,8 +19,9 @@ export default function Detail() {
 
   const handleAdd = (items) => {
     setCarts(true);
-    dispatch(addToCarts())
+    dispatch(addToCarts(items))
   };
+
   console.log("HHi",productdetail);
 
   return (
@@ -328,7 +329,7 @@ export default function Detail() {
             </div>
             {/* BUTTON ADD TO CART */}
             {/* <Link href="/add_to_cart"> */}
-            <div className="w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md cursor-pointer"  onClick={handleAdd}>
+            <div className="w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md cursor-pointer"  onClick={()=>handleAdd()}>
               <button className="" >
                 ADD TO CART
               </button>
@@ -558,7 +559,7 @@ export default function Detail() {
                       <Link href={`/cards/${items.id}`}>
                         <button
                           className=" items-center flex gap-2 hover:animate-bounce text-[14px] xl:text-[15px] font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "
-                          onClick={() => handleAdd(items)}
+                          // onClick={handleAdd}
                         >
                           <span>
                             <img
@@ -588,6 +589,7 @@ export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   await store.dispatch(navDataRequest());
 });
 
+<<<<<<< Updated upstream
 export async function getStaticPaths() {
   return {
     paths: [
@@ -596,3 +598,20 @@ export async function getStaticPaths() {
     fallback: true,
   }
 }
+=======
+
+export const getStaticPaths = async () => {
+  // const products = await initStore().dispatch(getProducts());
+  // const paths =
+  //   products?.payload?.data?.length &&
+  //   products?.payload?.data?.map((item) => ({
+  //     params: {
+  //       id: item.id.toString(),
+  //     },
+  //   }));
+  return {
+    paths: [],
+    fallback: true, // can also be true or 'blocking'
+  };
+};
+>>>>>>> Stashed changes
