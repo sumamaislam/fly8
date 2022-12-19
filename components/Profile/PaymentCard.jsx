@@ -2,6 +2,7 @@ import React from 'react'
 
 function PaymentCard() {
   return (
+<>
     <div className="border rounded-md mt-[70px] md:w-[50%]  w-[95%]  m-auto">
     <div className="flex justify-between p-2 md:p-4">
       <div>
@@ -61,8 +62,15 @@ function PaymentCard() {
         </p>
       </div>
     </div>
+
   </div>
-  )
+  <div className='flex justify-center m-5 '>
+<button className='px-5 py-2 bg-black text-white rounded-md text-[12px]'>
+ADD METHOD
+</button>
+  </div>
+ </>
+ )
 }
 
 export default PaymentCard

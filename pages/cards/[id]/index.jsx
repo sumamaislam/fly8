@@ -587,3 +587,12 @@ export default function Detail() {
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   await store.dispatch(navDataRequest());
 });
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { "id": '1' } },
+    ],
+    fallback: true,
+  }
+}

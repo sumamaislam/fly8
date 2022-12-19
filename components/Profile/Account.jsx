@@ -68,7 +68,7 @@ function Account({ show, setShow }) {
               </div>
 
               <h5 className={`text-[11px] md:text-[14px] pt-[15px] font-semibold text-center  ${show === "accounts" && "text-white"}`  }>
-                ORDERS
+              Address
               </h5>
             </div>
             <div
@@ -87,7 +87,7 @@ function Account({ show, setShow }) {
               </div>
 
               <h5 className={ `text-[11px] md:text-[14px] pt-[15px] font-semibold text-center  ${show === "account" && "text-white"}`}>
-                ORDERS
+              Account
               </h5>
             </div>
             <div
@@ -106,7 +106,7 @@ function Account({ show, setShow }) {
               </div>
 
               <h5 className={`text-[11px] md:text-[14px] md:pt-[32px] pt-[20px] font-semibold text-center ${show === "payment" && "text-white"}`} >
-                ORDERS
+              Payment
               </h5>
             </div>
             <div
@@ -125,7 +125,7 @@ function Account({ show, setShow }) {
               </div>
 
               <h5 className={` text-[11px] md:text-[14px] pt-[15px] font-semibold text-center  ${show === "subscription" && "text-white"}` }>
-                ORDERS
+              Subscription
               </h5>
             </div>
           </div>
