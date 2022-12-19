@@ -6,21 +6,6 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import Router, { useRouter } from "next/router";
 import { wrapper } from "../../store";
-<<<<<<< Updated upstream
-import { footerDataRequest, navDataRequest } from "../../redux/home";
-export default function index() {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const handleClick = (data) => {
-    console.log(data);
-    // router.push({ pathname: "/add_to_cart" });
-    // router.push("/add_to_cart", undefined, { shallow: true });
-    // router.push("/add_to_cart")
-    console.log("called");
-    console.log(router.pathname);
-  };
-  
-=======
 import { navDataRequest } from "../../redux/home";
 import { sentgummiesRequest, sentvapeRequest } from "../../redux/product";
 export default function Delta11() {
@@ -30,7 +15,6 @@ export default function Delta11() {
   console.log("vapesss", vapesData);
   console.log("gummkmm", gummiesData);
 
->>>>>>> Stashed changes
   return (
     <div>
       <Header />
@@ -196,10 +180,6 @@ export default function Delta11() {
 
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   await store.dispatch(navDataRequest());
-<<<<<<< Updated upstream
-  await store.dispatch(footerDataRequest());
-=======
   await store.dispatch(sentvapeRequest());
   await store.dispatch(sentgummiesRequest());
->>>>>>> Stashed changes
 });
