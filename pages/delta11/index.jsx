@@ -89,7 +89,7 @@ export default function Delta11() {
                       ${items.price}
                     </p>
                     <p className="line-through text-[20px] mt-[10px]">
-                      ${items.discount}
+                      {/* ${items.discount} */}
                     </p>
                   </div>
                   <div className=" flex items-center justify-center">
