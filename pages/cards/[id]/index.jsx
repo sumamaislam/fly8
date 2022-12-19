@@ -589,16 +589,6 @@ export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   await store.dispatch(navDataRequest());
 });
 
-<<<<<<< Updated upstream
-export async function getStaticPaths() {
-  return {
-    paths: [
-      { params: { "id": '1' } },
-    ],
-    fallback: true,
-  }
-}
-=======
 
 export const getStaticPaths = async () => {
   // const products = await initStore().dispatch(getProducts());
@@ -614,4 +604,3 @@ export const getStaticPaths = async () => {
     fallback: true, // can also be true or 'blocking'
   };
 };
->>>>>>> Stashed changes
