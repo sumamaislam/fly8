@@ -3,10 +3,11 @@ import { Footer, Header } from "../../components/common";
 import { Raiting } from "../../components/Home";
 import {  hhc, masterBlend} from "../../data";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Router, { useRouter } from "next/router";
 import { wrapper } from "../../store";
 import { footerDataRequest, navDataRequest } from "../../redux/home";
+import { sentvapeRequest } from "../../redux/product";
 export default function index() {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -18,6 +19,9 @@ export default function index() {
     console.log("called");
     console.log(router.pathname);
   };
+  const {vapesData} = useSelector((state)=>state.product)
+  console.log("123",vapesData)
+
   return (
     <div>
       <Header />
@@ -69,14 +73,14 @@ export default function index() {
       </div>
       <div className=" mt-[100px] container m-auto 2xl:w-[65%]">
         <div className="grid xl:gap-20 gap-12 lg:grid-cols-3 md:grid-cols-2 mt-[28px] justify-center ">
-          {hhc.map((items, index) => {
+          {vapesData?.HHC?.map((items, index) => {
             return (
               <div className="   " key={index}>
                 <div className="justify-center flex ">
                   <Link href={`/cards/${items.id}`}>
                     <img
                       className="rounded-t-lg   "
-                      src={items.image[0]}
+                      src={items.thumbnail}
                       alt=""
                     />
                   </Link>
@@ -90,7 +94,7 @@ export default function index() {
                       ${items.price}
                     </p>
                     <p className="line-through text-[20px] mt-[10px]">
-                      ${items.discount}
+                      ${items.previous_price}
                     </p>
                   </div>
                   <div className=" flex items-center justify-center">
@@ -183,5 +187,6 @@ export default function index() {
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   await store.dispatch(navDataRequest());
   await store.dispatch(footerDataRequest());
+  await store.dispatch(sentvapeRequest());
 
 });

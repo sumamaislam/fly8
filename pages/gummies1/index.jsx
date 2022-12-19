@@ -6,9 +6,9 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import Router, { useRouter } from "next/router";
 import { wrapper } from "../../store";
-import { footerDataRequest, navDataRequest } from "../../redux/home";
-import { sentvapeRequest } from "../../redux/product";
-export default function index() {
+import { footerDataRequest, gummiesDataRequest, navDataRequest } from "../../redux/home";
+import { sentgummiesRequest, sentvapeRequest } from "../../redux/product";
+export default function gummies1() {
   const dispatch = useDispatch();
   const router = useRouter();
   const handleClick = (data) => {
@@ -19,7 +19,8 @@ export default function index() {
     console.log("called");
     console.log(router.pathname);
   };
-  const {vapesData} = useSelector((state)=>state.product)
+  const { gummiesData } = useSelector((state) => state.product);
+
   return (
     <div>
       <Header />
@@ -54,7 +55,7 @@ export default function index() {
                     href="#"
                     className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
                   >
-                    Delta-9o
+                   Flavours
                   </Link>
                 </div>
               </li>
@@ -68,12 +69,12 @@ export default function index() {
 
       <div className="text-center font-bold text-[#5FB75D]">
         <h1 className="pt-[100px] text-[35px] font-bold text-[#5FB75D]">
-          EXCITING FLAVORS OF DELTA-9o
+          EXCITING FLAVORS OF Gummies1
         </h1>
       </div>
       <div className=" mt-[100px] container m-auto 2xl:w-[65%]">
         <div className="grid xl:gap-20 gap-12 lg:grid-cols-3 md:grid-cols-2 mt-[28px] justify-center ">
-          {vapesData?.DELTA_9o?.map((items, index) => {
+          {gummiesData?.DELTA_9o?.map((items, index) => {
             return (
               <div className="   " key={index}>
                 <div className="justify-center flex ">
@@ -186,5 +187,6 @@ export default function index() {
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   await store.dispatch(navDataRequest());
   await store.dispatch(footerDataRequest());
-  await store.dispatch(sentvapeRequest());
+//   await store.dispatch(sentvapeRequest());
+await store.dispatch(sentgummiesRequest());
 });

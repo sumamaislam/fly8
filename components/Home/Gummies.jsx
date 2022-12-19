@@ -38,7 +38,12 @@ function Gummies() {
 
                     <div className="flex justify-center mt-[42px]">
                       <Link
-                        href="/cards"
+                       href={`${
+                        (index === 0 && "/gummies1") ||
+                        (index === 1 && "/gummies2") ||
+                        (index === 2 && "/gummies3") ||
+                        (index === 3 && "/gummies4")
+                      }`}
                         className=" items-center hover:animate-bounce text-[14px] xl:text-[18px] font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "
                       >
                         Get Your Flavour
