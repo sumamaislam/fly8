@@ -18,7 +18,20 @@ export default function Delta11() {
     if (slugData){
         console.log("WoW",slugData);
       }
-  },[slugData])
+  },[slugData]);
+
+  
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(
+        "slug",
+        JSON.stringify({
+          slugData
+        })
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slugData]);
 
   return (
     <div>

@@ -18,6 +18,10 @@ function MyApp({ Component, pageProps }) {
     (state) => state.product
   );
 
+  const { slugData } = useSelector(
+    (state) => state.product
+  );
+
   useEffect(() => {
     const handleStart = (url) => {
       url !== router.pathname

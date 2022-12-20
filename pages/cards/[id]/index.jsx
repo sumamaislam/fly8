@@ -19,9 +19,14 @@ export default function Detail() {
   const { selectedProduct } = useSelector((state) => state.product);
   const { carts } = useSelector((state) => state.product);
 
-  const { slugData } = useSelector((state) => state.product);
+  const { detailData } = useSelector((state) => state.product);
+  const localSlug =
+  typeof localStorage !== "undefined" &&
+  localStorage.getItem("slug") &&
+  JSON.parse(localStorage.getItem("slug"));
 
-  console.log("fffffff",selectedProduct);
+  console.log("fffffff",selectedProduct.name);
+  console.log("momomoo",detailData)
 
   const handleAdd = () => {
     const isSimilar =
@@ -33,6 +38,10 @@ export default function Detail() {
     }
     setCartsNew(true);
   };
+
+  const handleFlavourChange = () => {
+    
+  }
 
   return (
     <div>
@@ -166,12 +175,18 @@ export default function Detail() {
                 id=""
                 placeholder="Select Another Flavours"
               >
-                <option className="md:text-[18px]" value="">
+                {/* <option className="md:text-[18px]" value=""> */}
+                  {localSlug?.slugData?.map((item,i)=>{
+                    return(
+                      <option selected={selectedProduct.id === item.id} onChange={handleFlavourChange}>{item?.name}</option>
+                      // <option selected={Train Wreck}>{item?.name}</option>
+                    )
+                  })}
                   {/* <span className="font-extrabold"> */}
-                    {productdetail?.flavours[0]?.name}
+                    {/* {productdetail?.flavours[0]?.name} */}
                   {/* </span> */}
-                </option>
-                <option value="">{productdetail?.flavours[1]?.name}</option>
+                {/* </option> */}
+                {/* <option value="">{productdetail?.flavours[1]?.name}</option>1 */}
               </select>
             </div>
             {/* QUANTITY */}
