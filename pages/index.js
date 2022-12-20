@@ -17,7 +17,8 @@ import "slick-carousel/slick/slick-theme.css";
 import Gummies from "../components/Home/Gummies";
 import Commitment from "../components/Home/Commitment";
 import { wrapper } from "../store";
-import { bannerDataRequest, footerDataRequest, gummiesDataRequest, navDataRequest, qualityDataRequest, vapeDataRequest } from "../redux/home";
+import { bannerDataRequest, footerDataRequest, gummiesDataRequest, mainDataRequest, navDataRequest, qualityDataRequest } from "../redux/home";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
 
@@ -34,7 +35,7 @@ const Home = () => {
         <Header />
         <Banner />
         <Cards />
-        <Gummies/> 
+        {/* <Gummies/>  */}
         <Commitment/>
         <Email />
         <Footer />
@@ -48,9 +49,9 @@ export default Home;
 
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   await store.dispatch(navDataRequest());
-  await store.dispatch(vapeDataRequest());
+  await store.dispatch(mainDataRequest());
   await store.dispatch(bannerDataRequest());
-  await store.dispatch(gummiesDataRequest());
+  // await store.dispatch(gummiesDataRequest());
   await store.dispatch(qualityDataRequest());
   await store.dispatch(footerDataRequest());
 });

@@ -1,6 +1,23 @@
 import React from "react";
+import { useState } from "react";
 
 function Email() {
+
+  const [emailData, setEmailData] = useState({});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!emailData.email){
+    }else{
+     console.log(emailData)
+     setEmailData({email: ""});
+    }
+  }
+
+  const handleChange = (e) => {
+    setEmailData({...emailData,[e.target.name]:e.target.value})
+  }
+
   return (
     <div className="mt-[109px]">
       <div className="2xl:w-[65%] container  m-auto ">
@@ -20,12 +37,15 @@ function Email() {
             <p className="text-[20px] pt-[28px] font-medium text-center md:text-left">
               Sign up to take this offer
             </p>
-            <div className="flex gap-1 mt-[30px] justify-center flex-col md:flex-row ">
+            <form onSubmit={handleSubmit} className="flex gap-1 mt-[30px] justify-center flex-col md:flex-row ">
               <div className="flex justify-center md:justify-start">
                 <input
                   className=" 2xl:w-[700px] md:w-[500px] w-[250px]   h-[48px] md:rounded-tl-[10px] md:rounded-bl-[10px] outline-1 pl-4 outline-black outline"
                   placeholder="E-Mail Address"
                   type="text"
+                  name="email"
+                  value={emailData.email}
+                  onChange={handleChange}
                 />
               </div>
               <div className=" flex justify-center md:justify-start mt-[20px] md:mt-[0px]">
@@ -33,7 +53,7 @@ function Email() {
                   SUBSCRIBE
                 </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

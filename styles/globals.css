@@ -117,3 +117,28 @@ filter: blur(1px);
   position: relative;
 }
 
+
+.spinner-hide {
+  position: absolute;
+  opacity: 0;
+  .spinner-grow {
+    width: 0px;
+    height: 0px;
+  }
+}
+
+.spinner {
+  transition: opacity 0.3s ease-in;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3897686876876;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.5;
+  height: 100vh;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}

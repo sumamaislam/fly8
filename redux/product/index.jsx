@@ -20,16 +20,18 @@ const initialState = {
   vapesData: {},
   gummiesData: {},
   selectedProduct: {},
+  slugData: {},
 
   carts: localCart?.carts?.length > 0 ? localCart.carts : [],
   totalPrice: localCart?.totalPrice ? localCart.totalPrice : 0,
   totalQuantity: localCart?.totalQuantity ? localCart.totalQuantity : 0
 };
 
-export const sentvapeRequest = createAsyncThunk("vape/sentvapeRequest", async (payload, thunkAPI) => {
+export const sentslugRequest = createAsyncThunk("vape/sentslugRequest", async (payload, thunkAPI) => {
   try {
     let response;
-    response = await request.get(`product_detail/Vape`).then((response) => response.data);
+    // response = await request.get(`product_detail/Vape`).then((response) => response.data);
+    response = await request.get(`product_detail/${payload}`).then((response) => response.data);
     // toast(<RequestMessage message="Message sent successfully!" />);
     return response;
   } catch (error) {
@@ -105,19 +107,19 @@ export const productSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action) => {
       console.log("HYDRATE10", action.payload);
-        state.vapesData = action?.payload?.product?.vapesData ? action.payload.product?.vapesData : state?.vapesData;
+        state.slugData = action?.payload?.product?.slugData ? action.payload.product?.slugData : state?.slugData;
         state.gummiesData = action?.payload?.product?.gummiesData ? action.payload.product?.gummiesData : state?.gummiesData;
         state.selectedProduct = action?.payload?.product?.selectedProduct ? action.payload.product?.selectedProduct : state?.selectedProduct;
       //   state.usersQuery = action?.payload?.user?.users?.usersQuery?.id ? action.payload.user.users.usersQuery : state?.usersQuery;
     });
-    builder.addCase(sentvapeRequest.pending, (state) => {
+    builder.addCase(sentslugRequest.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(sentvapeRequest.fulfilled, (state, action) => {
-      state.vapesData = action.payload;
+    builder.addCase(sentslugRequest.fulfilled, (state, action) => {
+      state.slugData = action.payload;
       state.isLoading = false;
     });
-    builder.addCase(sentvapeRequest.rejected, (state, action) => {
+    builder.addCase(sentslugRequest.rejected, (state, action) => {
       state.isLoading = false;
       console.log("Error:", { message: action.payload.message });
     });

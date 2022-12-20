@@ -3,35 +3,51 @@ import React from "react";
 import { useState } from "react";
 import InputField from "../../common/inputField";
 import Selectoption from "../../common/Selectoption";
+import CountrySelect from "../../common/CountrySelect";
+import StateSelect from "../../common/StateSelect";
 
-function Address({setShow}) {
-    const[input,setInput]=useState({});
-    const handleSubmit =(e)=>{
-        e.preventDefault()
-console.log(input)
-    }
-    const handleChange =(e)=>{
-setInput({...input,[e.target.name]:e.target.value})
-console.log(input)
-    }
+function Address({ setShow }) {
+  const [input, setInput] = useState({});
+  // const {  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(input);
+  };
+
+  const handleChange = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+    console.log(input);
+  };
+
+  const handleCountryChange = (val) => {
+    setInput({ ...input, country: val });
+  };
+  
+  const handleStateChange = (val) => {
+    setInput({ ...input, state: val });
+  };
+
+
   return (
     <div>
       <div className="2xl:w-[75%] w-[90%] m-auto">
         {/* logo */}
         <div>
-            <Link href="/">
-          <img className="w-[100px] pt-[20px]" src="/images/logo.png" alt="" />
-        </Link>
+          <Link href="/">
+            <img
+              className="w-[100px] pt-[20px]"
+              src="/images/logo.png"
+              alt=""
+            />
+          </Link>
         </div>
         {/* Breadcrumb */}
         <div>
           <nav className="flex mt-[20px]  " aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
               <li className="inline-flex items-center">
-                <div
-               
-                  className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                >
+                <div className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                   Cart
                 </div>
               </li>
@@ -52,7 +68,8 @@ console.log(input)
                   <Link
                     href="#"
                     className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
-                  onClick={()=>setShow("address")} >
+                    onClick={() => setShow("address")}
+                  >
                     Information
                   </Link>
                 </div>
@@ -74,7 +91,8 @@ console.log(input)
                   <Link
                     href="#"
                     className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
-                  onClick={()=>setShow("shipping")}>
+                    onClick={() => setShow("shipping")}
+                  >
                     Shipping
                   </Link>
                 </div>
@@ -94,8 +112,11 @@ console.log(input)
                       clip-rule="evenodd"
                     ></path>
                   </svg>
-                  <Link href="#" >
-                    <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400 " onClick={()=>setShow("payment")}>
+                  <Link href="#">
+                    <span
+                      className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400 "
+                      onClick={() => setShow("payment")}
+                    >
                       Payment
                     </span>
                   </Link>
@@ -107,9 +128,11 @@ console.log(input)
         <div className="font-semibold text-[22px] mt-[25px]">
           <p>Information</p>
         </div>
-        <div className="mt-[20px] border-black border flex gap-[20px] ">
+        <form
+          className="mt-[20px] border-black border flex gap-[20px] "
+          onSubmit={handleSubmit}
+        >
           {/* left side */}
-
           <div className="p-4 md:p-10 w-full">
             <div className="">
               <p className="text-[20px] font-bold">Contact Information</p>
@@ -122,11 +145,14 @@ console.log(input)
             </div>
 
             <div className="">
-              <form>
+              <div>
                 <InputField
                   placeholder="Email"
                   type="email"
                   className="w-full py-[10px] mt-[10px] border  border-gray-700 rounded-md p-2 outline-none"
+                  name="email"
+                  value={input.email}
+                  onChange={handleChange}
                 />
                 <div className="mt-[10px] text-[12px] text-[#2D80CD] flex items-center gap-2">
                   <div>
@@ -143,12 +169,18 @@ console.log(input)
                     <InputField
                       placeholder="First Name"
                       className=" w-full py-[10px] mt-[20px] border border-gray-700 rounded-md p-2 outline-none"
+                      name="first_name"
+                      value={input.first_name}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="w-[100%]">
                     <InputField
                       placeholder="Last Name"
                       className="w-full py-[10px] mt-[20px] border border-gray-700  rounded-md p-2 outline-none"
+                      name="last_name"
+                      value={input.last_name}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -156,26 +188,51 @@ console.log(input)
                 <InputField
                   placeholder="Company (optional)"
                   className="w-full py-[10px] mt-[10px] border border-gray-700 rounded-md p-2 outline-none"
+                  name="company"
+                  value={input.company}
+                  onChange={handleChange}
                 />
                 <InputField
                   placeholder="Street Address"
                   className="w-full py-[10px] mt-[10px] border border-gray-700 rounded-md p-2 outline-none"
+                  name="address"
+                  value={input.address}
+                  onChange={handleChange}
                 />
 
                 <div className="flex  justify-between gap-4">
                   <div className="w-[100%]">
-                    <Selectoption className="w-full  mt-[10px] border  border-gray-700 rounded-md p-2" />
+                    {/* <Selectoption className="w-full  mt-[10px] border  border-gray-700 rounded-md p-2" /> */}
+                    <CountrySelect
+                      name="country"
+                      label="Country/region"
+                      value={input.country || ""}
+                      onChange={handleCountryChange}
+                    />
                   </div>
                   <div className="w-full">
                     <InputField
                       placeholder="Zip Code"
                       className=" w-full outline-none py-[10px] mt-[10px] border border-gray-700 rounded-md p-2"
+                      name="zip_code"
+                      value={input.zip_code}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="w-full">
-                    <InputField
+                    {/* <InputField
                       placeholder="State"
                       className=" w-full outline-none py-[10px] mt-[10px] border border-gray-700 rounded-md p-2"
+                    /> */}
+                    <StateSelect
+                      blankOptionLabel="State"
+                      defaultOptionLabel="Select State"
+                      onChange={handleStateChange}
+                      name="state"
+                      value={input.state || ""}
+                      label="State"
+                      country={input.country}
+                      disabled={input.country ? false : true}
                     />
                   </div>
                 </div>
@@ -183,12 +240,18 @@ console.log(input)
                   <InputField
                     placeholder="Town/City "
                     className=" w-full outline-none py-[10px] mt-[10px] border border-gray-700 rounded-md p-2"
+                    name="city"
+                      value={input.city}
+                      onChange={handleChange}
                   />
                 </div>
                 <div className="w-full">
                   <InputField
                     placeholder="Phone "
                     className=" w-full outline-none py-[10px] mt-[10px] border border-gray-700 rounded-md p-2"
+                    name="phone_no"
+                    value={input.phone_no}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="mt-[10px] text-[12px] text-[#2D80CD] flex items-center gap-2">
@@ -205,14 +268,15 @@ console.log(input)
                     <div>
                       <button
                         className="  rounded-md text-white font-semibold"
-                        type="submit" onClick={()=>setShow("shipping")}
+                        type="submit"
+                        onClick={() => setShow("shipping")}
                       >
                         Continue Shipping
                       </button>
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
           {/* right side */}
@@ -225,14 +289,16 @@ console.log(input)
                 <ul role="list" className="-my-6 divide-y divide-gray-200">
                   <li className="flex py-2 justify-between ">
                     <div className="flex items-center gap-7">
-                      <div className="relative" >
+                      <div className="relative">
                         <img
                           className="w-[70px]"
                           src="/images/p1.jpeg"
                           alt=""
                         />
                         <div className="absolute top-0 right-0">
-                            <p className="text-[10px] rounded-full bg-red-500 w-4 h-4 text-white text-center ">1</p>
+                          <p className="text-[10px] rounded-full bg-red-500 w-4 h-4 text-white text-center ">
+                            1
+                          </p>
                         </div>
                       </div>
                       <div>
@@ -262,14 +328,16 @@ console.log(input)
                   <hr className="border-[10px] shadow-lg" />
                   <li className="flex py-2 justify-between">
                     <div className="flex items-center gap-7">
-                    <div className="relative" >
+                      <div className="relative">
                         <img
                           className="w-[70px]"
                           src="/images/p1.jpeg"
                           alt=""
                         />
                         <div className="absolute top-0 right-0">
-                            <p className="text-[10px] rounded-full bg-red-500 w-4 h-4 text-white text-center ">1</p>
+                          <p className="text-[10px] rounded-full bg-red-500 w-4 h-4 text-white text-center ">
+                            1
+                          </p>
                         </div>
                       </div>
                       <div>
@@ -300,14 +368,16 @@ console.log(input)
                   <hr className="border-[10px] shadow-lg" />
                   <li className="flex py-2 justify-between">
                     <div className="flex items-center gap-7">
-                    <div className="relative" >
+                      <div className="relative">
                         <img
                           className="w-[70px]"
                           src="/images/p1.jpeg"
                           alt=""
                         />
                         <div className="absolute top-0 right-0">
-                            <p className="text-[10px] rounded-full bg-red-500 w-4 h-4 text-white text-center ">1</p>
+                          <p className="text-[10px] rounded-full bg-red-500 w-4 h-4 text-white text-center ">
+                            1
+                          </p>
                         </div>
                       </div>
                       <div>
@@ -340,24 +410,26 @@ console.log(input)
             </div>
             {/* button  */}
 
-            <form className=" " onSubmit={handleSubmit}>
+            {/* <form className=" " onSubmit={handleSubmit}> */}
               <div className=" mt-[50px]  flex h-[45px] ">
                 <input
                   className="w-full p-3 rounded-l-md border outline-none "
                   type="text"
                   placeholder="Enter Promo/Coupon Code"
-                  name="discount" value={input.discount}
+                  name="discount"
+                  value={input.discount}
                   onChange={handleChange}
                 />
 
                 <button
                   className="w-[127px] py-3 px-5 ml-[2px] h-[45px] bg-[#8C8C8C] outline-none border-none rounded-r-md text-white font-semibold disabled:opacity-25 "
-                  type="sumbit" disabled={input?.discount?.length > 0 ? false : true}
+                  type="sumbit"
+                  disabled={input?.discount?.length > 0 ? false : true}
                 >
                   Apply
                 </button>
               </div>
-            </form>
+            {/* </form> */}
             <div className="p-2 text-[12px]">
               <div className="w-full flex justify-between mt-4">
                 <div>
@@ -396,7 +468,7 @@ console.log(input)
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div className="absolute mt-[95px]  w-full bg-black">
         <p className="text-center text-white text-[13px] ">

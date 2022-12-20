@@ -9,7 +9,7 @@ const initialState = {
   // homeData: [],
   header: {},
   isLoading: false,
-  vapes: {},
+  main: {},
   image: {},
   gummies: {},
   quality: {},
@@ -108,13 +108,14 @@ export const bannerDataRequest = createAsyncThunk(
   }
 );
 
-export const vapeDataRequest = createAsyncThunk(
-  "vape/vapeDataRequest",
+export const mainDataRequest = createAsyncThunk(
+  "vape/mainDataRequest",
   async (_, thunkAPI) => {
     try {
       let response;
       response = await request
-        .get(`products?highlight=best`)
+        // .get(`products?highlight=best`)
+        .get(`main`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
@@ -136,7 +137,7 @@ export const homeDataSlice = createSlice({
       // state.homeData = action?.payload?.home?.homeData?.banner?.length > 0 && action?.payload?.home?.homeData?.footer?.length > 0 && action?.payload?.home?.homeData?.header?.length > 0 && action?.payload?.home?.homeData?.home?.length > 0 && action?.payload?.home?.homeData?.product?.length > 0 ?  action.payload.home.homeData : state?.homeData;
       state.header = action?.payload?.home?.header ? action.payload.home.header : state?.header;
       state.image = action?.payload?.home?.image ? action.payload.home.image : state?.image;
-      state.vapes = action?.payload?.home?.vapes ? action.payload.home.vapes : state?.vapes;
+      state.main = action?.payload?.home?.main ? action.payload.home.main : state?.main;
       state.gummies = action?.payload?.home?.gummies ? action.payload.home.gummies : state?.gummies;
       state.quality = action?.payload?.home?.quality ? action.payload.home.quality : state?.quality;
       state.footer = action?.payload?.home?.footer ? action.payload.home.footer : state?.footer;
@@ -178,14 +179,14 @@ export const homeDataSlice = createSlice({
       state.isLoading = false;
       console.log("Error:", { message: action.payload.message });
     });
-    builder.addCase(vapeDataRequest.pending, (state) => {
+    builder.addCase(mainDataRequest.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(vapeDataRequest.fulfilled, (state, action) => {
-      state.vapes = action.payload;
+    builder.addCase(mainDataRequest.fulfilled, (state, action) => {
+      state.main = action.payload;
       state.isLoading = false;
     });
-    builder.addCase(vapeDataRequest.rejected, (state, action) => {
+    builder.addCase(mainDataRequest.rejected, (state, action) => {
       state.isLoading = false;
       console.log("Error:", { message: action.payload.message });
     });

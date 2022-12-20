@@ -13,6 +13,7 @@ function Header() {
   const [showCart, setShowCart] = useState(false);
 
   const { header } = useSelector((state) => state.home);
+  const { totalQuantity } = useSelector((state) => state.product);
 
   useEffect(() => {
     console.log(header);
@@ -171,7 +172,7 @@ function Header() {
                 </Link>
               </div>
               {/* <!-- Primary Navbar items --> */}
-              <div className="flex-col z-10 absolute md:static flex md:flex-row items-center gap-[20px] ">
+              <div className="flex-col z-10 absolute md:static flex md:flex-row items-center gap-[20px]">
                 {header &&
                   // header.data.length > 0 &&
                   header?.data?.map((item, index) => {
@@ -185,18 +186,24 @@ function Header() {
                       </Link>
                     );
                   })}
-              
               </div>
             </div>
             {/* <!-- Secondary Navbar items --> */}
             <div className="hidden md:flex items-center space-x-6 cursor-pointer">
               <img className="w-[20px]" src="/svg/search.svg" alt="" />
-              <img
-                className="w-[20px] "
-                src="/svg/cart.svg"
-                alt=""
-                onClick={() => setShowCart(true)}
-              />
+              <div className="relative">
+                <img
+                  className="w-[20px] "
+                  src="/svg/cart.svg"
+                  alt=""
+                  onClick={() => setShowCart(true)}
+                />
+                {totalQuantity.length > 0 && (
+                  <span className="absolute h-[18px] w-[18px] max-w-auto bg-white rounded-full text-[10px] flex items-center justify-center font-bold top-[-10px] right-[-11px]">
+                    {totalQuantity}
+                  </span>
+                )}
+              </div>
               <Link href="/profile">
                 {" "}
                 <img className="w-[20px]" src="/svg/profile.svg" alt="" />

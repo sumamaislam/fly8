@@ -89,9 +89,11 @@ export default function Cart({ setShowCart }) {
   //   setCart(filterd);
   // };
   return (
-    <div className="relative z-10 background: rgba(0, 0, 0, 0.5) z-50">
+    <div>
+      <div className=""></div>
+    <div className="relative background: rgba(0, 0, 0, 0.5) z-50">
       <div className="fixed inset-0 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden bg-black bg-opacity-75">
           <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
             <div className="pointer-events-auto w-screen max-w-md">
               <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
@@ -177,6 +179,11 @@ export default function Cart({ setShowCart }) {
                                         ${item.price}
                                       </p>
                                     </div>
+                                    <div>
+                                      <p className="text-right font-bold ">
+                                        ${item.previous_price}
+                                      </p>
+                                    </div>
                                   </div>
                                   <div>
                                     <img
@@ -238,6 +245,7 @@ export default function Cart({ setShowCart }) {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
   /* // <div>

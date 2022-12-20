@@ -7,29 +7,37 @@ import { useDispatch, useSelector } from "react-redux";
 import { Raiting } from "../../../components/Home";
 import Cart from "../../../components/Home/Cart";
 import { wrapper } from "../../../store";
-import { navDataRequest } from "../../../redux/home";
+import { footerDataRequest, navDataRequest } from "../../../redux/home";
 import { addToCarts, getProductById } from "../../../redux/product";
 export default function Detail() {
   const [show, setShow] = useState(details.image[0]);
   const [detail, setDetail] = useState("a");
   const [offers, setOffers] = useState(false);
-  const [carts, setCarts] = useState(false);
+  const [cartsNew, setCartsNew] = useState(false);
 
   const dispatch = useDispatch();
   const { selectedProduct } = useSelector((state) => state.product);
-  console.log("oooooooo",selectedProduct)
+  const { carts } = useSelector((state) => state.product);
+
+  const { slugData } = useSelector((state) => state.product);
+
+  console.log("fffffff",selectedProduct);
 
   const handleAdd = () => {
-    setCarts(true);
-    dispatch(addToCarts(selectedProduct));
+    const isSimilar =
+      carts?.length > 0 && carts?.find((item) => item.id === selectedProduct.id)
+        ? true
+        : false;
+    if (!isSimilar) {
+      dispatch(addToCarts(selectedProduct));
+    }
+    setCartsNew(true);
   };
-
-  console.log("HHi", productdetail);
 
   return (
     <div>
       <Header />
-      {carts && <Cart showCart={carts} setShowCart={setCarts} />}
+      {cartsNew && <Cart showCart={cartsNew} setShowCart={setCartsNew} />}
       <div className=" 2xl:w-[65%] md:w-[80%] container m-auto">
         <div className="container m-auto">
           <div>
@@ -97,8 +105,8 @@ export default function Detail() {
             <div className="max-w-[700px] border ">
               <img className="" src={selectedProduct?.thumbnail} alt="" />
             </div>
-            {/* <div className="flex lg:gap-[36px] gap-2 justify-center lg:justify-start">
-              {productdetail?.images?.map((items, index) => {
+            <div className="flex lg:gap-[36px] gap-2 justify-center lg:justify-start">
+              {/* {productdetail?.images?.map((items, index) => {
                 return (
                   <div
                     className="mb-[10px] py-[10px]"
@@ -116,14 +124,16 @@ export default function Detail() {
                     />
                   </div>
                 );
-              })}
-            </div> */}
+              })} */}
+            </div>
           </div>
-          {/* right side */}
           <div>
-            {/* Instock btn */}
             <button className="text-[15px] bg-[#5FB75D] px-[7px]  rounded-md text-white uppercase">
-              {productdetail.stock}
+              {selectedProduct?.stock > 0 ? (
+                <p>IN STOCK</p>
+              ) : (
+                <p>OUT OF STOCK</p>
+              )}
             </button>
 
             {/* tittle */}
@@ -157,11 +167,9 @@ export default function Detail() {
                 placeholder="Select Another Flavours"
               >
                 <option className="md:text-[18px]" value="">
-                  {" "}
-                  <span className="font-extrabold  ">
-                    {" "}
+                  {/* <span className="font-extrabold"> */}
                     {productdetail?.flavours[0]?.name}
-                  </span>
+                  {/* </span> */}
                 </option>
                 <option value="">{productdetail?.flavours[1]?.name}</option>
               </select>
@@ -190,7 +198,7 @@ export default function Detail() {
               </div>
             </div>
             {/* purchase offers */}
-            <div className="mt-[25px]  ">
+            {/* <div className="mt-[25px]  ">
               <div className="flex justify-between  w-full h-[45px] p-4 items-center rounded-md  border">
                 <div className="flex gap-3">
                   <div className="flex items-center">
@@ -216,10 +224,10 @@ export default function Detail() {
                   <p className="md:text-[18px] text-[15px] font-bold">$34.55</p>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* SUBSCRIBE */}
-            <div className="mt-[15px] border rounded-md bg-[#CEF1CD]">
+            {/* <div className="mt-[15px] border rounded-md bg-[#CEF1CD]">
               <div className="flex justify-between  w-full h-[45px] p-4 items-center  rounded-md ">
                 <div className="flex gap-3">
                   <div className="flex items-center">
@@ -248,7 +256,6 @@ export default function Detail() {
                   </p>
                 </div>
               </div>
-              {/* further detail subscription */}
               {offers && (
                 <div className="px-12  pb-[15px] ">
                   <div className="flex gap-3">
@@ -256,13 +263,11 @@ export default function Detail() {
                       <input
                         id="country-option-1"
                         type="radio"
-                        //  checked={ offers ? true : false}
                         name="countries"
                         value="USA"
                         className="h-4 w-4 border-gray-300  focus:ring-black "
                         aria-labelledby="country-option-1"
                         aria-describedby="country-option-1"
-                        //  onClick={()=>setOffers(false)}
                       />
                     </div>
                     <div className="uppercase">
@@ -276,13 +281,11 @@ export default function Detail() {
                       <input
                         id="country-option-1"
                         type="radio"
-                        // checked={ !showModel ? true : false}
                         name="countries"
                         value="USA"
                         className="h-4 w-4 border-gray-300  focus:ring-black "
                         aria-labelledby="country-option-1"
                         aria-describedby="country-option-1"
-                        // onClick={()=>setShowModel(false)}
                       />
                     </div>
                     <div className="uppercase">
@@ -296,13 +299,11 @@ export default function Detail() {
                       <input
                         id="country-option-1"
                         type="radio"
-                        // checked={ !showModel ? true : false}
                         name="countries"
                         value="USA"
                         className="h-4 w-4 border-gray-300  focus:ring-black "
                         aria-labelledby="country-option-1"
                         aria-describedby="country-option-1"
-                        // onClick={()=>setShowModel(false)}
                       />
                     </div>
                     <div className="uppercase">
@@ -316,13 +317,11 @@ export default function Detail() {
                       <input
                         id="country-option-1"
                         type="radio"
-                        // checked={ !showModel ? true : false}
                         name="countries"
                         value="USA"
                         className="h-4 w-4 border-gray-300  focus:ring-black "
                         aria-labelledby="country-option-1"
                         aria-describedby="country-option-1"
-                        // onClick={()=>setShowModel(false)}
                       />
                     </div>
                     <div className="uppercase">
@@ -333,14 +332,25 @@ export default function Detail() {
                   </div>
                 </div>
               )}
-            </div>
+            </div> */}
             {/* BUTTON ADD TO CART */}
             {/* <Link href="/add_to_cart"> */}
-            <div
-              className="w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md cursor-pointer"
-              onClick={handleAdd}
-            >
-              <button className="">ADD TO CART</button>
+            <div className="">
+              {selectedProduct?.stock?.length > 0 ? (
+                <button
+                  className="w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md cursor-pointer"
+                  onClick={handleAdd}
+                >
+                  ADD TO CART
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="disabled:opacity-25 w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md cursor-pointer"
+                >
+                  OUT OF STOCK
+                </button>
+              )}
             </div>
             {/* </Link> */}
             {/* RESTRICTION LINE */}
@@ -380,7 +390,6 @@ export default function Detail() {
           </h1>
         </div>
       </div>
-      {/* Detail */}
       <div className="md:mt-[100px] mt-[50px] ">
         <div className="bg-[#F7F7F7]">
           <div
@@ -409,7 +418,6 @@ export default function Detail() {
           </div>
         </div>
       </div>
-      {/* description */}
       <div className="container m-auto px-[10px]">
         <div className="w-full md:mt-[100px] mt-[50px] border border-black ">
           <div className="flex md:gap-12 gap-4 bg-[#D9D9D9] ">
@@ -531,7 +539,6 @@ export default function Detail() {
           )}
         </div>
       </div>
-      {/* RECENTLY VIEWED */}
       <div className="mt-[100px] container m-auto">
         <h1 className="text-2xl font-bold ml-5">Recently Viewed</h1>
         <div className="  container m-auto">
@@ -613,4 +620,5 @@ export const getStaticProps = wrapper.getStaticProps((store) => async (ctx) => {
     await store.dispatch(getProductById(ctx?.params?.id));
   }
   await store.dispatch(navDataRequest());
+  await store.dispatch(footerDataRequest());
 });
