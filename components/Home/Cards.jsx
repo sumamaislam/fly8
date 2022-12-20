@@ -11,17 +11,17 @@ function Cards() {
 
   console.log("DONE", main);
   return (
-    <div className="mt-[100px] ">
+    <div className=" ">
       <div className="2xl:w-[65%] container  m-auto">
-        <div className=" xl:gap-20 gap-12 lg:grid-cols-4 md:grid-cols-2 mt-[28px] justify-center ">
-          {Object.keys(main).map((item, i) => {
+        <div className=" xl:gap-20  gap-12 lg:grid-cols-4 md:grid-cols-2   justify-center ">
+          {Object.keys(main).map((item) => {
             return (
-              <div className="flex flex-col mb-[60px]">
-                <h1 className="text-center text-[40px] font-bold text-black">
+              <div className="flex flex-col ">
+                <h1 className="text-center my-[80px] text-[40px] font-bold text-black">
                   {item}
                 </h1>
                 {/* {JSON.stringify(main[item])} */}
-                <div className="flex">
+                <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 justify-items-center ">
                   {main[item].map((items, index) => {
                     return (
                       <div className="max-w-sm " key={index}>
