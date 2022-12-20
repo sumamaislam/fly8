@@ -185,48 +185,7 @@ function Header() {
                       </Link>
                     );
                   })}
-                {/* <Link
-                  href=""
-                  className="py-4 px-2  lg:text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white  "
-                >
-                  Delta-9o
-                </Link>
-                <Link
-                  href=""
-                  className="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
-                >
-                  Delta-11
-                </Link>
-                <Link
-                  href=""
-                  className="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white"
-                >
-                  Master Blend
-                </Link>
-                <Link
-                  href=""
-                  className="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
-                >
-                  HHC
-                </Link>
-                <Link
-                  href=""
-                  className="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
-                >
-                  Shop All
-                </Link>
-                <Link
-                  href=""
-                  className="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
-                >
-                  About Us
-                </Link>
-                <Link
-                  href=""
-                  className="py-4 px-2 text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white "
-                >
-                  Contact Us
-                </Link> */}
+              
               </div>
             </div>
             {/* <!-- Secondary Navbar items --> */}

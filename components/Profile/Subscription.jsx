@@ -15,23 +15,23 @@ function Subscription() {
         </div>
         <div className="">
           {/* 1 */}
-          <div className="flex gap-12">
+          <div className="flex gap-4 md:gap-12">
             <div>
-              <p className="font-normal text-[18px]">
+              <p className="font-normal text-[12px] md:text-[18px]">
                 BEST FALAVOR OF THE DELTA-9O HIGH POTENCY VAPE WITH 2 PACK COMBO
               </p>
             </div>
             <div>
-              <p className="text-[16px] font-bold">
+              <p className="md:text-[16px] text-[12px] font-bold">
                 Billing : <span className="text-red-600">$34.56</span>
               </p>
             </div>
           </div>
           {/* 2 */}
-          <div className="flex justify-between mt-6">
+          <div className="flex justify-between flex-col md:flex-row gap-4 mt-6">
             <div className="flex   justify-between ">
               <div className=" border rounded-md bg-[#CEF1CD]">
-                <div className="flex justify-between gap-[174px] w-full h-[55px]  px-2 items-center  rounded-md ">
+                <div className="flex justify-between gap-[10px] lg:gap-[174px] w-full h-[55px]  px-2 items-center  rounded-md ">
                   <div className="flex gap-3">
                     <div className="flex items-center">
                       <input
@@ -110,14 +110,14 @@ function Subscription() {
                 )}
               </div>
             </div>
-            <div className="flex gap-8">
+            <div className="flex  gap-4">
               <div>
-                <button className="bg-black text-white px-5 py-4 font-bold rounded-xl">
+                <button className="bg-black md:text-[16px] text-[10px]  text-white px-5 py-2 font-bold rounded-xl">
                   VIEW DETAIL
                 </button>
               </div>
-              <div>
-                <button className="bg-red-600 text-white px-5 py-4 font-bold rounded-xl">
+              <div >
+                <button className="bg-red-600  md:text-[16px] text-[10px] text-white px-5 py-2 font-bold rounded-xl">
                   REMOVE
                 </button>
               </div>

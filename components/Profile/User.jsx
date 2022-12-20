@@ -62,7 +62,7 @@ function User() {
     <div className="2xl:w-[65%] w-[90%] m-auto ">
       <div className=" p-5 mt-[30px]">
         <div className="flex justify-center md:flex-row flex-col gap-12">
-          <div className="flex flex-col gap-12 items-center mt-[100px]">
+          <div className="flex flex-col gap-12 items-center md:mt-[100px]">
             <div className="  ">
               <img
                 className="m-auto w-[150px] rounded-full "

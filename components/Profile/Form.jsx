@@ -1,3 +1,6 @@
+
+
+
 import React from "react";
 import InputField from "../common/inputField";
 import Selectoption from "../common/Selectoption";
@@ -49,9 +52,9 @@ function Form() {
     }
     if (Object.keys(error).length > 0) {
       setFormError(error);
-      console.log("Error",formError);
+      console.log("Error", formError);
     } else {
-       console.log(formData)
+      console.log(formData);
     }
   };
 
@@ -62,8 +65,11 @@ function Form() {
   return (
     <div className="2xl:w-[65%] w-[90%] m-auto">
       <div className="border p-5 mt-[30px]">
-        <div className="flex justify-between gap-12 md:flex-row flex-col">
-          <form onSubmit={handleSubmit}>
+        <div className="flex justify-between  md:gap-12 md:flex-row flex-col ">
+        
+
+        
+          <form className="2xl:w-[550px] xl:w-[500px]" onSubmit={handleSubmit} >
             <div className="mt-[10px] text-[12px]  flex items-center gap-2">
               <p>
                 The following address will be used on the time of CHECKOUT page
@@ -107,16 +113,15 @@ function Form() {
               value={formData.street_address || ""}
               onChange={handleChange}
             />
-
+            <div className="w-[100%]  mt-[10px]">
+              <CountrySelect
+                className="border border-black outline-none w-full  p-3  rounded-lg "
+                name="country" 
+                value={formData.country || ""}
+                onChange={handleCountryChange}
+              />
+            </div>
             <div className="flex  justify-between gap-4">
-              <div className="w-[100%]">
-                <CountrySelect
-                  name="country"
-                  label="Country/region"
-                  value={formData.country || ""}
-                  onChange={handleCountryChange}
-                />
-              </div>
               <div className="w-full">
                 <InputField
                   placeholder="Zip Code"
@@ -126,14 +131,15 @@ function Form() {
                   onChange={handleChange}
                 />
               </div>
-              <div className="w-full">
+              <div className="w-full mt-[10px] border  pt-3 rounded-lg border-black">
                 <StateSelect
-                  blankOptionLabel="State"
-                  defaultOptionLabel="Select State"
+                  className="w-full outline-none"
+                  blankOptionLabel=""
+                  defaultOptionLabel=" State"
                   onChange={handleStateChange}
-                  name="state"
+                  name=""
                   value={formData.state || ""}
-                  label="State"
+                  label=""
                   country={formData.country}
                   disabled={formData.country ? false : true}
                 />
@@ -160,22 +166,21 @@ function Form() {
 
             <div className="flex justify-center mt-[2rem] pb-[2rem] ">
               <div className="flex bg-[black] text-white justify-center items-center rounded-md shadow-lg px-6 py-2 gap-2">
-                <div>
-                  <img src="/svg/cart2.svg" alt="cart" />
-                </div>
+                
                 <div>
                   <button
                     className="  rounded-md text-white font-semibold"
                     type="submit"
                   >
-                    Continue Shipping
+                    UPDATE SHIPPING ADDRESS
                   </button>
                 </div>
               </div>
             </div>
           </form>
+      
           <div className="seperator 2xl:h-[55%] xl:h-[63%] lg:h-[83%] md:h-[45%]"></div>
-          <form>
+          <form className="2xl:w-[550px] xl:w-[500px]">
             <div className="mt-[10px] text-[12px]  flex items-center gap-2"></div>
             <p className="text-[20px] mt-[2rem] font-bold">Billing Address</p>
             <div className="mt-[10px] text-[12px] text-[#2D80CD] flex items-center gap-2">
@@ -208,22 +213,28 @@ function Form() {
               className="w-full py-[10px] mt-[10px] border border-gray-700 rounded-md p-2 outline-none"
             />
 
+            
+            <div className="w-[100%] border mt-[10px] rounded-lg border-black p-2">
+              <CountrySelect
+                className="border-none outline-none w-full"
+                name="country"
+              />
+            </div>
+
             <div className="flex  justify-between gap-4">
-              <div className="w-[100%]">
-                <CountrySelect name="country" label="Country/region" />
-              </div>
               <div className="w-full">
                 <InputField
                   placeholder="Zip Code"
                   className=" w-full outline-none py-[10px] mt-[10px] border border-gray-700 rounded-md p-2"
                 />
               </div>
-              <div className="w-full">
+              <div className="w-full mt-[10px] border  pt-3 rounded-lg border-black">
                 <StateSelect
-                  blankOptionLabel="State"
-                  defaultOptionLabel="Select State"
-                  name="state"
-                  label="State"
+                  className="w-full outline-none"
+                  blankOptionLabel=""
+                  defaultOptionLabel=" State"
+                  name=""
+                  label=""
                 />
               </div>
             </div>
@@ -242,15 +253,13 @@ function Form() {
 
             <div className="flex justify-center mt-[2rem] pb-[2rem] ">
               <div className="flex bg-[black] text-white justify-center items-center rounded-md shadow-lg px-6 py-2 gap-2">
-                <div>
-                  <img src="/svg/cart2.svg" alt="cart" />
-                </div>
+                
                 <div>
                   <button
                     className="  rounded-md text-white font-semibold"
                     type="submit"
                   >
-                    Continue Shipping
+                 UPDATE BILLING ADDRESS
                   </button>
                 </div>
               </div>

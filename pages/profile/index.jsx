@@ -16,6 +16,7 @@ function Profile() {
   return (
     <div>
         <Header />
+      
         <Account show={show} setShow={setShow} />
         {show === "address" && <Form />}
         {show === "account" && <User/>}

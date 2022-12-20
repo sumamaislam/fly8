@@ -229,7 +229,7 @@ function Footer() {
           </div>
           <div className="menus ">
             <h1 className="text-[20px] font-bold mb-[25px]">We Accept</h1>
-            <div className="flex gap-2">
+            <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 ">
               <img src="/svg/card1.svg" alt="" />
               <img src="/svg/card2.svg" alt="" />
               <img src="/svg/card3.svg" alt="" />
