@@ -8,7 +8,11 @@ import { Raiting } from "../../../components/Home";
 import Cart from "../../../components/Home/Cart";
 import { wrapper } from "../../../store";
 import { footerDataRequest, navDataRequest } from "../../../redux/home";
-import { addToCarts, getProductById } from "../../../redux/product";
+import {
+  addToCarts,
+  getProductById,
+  setRecentProduct,
+} from "../../../redux/product";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import {
@@ -44,7 +48,7 @@ export default function Detail() {
   const dispatch = useDispatch();
   const router = useRouter();
   const { selectedProduct } = useSelector((state) => state.product);
-  const { carts } = useSelector((state) => state.product);
+  const { carts, recentProduct } = useSelector((state) => state.product);
 
   const { detailData } = useSelector((state) => state.product);
   const localSlug =
@@ -86,13 +90,21 @@ export default function Detail() {
 
   useEffect(() => {
     setMainData(selectedProduct);
+    dispatch(setRecentProduct(selectedProduct));
   }, [selectedProduct]);
+
+  useEffect(() => {
+    if (selectedProduct?.product) {
+      if (Object.keys(selectedProduct.product).length > 0) {
+        dispatch(setRecentProduct(selectedProduct));
+      }
+    }
+  }, []);
 
   const handleFlavourChange = (e) => {
     mainData?.flavour?.map((item, i) => {
       item.name === e.target.value && router.push(`/cards/${item.id}`);
     });
-    console.log("bhai", e.target.value);
   };
 
   return (
@@ -148,9 +160,7 @@ export default function Detail() {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p
-                      className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
-                    >
+                    <p className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">
                       {mainData?.product?.name}
                     </p>
                   </div>
@@ -632,7 +642,7 @@ export default function Detail() {
           <div className="grid xl:gap-20 gap-12 lg:grid-cols-3 md:grid-cols-2  justify-center">
             {delta9o.slice(0, 2).map((items, index) => {
               return (
-                <div className="   " key={index}>
+                <div className="" key={index}>
                   <div className="justify-center flex ">
                     <Link href={`/cards/${items.id}`}>
                       <img

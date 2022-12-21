@@ -16,6 +16,12 @@ const localSlug =
   localStorage.getItem("slug") &&
   JSON.parse(localStorage.getItem("slug"));
 
+  
+const recentData =
+typeof localStorage !== "undefined" &&
+localStorage.getItem("recent") &&
+JSON.parse(localStorage.getItem("recent"));
+
 const initialState = {
   // carts: localCarts && localCarts?.carts?.length > 0 ? localCarts.carts : [],
   // carts: [],
@@ -28,6 +34,7 @@ const initialState = {
   slugData: {},
   // detailData: localSlug.length > 0 ? localSlug : {},
   detailData: {},
+  recentProduct: recentData?.length > 0 ? recentData : [],
 
   carts: localCart?.carts?.length > 0 ? localCart.carts : [],
   totalPrice: localCart?.totalPrice ? localCart.totalPrice : 0,
@@ -127,6 +134,11 @@ export const productSlice = createSlice({
     setDetailData: (state, action) => {
       state.detailData = action.payload;
     },
+    setRecentProduct: (state, action) => {
+      if (Object.keys(action.payload).length > 0){
+        state.recentProduct = [...state.recentProduct, action.payload];
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action) => {
@@ -186,7 +198,8 @@ export const {
   deleteCart,
   setTotalPrice,
   setTotalQuantity,
-  setDetailData
+  setDetailData,
+  setRecentProduct,
 } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -14,9 +14,10 @@ export default function Cart({ showCart ,setShowCart }) {
   console.log("carts11111111111", carts);
 
   const increment = (items, index) => {
+    console.log("I",items)
     let update = { ...items };
-    update.quantity = update.quantity + 1;
-    update.total = update.price * update.quantity;
+    update.qty = update.qty + 1;
+    update.total = update.price * update.qty;
     dispatch(updateCart(update));
   };
 
@@ -25,18 +26,19 @@ export default function Cart({ showCart ,setShowCart }) {
   };
 
   const decerement = (items, index) => {
+    console.log("D",items)
     const updateVal = { ...items };
-    if (updateVal.quantity > 1) {
-      updateVal.quantity = updateVal.quantity - 1;
-      updateVal.total = updateVal.price * updateVal.quantity;
+    if (updateVal.qty > 1) {
+      updateVal.qty = updateVal.qty - 1;
+      updateVal.total = updateVal.price * updateVal.qty;
     }
     dispatch(updateCart(updateVal));
   };
 
   useEffect(() => {
     if (carts) {
-      const totalAmount = carts?.reduce((a, v) => a + v.price * v.quantity, 0);
-      const totalQuantity = carts?.reduce((a, v) => a + v.quantity, 0);
+      const totalAmount = carts?.reduce((a, v) => a + v.price * v.qty, 0);
+      const totalQuantity = carts?.reduce((a, v) => a + v.qty, 0);
       // console.log(totalQuantity);
       dispatch(setTotalPrice(totalAmount));
       dispatch(setTotalQuantity(totalQuantity));
@@ -90,13 +92,12 @@ export default function Cart({ showCart ,setShowCart }) {
   // };
   return (
     <div>
-      
-      <div className="relative background: rgba(0, 0, 0, 0.5) z-50">
+      <div className="relative background: rgba(0, 0, 0, 0.5) z-50 relative">
         <div className={`fixed inset-0 overflow-hidden ease-in-out duration-1000  ${showCart ? "translate-x-0 " : "translate-x-full"}`} >
           <div className={`absolute inset-0 overflow-hidden bg-black bg-opacity-75 `}>
-            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10"    >
+            <div className={`pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 `}>
               <div className={`pointer-events-auto w-screen max-w-md `} >
-                <div className={`flex h-full flex-col overflow-y-scroll bg-white shadow-xl `}>
+                <div className={`flex h-full flex-col overflow-y-scroll bg-white shadow-xl`}>
                   <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                     <div className="flex items-start gap-36">
                       <img
@@ -155,7 +156,7 @@ export default function Cart({ showCart ,setShowCart }) {
                                       </div>
                                       <div className="mt-[10px] flex gap-[25px] items-center justify-between ">
                                         <div className="flex gap-[20px] border items-center rounded-md h-[25px] bg-[ #E9EFEE] px-[16px]">
-                                          <div>
+                                          <div className="cursor-pointer">
                                             <img
                                               src="/svg/arrowleft.svg"
                                               alt=""
@@ -164,10 +165,10 @@ export default function Cart({ showCart ,setShowCart }) {
                                           </div>
                                           <div>
                                             <p className="text-[15px] font-bold">
-                                              1
+                                              {item.qty}
                                             </p>
                                           </div>
-                                          <div>
+                                          <div className="cursor-pointer">
                                             <img
                                               src="/svg/arrowright.svg"
                                               alt=""
@@ -190,7 +191,7 @@ export default function Cart({ showCart ,setShowCart }) {
                                       </div>
                                       </div>
                                     </div>
-                                    <div>
+                                    <div className="cursor-pointer">
                                       <img
                                         src="/svg/cross.png"
                                         alt=""

@@ -198,7 +198,7 @@ function Header() {
                   alt=""
                   onClick={() => setShowCart(true) }
                 />
-                {totalQuantity.length > 0 && (
+                {totalQuantity > 0 && (
                   <span className="absolute h-[18px] w-[18px] max-w-auto bg-white rounded-full text-[10px] flex items-center justify-center font-bold top-[-10px] right-[-11px]">
                     {totalQuantity}
                   </span>

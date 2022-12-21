@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { carts, totalPrice, totalQuantity } = useSelector(
+  const { carts, totalPrice, totalQuantity ,recentProduct ,selectedProduct } = useSelector(
     (state) => state.product
   );
 
@@ -50,6 +50,18 @@ function MyApp({ Component, pageProps }) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carts, totalPrice, totalQuantity]);
+
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(
+        "recent",
+        JSON.stringify({
+          selectedProduct
+        })
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recentProduct]);
 
   useEffect(() => {
     setIsSSR(false);
