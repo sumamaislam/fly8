@@ -13,6 +13,7 @@ import {
   getProductById,
   setRecentProduct,
 } from "../../../redux/product";
+import product from "../../../redux/product";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import {
@@ -106,7 +107,7 @@ export default function Detail() {
       item.name === e.target.value && router.push(`/cards/${item.id}`);
     });
   };
-
+console.log("sam" ,product)
   return (
     <div>
       <Header />
@@ -114,7 +115,7 @@ export default function Detail() {
       <div className=" 2xl:w-[65%] md:w-[80%] container m-auto">
         <div className="container m-auto">
           <div>
-            <nav className="flex mt-[5rem] " aria-label="Breadcrumb">
+            <nav className="flex mt-[5rem] ml-[20px] " aria-label="Breadcrumb">
               <ol className="inline-flex items-center space-x-1 md:space-x-3">
                 <li className="inline-flex items-center">
                   <Link
@@ -163,6 +164,7 @@ export default function Detail() {
                     <p className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">
                       {mainData?.product?.name}
                     </p>
+                    
                   </div>
                 </li>
               </ol>
@@ -172,8 +174,8 @@ export default function Detail() {
 
         <div className="flex flex-col lg:flex-row  justify-center gap-[40px] lg:gap-[80px] 2xl:gap-[100px] px-[10px] mt-[31px]">
           <div className=" ">
-            <div className="max-w-[700px] border ">
-              <img className="" src={mainData?.product?.thumbnail} alt="" />
+            <div className="md:w-[500px] border m-auto">
+              <img className="flex items-center md:py-[70px] justify-center m-auto" src={mainData?.product?.thumbnail} alt="" />
             </div>
             <div className="flex lg:gap-[36px] gap-2 justify-center lg:justify-start">
               {/* {productdetail?.images?.map((items, index) => {
@@ -218,6 +220,10 @@ export default function Detail() {
               </p>
             </div>
             {/* price */}
+           
+
+            {/* <p className=" " >{mainData?.product?.detail}</p> */}
+         
             <div className="flex items-center md:gap-[40px] gap-[20px] mt-[5px]">
               <p className="font-bold md:text-[20px] text-[15px] text-[#EB001B]">
                 ${mainData?.product?.price}
@@ -438,7 +444,7 @@ export default function Detail() {
             {/* </Link> */}
             {/* RESTRICTION LINE */}
             <div className="text-right mt-[10px]">
-              <p className="text-[12px] fonr-semibold text-[#EB001B]">
+              <p className="md:text-[12px] text-[9px] fonr-semibold text-[#EB001B]">
                 Not Intended for use by those under the age of 21.
               </p>
             </div>
@@ -460,20 +466,20 @@ export default function Detail() {
             <div className=" mt-[15px] md:text-[20px] text-[16px] flex gap-8 ">
               <p className="font-bold ">Share to :</p>
               {/* <FacebookShareButton><img src="/svg/1.svg" alt="" /></FacebookShareButton> */}
-              <FacebookShareButton>
+              {/* <FacebookShareButton> */}
                 {/* <FacebookIcon size={32} round={true} /> */}
-                <img src="/svg/2.svg" alt="" />
-                JHGJGH
-              </FacebookShareButton>
-              <FacebookShareButton
-                url={"https://peing.net/ja/"}
+                {/* <img src="/svg/2.svg" alt="" /> */}
+                {/* JHGJGH */}
+              {/* </FacebookShareButton> */}
+              {/* <FacebookShareButton */}
+                {/* url={"https://peing.net/ja/"}
                 quote={"フェイスブックはタイトルが付けれるようです"}
                 hashtag={"#hashtag"}
                 description={"aiueo"}
                 className="Demo__some-network__share-button"
               >
                 <FacebookIcon size={32} round /> Facebookでshare
-              </FacebookShareButton>
+              </FacebookShareButton> */}
               <img src="/svg/2.svg" alt="" />
               <img src="/svg/3.svg" alt="" />
               <img src="/svg/4.svg" alt="" />
@@ -517,10 +523,10 @@ export default function Detail() {
       </div>
       <div className="container m-auto px-[10px]">
         <div className="w-full md:mt-[100px] mt-[50px] border border-black ">
-          <div className="flex md:gap-12 gap-4 bg-[#D9D9D9] ">
+          <div className="flex md:gap-12 gap-[4px] bg-[#D9D9D9] ">
             <div>
               <p
-                className={`md:text-[15px] text-[10px]  font-normal p-2 cursor-pointer ${
+                className={`md:text-[15px] text-[8px]  font-normal p-2 cursor-pointer ${
                   detail === "a" ? "  bg-black text-white" : ""
                 }`}
                 onClick={() => setDetail("a")}
@@ -530,7 +536,7 @@ export default function Detail() {
             </div>
             <div>
               <p
-                className={`md:text-[15px] text-[10px]  font-normal p-2 cursor-pointer ${
+                className={`md:text-[15px] text-[8px]  font-normal p-2 cursor-pointer ${
                   detail === "b" ? "  bg-black text-white" : ""
                 }`}
                 onClick={() => setDetail("b")}
@@ -540,7 +546,7 @@ export default function Detail() {
             </div>
             <div>
               <p
-                className={`md:text-[15px] text-[10px]  font-normal p-2 cursor-pointer ${
+                className={`md:text-[15px] text-[8px]  font-normal p-2 cursor-pointer ${
                   detail === "c" ? "  bg-black text-white" : ""
                 }`}
                 onClick={() => setDetail("c")}
@@ -550,7 +556,7 @@ export default function Detail() {
             </div>
             <div>
               <p
-                className={`md:text-[15px] text-[10px]  font-normal p-2 cursor-pointer ${
+                className={`md:text-[15px] text-[8px]  font-normal p-2 cursor-pointer ${
                   detail === "d" ? "  bg-black text-white" : ""
                 }`}
                 onClick={() => setDetail("d")}
@@ -560,7 +566,7 @@ export default function Detail() {
             </div>
           </div>
           {detail === "a" && (
-            <div className="md:p-[40px] p-[20px]">
+            <div className="md:p-[40px] p-[10px] md:text-[16px] text-[12px] ">
               <p>
                 When it comes to puffing THC, it doesn’t get better than fly8
                 Delta 9 vapes. Our vapes offer the perfect Balance of potency,
@@ -621,17 +627,38 @@ export default function Detail() {
           )}
           {detail === "b" && (
             <div>
-              <h2 className="md:p-[40px] p-[20px]">INGREDIENTS</h2>
+              <h2 className="md:p-[40px] p-[10px] text-[12px] md:text-[16px] "> When it comes to puffing THC, it doesn’t get better than fly8
+                Delta 9 vapes. Our vapes offer the perfect Balance of potency,
+                convenience, and long-life. Each of our powerful pens contains a
+                unique blend of cannabinoids including Delta 8, Delta 9, Delta
+                10, and THC O. This combo is both completely unique and sure to
+                help you blast off to the moon. Why get baked on one form of THC
+                when you can puff a boutique blend of potent psychotropic
+                cannabinoids? When it comes to puffing THC, it doesn’t get
+                better than fly8 Delta 9 vapes. Our vapes offer the perfect
+                Balance of potency, convenience, and long-life. Each of our
+                powerful pens contains a unique blend of cannabinoids including
+                Delta 8, Delta 9, Delta 10, and THC O. This combo is both
+                completely unique and sure to help you blast off to the moon.
+                Why get baked on one form of THC when you can puff a boutique
+                blend of potent psychotropic cannabinoids?When it comes to
+                puffing THC, it doesn’t get better than fly8 Delta 9 vapes. Our
+                vapes offer the perfect Balance of potency, convenience, and
+                long-life. Each of our powerful pens contains a unique blend of
+                cannabinoids including Delta 8, Delta 9, Delta 10, and THC O.
+                This combo is both completely unique and sure to help you blast
+                off to the moon. Why get baked on one form of THC when you can
+                puff a boutique blend of potent psychotropic cannabinoids?</h2>
             </div>
           )}
           {detail === "c" && (
             <div>
-              <h2 className="md:p-[40px] p-[20px]">FAQs</h2>
+              <h2 className="md:p-[40px] p-[10px] text-[12px] md:text-[16px]">FAQs</h2>
             </div>
           )}
           {detail === "d" && (
             <div>
-              <h2 className="md:p-[40px] p-[20px]">LAB REPORT</h2>
+              <h2 className="md:p-[40px] p-[10px] text-[12px] md:text-[16px]">LAB REPORT</h2>
             </div>
           )}
         </div>
