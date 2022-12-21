@@ -3,20 +3,21 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteCart,
+  sentCoupanRequest,
   setTotalPrice,
   setTotalQuantity,
   updateCart,
 } from "../../../redux/product";
 
-export default function Cart({ showCart ,setShowCart }) {
+export default function Cart({ showCart, setShowCart }) {
+
+  const [coupan ,setCoupan] = useState("")
   const dispatch = useDispatch();
-  const { carts, totalPrice } = useSelector((state) => state.product);
-  console.log("carts11111111111", carts);
+  const { carts, totalPrice ,coupanData } = useSelector((state) => state.product);
 
   const increment = (items, index) => {
-    console.log("I",items)
     let update = { ...items };
-    update.qty = update.qty + 1;
+    update.qty = JSON.parse(update.qty) + 1;
     update.total = update.price * update.qty;
     dispatch(updateCart(update));
   };
@@ -26,7 +27,6 @@ export default function Cart({ showCart ,setShowCart }) {
   };
 
   const decerement = (items, index) => {
-    console.log("D",items)
     const updateVal = { ...items };
     if (updateVal.qty > 1) {
       updateVal.qty = updateVal.qty - 1;
@@ -34,6 +34,13 @@ export default function Cart({ showCart ,setShowCart }) {
     }
     dispatch(updateCart(updateVal));
   };
+
+  const coupanSubmit = (e) => {
+    e.preventDefault();
+    console.log(coupan)
+    setCoupan("")
+    dispatch(sentCoupanRequest(coupan))
+  }
 
   useEffect(() => {
     if (carts) {
@@ -93,18 +100,28 @@ export default function Cart({ showCart ,setShowCart }) {
   return (
     <div>
       <div className="relative background: rgba(0, 0, 0, 0.5) z-50 relative">
-        <div className={`fixed inset-0 overflow-hidden ease-in-out duration-1000  ${showCart ? "translate-x-0 " : "translate-x-full"}`} >
-          <div className={`absolute inset-0 overflow-hidden bg-black bg-opacity-75 `}>
-            <div className={`pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 `}>
-              <div className={`pointer-events-auto w-screen max-w-md `} >
-                <div className={`flex h-full flex-col overflow-y-scroll bg-white shadow-xl`}>
+        <div
+          className={`fixed inset-0 overflow-hidden ease-in-out duration-1000  ${
+            showCart ? "translate-x-0 " : "translate-x-full"
+          }`}
+        >
+          <div
+            className={`absolute inset-0 overflow-hidden bg-black bg-opacity-75 `}
+          >
+            <div
+              className={`pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 `}
+            >
+              <div className={`pointer-events-auto w-screen max-w-md `}>
+                <div
+                  className={`flex h-full flex-col overflow-y-scroll bg-white shadow-xl`}
+                >
                   <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                     <div className="flex items-start gap-36">
                       <img
                         src="/svg/back.svg"
                         alt=""
                         className="cursor-pointer "
-                        onClick={() => setShowCart(false) }
+                        onClick={() => setShowCart(false)}
                       />
                       <div className=" flex h-7 items-center justify-center">
                         <button
@@ -149,10 +166,13 @@ export default function Cart({ showCart ,setShowCart }) {
                                         <p className="text-[12px] font-bold">
                                           {item.name}
                                         </p>
-                                    
                                       </div>
                                       <div>
-                                        <p className="text-[10px]">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda, magni!</p>
+                                        <p className="text-[10px]">
+                                          Lorem ipsum dolor, sit amet
+                                          consectetur adipisicing elit.
+                                          Assumenda, magni!
+                                        </p>
                                       </div>
                                       <div className="mt-[10px] flex gap-[25px] items-center justify-between ">
                                         <div className="flex gap-[20px] border items-center rounded-md h-[25px] bg-[ #E9EFEE] px-[16px]">
@@ -176,19 +196,18 @@ export default function Cart({ showCart ,setShowCart }) {
                                             />
                                           </div>
                                         </div>
-                                      <div className="flex gap-4">
-
-                                      <div>
-                                        <p className="text-right font-bold">
-                                          ${item.price}
-                                        </p>
-                                      </div>
-                                      <div>
-                                        <p className="text-right font-bold line-through">
-                                          ${item.previous_price}
-                                        </p>
-                                      </div>
-                                      </div>
+                                        <div className="flex gap-4">
+                                          <div>
+                                            <p className="text-right font-bold">
+                                              ${item.price}
+                                            </p>
+                                          </div>
+                                          <div>
+                                            <p className="text-right font-bold line-through">
+                                              ${item.previous_price}
+                                            </p>
+                                          </div>
+                                        </div>
                                       </div>
                                     </div>
                                     <div className="cursor-pointer">
@@ -202,7 +221,9 @@ export default function Cart({ showCart ,setShowCart }) {
                                 </li>
                               );
                             })}
-                          {carts.length === 0 && <p className="text-center">Your Cart is empty</p>}
+                          {carts.length === 0 && (
+                            <p className="text-center">Your Cart is empty</p>
+                          )}
                         </ul>
                       </div>
                     </div>
@@ -213,22 +234,22 @@ export default function Cart({ showCart ,setShowCart }) {
                       <p>Subtotal</p>
                       <p>${totalPrice}</p>
                     </div>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={coupanSubmit}>
                       <div>
                         <input
                           className="w-full border h-10 rounded-md text-[12px] font-bold pl-3 outline-none"
                           placeholder="Coupon Code"
                           type="text"
-                          onChange={handleChange}
-                          name="discount"
-                          value={input.discount}
+                          onChange={(e)=>setCoupan(e.target.value)}
+                          name="coupan"
+                          value={coupan}
                         />
                       </div>
                       <div className="w-full  mt-[8px]">
                         <button
                           type="submit"
                           className="w-full border h-10 rounded-md bg-gray-300 text-[14px] disabled:opacity-25"
-                          disabled={input?.discount?.length > 0 ? false : true}
+                          disabled={coupan.length > 0 ? false : true}
                         >
                           Apply coupon
                         </button>

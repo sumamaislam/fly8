@@ -16,6 +16,7 @@ import {
 import product from "../../../redux/product";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { setRecentCheck } from "../../../redux/product";
 import {
   EmailShareButton,
   FacebookIcon,
@@ -92,6 +93,8 @@ export default function Detail() {
   useEffect(() => {
     setMainData(selectedProduct);
     dispatch(setRecentProduct(selectedProduct));
+    dispatch(setRecentCheck(true));
+    return () => setRecentCheck(false)
   }, [selectedProduct]);
 
   useEffect(() => {
@@ -107,7 +110,7 @@ export default function Detail() {
       item.name === e.target.value && router.push(`/cards/${item.id}`);
     });
   };
-console.log("sam" ,product)
+  
   return (
     <div>
       <Header />

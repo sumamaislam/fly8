@@ -287,6 +287,9 @@ function Address({ setShow }) {
             <div className="mt-8 w-full">
               <div className="flow-root ">
                 <ul role="list" className="-my-6 divide-y divide-gray-200">
+                  {
+                    
+                  }
                   <li className="flex py-2 justify-between ">
                     <div className="flex items-center gap-7">
                       <div className="relative">
@@ -326,7 +329,7 @@ function Address({ setShow }) {
                     </div>
                   </li>
                   <hr className="border-[10px] shadow-lg" />
-                  <li className="flex py-2 justify-between">
+                  {/* <li className="flex py-2 justify-between">
                     <div className="flex items-center gap-7">
                       <div className="relative">
                         <img
@@ -403,7 +406,7 @@ function Address({ setShow }) {
                         $245.99
                       </p>
                     </div>
-                  </li>
+                  </li> */}
                   <hr className="border-[10px] shadow-lg" />
                 </ul>
               </div>

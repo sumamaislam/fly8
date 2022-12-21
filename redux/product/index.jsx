@@ -16,11 +16,10 @@ const localSlug =
   localStorage.getItem("slug") &&
   JSON.parse(localStorage.getItem("slug"));
 
-  
 const recentData =
-typeof localStorage !== "undefined" &&
-localStorage.getItem("recent") &&
-JSON.parse(localStorage.getItem("recent"));
+  typeof localStorage !== "undefined" &&
+  localStorage.getItem("recent") &&
+  JSON.parse(localStorage.getItem("recent"));
 
 const initialState = {
   // carts: localCarts && localCarts?.carts?.length > 0 ? localCarts.carts : [],
@@ -32,8 +31,11 @@ const initialState = {
   gummiesData: {},
   selectedProduct: {},
   slugData: {},
+  coupanData: {},
   // detailData: localSlug.length > 0 ? localSlug : {},
   detailData: {},
+  shopAll : {},
+  recentCheck: false,
   recentProduct: recentData?.length > 0 ? recentData : [],
 
   carts: localCart?.carts?.length > 0 ? localCart.carts : [],
@@ -60,6 +62,26 @@ export const sentslugRequest = createAsyncThunk(
   }
 );
 
+
+export const sentAllProductRequest = createAsyncThunk(
+  "product/sentAllProductRequest",
+  async (payload, thunkAPI) => {
+    try {
+      let response;
+      // response = await request.get(`product_detail/Vape`).then((response) => response.data);
+      response = await request
+        .get(`all_product`)
+        .then((response) => response.data);
+      // toast(<RequestMessage message="Message sent successfully!" />);
+      return response;
+    } catch (error) {
+      console.log("Error", error);
+      // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);
+      return null;
+    }
+  }
+);
+
 export const sentgummiesRequest = createAsyncThunk(
   "gummies/sentgummiesRequest",
   async (payload, thunkAPI) => {
@@ -67,6 +89,24 @@ export const sentgummiesRequest = createAsyncThunk(
       let response;
       response = await request
         .get(`product_detail/Gummies`)
+        .then((response) => response.data);
+      // toast(<RequestMessage message="Message sent successfully!" />);
+      return response;
+    } catch (error) {
+      console.log("Error", error);
+      // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);
+      return null;
+    }
+  }
+);
+
+export const sentCoupanRequest = createAsyncThunk(
+  "coupan/sentCoupanRequest",
+  async (payload, thunkAPI) => {
+    try {
+      let response;
+      response = await request
+        .get(`get/${payload}`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
@@ -135,9 +175,12 @@ export const productSlice = createSlice({
       state.detailData = action.payload;
     },
     setRecentProduct: (state, action) => {
-      if (Object.keys(action.payload).length > 0){
+      if (Object.keys(action.payload).length > 0) {
         state.recentProduct = [...state.recentProduct, action.payload];
       }
+    },
+    setRecentCheck: (state, action) => {
+      state.recentCheck = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -152,6 +195,9 @@ export const productSlice = createSlice({
       state.selectedProduct = action?.payload?.product?.selectedProduct
         ? action.payload.product?.selectedProduct
         : state?.selectedProduct;
+      state.coupanData = action?.payload?.product?.coupanData
+        ? action.payload.product?.coupanData
+        : state?.coupanData;
       //   state.usersQuery = action?.payload?.user?.users?.usersQuery?.id ? action.payload.user.users.usersQuery : state?.usersQuery;
     });
     builder.addCase(sentslugRequest.pending, (state) => {
@@ -187,6 +233,28 @@ export const productSlice = createSlice({
       state.isLoading = false;
       console.log("Error:", { message: action.payload.message });
     });
+    builder.addCase(sentCoupanRequest.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(sentCoupanRequest.fulfilled, (state, action) => {
+      state.coupanData = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(sentCoupanRequest.rejected, (state, action) => {
+      state.isLoading = false;
+      console.log("Error:", { message: action.payload.message });
+    });
+    builder.addCase(sentAllProductRequest.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(sentAllProductRequest.fulfilled, (state, action) => {
+      state.shopAll = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(sentAllProductRequest.rejected, (state, action) => {
+      state.isLoading = false;
+      console.log("Error:", { message: action.payload.message });
+    });
   },
 });
 export const {
@@ -200,6 +268,7 @@ export const {
   setTotalQuantity,
   setDetailData,
   setRecentProduct,
+  setRecentCheck,
 } = productSlice.actions;
 
 export default productSlice.reducer;
