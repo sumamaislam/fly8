@@ -55,11 +55,11 @@ export default function Detail() {
   const handleAdd = () => {
     const isSimilar =
       carts?.length > 0 &&
-      carts?.find((item) => item.id === selectedProduct.product.id)
+      carts?.find((item) => item.id === mainData.product.id)
         ? true
         : false;
     if (!isSimilar) {
-      dispatch(addToCarts(selectedProduct.product));
+      dispatch(addToCarts(mainData.product));
     }
     setCartsNew(true);
   };
