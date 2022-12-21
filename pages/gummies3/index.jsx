@@ -104,7 +104,7 @@ export default function gummies1() {
                   <div className="flex justify-center mt-[24px]">
                     <Link href={`/cards/${items.id}`}>
                       <button
-                        className=" items-center flex gap-2 hover:animate-bounce text-[14px] xl:text-[15px] font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "
+                        className=" items-center flex gap-2 text-[14px] xl:text-[15px] font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "
                         // onClick={() => handleAdd(items)}
                       >
                         <span>
