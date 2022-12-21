@@ -1,30 +1,35 @@
 import React from "react";
 import { Footer, Header } from "../../components/common";
 import { Raiting } from "../../components/Home";
-import { delta11 } from "../../data";
+import { cards, delta9o } from "../../data";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import Router, { useRouter } from "next/router";
 import { wrapper } from "../../store";
-import { navDataRequest } from "../../redux/home";
-import { sentgummiesRequest, sentvapeRequest } from "../../redux/product";
-export default function Delta11() {
-  
-  const { vapesData } = useSelector((state) => state.product);
-  const { gummiesData } = useSelector((state) => state.product);
-
-  console.log("vapesss", vapesData);
-  console.log("gummkmm", gummiesData);
-
+import { footerDataRequest, navDataRequest } from "../../redux/home";
+import { sentAllProductRequest, sentgummiesRequest, sentvapeRequest } from "../../redux/product";
+export default function allproducts() {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const handleClick = (data) => {
+    console.log(data);
+    router.push({ pathname: "/add_to_cart" });
+    // router.push("/add_to_cart", undefined, { shallow: true });
+    // router.push("/add_to_cart")
+    console.log("called");
+    console.log(router.pathname);
+  };
+  const { shopAll } = useSelector((state)=>state.product)
+  console.log("samama", shopAll)
   return (
     <div>
       <Header />
 
       <div className="container  m-auto ">
-        <div className="">
+        <div>
           <nav className="flex mt-[5rem] " aria-label="Breadcrumb">
-            <ol className="inline-flex items-center  space-x-2 md:space-x-3">
-              <li className="inline-flex items-center ">
+            <ol className="inline-flex items-center space-x-1 md:space-x-3">
+              <li className="inline-flex items-center">
                 <Link
                   href="/add_to_cart"
                   className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
@@ -50,7 +55,7 @@ export default function Delta11() {
                     href="#"
                     className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
                   >
-                    Flavours
+                  Shop All
                   </Link>
                 </div>
               </li>
@@ -64,14 +69,14 @@ export default function Delta11() {
 
       <div className="text-center font-bold text-[#5FB75D]">
         <h1 className="pt-[100px] text-[35px] font-bold text-[#5FB75D]">
-          EXCITING FLAVORS OF DELTA 11 LIVE RESIN
+          All Products
         </h1>
       </div>
       <div className=" mt-[100px] container m-auto 2xl:w-[65%]">
-        <div className="grid xl:gap-20 gap-12 lg:grid-cols-3 md:grid-cols-2 mt-[28px] justify-center ">
-          {vapesData?.DELTA_11_LIVE_RESIN?.map((items, index) => {
+        <div className="grid xl:gap-20 gap-12 lg:grid-cols-4 md:grid-cols-2 mt-[28px] justify-center ">
+          {shopAll.map((items, index) => {
             return (
-              <div className="" key={index}>
+              <div className="   " key={index}>
                 <div className="justify-center flex ">
                   <Link href={`/cards/${items.id}`}>
                     <img
@@ -90,12 +95,12 @@ export default function Delta11() {
                       ${items.price}
                     </p>
                     <p className="line-through text-[20px] mt-[10px]">
-                      {/* ${items.discount} */}
+                      ${items.previous_price}
                     </p>
                   </div>
-                  {/* <div className=" flex items-center justify-center">
-                    <Raiting /> (274)
-                  </div> */}
+                  <div className=" flex items-center justify-center">
+                    {/* <Raiting /> (274) */}
+                  </div>
 
                   <div className="flex justify-center mt-[24px]">
                     <Link href={`/cards/${items.id}`}>
@@ -120,7 +125,7 @@ export default function Delta11() {
           })}
         </div>
       </div>
-      <div className="md:mt-[100px] mt-[50px]">
+      {/* <div className="md:mt-[100px] mt-[50px]">
         <div className="bg-[#F7F7F7]">
           <div
             className="container m-auto flex items-center p-5 flex-col md:flex-row  md:p-8 gap-[75px]
@@ -173,14 +178,16 @@ export default function Delta11() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <Footer />
     </div>
   );
-}
+};
 
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   await store.dispatch(navDataRequest());
-  await store.dispatch(sentvapeRequest());
+  await store.dispatch(footerDataRequest());
   await store.dispatch(sentgummiesRequest());
+  await store.dispatch(sentAllProductRequest());
+
 });

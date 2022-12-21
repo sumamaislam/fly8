@@ -34,7 +34,7 @@ const initialState = {
   coupanData: {},
   // detailData: localSlug.length > 0 ? localSlug : {},
   detailData: {},
-  shopAll : {},
+  shopAll: {},
   recentCheck: false,
   recentProduct: recentData?.length > 0 ? recentData : [],
 
@@ -61,7 +61,6 @@ export const sentslugRequest = createAsyncThunk(
     }
   }
 );
-
 
 export const sentAllProductRequest = createAsyncThunk(
   "product/sentAllProductRequest",
@@ -198,6 +197,9 @@ export const productSlice = createSlice({
       state.coupanData = action?.payload?.product?.coupanData
         ? action.payload.product?.coupanData
         : state?.coupanData;
+      state.shopAll = action?.payload?.product?.shopAll
+        ? action.payload.product?.shopAll
+        : state?.shopAll;
       //   state.usersQuery = action?.payload?.user?.users?.usersQuery?.id ? action.payload.user.users.usersQuery : state?.usersQuery;
     });
     builder.addCase(sentslugRequest.pending, (state) => {

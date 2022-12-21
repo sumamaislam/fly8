@@ -205,14 +205,14 @@ export default function Detail() {
           <div>
             <button className="text-[15px] bg-[#5FB75D] px-[7px]  rounded-md text-white uppercase">
               {mainData?.product?.stock > 0 ? (
-                <p>IN STOCK</p>
+                <p className="">IN STOCK</p>
               ) : (
                 <p>OUT OF STOCK</p>
               )}
             </button>
 
             {/* tittle */}
-            <p className="md:text-[25px] text-[16px] font-normal mt-[15px] text-black ">
+            <p className="md:text-[25px] text-center md:text-left text-[16px] font-bold mt-[15px] text-black ">
               {mainData?.product?.name}
             </p>
             <div className="flex items-center gap-[52px]">
@@ -225,9 +225,9 @@ export default function Detail() {
             {/* price */}
            
 
-            {/* <p className=" " >{mainData?.product?.detail}</p> */}
+            <p className=" text-[14px] text-justify" >{mainData?.product?.detail}</p>
          
-            <div className="flex items-center md:gap-[40px] gap-[20px] mt-[5px]">
+            <div className="flex items-center md:gap-[40px] gap-[20px] justify-center md:justify-start mt-[10px] md:mt-[5px]">
               <p className="font-bold md:text-[20px] text-[15px] text-[#EB001B]">
                 ${mainData?.product?.price}
               </p>
@@ -262,13 +262,13 @@ export default function Detail() {
             </div>
             {/* QUANTITY */}
 
-            <div className="mt-[20px] flex gap-[25px] items-center ">
+            <div className="mt-[20px] flex md:gap-[25px] gap-[12px] justify-center md:justify-start items-center ">
               <div>
-                <p className="text-[15px] font-semibold uppercase">
+                <p className=" text-[14px] md:text-[15px] font-semibold uppercase">
                   Quantity :
                 </p>
               </div>
-              <div className="flex gap-[27px] border items-center border-black h-[35px] bg-[#E9EFEE] px-[16px]">
+              <div className="flex gap-[17px] md:gap-[27px] border items-center border-black h-[35px] bg-[#E9EFEE] px-[8px] md:px-[16px]">
                 {mainData?.product?.qty > 1 ? (
                   <div className="cursor-pointer" onClick={decerement}>
                     <img src="/svg/arrowleft.svg" alt="" />
@@ -508,8 +508,8 @@ export default function Detail() {
               </p>
             </div>
             <div className="2xl:text-[20px] lg:text-[20px] text-[14px] text-[#7A7A7A]">
-              <p className="font-bold text-black">DELTA 9</p>
-              <p>
+              <p className="font-bold text-black ">DELTA 9</p>
+              <p className="text-justify">
                 When it comes to puffing THC, it doesn’t get better than fly8
                 Delta 9 vapes. Our vapes offer the perfect Balance of potency,
                 convenience, and long-life. Each of our powerful pens contains a
@@ -570,7 +570,7 @@ export default function Detail() {
           </div>
           {detail === "a" && (
             <div className="md:p-[40px] p-[10px] md:text-[16px] text-[12px] ">
-              <p>
+              <p className="text-justify">
                 When it comes to puffing THC, it doesn’t get better than fly8
                 Delta 9 vapes. Our vapes offer the perfect Balance of potency,
                 convenience, and long-life. Each of our powerful pens contains a
@@ -602,7 +602,7 @@ export default function Detail() {
                 when you can puff a boutique blend of potent psychotropic
                 cannabinoids?
               </p>
-              <p>
+              <p className="text-justify">
                 When it comes to puffing THC, it doesn’t get better than fly8
                 Delta 9 vapes. Our vapes offer the perfect Balance of potency,
                 convenience, and long-life. Each of our powerful pens contains a
@@ -630,7 +630,7 @@ export default function Detail() {
           )}
           {detail === "b" && (
             <div>
-              <h2 className="md:p-[40px] p-[10px] text-[12px] md:text-[16px] "> When it comes to puffing THC, it doesn’t get better than fly8
+              <p className="md:p-[40px] p-[10px] text-[12px] md:text-[16px] text-justify "> When it comes to puffing THC, it doesn’t get better than fly8
                 Delta 9 vapes. Our vapes offer the perfect Balance of potency,
                 convenience, and long-life. Each of our powerful pens contains a
                 unique blend of cannabinoids including Delta 8, Delta 9, Delta
@@ -651,17 +651,17 @@ export default function Detail() {
                 cannabinoids including Delta 8, Delta 9, Delta 10, and THC O.
                 This combo is both completely unique and sure to help you blast
                 off to the moon. Why get baked on one form of THC when you can
-                puff a boutique blend of potent psychotropic cannabinoids?</h2>
+                puff a boutique blend of potent psychotropic cannabinoids?</p>
             </div>
           )}
           {detail === "c" && (
             <div>
-              <h2 className="md:p-[40px] p-[10px] text-[12px] md:text-[16px]">FAQs</h2>
+              <p className="md:p-[40px] p-[10px] text-[12px] md:text-[16px] text-justify">FAQs</p>
             </div>
           )}
           {detail === "d" && (
             <div>
-              <h2 className="md:p-[40px] p-[10px] text-[12px] md:text-[16px]">LAB REPORT</h2>
+              <p className="md:p-[40px] p-[10px] text-[12px] md:text-[16px] text-justify">LAB REPORT</p>
             </div>
           )}
         </div>

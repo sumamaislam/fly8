@@ -43,7 +43,7 @@ export default function Delta11() {
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
               <li className="inline-flex items-center">
                 <Link
-                  href="/add_to_cart"
+                  href="/"
                   className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                 >
                   Home
@@ -109,9 +109,9 @@ export default function Delta11() {
                       ${items.previous_price}
                     </p>
                   </div>
-                  <div className=" flex items-center justify-center">
+                  {/* <div className=" flex items-center justify-center">
                     <Raiting /> (274)
-                  </div>
+                  </div> */}
 
                   <div className="flex justify-center mt-[24px]">
                     <Link href={`/cards/${items.id}`}>
