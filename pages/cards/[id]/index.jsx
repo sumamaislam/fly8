@@ -65,12 +65,12 @@ export default function Detail() {
   };
 
   const increment = () => {
-    if (mainData.product.stock <= mainData.product.qty) {
+    if (mainData?.product?.stock <= mainData?.product?.qty) {
       alert("Not have more stock");
     } else {
       setMainData({
         ...mainData,
-        product: { ...mainData.product, qty: mainData.product.qty - -1 },
+        product: { ...mainData?.product, qty: mainData?.product?.qty - -1 },
       });
     }
   };
@@ -127,10 +127,10 @@ export default function Detail() {
                       ></path>
                     </svg>
                     <Link
-                      href="#"
+                      href={`/flavour/${mainData?.product?.subcategory?.slug}`}
                       className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
                     >
-                      Delta-9o
+                      {mainData?.product?.subcategory?.name}
                     </Link>
                   </div>
                 </li>
@@ -148,12 +148,11 @@ export default function Detail() {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <Link
-                      href="#"
+                    <p
                       className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
                     >
-                      Detail
-                    </Link>
+                      {mainData?.product?.name}
+                    </p>
                   </div>
                 </li>
               </ol>
