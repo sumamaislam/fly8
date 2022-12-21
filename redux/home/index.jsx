@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { HYDRATE } from "next-redux-wrapper";
 import request from "../request";
+import { setLoading } from "../global";
 // import { toast } from "react-toastify";
 // import RequestMessage from "../../src/RequestMessage";
 
@@ -21,11 +22,13 @@ export const navDataRequest = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       let response;
+      await thunkAPI.dispatch(setLoading(true));
       response = await request
         .get(`featured-links`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
+      await thunkAPI.dispatch(setLoading(false));
     } catch (error) {
       console.log("Error", error);
       // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);
@@ -39,11 +42,13 @@ export const footerDataRequest = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       let response;
+      await thunkAPI.dispatch(setLoading(true));
       response = await request
         .get(`footer`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
+      await thunkAPI.dispatch(setLoading(false));
     } catch (error) {
       console.log("Error", error);
       // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);
@@ -58,11 +63,13 @@ export const qualityDataRequest = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       let response;
+      await thunkAPI.dispatch(setLoading(true));
       response = await request
         .get(`services`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
+      await thunkAPI.dispatch(setLoading(false));
     } catch (error) {
       console.log("Error", error);
       // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);
@@ -76,11 +83,13 @@ export const gummiesDataRequest = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       let response;
+      await thunkAPI.dispatch(setLoading(true));
       response = await request
         .get(`products?highlight=featured`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
+      await thunkAPI.dispatch(setLoading(false));
     } catch (error) {
       console.log("Error", error);
       // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);
@@ -95,11 +104,13 @@ export const bannerDataRequest = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       let response;
+      await thunkAPI.dispatch(setLoading(true));
       response = await request
         .get(`sliders`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
+      await thunkAPI.dispatch(setLoading(false));
     } catch (error) {
       console.log("Error", error);
       // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);
@@ -113,12 +124,14 @@ export const mainDataRequest = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       let response;
+      await thunkAPI.dispatch(setLoading(true));
       response = await request
         // .get(`products?highlight=best`)
         .get(`main`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
+      await thunkAPI.dispatch(setLoading(false));
     } catch (error) {
       console.log("Error", error);
       // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);

@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import request from "../request";
+import RequestMessage from "../../components/common/RequestMessage";
+import { setLoading } from "../global";
 // import { HYDRATE } from "next-redux-wrapper";
 // import request from "../request";
 // import { toast } from "react-toastify";
@@ -49,11 +51,13 @@ export const sentslugRequest = createAsyncThunk(
     try {
       let response;
       // response = await request.get(`product_detail/Vape`).then((response) => response.data);
+      await thunkAPI.dispatch(setLoading(true));
       response = await request
         .get(`product_detail/${payload}`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
+      await thunkAPI.dispatch(setLoading(false));
     } catch (error) {
       console.log("Error", error);
       // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);
@@ -68,11 +72,13 @@ export const sentAllProductRequest = createAsyncThunk(
     try {
       let response;
       // response = await request.get(`product_detail/Vape`).then((response) => response.data);
+      await thunkAPI.dispatch(setLoading(true));
       response = await request
         .get(`all_product`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
+      await thunkAPI.dispatch(setLoading(false));
     } catch (error) {
       console.log("Error", error);
       // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);
@@ -86,11 +92,13 @@ export const sentgummiesRequest = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       let response;
+      await thunkAPI.dispatch(setLoading(true));
       response = await request
         .get(`product_detail/Gummies`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
+      await thunkAPI.dispatch(setLoading(false));
     } catch (error) {
       console.log("Error", error);
       // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);
@@ -104,14 +112,16 @@ export const sentCoupanRequest = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       let response;
+      await thunkAPI.dispatch(setLoading(true));
       response = await request
         .get(`get/${payload}`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
+      await thunkAPI.dispatch(setLoading(false));
     } catch (error) {
       console.log("Error", error);
-      // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);
+      // toast(<RequestMessage message="Message failed!" />);
       return null;
     }
   }
@@ -122,11 +132,13 @@ export const getProductById = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       let response;
+      await thunkAPI.dispatch(setLoading(true));
       response = await request
         .get(`product_card/${payload}`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;
+      await thunkAPI.dispatch(setLoading(false));
     } catch (error) {
       console.log("Error", error);
       // toast(<RequestMessage icon="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" message="Message failed!" />);
@@ -244,7 +256,7 @@ export const productSlice = createSlice({
     });
     builder.addCase(sentCoupanRequest.rejected, (state, action) => {
       state.isLoading = false;
-      console.log("Error:", { message: action.payload.message });
+      console.log("Error Coupan");
     });
     builder.addCase(sentAllProductRequest.pending, (state) => {
       state.isLoading = true;

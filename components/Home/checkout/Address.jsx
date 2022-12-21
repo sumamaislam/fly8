@@ -1,14 +1,16 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import InputField from "../../common/inputField";
 import Selectoption from "../../common/Selectoption";
 import CountrySelect from "../../common/CountrySelect";
 import StateSelect from "../../common/StateSelect";
+import { useSelector } from "react-redux";
 
 function Address({ setShow }) {
   const [input, setInput] = useState({});
-  // const {  }
+
+  const { totalPrice ,carts } = useSelector((state) => state.product);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,11 +25,10 @@ function Address({ setShow }) {
   const handleCountryChange = (val) => {
     setInput({ ...input, country: val });
   };
-  
+
   const handleStateChange = (val) => {
     setInput({ ...input, state: val });
   };
-
 
   return (
     <div>
@@ -241,8 +242,8 @@ function Address({ setShow }) {
                     placeholder="Town/City "
                     className=" w-full outline-none py-[10px] mt-[10px] border border-gray-700 rounded-md p-2"
                     name="city"
-                      value={input.city}
-                      onChange={handleChange}
+                    value={input.city}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="w-full">
@@ -287,10 +288,54 @@ function Address({ setShow }) {
             <div className="mt-8 w-full">
               <div className="flow-root ">
                 <ul role="list" className="-my-6 divide-y divide-gray-200">
-                  {
-                    
-                  }
-                  <li className="flex py-2 justify-between ">
+                  {carts &&
+                    carts.map((items, i) => {
+                      return (
+                        <li className="flex py-2 justify-between ">
+                          <div className="flex items-center gap-7">
+                            <div className="relative">
+                              <img
+                                className="w-[70px]"
+                                src={items.thumbnail}
+                                alt=""
+                              />
+                              <div className="absolute top-0 right-0">
+                                <p className="text-[10px] rounded-full bg-red-500 w-4 h-4 text-white text-center ">
+                                  {items.qty}
+                                </p>
+                              </div>
+                            </div>
+                            <div>
+                              <div>
+                                <p className="text-[10px] ">
+                                  <span className="font-bold">
+                                    {" "}
+                                    {items.name}
+                                  </span>
+                                  <br />
+                                  <span className="text-[10px]">
+                                    {items.slug}
+                                  </span>{" "}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div>
+                            {/* <div className="flex justify-end">
+                              <img
+                                className="w-[15px]"
+                                src="/svg/cross.png"
+                                alt=""
+                              />
+                            </div> */}
+                            <p className="text-right font-semibold text-[14px] pt-2">
+                              ${items.price}
+                            </p>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  {/* <li className="flex py-2 justify-between ">
                     <div className="flex items-center gap-7">
                       <div className="relative">
                         <img
@@ -327,7 +372,7 @@ function Address({ setShow }) {
                         $245.99
                       </p>
                     </div>
-                  </li>
+                  </li> */}
                   <hr className="border-[10px] shadow-lg" />
                   {/* <li className="flex py-2 justify-between">
                     <div className="flex items-center gap-7">
@@ -414,24 +459,24 @@ function Address({ setShow }) {
             {/* button  */}
 
             {/* <form className=" " onSubmit={handleSubmit}> */}
-              <div className=" mt-[50px]  flex h-[45px] ">
-                <input
-                  className="w-full p-3 rounded-l-md border outline-none "
-                  type="text"
-                  placeholder="Enter Promo/Coupon Code"
-                  name="discount"
-                  value={input.discount}
-                  onChange={handleChange}
-                />
+            <div className=" mt-[50px]  flex h-[45px] ">
+              <input
+                className="w-full p-3 rounded-l-md border outline-none "
+                type="text"
+                placeholder="Enter Promo/Coupon Code"
+                name="discount"
+                value={input.discount}
+                onChange={handleChange}
+              />
 
-                <button
-                  className="w-[127px] py-3 px-5 ml-[2px] h-[45px] bg-[#8C8C8C] outline-none border-none rounded-r-md text-white font-semibold disabled:opacity-25 "
-                  type="sumbit"
-                  disabled={input?.discount?.length > 0 ? false : true}
-                >
-                  Apply
-                </button>
-              </div>
+              <button
+                className="w-[127px] py-3 px-5 ml-[2px] h-[45px] bg-[#8C8C8C] outline-none border-none rounded-r-md text-white font-semibold disabled:opacity-25 "
+                type="sumbit"
+                disabled={input?.discount?.length > 0 ? false : true}
+              >
+                Apply
+              </button>
+            </div>
             {/* </form> */}
             <div className="p-2 text-[12px]">
               <div className="w-full flex justify-between mt-4">
@@ -447,7 +492,7 @@ function Address({ setShow }) {
                   <p className="font-normal">SUBTOTAL :</p>
                 </div>
                 <div>
-                  <p className="font-bold">$245.99</p>
+                  <p className="font-bold">${totalPrice}</p>
                 </div>
               </div>
               <div className="w-full flex justify-between mt-4">
@@ -466,7 +511,7 @@ function Address({ setShow }) {
                   <p className="font-bold">TOTAL :</p>
                 </div>
                 <div>
-                  <p className="font-bold">$245.99</p>
+                  <p className="font-bold">${totalPrice}</p>
                 </div>
               </div>
             </div>

@@ -74,7 +74,7 @@ export default function allproducts() {
       </div>
       <div className=" mt-[100px] container m-auto 2xl:w-[65%]">
         <div className="grid xl:gap-20 gap-12 lg:grid-cols-4 md:grid-cols-2 mt-[28px] justify-center ">
-          {shopAll.map((items, index) => {
+          {shopAll.map && shopAll?.map((items, index) => {
             return (
               <div className="   " key={index}>
                 <div className="justify-center flex ">

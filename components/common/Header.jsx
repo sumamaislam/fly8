@@ -179,7 +179,7 @@ function Header() {
                     return (
                       <Link
                         key={index}
-                        href={item.link}
+                        href={`/${item.link}`}
                         className="py-4 px-2  lg:text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white  "
                       >
                         {item.name}
