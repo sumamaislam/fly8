@@ -46,7 +46,7 @@ export default function Cart({ showCart, setShowCart }) {
   useEffect(() => {
     if (carts) {
       const totalAmount = carts?.reduce((a, v) => a + v.price * v.qty, 0);
-      const totalQuantity = carts?.reduce((a, v) => a + v.qty, 0);
+      const totalQuantity = carts?.reduce((a, v) => a + JSON.parse(v.qty), 0);
       // console.log(totalQuantity);
       dispatch(setTotalPrice(totalAmount));
       dispatch(setTotalQuantity(totalQuantity));
