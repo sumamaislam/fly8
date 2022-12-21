@@ -121,10 +121,11 @@ filter: blur(1px);
 .spinner-hide {
   position: absolute;
   opacity: 0;
-  .spinner-grow {
-    width: 0px;
-    height: 0px;
-  }
+  
+}
+.spinner-grow {
+  width: 0px;
+  height: 0px;
 }
 
 .spinner {
@@ -142,3 +143,6 @@ filter: blur(1px);
   width: 100%;
   justify-content: center;
 }
+
+
+/*  */
