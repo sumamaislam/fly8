@@ -9,39 +9,91 @@ import Cart from "../../../components/Home/Cart";
 import { wrapper } from "../../../store";
 import { footerDataRequest, navDataRequest } from "../../../redux/home";
 import { addToCarts, getProductById } from "../../../redux/product";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import {
+  EmailShareButton,
+  FacebookIcon,
+  FacebookShareButton,
+  HatenaShareButton,
+  InstapaperShareButton,
+  LineShareButton,
+  LinkedinShareButton,
+  LivejournalShareButton,
+  MailruShareButton,
+  OKShareButton,
+  PinterestShareButton,
+  PocketShareButton,
+  RedditShareButton,
+  TelegramShareButton,
+  TumblrShareButton,
+  TwitterShareButton,
+  ViberShareButton,
+  VKShareButton,
+  WhatsappShareButton,
+  WorkplaceShareButton,
+} from "react-share";
+
 export default function Detail() {
   const [show, setShow] = useState(details.image[0]);
   const [detail, setDetail] = useState("a");
+  const [mainData, setMainData] = useState({});
   const [offers, setOffers] = useState(false);
   const [cartsNew, setCartsNew] = useState(false);
 
   const dispatch = useDispatch();
+  const router = useRouter();
   const { selectedProduct } = useSelector((state) => state.product);
   const { carts } = useSelector((state) => state.product);
 
   const { detailData } = useSelector((state) => state.product);
   const localSlug =
-  typeof localStorage !== "undefined" &&
-  localStorage.getItem("slug") &&
-  JSON.parse(localStorage.getItem("slug"));
-
-  console.log("fffffff",selectedProduct.name);
-  // console.log("momomoo",detailData)
+    typeof localStorage !== "undefined" &&
+    localStorage.getItem("slug") &&
+    JSON.parse(localStorage.getItem("slug"));
 
   const handleAdd = () => {
     const isSimilar =
-      carts?.length > 0 && carts?.find((item) => item.id === selectedProduct.id)
+      carts?.length > 0 &&
+      carts?.find((item) => item.id === selectedProduct.product.id)
         ? true
         : false;
     if (!isSimilar) {
-      dispatch(addToCarts(selectedProduct));
+      dispatch(addToCarts(selectedProduct.product));
     }
     setCartsNew(true);
   };
 
-  const handleFlavourChange = () => {
-    
-  }
+  const increment = () => {
+    if (mainData.product.stock <= mainData.product.qty) {
+      alert("Not have more stock");
+    } else {
+      setMainData({
+        ...mainData,
+        product: { ...mainData.product, qty: mainData.product.qty - -1 },
+      });
+    }
+  };
+
+  const decerement = () => {
+    if (mainData.product.qty > 1) {
+      setMainData({
+        ...mainData,
+        product: { ...mainData.product, qty: mainData.product.qty - 1 },
+      });
+    }
+  };
+
+  useEffect(() => {
+    setMainData(selectedProduct);
+  }, [selectedProduct]);
+
+  const handleFlavourChange = (e) => {
+    mainData?.flavour?.map((item, i) => {
+      item.name === e.target.value && router.push(`/cards/${item.id}`);
+    });
+    console.log("bhai", e.target.value);
+  };
 
   return (
     <div>
@@ -112,7 +164,7 @@ export default function Detail() {
         <div className="flex flex-col lg:flex-row  justify-center gap-[40px] lg:gap-[80px] 2xl:gap-[100px] px-[10px] mt-[31px]">
           <div className=" ">
             <div className="max-w-[700px] border ">
-              <img className="" src={selectedProduct?.thumbnail} alt="" />
+              <img className="" src={mainData?.product?.thumbnail} alt="" />
             </div>
             <div className="flex lg:gap-[36px] gap-2 justify-center lg:justify-start">
               {/* {productdetail?.images?.map((items, index) => {
@@ -138,7 +190,7 @@ export default function Detail() {
           </div>
           <div>
             <button className="text-[15px] bg-[#5FB75D] px-[7px]  rounded-md text-white uppercase">
-              {selectedProduct?.stock > 0 ? (
+              {mainData?.product?.stock > 0 ? (
                 <p>IN STOCK</p>
               ) : (
                 <p>OUT OF STOCK</p>
@@ -147,24 +199,22 @@ export default function Detail() {
 
             {/* tittle */}
             <p className="md:text-[25px] text-[16px] font-normal mt-[15px] text-black ">
-              {selectedProduct?.name}
+              {mainData?.product?.name}
             </p>
             <div className="flex items-center gap-[52px]">
               {/* raiting */}
-              <div className="">
-                <Raiting />
-              </div>
+              <div className="">{/* <Raiting /> */}</div>
               <p className="md:text-[15px] text-[12px] text-[#5FB75D] mt-[3px] font-bold">
-                {productdetail.review}
+                {/* {productdetail.review} */}
               </p>
             </div>
             {/* price */}
             <div className="flex items-center md:gap-[40px] gap-[20px] mt-[5px]">
               <p className="font-bold md:text-[20px] text-[15px] text-[#EB001B]">
-                ${selectedProduct?.price}
+                ${mainData?.product?.price}
               </p>
               <p className=" line-through md:text-[20px] text-[15px]">
-                ${productdetail.discount}
+                ${mainData?.product?.previous_price}
               </p>
             </div>
             {/* SELECT FLAVOURS */}
@@ -174,17 +224,20 @@ export default function Detail() {
                 name=""
                 id=""
                 placeholder="Select Another Flavours"
+                onChange={handleFlavourChange}
               >
                 {/* <option className="md:text-[18px]" value=""> */}
-                  {localSlug?.slugData?.map((item,i)=>{
-                    return(
-                      <option selected={selectedProduct.id === item.id} onChange={handleFlavourChange}>{item?.name}</option>
-                      // <option selected={Train Wreck}>{item?.name}</option>
-                    )
-                  })}
-                  {/* <span className="font-extrabold"> */}
-                    {/* {productdetail?.flavours[0]?.name} */}
-                  {/* </span> */}
+                {mainData?.flavour?.map((item, i) => {
+                  return (
+                    <option key={i} selected={mainData.product.id === item.id}>
+                      {item?.name}
+                    </option>
+                    // <option selected={Train Wreck}>{item?.name}</option>
+                  );
+                })}
+                {/* <span className="font-extrabold"> */}
+                {/* {productdetail?.flavours[0]?.name} */}
+                {/* </span> */}
                 {/* </option> */}
                 {/* <option value="">{productdetail?.flavours[1]?.name}</option>1 */}
               </select>
@@ -198,16 +251,22 @@ export default function Detail() {
                 </p>
               </div>
               <div className="flex gap-[27px] border items-center border-black h-[35px] bg-[#E9EFEE] px-[16px]">
-                <div>
-                  <img src="/svg/arrowleft.svg" alt="" />
-                </div>
+                {mainData?.product?.qty > 1 ? (
+                  <div className="cursor-pointer" onClick={decerement}>
+                    <img src="/svg/arrowleft.svg" alt="" />
+                  </div>
+                ) : (
+                  <div className="w-[7.5px]" onClick={decerement}>
+                    <img src="/svg/arrowleftdisable.svg" alt="" />
+                  </div>
+                )}
                 <div>
                   {" "}
                   <p className="text-[15px] font-bold">
-                    {productdetail.quantity}
+                    {mainData?.product?.qty}
                   </p>
                 </div>
-                <div>
+                <div className="cursor-pointer" onClick={increment}>
                   <img src="/svg/arrowright.svg" alt="" />
                 </div>
               </div>
@@ -351,7 +410,7 @@ export default function Detail() {
             {/* BUTTON ADD TO CART */}
             {/* <Link href="/add_to_cart"> */}
             <div className="">
-              {selectedProduct?.stock?.length > 0 ? (
+              {mainData?.product?.stock?.length > 0 ? (
                 <button
                   className="w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md cursor-pointer"
                   onClick={handleAdd}
@@ -391,7 +450,21 @@ export default function Detail() {
             </div>
             <div className=" mt-[15px] md:text-[20px] text-[16px] flex gap-8 ">
               <p className="font-bold ">Share to :</p>
-              <img src="/svg/1.svg" alt="" />
+              {/* <FacebookShareButton><img src="/svg/1.svg" alt="" /></FacebookShareButton> */}
+              <FacebookShareButton>
+                {/* <FacebookIcon size={32} round={true} /> */}
+                <img src="/svg/2.svg" alt="" />
+                JHGJGH
+              </FacebookShareButton>
+              <FacebookShareButton
+                url={"https://peing.net/ja/"}
+                quote={"フェイスブックはタイトルが付けれるようです"}
+                hashtag={"#hashtag"}
+                description={"aiueo"}
+                className="Demo__some-network__share-button"
+              >
+                <FacebookIcon size={32} round /> Facebookでshare
+              </FacebookShareButton>
               <img src="/svg/2.svg" alt="" />
               <img src="/svg/3.svg" alt="" />
               <img src="/svg/4.svg" alt="" />
@@ -557,7 +630,7 @@ export default function Detail() {
       <div className="mt-[100px] container m-auto">
         <h1 className="text-2xl font-bold ml-5">Recently Viewed</h1>
         <div className="  container m-auto">
-          <div className="grid xl:gap-20 gap-12 lg:grid-cols-3 md:grid-cols-2  justify-center ">
+          <div className="grid xl:gap-20 gap-12 lg:grid-cols-3 md:grid-cols-2  justify-center">
             {delta9o.slice(0, 2).map((items, index) => {
               return (
                 <div className="   " key={index}>

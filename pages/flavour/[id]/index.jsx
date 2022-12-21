@@ -63,12 +63,11 @@ export default function Delta11() {
                       clip-rule="evenodd"
                     ></path>
                   </svg>
-                  <Link
-                    href="#"
+                  <p
                     className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
                   >
-                    Flavours
-                  </Link>
+                    {slugData && slugData[0]?.subcategory?.name}
+                  </p>
                 </div>
               </li>
             </ol>
