@@ -26,8 +26,8 @@ const initialState = {
   gummiesData: {},
   selectedProduct: {},
   slugData: {},
-  detailData: localSlug.length > 0 ? localSlug : {},
-  // detailData: {},
+  // detailData: localSlug.length > 0 ? localSlug : {},
+  detailData: {},
 
   carts: localCart?.carts?.length > 0 ? localCart.carts : [],
   totalPrice: localCart?.totalPrice ? localCart.totalPrice : 0,

@@ -39,7 +39,7 @@ export default function Delta11() {
 
       <div className="container  m-auto ">
         <div>
-          <nav className="flex mt-[5rem] " aria-label="Breadcrumb">
+          <nav className="flex mt-[5rem] ml-[20px]" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
               <li className="inline-flex items-center">
                 <Link
@@ -80,12 +80,12 @@ export default function Delta11() {
       </div>
 
       <div className="text-center font-bold text-[#5FB75D]">
-        <h1 className="pt-[100px] text-[35px] font-bold text-[#5FB75D]">
+        <h1 className="md:pt-[100px] pt-[50px] text-[22px] md:text-[35px] font-bold text-[#5FB75D]">
           {slugData && slugData[0]?.subcategory?.name}
         </h1>
       </div>
-      <div className=" mt-[100px] container m-auto 2xl:w-[65%]">
-        <div className="grid xl:gap-20 gap-12 lg:grid-cols-3 md:grid-cols-2 mt-[28px] justify-center ">
+      <div className=" md:mt-[50px] container m-auto 2xl:w-[65%]">
+        <div className="grid xl:gap-20 gap-12 lg:grid-cols-3 md:grid-cols-2 mt-[28px] justify-items-center ">
           {slugData && slugData.length > 0 && slugData?.map((items, index) => {
             return (
               <div className="" key={index}>
@@ -102,12 +102,12 @@ export default function Delta11() {
                   <h1 className="text-[18px] xl:text-[22px] font-bold    text-[black] dark:text-white text-center">
                     {items.name}
                   </h1>
-                  <div className="flex justify-center gap-[30px] items-center">
-                    <p className="text-[#EB001B] text-[20px] mt-[10px]">
+                  <div className="flex justify-center gap-[30px] items-center ">
+                    <p className="text-[#EB001B] text-[20px]  mt-[10px]">
                       ${items.price}
                     </p>
                     <p className="line-through text-[20px] mt-[10px]">
-                      {/* ${items.discount} */}
+                      ${items.previous_price}
                     </p>
                   </div>
                   <div className=" flex items-center justify-center">
@@ -136,7 +136,7 @@ export default function Delta11() {
           })}
         </div>
       </div>
-      {/* <div className="md:mt-[100px] mt-[50px]">
+      <div className="md:mt-[100px] mt-[50px]">
         <div className="bg-[#F7F7F7]">
           <div
             className="container m-auto flex items-center p-5 flex-col md:flex-row  md:p-8 gap-[75px]
@@ -189,7 +189,7 @@ export default function Delta11() {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
       <Footer />
     </div>
   );

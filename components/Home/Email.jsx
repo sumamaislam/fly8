@@ -20,7 +20,7 @@ function Email() {
 
   return (
     <div className="mt-[109px]">
-      <div className="2xl:w-[65%] container  m-auto ">
+      <div className="2xl:w-[65%] px-[10px] container  m-auto ">
         <div className="flex md:gap-[59px]  justify-center items-center ">
           <div>
             <img

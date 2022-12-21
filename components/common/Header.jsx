@@ -161,18 +161,18 @@ function Header() {
         // }`}
         className="fixed z-10 top-0 shadow-lg w-full bg-black bg-opacity-[60%]"
       >
-        {showCart && <Cart setShowCart={setShowCart} />}
-        <div className="container m-auto px-4 h-[64px]">
+        {showCart && <Cart showCart={showCart} setShowCart={setShowCart}  />}
+        <div className="container m-auto px-4 h-[64px]  ">
           <div className="flex justify-between ">
             <div className="flex space-x-7">
               <div>
                 {/* <!-- Website Logo --> */}
-                <Link href="/" className="flex items-center py-4 px-2">
+                <Link href="/" className="flex  py-4 px-2">
                   <img src={header?.logo} alt="Logo" className="w-[65px]" />
                 </Link>
               </div>
               {/* <!-- Primary Navbar items --> */}
-              <div className="flex-col z-10 absolute md:static flex md:flex-row items-center gap-[20px]">
+              <div className="flex-col z-10 absolute md:static flex lg:flex-row gap-[20px]">
                 {header &&
                   // header.data.length > 0 &&
                   header?.data?.map((item, index) => {
@@ -189,14 +189,14 @@ function Header() {
               </div>
             </div>
             {/* <!-- Secondary Navbar items --> */}
-            <div className="hidden md:flex items-center space-x-6 cursor-pointer">
-              <img className="w-[20px]" src="/svg/search.svg" alt="" />
+            <div className=" flex mt-[20px] space-x-6 cursor-pointer">
+              
               <div className="relative">
                 <img
                   className="w-[20px] "
                   src="/svg/cart.svg"
                   alt=""
-                  onClick={() => setShowCart(true)}
+                  onClick={() => setShowCart(true) }
                 />
                 {totalQuantity.length > 0 && (
                   <span className="absolute h-[18px] w-[18px] max-w-auto bg-white rounded-full text-[10px] flex items-center justify-center font-bold top-[-10px] right-[-11px]">
@@ -208,12 +208,10 @@ function Header() {
                 {" "}
                 <img className="w-[20px]" src="/svg/profile.svg" alt="" />
               </Link>
-            </div>
-            {/* <!-- Mobile menu button --> */}
-            <div className="md:hidden flex items-center">
+            <div className=" lg:hidden">
               <button className="outline-none mobile-menu-button">
                 <svg
-                  className=" w-6 h-6 text-gray-500 hover:text-green-500 "
+                  className=" w-6 h-6 text-white hover:text-green-500 "
                   x-show="!showMenu"
                   fill="none"
                   stroke-linecap="round"
@@ -226,6 +224,8 @@ function Header() {
                 </svg>
               </button>
             </div>
+            </div>
+            {/* <!-- Mobile menu button --> */}
           </div>
         </div>
       </nav>

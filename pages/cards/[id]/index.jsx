@@ -26,7 +26,7 @@ export default function Detail() {
   JSON.parse(localStorage.getItem("slug"));
 
   console.log("fffffff",selectedProduct.name);
-  console.log("momomoo",detailData)
+  // console.log("momomoo",detailData)
 
   const handleAdd = () => {
     const isSimilar =

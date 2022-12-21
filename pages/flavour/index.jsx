@@ -21,10 +21,10 @@ export default function Delta11() {
       <Header />
 
       <div className="container  m-auto ">
-        <div>
+        <div className="">
           <nav className="flex mt-[5rem] " aria-label="Breadcrumb">
-            <ol className="inline-flex items-center space-x-1 md:space-x-3">
-              <li className="inline-flex items-center">
+            <ol className="inline-flex items-center  space-x-2 md:space-x-3">
+              <li className="inline-flex items-center ">
                 <Link
                   href="/add_to_cart"
                   className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
