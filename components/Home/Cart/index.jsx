@@ -92,10 +92,10 @@ export default function Cart({ showCart ,setShowCart }) {
     <div>
       
       <div className="relative background: rgba(0, 0, 0, 0.5) z-50">
-        <div className={`fixed inset-0 overflow-hidden ease-in-out duration-1000  ${showCart ? "translate-x-0 " : "translate-x-full"}`}>
+        <div className={`fixed inset-0 overflow-hidden ease-in-out duration-1000  ${showCart ? "translate-x-0 " : "translate-x-full"}`} >
           <div className={`absolute inset-0 overflow-hidden bg-black bg-opacity-75 `}>
-            <div className={`pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 `}>
-              <div className={`pointer-events-auto w-screen max-w-md `}>
+            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10"    >
+              <div className={`pointer-events-auto w-screen max-w-md `} >
                 <div className={`flex h-full flex-col overflow-y-scroll bg-white shadow-xl `}>
                   <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                     <div className="flex items-start gap-36">
@@ -138,7 +138,7 @@ export default function Cart({ showCart ,setShowCart }) {
                                   <div className="flex gap-4">
                                     <div>
                                       <img
-                                        className="h-24 w-24"
+                                        className="w-[150px]"
                                         src={item.thumbnail}
                                         alt=""
                                       />
@@ -148,8 +148,12 @@ export default function Cart({ showCart ,setShowCart }) {
                                         <p className="text-[12px] font-bold">
                                           {item.name}
                                         </p>
+                                    
                                       </div>
-                                      <div className="mt-[10px] flex gap-[25px] items-center ">
+                                      <div>
+                                        <p className="text-[10px]">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda, magni!</p>
+                                      </div>
+                                      <div className="mt-[10px] flex gap-[25px] items-center justify-between ">
                                         <div className="flex gap-[20px] border items-center rounded-md h-[25px] bg-[ #E9EFEE] px-[16px]">
                                           <div>
                                             <img
@@ -171,16 +175,19 @@ export default function Cart({ showCart ,setShowCart }) {
                                             />
                                           </div>
                                         </div>
-                                      </div>
+                                      <div className="flex gap-4">
+
                                       <div>
                                         <p className="text-right font-bold">
                                           ${item.price}
                                         </p>
                                       </div>
                                       <div>
-                                        <p className="text-right font-bold ">
+                                        <p className="text-right font-bold line-through">
                                           ${item.previous_price}
                                         </p>
+                                      </div>
+                                      </div>
                                       </div>
                                     </div>
                                     <div>
