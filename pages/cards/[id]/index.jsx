@@ -12,6 +12,7 @@ import {
   addToCarts,
   getProductById,
   setRecentProduct,
+  updateCart,
 } from "../../../redux/product";
 import product from "../../../redux/product";
 import { useRouter } from "next/router";
@@ -46,6 +47,7 @@ export default function Detail() {
   const [mainData, setMainData] = useState({});
   const [offers, setOffers] = useState(false);
   const [cartsNew, setCartsNew] = useState(false);
+  const [added, setAdded] = useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -58,6 +60,12 @@ export default function Detail() {
     localStorage.getItem("slug") &&
     JSON.parse(localStorage.getItem("slug"));
 
+  useEffect(() => {
+    carts?.find((item) => item.id === selectedProduct?.product?.id)
+      ? setAdded(true)
+      : setAdded(false);
+  }, [selectedProduct, carts]);
+
   const handleAdd = () => {
     const isSimilar =
       carts?.length > 0 &&
@@ -66,6 +74,7 @@ export default function Detail() {
         : false;
     if (!isSimilar) {
       dispatch(addToCarts(mainData.product));
+    } else {
     }
     setCartsNew(true);
   };
@@ -79,6 +88,13 @@ export default function Detail() {
         product: { ...mainData?.product, qty: mainData?.product?.qty - -1 },
       });
     }
+    if (carts?.find((item) => item.id === mainData.product.id)) {
+      const index=carts.findIndex(object => object.id === mainData.product.id);
+      if (index){
+        console.log(carts[index])
+        dispatch(updateCart({ ...mainData?.product, qty: mainData?.product?.qty - -1 }))
+      }
+    }
   };
 
   const decerement = () => {
@@ -88,13 +104,21 @@ export default function Detail() {
         product: { ...mainData.product, qty: mainData.product.qty - 1 },
       });
     }
+    if (carts?.find((item) => item.id === mainData.product.id)) {
+      // dispatch(addToCarts(mainData.product));
+      const index=carts.findIndex(object => object.id === mainData.product.id);
+      if (index){
+        console.log(carts[index])
+        dispatch(updateCart({ ...mainData.product, qty: mainData.product.qty - 1 }))
+      }
+    }
   };
 
   useEffect(() => {
     setMainData(selectedProduct);
     dispatch(setRecentProduct(selectedProduct));
     dispatch(setRecentCheck(true));
-    return () => setRecentCheck(false)
+    return () => setRecentCheck(false);
   }, [selectedProduct]);
 
   useEffect(() => {
@@ -110,7 +134,7 @@ export default function Detail() {
       item.name === e.target.value && router.push(`/cards/${item.id}`);
     });
   };
-  
+
   return (
     <div>
       <Header />
@@ -167,7 +191,6 @@ export default function Detail() {
                     <p className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">
                       {mainData?.product?.name}
                     </p>
-                    
                   </div>
                 </li>
               </ol>
@@ -178,7 +201,11 @@ export default function Detail() {
         <div className="flex flex-col lg:flex-row  justify-center gap-[40px] lg:gap-[80px] 2xl:gap-[100px] px-[10px] mt-[31px]">
           <div className=" ">
             <div className="md:w-[500px] border m-auto">
-              <img className="flex items-center md:py-[70px] justify-center m-auto" src={mainData?.product?.thumbnail} alt="" />
+              <img
+                className="flex items-center md:py-[70px] justify-center m-auto"
+                src={mainData?.product?.thumbnail}
+                alt=""
+              />
             </div>
             <div className="flex lg:gap-[36px] gap-2 justify-center lg:justify-start">
               {/* {productdetail?.images?.map((items, index) => {
@@ -223,10 +250,11 @@ export default function Detail() {
               </p>
             </div>
             {/* price */}
-           
 
-            <p className=" text-[14px] text-justify" >{mainData?.product?.detail}</p>
-         
+            <p className=" text-[14px] text-justify">
+              {mainData?.product?.detail}
+            </p>
+
             <div className="flex items-center md:gap-[40px] gap-[20px]  mt-[10px] md:mt-[5px]">
               <p className="font-bold md:text-[20px] text-[15px] text-[#EB001B]">
                 ${mainData?.product?.price}
@@ -429,12 +457,22 @@ export default function Detail() {
             {/* <Link href="/add_to_cart"> */}
             <div className="">
               {mainData?.product?.stock?.length > 0 ? (
-                <button
-                  className="w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md cursor-pointer"
-                  onClick={handleAdd}
-                >
-                  ADD TO CART
-                </button>
+                added ? (
+                  <button
+                    className="disabled:opacity-25 w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md"
+                    onClick={handleAdd}
+                    disabled
+                  >
+                    Added to Cart
+                  </button>
+                ) : (
+                  <button
+                    className="w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md cursor-pointer"
+                    onClick={handleAdd}
+                  >
+                    ADD TO CART
+                  </button>
+                )
               ) : (
                 <button
                   disabled
@@ -470,12 +508,12 @@ export default function Detail() {
               <p className="font-bold ">Share to :</p>
               {/* <FacebookShareButton><img src="/svg/1.svg" alt="" /></FacebookShareButton> */}
               {/* <FacebookShareButton> */}
-                {/* <FacebookIcon size={32} round={true} /> */}
-                {/* <img src="/svg/2.svg" alt="" /> */}
-                {/* JHGJGH */}
+              {/* <FacebookIcon size={32} round={true} /> */}
+              {/* <img src="/svg/2.svg" alt="" /> */}
+              {/* JHGJGH */}
               {/* </FacebookShareButton> */}
               {/* <FacebookShareButton */}
-                {/* url={"https://peing.net/ja/"}
+              {/* url={"https://peing.net/ja/"}
                 quote={"フェイスブックはタイトルが付けれるようです"}
                 hashtag={"#hashtag"}
                 description={"aiueo"}
@@ -630,7 +668,9 @@ export default function Detail() {
           )}
           {detail === "b" && (
             <div>
-              <p className="md:p-[40px] p-[10px] text-[12px] md:text-[16px] text-justify "> When it comes to puffing THC, it doesn’t get better than fly8
+              <p className="md:p-[40px] p-[10px] text-[12px] md:text-[16px] text-justify ">
+                {" "}
+                When it comes to puffing THC, it doesn’t get better than fly8
                 Delta 9 vapes. Our vapes offer the perfect Balance of potency,
                 convenience, and long-life. Each of our powerful pens contains a
                 unique blend of cannabinoids including Delta 8, Delta 9, Delta
@@ -651,17 +691,22 @@ export default function Detail() {
                 cannabinoids including Delta 8, Delta 9, Delta 10, and THC O.
                 This combo is both completely unique and sure to help you blast
                 off to the moon. Why get baked on one form of THC when you can
-                puff a boutique blend of potent psychotropic cannabinoids?</p>
+                puff a boutique blend of potent psychotropic cannabinoids?
+              </p>
             </div>
           )}
           {detail === "c" && (
             <div>
-              <p className="md:p-[40px] p-[10px] text-[12px] md:text-[16px] text-justify">FAQs</p>
+              <p className="md:p-[40px] p-[10px] text-[12px] md:text-[16px] text-justify">
+                FAQs
+              </p>
             </div>
           )}
           {detail === "d" && (
             <div>
-              <p className="md:p-[40px] p-[10px] text-[12px] md:text-[16px] text-justify">LAB REPORT</p>
+              <p className="md:p-[40px] p-[10px] text-[12px] md:text-[16px] text-justify">
+                LAB REPORT
+              </p>
             </div>
           )}
         </div>

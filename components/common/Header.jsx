@@ -172,7 +172,7 @@ function Header() {
                 </Link>
               </div>
               {/* <!-- Primary Navbar items --> */}
-              <div className="hidden z-10 absolute md:static flex lg:flex-row gap-[20px]">
+              <div className="flex-col z-10 absolute md:static flex lg:flex-row gap-[20px]">
                 {header &&
                   // header.data.length > 0 &&
                   header?.data?.map((item, index) => {

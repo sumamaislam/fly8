@@ -4,7 +4,6 @@ import Topbtn from "../Home/Topbtn";
 
 function Footer() {
   const { footer } = useSelector((state) => state.home);
-  console.log("jjj", footer);
 
   return (
     <div className="bg-[black] text-white mt-[100px]">
