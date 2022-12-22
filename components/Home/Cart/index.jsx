@@ -143,9 +143,9 @@ export default function Cart({ showCart, setShowCart }) {
                                           Assumenda, magni!
                                         </p>
                                       </div>
-                                      <div className="mt-[10px] flex gap-[25px] items-center justify-between ">
+                                      <div className="mt-[10px] flex gap-2 md:gap-[25px] items-center justify-between ">
                                         <div className="flex gap-[20px] border items-center rounded-md h-[25px] bg-[ #E9EFEE] px-[16px]">
-                                          <div className="cursor-pointer">
+                                          <div className="cursor-pointer w-[5px] ">
                                             <img className=""
                                               src="/svg/arrowleft.svg"
                                               alt=""
@@ -153,11 +153,11 @@ export default function Cart({ showCart, setShowCart }) {
                                             />
                                           </div>
                                           <div>
-                                            <p className="text-[15px] font-bold">
+                                            <p className=" font-bold text-[12px] md:text-[16px]">
                                               {item.qty}
                                             </p>
                                           </div>
-                                          <div className="cursor-pointer">
+                                          <div className="cursor-pointer w-[5px]">
                                             <img
                                               src="/svg/arrowright.svg"
                                               alt=""
@@ -167,19 +167,19 @@ export default function Cart({ showCart, setShowCart }) {
                                         </div>
                                         <div className="flex gap-4">
                                           <div>
-                                            <p className="text-right font-bold">
+                                            <p className="text-right font-bold text-[12px] md:text-[16px]">
                                               ${item.price}
                                             </p>
                                           </div>
                                           <div>
-                                            <p className="text-right font-bold line-through">
+                                            <p className="text-right font-bold line-through text-[12px] md:text-[16px]">
                                               ${item.previous_price}
                                             </p>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
-                                    <div className="cursor-pointer">
+                                    <div className="cursor-pointer w-[30px]">
                                       <img
                                         src="/svg/cross.png"
                                         alt=""
@@ -228,7 +228,7 @@ export default function Cart({ showCart, setShowCart }) {
                     <div className="mt-6">
                       <Link
                         href="/checkout"
-                        className="flex items-center justify-center rounded-md md:text-[14px] text-[10px] bg-black border px-6 py-3 text-base font-medium text-white "
+                        className="flex items-center justify-center rounded-md md:text-[14px] text-[9px] bg-black border px-6 py-3 text-base font-medium text-white "
                       >
                         PROCEED TO CHECKOUT
                       </Link>

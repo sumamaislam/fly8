@@ -19,7 +19,7 @@ function Cards() {
   // console.log("DONE", main);
   return (
     <div className=" ">
-      <div className="2xl:w-[65%] container  m-auto">
+      <div className="2xl:w-[65%] w-[90%] container  m-auto">
         <div className=" xl:gap-20  gap-12 lg:grid-cols-4 md:grid-cols-2   justify-center ">
           {Object.keys(main).map((item) => {
             return (
