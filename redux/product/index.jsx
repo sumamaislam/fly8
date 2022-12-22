@@ -114,7 +114,7 @@ export const sentCoupanRequest = createAsyncThunk(
       let response;
       await thunkAPI.dispatch(setLoading(true));
       response = await request
-        .get(`get/${payload}`)
+        .get(`getCoupon/${payload}`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
       return response;

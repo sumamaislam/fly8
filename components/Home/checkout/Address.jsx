@@ -5,18 +5,63 @@ import InputField from "../../common/inputField";
 import Selectoption from "../../common/Selectoption";
 // import CountrySelect from "../../common/CountrySelect";
 // import StateSelect from "../../common/StateSelect";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import axios from "axios";
+import RequestMessage from "../../common/RequestMessage";
+import { createOrder } from "../../../redux/order";
+import { baseURL } from "../../../redux/request";
 
 function Address({ setShow }) {
   const [input, setInput] = useState({});
   const [formError, setFormError] = useState({});
+  const [isProcessing, setProcessingTo] = useState(false);
+  const [checkoutError, setCheckoutError] = useState("");
 
-  const { totalPrice, carts } = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const { totalPrice, carts, totalQuantity } = useSelector(
+    (state) => state.product
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!stripe || !elements) {
+      return;
+    } else {
+      validate(input);
+    }
+    // if (session?.user?.user?.id) {
+    // }
     // setShow("shipping");
-    validate(input);
+  };
+
+  const iframeStyles = {
+    base: {
+      color: "#6e6e6e",
+      fontSize: "15px",
+      // iconColor: "#fff",
+      "::placeholder": {
+        color: "#737373",
+      },
+      padding: "4px 10px",
+      height: "50px",
+    },
+    invalid: {
+      iconColor: "#FFC7EE",
+      color: "#FFC7EE",
+    },
+    complete: {
+      iconColor: "#cbf4c9",
+    },
+  };
+
+  const cardElementOpts = {
+    iconStyle: "solid",
+    style: { ...iframeStyles },
+    hidePostalCode: true,
   };
 
   const validate = async (data) => {
@@ -59,23 +104,97 @@ function Address({ setShow }) {
       console.log(formError);
     } else {
       console.log(input);
-      setInput({
-        first_name: "",
-        last_name: "",
-        country: "",
-        city: "",
-        state: "",
-        zip_code: "",
-        phone_no: "",
-        address: "",
-        company: "",
-        email: "",
-      });
+      let cartArray = carts?.map((item) => ({
+        product_id: item.id,
+        quantity: item.qty,
+        price: item.price,
+        total: item.total,
+        name: item.name,
+      }));
+      let data = {
+        ...input,
+        products: cartArray,
+        total_quantity: totalQuantity,
+        total: totalPrice,
+      };
+      const billingDetails = {
+        name: data?.first_name + " " + data?.last_name,
+        email: data?.email,
+        address: {
+          city: data?.city,
+          line1: data?.address,
+          state: data?.state,
+          postal_code: data?.zip_code,
+        },
+      };
+      setProcessingTo(true);
+      const cardElement = elements.getElement("card");
+      try {
+        const { data: clientSecret } = await axios.post(
+          `${baseURL}/api/v1/checkout`,
+          {
+            price: totalPrice,
+          }
+        );
+        const paymentMethodReq = await stripe.createPaymentMethod({
+          type: "card",
+          card: cardElement,
+          billing_details: billingDetails,
+        });
+
+        if (paymentMethodReq.error) {
+          setCheckoutError(paymentMethodReq.error.message);
+          setProcessingTo(false);
+          return;
+        }
+
+        const { error } = await stripe.confirmCardPayment(
+          clientSecret?.client_secret,
+          {
+            payment_method: paymentMethodReq.paymentMethod.id,
+          }
+        );
+
+        if (error) {
+          setCheckoutError(error.message);
+          setProcessingTo(false);
+          toast(
+            <RequestMessage
+              // icon="bi bi-exclamation-triangle"
+              message="Payment failed!"
+            />
+          );
+          return;
+        }
+
+        // console.log("onSuccessfulCheckout");
+        dispatch(createOrder(data));
+        setFormError({});
+        setInput({
+          first_name: "",
+          last_name: "",
+          country: "",
+          city: "",
+          state: "",
+          zip_code: "",
+          phone_no: "",
+          address: "",
+          company: "",
+          email: "",
+        });
+      } catch (error) {
+        setCheckoutError(error.message);
+        // console.log("error", error);
+      }
     }
   };
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
+  const handleCardDetailsChange = (ev) => {
+    ev.error ? setCheckoutError(ev.error.message) : setCheckoutError();
   };
 
   // const handleCountryChange = (val) => {
@@ -316,6 +435,18 @@ function Address({ setShow }) {
                     onChange={handleChange}
                   />
                 </div>
+                <div className="mt-[10px]">
+                  <CardElement
+                    options={cardElementOpts}
+                    onChange={handleCardDetailsChange}
+                  />
+                </div>
+                {checkoutError ? (
+                  <div className="errors">
+                    {" "}
+                    <span>{checkoutError}</span>
+                  </div>
+                ) : null}
                 <div className="mt-[10px] text-[12px] text-[#2D80CD] flex items-center gap-2">
                   <div>
                     <input className="mt-1" type="checkbox" name="" id="" />
@@ -333,7 +464,7 @@ function Address({ setShow }) {
                         type="submit"
                         // onClick={() => setShow("shipping")}
                       >
-                        Continue Shipping
+                        {isProcessing ? "Processing..." : `Pay $${totalPrice}`}
                       </button>
                     </div>
                   </div>

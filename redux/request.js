@@ -1,7 +1,7 @@
 import axios from "axios";
 import { errorInterceptor, requestInterceptor } from "./interceptors";
 
-const baseURL = `${process.env.NEXT_PUBLIC_API_URL}`;
+export const baseURL = `${process.env.NEXT_PUBLIC_API_URL}`;
 
 const request = axios.create({ withCredentials: true, baseURL: baseURL });
 

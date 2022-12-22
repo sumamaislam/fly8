@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { setLoading } from "../redux/global";
 import { ToastContainer } from "react-toastify";
+import Layout from "../components/common/Layout";
 
 function MyApp({ Component, pageProps }) {
   const [isSSR, setIsSSR] = useState(true);
@@ -76,7 +77,7 @@ function MyApp({ Component, pageProps }) {
   }
 
   return (
-    <>
+    <Layout>
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -109,7 +110,7 @@ function MyApp({ Component, pageProps }) {
         </div>
       </div>
       <Component {...pageProps} />
-    </>
+    </Layout>
   );
 }
 
