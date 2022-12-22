@@ -66,24 +66,25 @@ export default function Cart({ showCart, setShowCart }) {
   };
   return (
     <div>
-      <div className=" background: rgba(0, 0, 0, 0.5) z-50 relative">
+      <div className="z-50 ">
+        <div className={`${ showCart ? "bg-black bg-opacity-75 w-full h-[100vh] min-h-[100%] ease-in-out duration-1000" : "" }`} onClick={()=>setShowCart(false)}></div>
         <div
-          className={`fixed inset-0 overflow-hidden ease-in-out duration-1000  ${
+          className={`fixed inset-0 overflow-hidden ease-in-out duration-1000  w-screen max-w-md z-10 ml-auto ${
             showCart ? "translate-x-0 " : "translate-x-full"
           }`}
         >
           <div
-            className={`absolute inset-0 overflow-hidden bg-black bg-opacity-75 `}
+            className={`absolute inset-0 overflow-hidden `}
           >
             <div
-              className={`pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 `}
+              className={`pointer-events-none fixed inset-y-0 right-0 flex max-w-full`}
             >
-              <div className={`pointer-events-auto w-screen max-w-md `}>
+              <div className={`pointer-events-auto`}>
                 <div
                   className={`flex h-full flex-col overflow-y-scroll bg-white shadow-xl`}
                 >
                   <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
-                    <div className="flex items-start gap-36">
+                    <div className="flex items-start justify-between">
                       <img
                         src="/svg/back.svg"
                         alt=""
@@ -102,6 +103,7 @@ export default function Cart({ showCart, setShowCart }) {
                           />
                         </button>
                       </div>
+                      
                     </div>
                     <div>
                       <p className="text-[10px] font-bold text-center">

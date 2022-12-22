@@ -1,17 +1,25 @@
 import React from "react";
 import { useSelector } from "react-redux";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
 function Commitment() {
   const { quality } = useSelector((state) => state.home);
-
+  useEffect(() => {
+    AOS.init({
+      easing: "ease-in-cubic",
+      once: true,
+      offset: 30,
+    });
+  }, []);
   return (
     <div className="mt-[100px]">
-      <div className="2xl:w-[65%] px-[10px] container  m-auto ">
-        <p className="md:text-[30px]  text-[18px] xl:text-[40px] font-semibold text-center">
+      <div className="2xl:w-[65%] px-[10px] container  m-auto " >
+        <p className="md:text-[30px]  text-[18px] xl:text-[40px] font-semibold text-center overflow-hidden"  data-aos="fade-down" data-aos-duration="1500">
           Our Commitment to Quality
         </p>
         <div className="md:mt-[76px] ">
-          <div className="md:mt-[65px] mt-[30px] flex gap-8 md:flex-row flex-col items-center md:items-start  justify-between ">
+          <div className="md:mt-[65px] mt-[30px] flex gap-8 md:flex-row flex-col items-center md:items-start  justify-between overflow-hidden"  data-aos="fade-up" data-aos-duration="1500">
             {quality &&
               quality.data &&
               // quality.data.length > 0 &&

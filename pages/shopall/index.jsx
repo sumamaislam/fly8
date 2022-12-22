@@ -76,7 +76,7 @@ export default function allproducts() {
         <img className="h-[300px] w-full" src="/banner/delta.png" alt="" />
       </div>
 
-      <div className="text-center font-bold text-[#5FB75D]"  data-aos="flip-up" data-aos-duration="1500" >
+      <div className="text-center font-bold text-[#5FB75D]"  data-aos="flip-up" data-aos-duration="500" >
         <h1 className="pt-[100px] text-[35px] font-bold text-[#5FB75D]">
           All Products
         </h1>
@@ -85,8 +85,8 @@ export default function allproducts() {
         <div className="grid xl:gap-20 gap-12 lg:grid-cols-4 md:grid-cols-2 mt-[28px] justify-center ">
           {shopAll.map && shopAll?.map((items, index) => {
             return (
-              <div className="   " key={index}>
-                <div className="justify-center flex  " data-aos="fade-right" data-aos-duration="1500">
+              <div className="  " key={index}>
+                <div className="justify-center flex                                                                                                                                                                                                                                                                                                                        " data-aos="zoom-in" data-aos-duration="1500">
                   <Link href={`/cards/${items.id}`}>
                     <img
                       className="rounded-t-lg   " 

@@ -9,8 +9,16 @@ import { wrapper } from "../../../store";
 import { footerDataRequest, navDataRequest } from "../../../redux/home";
 import { sentgummiesRequest, sentslugRequest, sentvapeRequest } from "../../../redux/product";
 import { useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 export default function Delta11() {
-  
+  useEffect(() => {
+    AOS.init({
+      easing: "ease-in-cubic",
+      once: true,
+      offset: 30,
+    });
+  }, []);
   const { vapesData } = useSelector((state) => state.product);
   const { slugData } = useSelector((state) => state.product);
 
@@ -88,7 +96,7 @@ export default function Delta11() {
           {slugData && slugData.length > 0 && slugData?.map((items, index) => {
             return (
               <div className="" key={index}>
-                <div className="justify-center flex ">
+                <div className="justify-center flex " data-aos="zoom-out" data-aos-duration="1500">
                   <Link href={`/cards/${items.id}`}>
                     <img
                       className="rounded-t-lg   "
@@ -139,14 +147,14 @@ export default function Delta11() {
         <div className="bg-[#F7F7F7]">
           <div
             className="container m-auto flex items-center p-5 flex-col md:flex-row  md:p-8 gap-[75px]
-  "
+  " data-aos="fade-down" data-aos-duration="1500"
           >
-            <div className="bg-gray-200 font-bold text-[20px]   p-5 md:p-4">
+            <div className="bg-gray-200 font-bold text-[20px]   p-5 md:p-4"  data-aos="fade-left" data-aos-duration="1500">
               <p className="min-w-[150px] min-h-[150px] text-center flex items-center">
                 What is <br /> Delta-9o Vapes.?
               </p>
             </div>
-            <div className="2xl:text-[20px] lg:text-[20px] text-[14px] text-[#7A7A7A]">
+            <div className="2xl:text-[20px] lg:text-[20px] text-[14px] text-[#7A7A7A]" data-aos="fade-right" data-aos-duration="1500" >
               <p>
                 When it comes to puffing THC, it doesn’t get better than fly8
                 Delta 9 vapes. Our vapes offer the perfect Balance of potency,
@@ -166,14 +174,14 @@ export default function Delta11() {
         <div className="bg-[#F7F7F7]">
           <div
             className="container m-auto flex items-center p-5 flex-col md:flex-row  md:p-8 gap-[75px]
-  "
+  " data-aos="fade-up" data-aos-duration="1500"
           >
-            <div className="bg-gray-200 font-bold text-[20px]   p-5 md:p-4">
-              <p className="min-w-[150px] min-h-[150px] text-center flex items-center">
+            <div className="bg-gray-200 font-bold text-[20px]   p-5 md:p-4" data-aos="fade-left" data-aos-duration="1500">
+              <p className="min-w-[150px] min-h-[150px] text-center flex items-center" >
                 What is <br /> Delta-9o Vapes.?
               </p>
             </div>
-            <div className="2xl:text-[20px] lg:text-[20px] text-[14px] text-[#7A7A7A]">
+            <div className="2xl:text-[20px] lg:text-[20px] text-[14px] text-[#7A7A7A]" data-aos="fade-right" data-aos-duration="1500">
               <p>
                 When it comes to puffing THC, it doesn’t get better than fly8
                 Delta 9 vapes. Our vapes offer the perfect Balance of potency,

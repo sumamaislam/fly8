@@ -114,8 +114,8 @@ export default function Detail() {
   return (
     <div>
       <Header />
-      {cartsNew && <Cart showCart={cartsNew} setShowCart={setCartsNew} />}
-      <div className=" 2xl:w-[65%] md:w-[80%] container m-auto">
+      <Cart showCart={cartsNew} setShowCart={setCartsNew} />
+      <div className=" 2xl:w-[65%] md:w-[80%] w-[90%] container m-auto">
         <div className="container m-auto">
           <div>
             <nav className="flex mt-[5rem] ml-[20px] " aria-label="Breadcrumb">
@@ -212,7 +212,7 @@ export default function Detail() {
             </button>
 
             {/* tittle */}
-            <p className="md:text-[25px] text-center md:text-left text-[16px] font-bold mt-[15px] text-black ">
+            <p className="md:text-[25px]  text-[16px] font-bold mt-[15px] text-black ">
               {mainData?.product?.name}
             </p>
             <div className="flex items-center gap-[52px]">
@@ -227,7 +227,7 @@ export default function Detail() {
 
             <p className=" text-[14px] text-justify" >{mainData?.product?.detail}</p>
          
-            <div className="flex items-center md:gap-[40px] gap-[20px] justify-center md:justify-start mt-[10px] md:mt-[5px]">
+            <div className="flex items-center md:gap-[40px] gap-[20px]  mt-[10px] md:mt-[5px]">
               <p className="font-bold md:text-[20px] text-[15px] text-[#EB001B]">
                 ${mainData?.product?.price}
               </p>
@@ -262,7 +262,7 @@ export default function Detail() {
             </div>
             {/* QUANTITY */}
 
-            <div className="mt-[20px] flex md:gap-[25px] gap-[12px] justify-center md:justify-start items-center ">
+            <div className="md:mt-[20px] mt-[40px] flex md:gap-[25px] gap-[12px]  items-center ">
               <div>
                 <p className=" text-[14px] md:text-[15px] font-semibold uppercase">
                   Quantity :

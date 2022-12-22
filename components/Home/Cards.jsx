@@ -4,11 +4,18 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cards } from "../../data";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 function Cards() {
   const router = useRouter();
   const { main } = useSelector((state) => state.home);
-
+  useEffect(() => {
+    AOS.init({
+      easing: "ease-in-cubic",
+      once: true,
+      offset: 30,
+    });
+  }, []);
   // console.log("DONE", main);
   return (
     <div className=" ">
@@ -17,29 +24,29 @@ function Cards() {
           {Object.keys(main).map((item) => {
             return (
               <div className="flex flex-col ">
-                <h1 className="text-center my-[80px] text-[40px] font-bold text-black">
+                <h1 className="text-center my-[80px] text-[40px] font-bold text-black"  data-aos="zoom-in" data-aos-duration="1500">
                   {item}
                 </h1>
                 {/* {JSON.stringify(main[item])} */}
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 justify-items-center ">
                   {main[item].map((items, index) => {
                     return (
-                      <div className="max-w-sm " key={index}>
-                        <div className="justify-center flex ">
+                      <div className="max-w-sm overflow-hidden w-full" key={index}>
+                        <div className="justify-center flex" data-aos="zoom-out" data-aos-duration="1500" >
                           <img
                             className="rounded-t-lg"
                             src={items.image}
                             alt=""
                           />
                         </div>
-                        <div className="pt-[15px]">
-                          <h1 className="text-[18px] xl:text-[19px] font-extrabold  text-[black] dark:text-white text-center">
+                        <div className="pt-[15px]" > 
+                          <h1 className="text-[18px] xl:text-[19px] font-extrabold  text-center">
                             {items.name}
                           </h1>
                           <h5 className=" text-[14px]  xl:text-[14px]  font-normal  pt-[15px] text-[#535353]  text-center ">
                             {items.description}
                           </h5>
-                          <div className="flex justify-center mt-[42px]">
+                          <div className="flex justify-center mt-[32px]">
                             <Link
                               href={`flavour/${items.slug}`}
                               className=" items-center  text-[14px] xl:text-[18px] font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "

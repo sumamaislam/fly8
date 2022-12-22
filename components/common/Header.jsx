@@ -161,7 +161,7 @@ function Header() {
         // }`}
         className="fixed z-10 top-0 shadow-lg w-full bg-black bg-opacity-[60%]"
       >
-        {showCart && <Cart showCart={showCart} setShowCart={setShowCart}  />}
+        <Cart showCart={showCart} setShowCart={setShowCart}  />
         <div className="container m-auto px-4 h-[64px]  ">
           <div className="flex justify-between ">
             <div className="flex space-x-7">
@@ -172,7 +172,7 @@ function Header() {
                 </Link>
               </div>
               {/* <!-- Primary Navbar items --> */}
-              <div className="flex-col z-10 absolute md:static flex lg:flex-row gap-[20px]">
+              <div className="hidden z-10 absolute md:static flex lg:flex-row gap-[20px]">
                 {header &&
                   // header.data.length > 0 &&
                   header?.data?.map((item, index) => {

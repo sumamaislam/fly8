@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
 
-function Email() {
 
+function Email() {
+  
   const [emailData, setEmailData] = useState({});
 
   const handleSubmit = (e) => {
@@ -20,7 +21,7 @@ function Email() {
 
   return (
     <div className="mt-[109px]">
-      <div className="2xl:w-[65%] px-[10px] container  m-auto ">
+      <div className="2xl:w-[65%] px-[10px] container  m-auto overflow-hidden">
         <div className="flex md:gap-[59px]  justify-center items-center ">
           <div>
             <img
