@@ -1,18 +1,19 @@
-import React from 'react'
+import React from "react";
 
-function Selectoption({props}) {
+function Selectoption({...props}) {
   return (
-    <div className='text-gray-500'>
-
-   <select  className="w-full py-[12px] mt-[10px] border border-gray-700 rounded-md p-2 outline-none"  name="" id="" {...props}>
-    <option  value="">Country/ Region</option>
-    <option   value="">USA</option>
-    <option   value="">UAE</option>
-    <option   value="">UK</option>
-    
-   </select>
+    <div className="text-gray-500">
+      <select
+        className="w-full py-[12px] mt-[10px] border border-gray-700 rounded-md p-2 outline-none"
+        {...props}
+      >
+        <option >Country/ Region</option>
+        <option>USA</option>
+        <option>UAE</option>
+        <option>UK</option>
+      </select>
     </div>
-  )
+  );
 }
 
-export default Selectoption
+export default Selectoption;

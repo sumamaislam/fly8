@@ -9,7 +9,7 @@ function Cards() {
   const router = useRouter();
   const { main } = useSelector((state) => state.home);
 
-  console.log("DONE", main);
+  // console.log("DONE", main);
   return (
     <div className=" ">
       <div className="2xl:w-[65%] container  m-auto">

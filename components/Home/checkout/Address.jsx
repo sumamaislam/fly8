@@ -3,32 +3,107 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import InputField from "../../common/inputField";
 import Selectoption from "../../common/Selectoption";
-import CountrySelect from "../../common/CountrySelect";
-import StateSelect from "../../common/StateSelect";
+// import CountrySelect from "../../common/CountrySelect";
+// import StateSelect from "../../common/StateSelect";
 import { useSelector } from "react-redux";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
+
+useEffect(() => {
+  // Check to see if this is a redirect back from Checkout
+  const query = new URLSearchParams(window.location.search);
+  if (query.get("success")) {
+    console.log("Order placed! You will receive an email confirmation.");
+  }
+
+  if (query.get("canceled")) {
+    console.log(
+      "Order canceled -- continue to shop around and checkout when you’re ready."
+    );
+  }
+}, []);
 
 function Address({ setShow }) {
   const [input, setInput] = useState({});
+  const [formError, setFormError] = useState({});
 
-  const { totalPrice ,carts } = useSelector((state) => state.product);
+  const { totalPrice, carts } = useSelector((state) => state.product);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(input);
+    // setShow("shipping");
+    validate(input);
+  };
+
+  const validate = async (data) => {
+    const error = {};
+    let emailVal =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (!data.email) {
+      error.email = "Email is required";
+    } else if (!data.email.match(emailVal)) {
+      error.email = "Invalid Email";
+    }
+
+    if (!data.first_name) {
+      error.first_name = "Enter a first name";
+    }
+    if (!data.last_name) {
+      error.last_name = "Enter a last name";
+    }
+    if (!data.country) {
+      error.country = "Enter a country";
+    }
+    if (!data.city) {
+      error.city = "Enter a city";
+    }
+    if (!data.state) {
+      error.state = "Select a state";
+    }
+    if (!data.zip_code) {
+      error.zip_code = "Enter a PIN code";
+    }
+    if (!data.phone_no) {
+      error.phone_no = "Enter a phone number to use this delivery method";
+    }
+    if (!data.address) {
+      error.address = "select delivery method";
+    }
+    if (Object.keys(error).length > 0) {
+      setFormError(error);
+      console.log(formError);
+    } else {
+      console.log(input);
+      setInput({
+        first_name: "",
+        last_name: "",
+        country: "",
+        city: "",
+        state: "",
+        zip_code: "",
+        phone_no: "",
+        address: "",
+        company: "",
+        email: "",
+      });
+    }
   };
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
-    console.log(input);
   };
 
-  const handleCountryChange = (val) => {
-    setInput({ ...input, country: val });
-  };
+  // const handleCountryChange = (val) => {
+  //   setInput({ ...input, country: val });
+  // };
 
-  const handleStateChange = (val) => {
-    setInput({ ...input, state: val });
-  };
+  // const handleStateChange = (val) => {
+  //   setInput({ ...input, state: val });
+  // };
 
   return (
     <div>
@@ -129,10 +204,7 @@ function Address({ setShow }) {
         <div className="font-semibold text-[22px] mt-[25px]">
           <p>Information</p>
         </div>
-        <form
-          className="mt-[20px] border-black border flex gap-[20px] "
-          onSubmit={handleSubmit}
-        >
+        <div className="mt-[20px] border-black border flex gap-[20px]">
           {/* left side */}
           <div className="p-4 md:p-10 w-full">
             <div className="">
@@ -145,7 +217,7 @@ function Address({ setShow }) {
               </p>
             </div>
 
-            <div className="">
+            <form onSubmit={handleSubmit}>
               <div>
                 <InputField
                   placeholder="Email"
@@ -203,13 +275,18 @@ function Address({ setShow }) {
 
                 <div className="flex  justify-between gap-4">
                   <div className="w-[100%]">
-                    {/* <Selectoption className="w-full  mt-[10px] border  border-gray-700 rounded-md p-2" /> */}
-                    <CountrySelect
+                    <Selectoption
+                      className="w-full  mt-[10px] border  border-gray-700 rounded-md p-2"
+                      name="country"
+                      value={input.country || ""}
+                      onChange={handleChange}
+                    />
+                    {/* <CountrySelect
                       name="country"
                       label="Country/region"
                       value={input.country || ""}
                       onChange={handleCountryChange}
-                    />
+                    /> */}
                   </div>
                   <div className="w-full">
                     <InputField
@@ -221,11 +298,14 @@ function Address({ setShow }) {
                     />
                   </div>
                   <div className="w-full">
-                    {/* <InputField
+                    <InputField
                       placeholder="State"
                       className=" w-full outline-none py-[10px] mt-[10px] border border-gray-700 rounded-md p-2"
-                    /> */}
-                    <StateSelect
+                      name="state"
+                      value={input.state}
+                      onChange={handleChange}
+                    />
+                    {/* <StateSelect
                       blankOptionLabel="State"
                       defaultOptionLabel="Select State"
                       onChange={handleStateChange}
@@ -234,7 +314,7 @@ function Address({ setShow }) {
                       label="State"
                       country={input.country}
                       disabled={input.country ? false : true}
-                    />
+                    /> */}
                   </div>
                 </div>
                 <div className="w-full">
@@ -270,7 +350,7 @@ function Address({ setShow }) {
                       <button
                         className="  rounded-md text-white font-semibold"
                         type="submit"
-                        onClick={() => setShow("shipping")}
+                        // onClick={() => setShow("shipping")}
                       >
                         Continue Shipping
                       </button>
@@ -278,7 +358,7 @@ function Address({ setShow }) {
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
           {/* right side */}
           <div className="p-10 w-full hidden md:block">
@@ -465,8 +545,8 @@ function Address({ setShow }) {
                 type="text"
                 placeholder="Enter Promo/Coupon Code"
                 name="discount"
-                value={input.discount}
-                onChange={handleChange}
+                // value={input.discount}
+                // onChange={handleChange}
               />
 
               <button
@@ -516,7 +596,7 @@ function Address({ setShow }) {
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
       <div className="absolute mt-[95px]  w-full bg-black">
         <p className="text-center text-white text-[13px] ">
