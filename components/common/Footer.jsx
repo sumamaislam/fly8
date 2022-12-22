@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Topbtn from "../Home/Topbtn";
 
 function Footer() {
   const { footer } = useSelector((state) => state.home);
@@ -7,6 +8,7 @@ function Footer() {
 
   return (
     <div className="bg-[black] text-white mt-[100px]">
+      <Topbtn/>
       <div className="container m-auto px-[10px]">
         <div className="grid py-[65px] lg:grid-cols-5 grid-col md:grid-cols-2  gap-12 justify-items-center text-center md:text-left ">
           <div className="max-w-[323px] hidden md:block">

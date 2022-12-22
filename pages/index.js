@@ -19,6 +19,7 @@ import Commitment from "../components/Home/Commitment";
 import { wrapper } from "../store";
 import { bannerDataRequest, footerDataRequest, gummiesDataRequest, mainDataRequest, navDataRequest, qualityDataRequest } from "../redux/home";
 import 'react-toastify/dist/ReactToastify.css';
+import 'aos/dist/aos.css';
 
 const Home = () => {
 

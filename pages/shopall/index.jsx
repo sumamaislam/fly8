@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Footer, Header } from "../../components/common";
 import { Raiting } from "../../components/Home";
 import { cards, delta9o } from "../../data";
@@ -8,6 +8,8 @@ import Router, { useRouter } from "next/router";
 import { wrapper } from "../../store";
 import { footerDataRequest, navDataRequest } from "../../redux/home";
 import { sentAllProductRequest, sentgummiesRequest, sentvapeRequest } from "../../redux/product";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 export default function allproducts() {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -21,6 +23,13 @@ export default function allproducts() {
   };
   const { shopAll } = useSelector((state)=>state.product)
   console.log("samama", shopAll)
+  useEffect(() => {
+    AOS.init({
+      easing: "ease-in-cubic",
+      once: true,
+      offset: 30,
+    });
+  }, []);
   return (
     <div>
       <Header />
@@ -67,7 +76,7 @@ export default function allproducts() {
         <img className="h-[300px] w-full" src="/banner/delta.png" alt="" />
       </div>
 
-      <div className="text-center font-bold text-[#5FB75D]">
+      <div className="text-center font-bold text-[#5FB75D]"  data-aos="flip-up" data-aos-duration="1500" >
         <h1 className="pt-[100px] text-[35px] font-bold text-[#5FB75D]">
           All Products
         </h1>
@@ -77,10 +86,10 @@ export default function allproducts() {
           {shopAll.map && shopAll?.map((items, index) => {
             return (
               <div className="   " key={index}>
-                <div className="justify-center flex ">
+                <div className="justify-center flex  " data-aos="fade-right" data-aos-duration="1500">
                   <Link href={`/cards/${items.id}`}>
                     <img
-                      className="rounded-t-lg   "
+                      className="rounded-t-lg   " 
                       src={items.thumbnail}
                       alt=""
                     />
