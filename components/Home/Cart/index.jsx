@@ -65,9 +65,9 @@ export default function Cart({ showCart, setShowCart }) {
     console.log(input);
   };
   return (
-    <div>
-      <div className="z-50 ">
-        <div className={`${ showCart ? "bg-black bg-opacity-75 w-full h-[100vh] min-h-[100%] ease-in-out duration-1000" : "" }`} onClick={()=>setShowCart(false)}></div>
+    <div className="relative">
+      <div className="z-50">
+        <div className={`${ showCart ? "bg-black z-100 top-0 z-[1] fixed overflow-hidden bg-opacity-75 w-full h-[100vh] min-h-[100%] ease-in-out duration-1000" : "" }`} onClick={()=>setShowCart(false)}></div>
         <div
           className={`fixed inset-0 overflow-hidden ease-in-out duration-1000  w-screen max-w-md z-10 ml-auto ${
             showCart ? "translate-x-0 " : "translate-x-full"

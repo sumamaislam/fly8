@@ -24,7 +24,7 @@ function Topbtn() {
     <div>
       {show && (
         <div
-          className="fixed md:bottom-[100px] bottom-[30px] right-[10px] md:right-[50px] z-10 cursor-pointer md:p-[20px] p-[10px] font-bold rounded-[100%] bg-black"
+          className="fixed md:bottom-[100px] bottom-[30px] right-[10px] md:right-[50px]  cursor-pointer md:p-[20px] p-[10px] font-bold rounded-[100%] bg-black"
           onClick={handleClick}
         >
           <svg
