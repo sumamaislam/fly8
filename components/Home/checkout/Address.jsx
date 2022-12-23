@@ -130,12 +130,12 @@ function Address({ setShow }) {
       setProcessingTo(true);
       const cardElement = elements.getElement("card");
       try {
-        const { data: clientSecret } = await axios.post(
-          `${baseURL}/api/v1/checkout`,
-          {
-            price: totalPrice,
-          }
-        );
+        // const { data: clientSecret } = await axios.post(
+        //   `${baseURL}checkout`,
+        //   {
+        //     price: totalPrice,
+        //   }
+        // );
         const paymentMethodReq = await stripe.createPaymentMethod({
           type: "card",
           card: cardElement,
@@ -145,29 +145,31 @@ function Address({ setShow }) {
         if (paymentMethodReq.error) {
           setCheckoutError(paymentMethodReq.error.message);
           setProcessingTo(false);
+          console.log(checkoutError)
           return;
         }
 
-        const { error } = await stripe.confirmCardPayment(
-          clientSecret?.client_secret,
-          {
-            payment_method: paymentMethodReq.paymentMethod.id,
-          }
-        );
+        // const { error } = await stripe.confirmCardPayment(
+        //   // clientSecret?.client_secret,
+        //   clientSecret,
+        //   {
+        //     payment_method: paymentMethodReq.paymentMethod.id,
+        //   }
+        // );
 
-        if (error) {
-          setCheckoutError(error.message);
-          setProcessingTo(false);
-          toast(
-            <RequestMessage
-              // icon="bi bi-exclamation-triangle"
-              message="Payment failed!"
-            />
-          );
-          return;
-        }
+        // if (error) {
+        //   setCheckoutError(error.message);
+        //   setProcessingTo(false);
+        //   toast(
+        //     <RequestMessage
+        //       // icon="bi bi-exclamation-triangle"
+        //       message="Payment failed!"
+        //     />
+        //   );
+        //   return;
+        // }
 
-        // console.log("onSuccessfulCheckout");
+        console.log("onSuccessfulCheckout");
         dispatch(createOrder(data));
         setFormError({});
         setInput({
@@ -184,7 +186,7 @@ function Address({ setShow }) {
         });
       } catch (error) {
         setCheckoutError(error.message);
-        // console.log("error", error);
+        console.log("error", error);
       }
     }
   };

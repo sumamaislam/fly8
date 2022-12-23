@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import request from "../request";
+import request, { baseURL } from "../request";
 import RequestMessage from "../../components/common/RequestMessage";
 import { setLoading } from "../global";
+import axios from "axios";
 // import { HYDRATE } from "next-redux-wrapper";
 // import request from "../request";
 // import { toast } from "react-toastify";
@@ -113,12 +114,12 @@ export const sentCoupanRequest = createAsyncThunk(
     try {
       let response;
       await thunkAPI.dispatch(setLoading(true));
-      response = await request
-        .get(`getCoupon/${payload}`)
+      response = await axios
+        .get(`${baseURL}check_coupan/${payload}`)
         .then((response) => response.data);
       // toast(<RequestMessage message="Message sent successfully!" />);
+      thunkAPI.dispatch(setLoading(false));
       return response;
-      await thunkAPI.dispatch(setLoading(false));
     } catch (error) {
       console.log("Error", error);
       // toast(<RequestMessage message="Message failed!" />);

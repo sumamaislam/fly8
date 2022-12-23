@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { HYDRATE } from "next-redux-wrapper";
-import request from "../request";
+import request, { baseURL } from "../request";
 import { setLoading } from "../global";
 import { emptyCart, setTotalPrice, setTotalQuantity } from "../product";
 import RequestMessage from "../../components/common/RequestMessage";
@@ -14,7 +14,7 @@ const initialState = {
 
 export const createOrder = createAsyncThunk("order/createOrder", async (payload, thunkAPI) => {
     try {
-      const response = await request.post("/api/v1/orders", payload).then((response) => response.data);
+      const response = await axios.post(`${baseURL}checkout`, payload).then((response) => response.data);
       await thunkAPI.dispatch(setTotalPrice(0));
       await thunkAPI.dispatch(setTotalQuantity(0));
       await thunkAPI.dispatch(emptyCart());
