@@ -17,10 +17,13 @@ export default function Cart({ showCart, setShowCart }) {
   );
 
   const increment = (items, index) => {
-    let update = { ...items };
-    update.qty = JSON.parse(update.qty) + 1;
-    update.total = update.price * update.qty;
-    dispatch(updateCart(update));
+    // console.log(index);
+    if (carts[index]?.stock > carts[index]?.qty) {
+      let update = { ...items };
+      update.qty = JSON.parse(update.qty) + 1;
+      update.total = update.price * update.qty;
+      dispatch(updateCart(update));
+    }
   };
 
   const handleDelete = (id) => {
@@ -67,15 +70,20 @@ export default function Cart({ showCart, setShowCart }) {
   return (
     <div className="relative">
       <div className="z-50">
-        <div className={`${ showCart ? "bg-black z-100 top-0 z-[1] fixed overflow-hidden bg-opacity-75 w-full h-[100vh] min-h-[100%] ease-in-out duration-1000" : "" }`} onClick={()=>setShowCart(false)}></div>
+        <div
+          className={`${
+            showCart
+              ? "bg-black z-100 top-0 z-[1] fixed overflow-hidden bg-opacity-75 w-full h-[100vh] min-h-[100%] ease-in-out duration-1000"
+              : ""
+          }`}
+          onClick={() => setShowCart(false)}
+        ></div>
         <div
           className={`fixed inset-0 overflow-hidden ease-in-out duration-1000  w-screen max-w-md z-10 ml-auto ${
             showCart ? "translate-x-0 " : "translate-x-full"
           }`}
         >
-          <div
-            className={`absolute inset-0 overflow-hidden `}
-          >
+          <div className={`absolute inset-0 overflow-hidden `}>
             <div
               className={`pointer-events-none fixed inset-y-0 right-0 flex max-w-full`}
             >
@@ -103,7 +111,6 @@ export default function Cart({ showCart, setShowCart }) {
                           />
                         </button>
                       </div>
-                      
                     </div>
                     <div>
                       <p className="text-[10px] font-bold text-center">
@@ -146,10 +153,11 @@ export default function Cart({ showCart, setShowCart }) {
                                       <div className="mt-[10px] flex gap-2 md:gap-[25px] items-center justify-between ">
                                         <div className="flex gap-[20px] border items-center rounded-md h-[25px] bg-[ #E9EFEE] px-[16px]">
                                           <div className="cursor-pointer w-[5px] ">
-                                            <img className=""
+                                            <img
+                                              className=""
                                               src="/svg/arrowleft.svg"
                                               alt=""
-                                              onClick={() => decerement(item)}
+                                              onClick={() => decerement(item,index)}
                                             />
                                           </div>
                                           <div>
@@ -161,7 +169,7 @@ export default function Cart({ showCart, setShowCart }) {
                                             <img
                                               src="/svg/arrowright.svg"
                                               alt=""
-                                              onClick={() => increment(item)}
+                                              onClick={() => increment(item,index)}
                                             />
                                           </div>
                                         </div>
@@ -241,4 +249,5 @@ export default function Cart({ showCart, setShowCart }) {
         </div>
       </div>
     </div>
-  );}
+  );
+}

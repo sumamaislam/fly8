@@ -87,12 +87,20 @@ export default function Detail() {
         ...mainData,
         product: { ...mainData?.product, qty: mainData?.product?.qty - -1 },
       });
-    }
-    if (carts?.find((item) => item.id === mainData.product.id)) {
-      const index=carts.findIndex(object => object.id === mainData.product.id);
-      if (index){
-        console.log(carts[index])
-        dispatch(updateCart({ ...mainData?.product, qty: mainData?.product?.qty - -1 }))
+      if (carts?.find((item) => item.id === mainData.product.id)) {
+        const index = carts.findIndex(
+          (object) => object.id === mainData.product.id
+        );
+        console.log(index);
+        if (index >= 0) {
+          console.log(carts[index]);
+          dispatch(
+            updateCart({
+              ...mainData?.product,
+              qty: mainData?.product?.qty - -1,
+            })
+          );
+        }
       }
     }
   };
@@ -103,13 +111,18 @@ export default function Detail() {
         ...mainData,
         product: { ...mainData.product, qty: mainData.product.qty - 1 },
       });
-    }
-    if (carts?.find((item) => item.id === mainData.product.id)) {
-      // dispatch(addToCarts(mainData.product));
-      const index=carts.findIndex(object => object.id === mainData.product.id);
-      if (index){
-        console.log(carts[index])
-        dispatch(updateCart({ ...mainData.product, qty: mainData.product.qty - 1 }))
+      if (carts?.find((item) => item.id === mainData.product.id)) {
+        // dispatch(addToCarts(mainData.product));
+        const index = carts.findIndex(
+          (object) => object.id === mainData.product.id
+        );
+        if (index >= 0) {
+          console.log(carts[index]);
+          // console.log(carts[index])
+          dispatch(
+            updateCart({ ...mainData.product, qty: mainData.product.qty - 1 })
+          );
+        }
       }
     }
   };
