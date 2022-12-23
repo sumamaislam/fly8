@@ -242,7 +242,7 @@ function Footer() {
         </div>
       </div>
       <div className="mt-[57px] bg-[#D9D9D9]">
-        <p className="text-center text-black">
+        <p className="text-center text-black text-[10px] md:text-[16px]">
           Copyright 2022 fly8.com Private Limited. All rights Are Reserved
         </p>
       </div>

@@ -35,9 +35,9 @@ export default function allproducts() {
       <Header />
 
       <div className="container  m-auto ">
-        <div>
+        <div className="ml-[20px]">
           <nav className="flex mt-[5rem] " aria-label="Breadcrumb">
-            <ol className="inline-flex items-center space-x-1 md:space-x-3">
+            <ol className="inline-flex items-center space-x-1 md:space-x-3 ">
               <li className="inline-flex items-center">
                 <Link
                   href="/add_to_cart"
@@ -76,26 +76,17 @@ export default function allproducts() {
         <img className="h-[300px] w-full" src="/banner/delta.png" alt="" />
       </div>
 
-<<<<<<< Updated upstream
-      <div className="text-center font-bold text-[#5FB75D]"  data-aos="flip-up" data-aos-duration="500" >
-=======
       <div className="text-center font-bold text-[#5FB75D]"  data-aos="flip-up" data-aos-duration="1500" >
->>>>>>> Stashed changes
         <h1 className="pt-[100px] text-[35px] font-bold text-[#5FB75D]">
           All Products
         </h1>
       </div>
       <div className=" mt-[100px] container m-auto 2xl:w-[65%]">
-        <div className="grid xl:gap-20 gap-12 lg:grid-cols-4 md:grid-cols-2 mt-[28px] justify-center ">
+        <div className="grid xl:gap-20 gap-12 lg:grid-cols-4 md:grid-cols-2 mt-[28px] justify-center w-full overflow-hidden">
           {shopAll.map && shopAll?.map((items, index) => {
             return (
-<<<<<<< Updated upstream
-              <div className="  " key={index}>
-                <div className="justify-center flex                                                                                                                                                                                                                                                                                                                        " data-aos="zoom-in" data-aos-duration="1500">
-=======
               <div className="   " key={index}>
-                <div className="justify-center flex  " data-aos="fade-right" data-aos-duration="1500">
->>>>>>> Stashed changes
+                <div className="justify-center flex  " data-aos="zoom-in" data-aos-duration="1500">
                   <Link href={`/cards/${items.id}`}>
                     <img
                       className="rounded-t-lg   " 

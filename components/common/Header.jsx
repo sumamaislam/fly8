@@ -233,12 +233,12 @@ function Header() {
         </div>
         <div className="">
           <div
-            className={`lg:hidden bg-black absolute w-full ease-in-out duration-1000 ${
-              showHead ? "" : "hidden h-0"
+            className={`lg:hidden bg-black absolute w-full ease-in-out duration-500 ${
+              !showHead ? "h-0" : "h-[100vh]"
             }`}
             style={{ marginLeft: 0 }}
           >
-            <div className={`container flex-col flex m-auto px-4 ease-in-out duration-1000 ${showHead ? "h-[100vh]" : ""}`}>
+            <div className={`container flex-col mt-[40px] flex m-auto px-4 ease-in-out duration-1000 `}>
             {header &&
               // header.data.length > 0 &&
               header?.data?.map((item, index) => {
@@ -246,8 +246,8 @@ function Header() {
                   <Link
                     key={index}
                     href={`/${item.link}`}
-                    className="py-4 px-2 text-center  lg:text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white  "
-                  >
+                    className={`py-4 px-2 text-center  lg:text-[16px] text-white ease-in-out hover:border-white duration-1000 ${showHead ? "block" : "hidden" } `}
+                   onClick={()=>setShowHead(false)}>
                     {item.name}
                   </Link>
                 );

@@ -121,7 +121,7 @@ export default function Delta11() {
                     <Raiting /> (274)
                   </div> */}
 
-                  <div className="flex justify-center mt-[24px]">
+                  <div className="flex justify-center mt-[24px] w-full overflow-hidden">
                     <Link href={`/cards/${items.id}`}>
                       <button
                         className=" items-center flex gap-2 h text-[14px] xl:text-[15px] font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "
@@ -144,7 +144,7 @@ export default function Delta11() {
         </div>
       </div>
       <div className="md:mt-[100px] mt-[50px]">
-        <div className="bg-[#F7F7F7]">
+        <div className="bg-[#F7F7F7] w-full overflow-hidden">
           <div
             className="container m-auto flex items-center p-5 flex-col md:flex-row  md:p-8 gap-[75px]
   " data-aos="fade-down" data-aos-duration="1500"
@@ -171,7 +171,7 @@ export default function Delta11() {
         </div>
       </div>
       <div className=" mt-[50px]">
-        <div className="bg-[#F7F7F7]">
+        <div className="bg-[#F7F7F7] w-full overflow-hidden">
           <div
             className="container m-auto flex items-center p-5 flex-col md:flex-row  md:p-8 gap-[75px]
   " data-aos="fade-up" data-aos-duration="1500"
