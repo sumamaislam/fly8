@@ -11,6 +11,7 @@ import Cart from "../Home/Cart";
 
 function Header() {
   const [showCart, setShowCart] = useState(false);
+  const [showHead, setShowHead] = useState(false);
 
   const { header } = useSelector((state) => state.home);
   const { totalQuantity } = useSelector((state) => state.product);
@@ -161,7 +162,7 @@ function Header() {
         // }`}
         className="fixed z-10 top-0 shadow-lg w-full bg-black bg-opacity-[60%]"
       >
-        <Cart showCart={showCart} setShowCart={setShowCart}  />
+        <Cart showCart={showCart} setShowCart={setShowCart} />
         <div className="container m-auto px-4 h-[64px]  ">
           <div className="flex justify-between ">
             <div className="flex space-x-7">
@@ -172,7 +173,7 @@ function Header() {
                 </Link>
               </div>
               {/* <!-- Primary Navbar items --> */}
-              <div className="flex-col z-10 absolute md:static flex lg:flex-row gap-[20px]">
+              <div className="hidden lg:block z-10  mt-[20px]  gap-[20px]">
                 {header &&
                   // header.data.length > 0 &&
                   header?.data?.map((item, index) => {
@@ -190,13 +191,12 @@ function Header() {
             </div>
             {/* <!-- Secondary Navbar items --> */}
             <div className=" flex mt-[20px] space-x-6 cursor-pointer">
-              
               <div className="relative">
                 <img
                   className="w-[20px] "
                   src="/svg/cart.svg"
                   alt=""
-                  onClick={() => setShowCart(true) }
+                  onClick={() => setShowCart(true)}
                 />
                 {totalQuantity > 0 && (
                   <span className="absolute h-[18px] w-[18px] max-w-auto bg-white rounded-full text-[10px] flex items-center justify-center font-bold top-[-10px] right-[-11px]">
@@ -208,24 +208,51 @@ function Header() {
                 {" "}
                 <img className="w-[20px]" src="/svg/profile.svg" alt="" />
               </Link>
-            <div className=" lg:hidden">
-              <button className="outline-none mobile-menu-button">
-                <svg
-                  className=" w-6 h-6 text-white hover:text-green-500 "
-                  x-show="!showMenu"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+              <div className=" lg:hidden">
+                <button
+                  className="outline-none mobile-menu-button"
+                  onClick={() => setShowHead(!showHead)}
                 >
-                  <path d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-              </button>
-            </div>
+                  <svg
+                    className=" w-6 h-6 text-white hover:text-green-500 "
+                    x-show="!showMenu"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path d="M4 6h16M4 12h16M4 18h16"></path>
+                  </svg>
+                </button>
+              </div>
             </div>
             {/* <!-- Mobile menu button --> */}
+          </div>
+        </div>
+        <div className="">
+          <div
+            className={`lg:hidden bg-black absolute w-full ease-in-out duration-1000 ${
+              showHead ? "" : "hidden h-0"
+            }`}
+            style={{ marginLeft: 0 }}
+          >
+            <div className={`container flex-col flex m-auto px-4 ease-in-out duration-1000 ${showHead ? "h-[100vh]" : ""}`}>
+            {header &&
+              // header.data.length > 0 &&
+              header?.data?.map((item, index) => {
+                return (
+                  <Link
+                    key={index}
+                    href={`/${item.link}`}
+                    className="py-4 px-2 text-center  lg:text-[16px] text-white  hover:border-b-4 border-b-4 border-transparent hover:border-white  "
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+              </div>
           </div>
         </div>
       </nav>

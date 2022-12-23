@@ -41,7 +41,8 @@ function Footer() {
               <div className="mt-[15px]">
                 <img className="w-[22px]" src="/svg/call.svg" alt="" />
               </div>
-              <div>
+              <div className="mt-[15px]">
+           
                 <a href="tel: hammadnadir75@gmail.com">123451231545</a>
               </div>
             </div>
@@ -49,7 +50,8 @@ function Footer() {
               <div className="mt-[15px]">
                 <img className="w-[22px]" src="/svg/email.svg" alt="" />
               </div>
-              <div>
+              <div className="mt-[15px]">
+
                 <a href="mailto: 666666666">info@fly8.com</a>
               </div>
             </div>

@@ -72,7 +72,7 @@ export default function Delta11() {
           {vapesData?.DELTA_11_LIVE_RESIN?.map((items, index) => {
             return (
               <div className="" key={index}>
-                <div className="justify-center flex ">
+                <div className="justify-center flex w-full overflow-hidden">
                   <Link href={`/cards/${items.id}`}>
                     <img
                       className="rounded-t-lg   "

@@ -511,7 +511,7 @@ export default function Detail() {
               <p className="md:text-[15px] text-[12px] pt-[5px]">DELTA-9o</p> */}
               {productdetail?.category?.map((items, index) => {
                 return (
-                  <p className="md:text-[15px] text-[12px] pt-[5px]">
+                  <p className="md:text-[15px] text-[10px] pt-[5px]">
                     {items.name}
                   </p>
                 );
@@ -727,11 +727,11 @@ export default function Detail() {
       <div className="mt-[100px] container m-auto">
         <h1 className="text-2xl font-bold ml-5">Recently Viewed</h1>
         <div className="  container m-auto">
-          <div className="grid xl:gap-20 gap-12 lg:grid-cols-3 md:grid-cols-2  justify-center">
-            {delta9o.slice(0, 2).map((items, index) => {
+          <div className="grid xl:gap-20 gap-12 lg:grid-cols-4 md:grid-cols-2  justify-center">
+            {delta9o.slice(0, 4).map((items, index) => {
               return (
                 <div className="" key={index}>
-                  <div className="justify-center flex ">
+                  <div className="justify-center flex max-w-[250px] md:max-w-[300px]">
                     <Link href={`/cards/${items.id}`}>
                       <img
                         className="rounded-t-lg   "

@@ -96,7 +96,7 @@ export default function Delta11() {
           {slugData && slugData.length > 0 && slugData?.map((items, index) => {
             return (
               <div className="" key={index}>
-                <div className="justify-center flex " data-aos="zoom-out" data-aos-duration="1500">
+                <div className="justify-center flex" data-aos="zoom-out" data-aos-duration="1500">
                   <Link href={`/cards/${items.id}`}>
                     <img
                       className="rounded-t-lg   "
