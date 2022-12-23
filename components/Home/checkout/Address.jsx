@@ -437,7 +437,7 @@ function Address({ setShow }) {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="mt-[10px]">
+                <div className="mt-[10px] stripe-field">
                   <CardElement
                     options={cardElementOpts}
                     onChange={handleCardDetailsChange}
