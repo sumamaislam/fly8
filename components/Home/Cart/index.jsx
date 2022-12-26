@@ -11,6 +11,7 @@ import {
 
 export default function Cart({ showCart, setShowCart }) {
   const [coupan, setCoupan] = useState("");
+  const [newPrice, setNewPrice] = useState("");
   const dispatch = useDispatch();
   const { carts, totalPrice, coupanData } = useSelector(
     (state) => state.product
@@ -25,6 +26,15 @@ export default function Cart({ showCart, setShowCart }) {
       dispatch(updateCart(update));
     }
   };
+  console.log("push", coupanData);
+  useEffect(() => {
+    if (coupan.type === "0") {
+      setNewPrice({})
+    }
+    if (coupan.type === "1") {
+      setNewPrice({})
+    };
+  }, [coupan]);
 
   const handleDelete = (id) => {
     dispatch(deleteCart(id));
@@ -157,7 +167,9 @@ export default function Cart({ showCart, setShowCart }) {
                                               className=""
                                               src="/svg/arrowleft.svg"
                                               alt=""
-                                              onClick={() => decerement(item,index)}
+                                              onClick={() =>
+                                                decerement(item, index)
+                                              }
                                             />
                                           </div>
                                           <div>
@@ -169,7 +181,9 @@ export default function Cart({ showCart, setShowCart }) {
                                             <img
                                               src="/svg/arrowright.svg"
                                               alt=""
-                                              onClick={() => increment(item,index)}
+                                              onClick={() =>
+                                                increment(item, index)
+                                              }
                                             />
                                           </div>
                                         </div>
@@ -209,6 +223,7 @@ export default function Cart({ showCart, setShowCart }) {
                   <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <p>Subtotal</p>
+                      {/* {coupanData } */}
                       <p>${totalPrice}</p>
                     </div>
                     <form onSubmit={coupanSubmit}>
