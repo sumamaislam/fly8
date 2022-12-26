@@ -204,7 +204,7 @@ function Header() {
                   </span>
                 )}
               </div>
-              <Link href="/profile">
+              <Link href="/login">
                 {" "}
                 <img className="w-[20px]" src="/svg/profile.svg" alt="" />
               </Link>

@@ -26,7 +26,7 @@ export default function Cart({ showCart, setShowCart }) {
       dispatch(updateCart(update));
     }
   };
-  console.log("push", coupanData);
+  // console.log("push", coupanData);
   useEffect(() => {
     if (coupan.type === "0") {
       setNewPrice({})
@@ -99,7 +99,7 @@ export default function Cart({ showCart, setShowCart }) {
             >
               <div className={`pointer-events-auto`}>
                 <div
-                  className={`flex h-full flex-col overflow-y-scroll bg-white shadow-xl`}
+                  className={`flex h-full flex-col  max-w-md  w-screen overflow-y-scroll bg-white shadow-xl`}
                 >
                   <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                     <div className="flex items-start justify-between">

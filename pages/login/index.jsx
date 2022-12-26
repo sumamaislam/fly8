@@ -1,10 +1,51 @@
 import Link from "next/link";
 import React from "react";
-import { Footer, Header } from "../common";
-import { Email } from "../Home";
+import { useEffect } from "react";
+import { useState } from "react";
+import { Footer, Header } from "../../components/common";
+import { Email } from "../../components/Home";
+import { footerDataRequest, navDataRequest } from "../../redux/home";
+import { wrapper } from "../../store";
+// import { Footer, Header } from "../common";
+// import { Email } from "../Home";
 
-function Login() {
-
+function login() {
+  const [formVal, setFormVal] = useState("");
+  const [formErr, setFormErr] = useState("");
+  const fields = { username: "", password: "" };
+  const [val, setVal] = useState(fields);
+  const [err, setErr] = useState("");
+  const handleChanged = (e) => {
+    const { name, value } = e.target;
+    setVal({ ...val, [name]: value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formVal) {
+      console.log(formVal);
+      setFormVal("");
+      setFormErr("");
+    } else {
+      setFormErr("Email is required *");
+    }
+  };
+  const submit = (e) => {
+    e.preventDefault();
+    let error = {};
+    if (!val.username) {
+      error.username = "username required *" 
+    } 
+    if (!val.password) {
+      error.password = "password required *"
+    }
+    if (Object.keys(error).length > 0){
+      setErr(error)
+    }else{
+      console.log(val)
+      setVal({ username: "", password: "" })
+      setErr({ username: "", password: "" })
+    }
+  };
   return (
     <div>
       <Header />
@@ -19,27 +60,35 @@ function Login() {
           <div className="mt-[100px]  md:w-[550px] w-[270px] m-auto">
             <p className="font-bold">LOG IN</p>
             {/* log in form */}
-            <form className="">
+            <form className="" onSubmit={submit}>
               {/* email */}
               <div className="mt-[30px] text-[14px]">
                 <input
                   className="w-full border outline-none pl-2 py-2 rounded-xl border-1 border-black"
                   type="text"
+                  name="username"
+                  onChange={handleChanged}
                   placeholder="Username OR Email Address *"
+                  value={val.username}
                 />
+                <p className="text-[10px] md:text-[12px] text-red-500 p-1">{err.username}</p>
               </div>
               {/* password */}
               <div className="mt-[15px]  text-[14px]">
                 <input
                   className="w-full border outline-none pl-2 py-2 rounded-xl border-1 border-black"
-                  type="passowrd"
+                  type="password"
                   placeholder="Password *"
+                  name="password"
+                  onChange={handleChanged}
+                  value={val.password}
                 />
+                 <p className="text-[10px] md:text-[12px] text-red-500 p-1">{err.password}</p>
               </div>
               {/* forget your password */}
               <div>
                 <Link href="">
-                  <p className="underline text-[#EB001B] mt-[10px] text-[10px] text-right">
+                  <p className="underline text-[#EB001B] outline-none mt-[10px] text-[10px] text-right">
                     Forget your password.?
                   </p>
                 </Link>
@@ -49,8 +98,8 @@ function Login() {
                 <input type="checkbox" name="" id="" /> Remember me
               </div>
               {/* button */}
-              <div className="w-full bg-black mt-[15px] text-center rounded-xl cursor-pointer">
-                <button className="text-[14px] text-white fontbold py-3 ">
+              <div className=" bg-black mt-[15px] text-center rounded-xl cursor-pointer">
+                <button className=" w-full text-[14px] text-white fontbold py-3 ">
                   LOG IN
                 </button>
               </div>
@@ -62,14 +111,18 @@ function Login() {
           <div className="mt-[100px] md:w-[550px] w-[270px] m-auto">
             <p className="font-bold">REGISTER</p>
             {/* log in form */}
-            <form className="">
+            <form className="" onSubmit={handleSubmit}>
               {/* email */}
               <div className="mt-[30px] text-[14px]">
                 <input
                   className="w-full border outline-none pl-2 py-2 rounded-xl border-1 border-black"
-                  type="text"
+                  type="email"
                   placeholder="Email Address  *"
+                  name="email"
+                  value={formVal}
+                  onChange={(e) => setFormVal(e.target.value)}
                 />
+                <p className=" text-[10px] md:text-[12px] text-red-500 p-1">{formErr}</p>
               </div>
 
               {/* statement */}
@@ -81,8 +134,8 @@ function Login() {
               </div>
 
               {/* button */}
-              <div className="w-full bg-black mt-[15px] text-center rounded-xl cursor-pointer">
-                <button className="text-[14px] text-white fontbold py-3 ">
+              <div className=" bg-black mt-[15px] text-center rounded-xl cursor-pointer">
+                <button className=" w-full text-[14px] text-white fontbold py-3 ">
                   REGISTER NOW
                 </button>
               </div>
@@ -90,10 +143,16 @@ function Login() {
           </div>
         </div>
       </div>
-        <Email />
+      <Email />
       <Footer />
     </div>
   );
 }
 
-export default Login;
+
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+  await store.dispatch(navDataRequest());
+  await store.dispatch(footerDataRequest());
+});
+
+export default login;
