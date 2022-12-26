@@ -27,6 +27,7 @@ export default function Cart({ showCart, setShowCart }) {
     }
   };
   // console.log("push", coupanData);
+<<<<<<< Updated upstream
   useEffect(() => {
     if (coupan.type === "0") {
       setNewPrice({})
@@ -35,6 +36,16 @@ export default function Cart({ showCart, setShowCart }) {
       setNewPrice({})
     };
   }, [coupan]);
+=======
+  // useEffect(() => {
+  //   if (coupan.type === "0") {
+  //     setNewPrice({})
+  //   }
+  //   if (coupan.type === "1") {
+  //     setNewPrice({})
+  //   };
+  // }, [coupan]);
+>>>>>>> Stashed changes
 
   const handleDelete = (id) => {
     dispatch(deleteCart(id));
@@ -226,7 +237,7 @@ export default function Cart({ showCart, setShowCart }) {
                       {/* {coupanData } */}
                       <p>${totalPrice}</p>
                     </div>
-                    <form onSubmit={coupanSubmit}>
+                    {/* <form onSubmit={coupanSubmit}>
                       <div>
                         <input
                           className="w-full border h-10 rounded-md text-[12px] font-bold pl-3 outline-none"
@@ -246,7 +257,7 @@ export default function Cart({ showCart, setShowCart }) {
                           Apply coupon
                         </button>
                       </div>
-                    </form>
+                    </form> */}
 
                     <div className="mt-6">
                       <Link

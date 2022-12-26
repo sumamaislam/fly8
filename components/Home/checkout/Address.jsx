@@ -11,18 +11,21 @@ import axios from "axios";
 import RequestMessage from "../../common/RequestMessage";
 import { createOrder } from "../../../redux/order";
 import { baseURL } from "../../../redux/request";
+import { toast } from "react-toastify";
+import { sentCoupanRequest } from "../../../redux/product";
 
 function Address({ setShow }) {
   const [input, setInput] = useState({});
   const [formError, setFormError] = useState({});
   const [isProcessing, setProcessingTo] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
+  const [coupan, setCoupan] = useState("");
 
   const dispatch = useDispatch();
   const stripe = useStripe();
   const elements = useElements();
 
-  const { totalPrice, carts, totalQuantity } = useSelector(
+  const { totalPrice, carts, totalQuantity ,coupanData } = useSelector(
     (state) => state.product
   );
 
@@ -63,6 +66,7 @@ function Address({ setShow }) {
     style: { ...iframeStyles },
     hidePostalCode: true,
   };
+  const handleSub = () => {}
 
   const validate = async (data) => {
     const error = {};
@@ -136,6 +140,7 @@ function Address({ setShow }) {
         //     price: totalPrice,
         //   }
         // );
+        // const clientSecret = {client_secret : "pi_3MJDJ6EnGM9NxkcQ07KPq3wr_secret_bi5BRmO7o69eX1PJHTRtN2w8p"}
         const paymentMethodReq = await stripe.createPaymentMethod({
           type: "card",
           card: cardElement,
@@ -149,8 +154,12 @@ function Address({ setShow }) {
           return;
         }
 
+        // const intent = await stripe.paymentIntents.confirm(clientSecret, {
+        //   payment_method: paymentMethodReq.paymentMethod.id,
+        // });
+
         // const { error } = await stripe.confirmCardPayment(
-        //   // clientSecret?.client_secret,
+        //   clientSecret?.client_secret,
         //   clientSecret,
         //   {
         //     payment_method: paymentMethodReq.paymentMethod.id,
@@ -169,6 +178,7 @@ function Address({ setShow }) {
         //   return;
         // }
 
+        // onSuccessfulCheckout
         console.log("onSuccessfulCheckout");
         dispatch(createOrder(data));
         setFormError({});
@@ -187,6 +197,14 @@ function Address({ setShow }) {
       } catch (error) {
         setCheckoutError(error.message);
         console.log("error", error);
+        setProcessingTo(false);
+        // // console.log("error", error);
+        toast(
+          <RequestMessage
+            // icon="bi bi-exclamation-triangle"
+            message="Payment failed!"
+          />
+        );
       }
     }
   };
@@ -653,24 +671,24 @@ function Address({ setShow }) {
             {/* button  */}
 
             {/* <form className=" " onSubmit={handleSubmit}> */}
-            <div className=" mt-[50px]  flex h-[45px] ">
+            <form className=" mt-[50px]  flex h-[45px] " onSubmit={handleSub}>
               <input
                 className="w-full p-3 rounded-l-md border outline-none "
                 type="text"
                 placeholder="Enter Promo/Coupon Code"
                 name="discount"
-                // value={input.discount}
-                // onChange={handleChange}
+                value={coupan}
+                onChange={(e)=>setCoupan(e.target.value)}
               />
 
               <button
                 className="w-[127px] py-3 px-5 ml-[2px] h-[45px] bg-[#8C8C8C] outline-none border-none rounded-r-md text-white font-semibold disabled:opacity-25 "
                 type="sumbit"
-                disabled={input?.discount?.length > 0 ? false : true}
+                disabled={coupan?.length > 0 ? false : true}
               >
                 Apply
               </button>
-            </div>
+            </form>
             {/* </form> */}
             <div className="p-2 text-[12px]">
               <div className="w-full flex justify-between mt-4">

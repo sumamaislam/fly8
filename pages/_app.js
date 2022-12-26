@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { setLoading } from "../redux/global";
 import { ToastContainer } from "react-toastify";
 import Layout from "../components/common/Layout";
+import 'react-toastify/dist/ReactToastify.css';
 
 function MyApp({ Component, pageProps }) {
   const [isSSR, setIsSSR] = useState(true);
