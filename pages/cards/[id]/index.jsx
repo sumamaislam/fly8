@@ -42,7 +42,7 @@ import {
 } from "react-share";
 
 export default function Detail() {
-  const [show, setShow] = useState(details.image[0]);
+  const [show, setShow] = useState("");
   const [detail, setDetail] = useState("a");
   const [mainData, setMainData] = useState({});
   const [offers, setOffers] = useState(false);
@@ -126,6 +126,14 @@ export default function Detail() {
       }
     }
   };
+  useEffect(()=>{
+    if (mainData?.product?.galleries[0]?.image){
+      setShow(mainData?.product?.galleries[0]?.image)
+    }else{
+      setShow("")
+    }
+    
+  },[mainData?.product?.galleries[0]?.image])
 
   useEffect(() => {
     setMainData(selectedProduct);
@@ -160,7 +168,7 @@ export default function Detail() {
                 <li className="inline-flex items-center">
                   <Link
                     href="/"
-                    className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                    className="inline-flex items-center text-[12px] md:text-[14px] font-medium  "
                   >
                     Home
                   </Link>
@@ -181,7 +189,7 @@ export default function Detail() {
                     </svg>
                     <Link
                       href={`/flavour/${mainData?.product?.subcategory?.slug}`}
-                      className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
+                      className="ml-1 text-[12px] md:text-[14px] font-medium "
                     >
                       {mainData?.product?.subcategory?.name}
                     </Link>
@@ -201,7 +209,7 @@ export default function Detail() {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">
+                    <p className="ml-1 text-[12px] md:text-[14px] font-medium ">
                       {mainData?.product?.name}
                     </p>
                   </div>
@@ -215,31 +223,32 @@ export default function Detail() {
           <div className=" ">
             <div className="md:w-[500px] border m-auto">
               <img
-                className="flex items-center md:py-[70px] justify-center m-auto"
-                src={mainData?.product?.thumbnail}
+                className="flex items-center w-[300px] md:py-[70px] justify-center m-auto"
+                src={show === "" ? mainData?.product?.thumbnail : show}
                 alt=""
               />
             </div>
-            <div className="flex lg:gap-[36px] gap-2 justify-center lg:justify-start">
-              {/* {productdetail?.images?.map((items, index) => {
+            <div className="gap-[80px]  justify-center lg:justify-start max-w-[500px] m-auto grid grid-cols-12 overlay  overflow-x-hidden hover:overflow-x-scroll" >
+              {mainData?.product?.galleries?.map((items, index) => {
                 return (
+                  
                   <div
-                    className="mb-[10px] py-[10px]"
+                    className=" py-5 w-[76px]"
                     key={index}
-                    onClick={() => setShow(items)}
+                    onClick={() => setShow(items.image)}
                   >
                     <img
-                      className={`   p-2 w-[100px] border  ${
-                        show === items
+                      className={`   p-2 border w-[300px] ${
+                        show === items.image
                           ? "border-2 border-black rounded-md "
                           : ""
                       } `}
-                      src={items}
+                      src={items.image}
                       alt="img"
                     />
                   </div>
                 );
-              })} */}
+              })}
             </div>
           </div>
           <div>
@@ -504,15 +513,15 @@ export default function Detail() {
             </div>
 
             {/* CATEGORIES */}
-            <div className="flex gap-8 items-center pt-[15px]">
-              <p className="font-bold md:text-[20px] text-[16px]">Category:</p>
+            <div className="flex gap-2 md:gap-8 items-center pt-[15px]">
+              <p className="font-bold md:text-[20px] text-[12px]">Category:</p>
               {/* <p className="md:text-[15px] text-[12px] pt-[5px]">{productdetail.category}</p>
               <p className="md:text-[15px] text-[12px] pt-[5px]">STARTER KIT</p>
               <p className="md:text-[15px] text-[12px] pt-[5px]">DELTA-9o</p> */}
-              {productdetail?.category?.map((items, index) => {
+              {mainData?.product?.meta_tag?.map((items, index) => {
                 return (
-                  <p className="md:text-[15px] text-[10px] pt-[5px]">
-                    {items.name}
+                  <p className="md:text-[10px] text-[8px] pt-[5px]">
+                    {items}
                   </p>
                 );
               })}
