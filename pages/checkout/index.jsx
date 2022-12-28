@@ -4,6 +4,7 @@ import Payments from "../../components/Home/checkout/Payments";
 import Shippings from "../../components/Home/checkout/Shippings";
 import { navDataRequest } from "../../redux/home";
 import { wrapper } from "../../store";
+import Stripe from "stripe";
 
 function index() {
 
@@ -23,3 +24,18 @@ export default index;
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   await store.dispatch(navDataRequest());
 });
+
+
+// export const getServerSideProps = async () => {
+//   await store.dispatch(navDataRequest());
+//   const strip = new Stripe(process.env.STRIPE_SECRET_KEY);
+//   const paymentIntent = await strip.paymentIntent.create({
+//     amount: 1000,
+//     currency: "usd"
+//   })
+//   return{
+//     props : {
+//       paymentIntent
+//     }
+//   }
+// } 

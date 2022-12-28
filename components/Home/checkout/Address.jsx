@@ -9,10 +9,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import RequestMessage from "../../common/RequestMessage";
-import { createOrder } from "../../../redux/order";
+import { createOrder, createOrderReal } from "../../../redux/order";
 import { baseURL } from "../../../redux/request";
 import { toast } from "react-toastify";
 import { sentCoupanRequest, setTotalPrice } from "../../../redux/product";
+import Stripe from "stripe";
+
+// async function createPaymentIntent(amount, currency) {
+//   const stripe = await stripePromise;
+//   const { data } = await stripe.createPaymentIntent({
+//     amount: amount,
+//     currency: currency,
+//     payment_method_types: ["card"],
+//   });
+//   return data.paymentIntent;
+// }
 
 function Address({ setShow }) {
   const [input, setInput] = useState({});
@@ -21,14 +32,29 @@ function Address({ setShow }) {
   const [isProcessing, setProcessingTo] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
   const [coupan, setCoupan] = useState("");
+  const [publishedKey ,setPublishedKey] = useState("")
 
   const dispatch = useDispatch();
   const stripe = useStripe();
   const elements = useElements();
+  const strip = new Stripe(process.env.STRIPE_SECRET_KEY);
+  // const strip = require('stripe')(process.env.STRIPE_SECRET_KEY);
+  // console.log("strip");
 
-  const { totalPrice, carts, totalQuantity ,coupanData } = useSelector(
+  const { totalPrice, carts, totalQuantity, coupanData } = useSelector(
     (state) => state.product
   );
+  useEffect(() => {
+    fetch("api/keys", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  });
+  if (!publishedKey){
+    return "Loading......"
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,9 +67,9 @@ function Address({ setShow }) {
     // }
     // setShow("shipping");
   };
-  useEffect(()=>{
-    setRealPrice(totalPrice)
-  },[totalPrice])
+  useEffect(() => {
+    setRealPrice(totalPrice);
+  }, [totalPrice]);
 
   const iframeStyles = {
     base: {
@@ -64,6 +90,12 @@ function Address({ setShow }) {
       iconColor: "#cbf4c9",
     },
   };
+  useEffect(() => {
+    const clientSecret = new URLSearchParams(window.location.search).get(
+      "payment_intent_client_secret"
+    );
+    console.log("gooood", clientSecret);
+  });
 
   const cardElementOpts = {
     iconStyle: "solid",
@@ -72,28 +104,33 @@ function Address({ setShow }) {
   };
   const handleSub = (e) => {
     e.preventDefault();
-    if (coupan.length > 0){
-      console.log(coupan)
-      dispatch(sentCoupanRequest(coupan))
-      setCoupan("")
+    if (coupan.length > 0) {
+      console.log(coupan);
+      dispatch(sentCoupanRequest(coupan));
+      setCoupan("");
     }
-  }
-  console.log(coupanData)
-  useEffect(()=>{
-    console.log("Hiiiiii",coupanData.type)
-    if (coupanData?.type === "0"){
+  };
+  // console.log(coupanData)
+  useEffect(() => {
+    console.log("Hiiiiii", coupanData.type);
+    if (coupanData?.type === "0") {
       // dispatch(setTotalPrice(0));
       // setRealPrice(totalPrice - coupanData?.price);
-      setRealPrice(totalPrice - totalPrice/100 * coupanData?.price);
+      setRealPrice(totalPrice - (totalPrice / 100) * coupanData?.price);
     }
-    if (coupanData?.type === "1"){
-      setRealPrice(totalPrice - coupanData?.price)
+    if (coupanData?.type === "1") {
+      setRealPrice(totalPrice - coupanData?.price);
       // dispatch(setTotalPrice(realPrice - coupanData.price))
     }
 
     // dispatch(setTotalPrice())
-  },[coupanData ,totalPrice])
-  console.log(realPrice)
+  }, [coupanData, totalPrice]);
+
+  useEffect(() => {
+    if (coupan) {
+      setInput({ ...input, coupan: coupan });
+    }
+  }, [coupan]);
 
   const validate = async (data) => {
     const error = {};
@@ -134,93 +171,130 @@ function Address({ setShow }) {
       setFormError(error);
       console.log(formError);
     } else {
-      // let cartArray = carts?.map((item) => ({
-      //   product_id: item.id,
-      //   quantity: item.qty,
-      //   price: item.price,
-      //   total: item.total,
-      //   name: item.name,
-      // }));
+      let cartArray = carts?.map((item) => ({
+        id: item.id,
+        qty: item.qty,
+        size: "",
+        size_qty: "",
+        size_key: 0,
+        size_price: "",
+        color: "",
+        keys: "",
+        values: "",
+        prices: item.price,
+      }));
       const abcd = {
-        "_token" : "Xi9Cvk89jQZJHJ7R4Aem9hsPoLey21B6uSonaUZi",
-        "personal_name" : "Cheyenne Lott",
-        "personal_email" : "asad@mailinator.com",
-        "personal_pass" : null,
-        "personal_confirm" : null,
-        "shipping" : "pickup",
-        "pickup_location" : "Azampur",
-        "name" : "Buffy Logan",
-        "phone" : "+1 (238) 898-9887",
-        "email" : "asad@mailinator.com",
-        "address" : "Quam minus veniam v",
-        "customer_country" : "Zambia",
-        "state" : "Eiusmod corrupti et",
-        "city" : "Sed do optio Nam ex",
-        "zip" : "16753",
-        "shipping_name" : null,
-        "shipping_email" : null,
-        "shipping_phone" : null,
-        "shipping_address" : null,
-        "shipping_country" : null,
-        "shipping_city" : null,
-        "shipping_state" : null,
-        "shipping_zip" : null,
-        "order_notes" : "Ut ullam non commodo",
-        "method" : "Stripe",
-        "cardNumber" : "4000 0566 5566 5556",
-        "cardCVC" : "123",
-        "month" : "12",
-        "year" : "24",
-        "shipping_cost" : "10",
-        "packing_cost" : "0",
-        "shipping_title" : "Free Shipping",
-        "packing_title" : "Default Packaging",
-        "dp" : "0",
-        "tax" : "0",
-        "totalQty" : "22",
-        "vendor_shipping_id" : "0",
-        "vendor_packing_id" : "0",
-        "total" : "2100",
-        "wallet_price" : "0",
-        "coupon_code" : null,
-        "coupon_discount" : null,
-        "coupon_id" : null,
-        "user_id" : null,
-        "txn_stripe": "hwhdfcgiufyoihedf8e6wr7yhekuh89743986y8oh",
-        "currency_code":"USD",
-         "items":[{
-              "id":"213" ,
-            "qty" : 2,
-            "size" : "",
-            "size_qty" : "",
-            "size_key" : 0,
-            "size_price" : "",
-            "color" : "",
-            "keys" : "",
-            "values" : "",
-            "prices" : 50
-          }
-           ,{
-              "id":"194" ,
-            "qty" : 20,
-            "size" : "",
-            "size_qty" : "",
-            "size_key" : 0,
-            "size_price" : "",
-            "color" : "",
-            "keys" : "",
-            "values" : "",
-            "prices" : 50
-          }]
-        }
+        _token: "Xi9Cvk89jQZJHJ7R4Aem9hsPoLey21B6uSonaUZi",
+        personal_name: data.first_name + " " + data.last_name,
+        personal_email: data.email,
+        personal_pass: null,
+        personal_confirm: null,
+        shipping: null,
+        pickup_location: null,
+        name: data.first_name + " " + data.last_name,
+        phone: data.phone_no,
+        email: data.email,
+        address: data.address,
+        customer_country: data.country,
+        state: data.state,
+        city: data.city,
+        zip: data.zip_code,
+        shipping_name: null,
+        shipping_email: null,
+        shipping_phone: null,
+        shipping_address: null,
+        shipping_country: null,
+        shipping_city: null,
+        shipping_state: null,
+        shipping_zip: null,
+        order_notes: null,
+        method: "Stripe",
+        cardNumber: "4000 0566 5566 5556",
+        cardCVC: "123",
+        month: "12",
+        year: "24",
+        shipping_cost: "0",
+        packing_cost: "0",
+        shipping_title: "Free Shipping",
+        packing_title: "Default Packaging",
+        dp: "0",
+        tax: "0",
+        totalQty: totalQuantity,
+        vendor_shipping_id: "0",
+        vendor_packing_id: "0",
+        total:
+          (coupanData?.type === "1" && totalPrice - coupanData?.price) ||
+          (coupanData?.type === "0" &&
+            totalPrice - (totalPrice / 100) * coupanData?.price),
+        wallet_price: "0",
+        coupon_code: coupanData?.code || null,
+        coupon_discount:
+          (coupanData?.type === "1" && coupanData?.price) ||
+          (coupanData?.type === "0" &&
+            (totalPrice / 100) * coupanData?.price) ||
+          null,
+        coupon_id: coupanData?.id || null,
+        user_id: null,
+        txn_stripe: "hwhdfcgiufyoihedf8e6wr7yhekuh89743986y8oh",
+        currency_code: "USD",
+        items: cartArray,
+      };
       dispatch(createOrder(abcd));
-     
+      // dispatch(createOrderReal(abcd));
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: "card",
+        card: elements.getElement(CardElement),
+      });
+
+      if (!error) {
+        try {
+          const { id } = paymentMethod;
+          // const paymentIntent = await createPaymentIntent(1099, "usd");
+          // const paymentIntent = await strip.paymentIntents.retrieve(id);
+          const paymentIntend = await strip.paymentIntents.create({
+            paymentMethod: id,
+            amount: totalPrice,
+            currency: "usd",
+            confirm: true,
+          });
+          console.log("NoNO", paymentIntend);
+          // const response = await axios.post
+          // const paymentIntent = await stripe.paymentIntents.create(
+          //   {
+          //   amount: totalPrice,
+          //   currency: 'usd',
+          //   confirm: true,
+          //   payment_method: paymentMethod.id,
+          //   })
+          //   console.log(paymentIntent)
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      // const paymentIntent = await strip.paymentIntents.create({
+      //   amount:
+      //     (coupanData?.type === "1" && totalPrice - coupanData?.price) ||
+      //     (coupanData?.type === "0" &&
+      //       totalPrice - (totalPrice / 100) * coupanData?.price),
+      //   currency: "usd",
+      //   payment_method_types: ["card"],
+      // });
+
+      // console.log("pay");
+      // paymentIntent.then(response => {
+      //   console.log("pay");
+      // console.log("pay", paymentIntent);
+      // }).catch(error => {
+      //   console.log(error)
+      // });
+
       // let data = {
       //   ...input,
       //   products: cartArray,
       //   total_quantity: totalQuantity,
       //   total: realPrice,
       // };
+
       // const billingDetails = {
       //   name: data?.first_name + " " + data?.last_name,
       //   email: data?.email,
@@ -233,6 +307,29 @@ function Address({ setShow }) {
       // };
       // setProcessingTo(true);
       // const cardElement = elements.getElement("card");
+      // if (req.method === 'POST') {
+      //   try {
+      //     // Create Checkout Sessions from body params.
+      //     const session = await stripe.checkout.sessions.create({
+      //       line_items: [
+      //         {
+      //           // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+      //           price: coupanData?.type === "1" && totalPrice - coupanData?.price || coupanData?.type === "0" && totalPrice - ( totalPrice / 100 ) * coupanData?.price || totalPrice,
+      //           quantity: totalQuantity,
+      //         },
+      //       ],
+      //       mode: 'payment',
+      //       success_url: `${req.headers.origin}/?success=true`,
+      //       cancel_url: `${req.headers.origin}/?canceled=true`,
+      //     });
+      //     res.redirect(303, session.url);
+      //   } catch (err) {
+      //     res.status(err.statusCode || 500).json(err.message);
+      //   }
+      // } else {
+      //   res.setHeader('Allow', 'POST');
+      //   res.status(405).end('Method Not Allowed');
+      // }
       // try {
       //   // const { data: clientSecret } = await axios.post(
       //   //   `${baseURL}checkout`,
@@ -254,17 +351,19 @@ function Address({ setShow }) {
       //     return;
       //   }
 
-      //   // const intent = await stripe.paymentIntents.confirm(clientSecret, {
-      //   //   payment_method: paymentMethodReq.paymentMethod.id,
-      //   // });
+      // const intent = await stripe.paymentIntents.create({
+      //   amount: coupanData?.type === "1" && totalPrice - coupanData?.price || coupanData?.type === "0" && totalPrice - ( totalPrice / 100 ) * coupanData?.price,
+      //   currency: "usd",
+      //   payment_method_types: ['card']
+      // });
 
-      //   const { error } = await stripe.confirmCardPayment(
-      //     clientSecret?.client_secret,
-      //     clientSecret,
-      //     {
-      //       payment_method: paymentMethodReq.paymentMethod.id,
-      //     }
-      //   );
+      // const { error } = await stripe.confirmCardPayment(
+      //   clientSecret?.client_secret,
+      //   clientSecret,
+      //   {
+      //     payment_method: paymentMethodReq.paymentMethod.id,
+      //   }
+      // );
 
       //   if (error) {
       //     setCheckoutError(error.message);
@@ -771,24 +870,26 @@ function Address({ setShow }) {
             {/* button  */}
 
             {/* <form className=" " onSubmit={handleSubmit}> */}
-           {!coupanData.price && <form className=" mt-[50px]  flex h-[45px] " onSubmit={handleSub}>
-              <input
-                className="w-full p-3 rounded-l-md border outline-none "
-                type="text"
-                placeholder="Enter Promo/Coupon Code"
-                name="discount"
-                value={coupan}
-                onChange={(e)=>setCoupan(e.target.value)}
-              />
+            {!coupanData.price && (
+              <form className=" mt-[50px]  flex h-[45px] " onSubmit={handleSub}>
+                <input
+                  className="w-full p-3 rounded-l-md border outline-none "
+                  type="text"
+                  placeholder="Enter Promo/Coupon Code"
+                  name="discount"
+                  value={coupan}
+                  onChange={(e) => setCoupan(e.target.value)}
+                />
 
-              <button
-                className="w-[127px] py-3 px-5 ml-[2px] h-[45px] bg-[#8C8C8C] outline-none border-none rounded-r-md text-white font-semibold disabled:opacity-25 "
-                type="sumbit"
-                disabled={coupan?.length > 0 ? false : true}
-              >
-                Apply
-              </button>
-            </form>}
+                <button
+                  className="w-[127px] py-3 px-5 ml-[2px] h-[45px] bg-[#8C8C8C] outline-none border-none rounded-r-md text-white font-semibold disabled:opacity-25 "
+                  type="sumbit"
+                  disabled={coupan?.length > 0 ? false : true}
+                >
+                  Apply
+                </button>
+              </form>
+            )}
             {coupanData.price && <p className="mt-[30px]">Discount Applied</p>}
             {/* </form> */}
             <div className="p-2 text-[12px]">
@@ -797,7 +898,12 @@ function Address({ setShow }) {
                   <p className="font-normal">Discount :</p>
                 </div>
                 <div>
-                  <p className="font-bold">{coupanData.type === "0" &&  coupanData.price + "%"|| coupanData.type === "1" && "$" + coupanData.price || coupanData[0] === "no found" && "0" || "0"}</p>
+                  <p className="font-bold">
+                    {(coupanData.type === "0" && coupanData.price + "%") ||
+                      (coupanData.type === "1" && "$" + coupanData.price) ||
+                      (coupanData[0] === "no found" && "0") ||
+                      "0"}
+                  </p>
                   {/* <p className="font-bold">{"0%"}</p> */}
                 </div>
               </div>
