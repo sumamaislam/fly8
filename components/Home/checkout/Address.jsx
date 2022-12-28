@@ -12,11 +12,12 @@ import RequestMessage from "../../common/RequestMessage";
 import { createOrder } from "../../../redux/order";
 import { baseURL } from "../../../redux/request";
 import { toast } from "react-toastify";
-import { sentCoupanRequest } from "../../../redux/product";
+import { sentCoupanRequest, setTotalPrice } from "../../../redux/product";
 
 function Address({ setShow }) {
   const [input, setInput] = useState({});
   const [formError, setFormError] = useState({});
+  const [realPrice, setRealPrice] = useState(0);
   const [isProcessing, setProcessingTo] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
   const [coupan, setCoupan] = useState("");
@@ -40,6 +41,9 @@ function Address({ setShow }) {
     // }
     // setShow("shipping");
   };
+  useEffect(()=>{
+    setRealPrice(totalPrice)
+  },[totalPrice])
 
   const iframeStyles = {
     base: {
@@ -66,7 +70,30 @@ function Address({ setShow }) {
     style: { ...iframeStyles },
     hidePostalCode: true,
   };
-  const handleSub = () => {}
+  const handleSub = (e) => {
+    e.preventDefault();
+    if (coupan.length > 0){
+      console.log(coupan)
+      dispatch(sentCoupanRequest(coupan))
+      setCoupan("")
+    }
+  }
+  console.log(coupanData)
+  useEffect(()=>{
+    console.log("Hiiiiii",coupanData.type)
+    if (coupanData?.type === "0"){
+      // dispatch(setTotalPrice(0));
+      // setRealPrice(totalPrice - coupanData?.price);
+      setRealPrice(totalPrice - totalPrice/100 * coupanData?.price);
+    }
+    if (coupanData?.type === "1"){
+      setRealPrice(totalPrice - coupanData?.price)
+      // dispatch(setTotalPrice(realPrice - coupanData.price))
+    }
+
+    // dispatch(setTotalPrice())
+  },[coupanData ,totalPrice])
+  console.log(realPrice)
 
   const validate = async (data) => {
     const error = {};
@@ -107,105 +134,178 @@ function Address({ setShow }) {
       setFormError(error);
       console.log(formError);
     } else {
-      console.log(input);
-      let cartArray = carts?.map((item) => ({
-        product_id: item.id,
-        quantity: item.qty,
-        price: item.price,
-        total: item.total,
-        name: item.name,
-      }));
-      let data = {
-        ...input,
-        products: cartArray,
-        total_quantity: totalQuantity,
-        total: totalPrice,
-      };
-      const billingDetails = {
-        name: data?.first_name + " " + data?.last_name,
-        email: data?.email,
-        address: {
-          city: data?.city,
-          line1: data?.address,
-          state: data?.state,
-          postal_code: data?.zip_code,
-        },
-      };
-      setProcessingTo(true);
-      const cardElement = elements.getElement("card");
-      try {
-        // const { data: clientSecret } = await axios.post(
-        //   `${baseURL}checkout`,
-        //   {
-        //     price: totalPrice,
-        //   }
-        // );
-        // const clientSecret = {client_secret : "pi_3MJDJ6EnGM9NxkcQ07KPq3wr_secret_bi5BRmO7o69eX1PJHTRtN2w8p"}
-        const paymentMethodReq = await stripe.createPaymentMethod({
-          type: "card",
-          card: cardElement,
-          billing_details: billingDetails,
-        });
-
-        if (paymentMethodReq.error) {
-          setCheckoutError(paymentMethodReq.error.message);
-          setProcessingTo(false);
-          console.log(checkoutError)
-          return;
+      // let cartArray = carts?.map((item) => ({
+      //   product_id: item.id,
+      //   quantity: item.qty,
+      //   price: item.price,
+      //   total: item.total,
+      //   name: item.name,
+      // }));
+      const abcd = {
+        "_token" : "Xi9Cvk89jQZJHJ7R4Aem9hsPoLey21B6uSonaUZi",
+        "personal_name" : "Cheyenne Lott",
+        "personal_email" : "asad@mailinator.com",
+        "personal_pass" : null,
+        "personal_confirm" : null,
+        "shipping" : "pickup",
+        "pickup_location" : "Azampur",
+        "name" : "Buffy Logan",
+        "phone" : "+1 (238) 898-9887",
+        "email" : "asad@mailinator.com",
+        "address" : "Quam minus veniam v",
+        "customer_country" : "Zambia",
+        "state" : "Eiusmod corrupti et",
+        "city" : "Sed do optio Nam ex",
+        "zip" : "16753",
+        "shipping_name" : null,
+        "shipping_email" : null,
+        "shipping_phone" : null,
+        "shipping_address" : null,
+        "shipping_country" : null,
+        "shipping_city" : null,
+        "shipping_state" : null,
+        "shipping_zip" : null,
+        "order_notes" : "Ut ullam non commodo",
+        "method" : "Stripe",
+        "cardNumber" : "4000 0566 5566 5556",
+        "cardCVC" : "123",
+        "month" : "12",
+        "year" : "24",
+        "shipping_cost" : "10",
+        "packing_cost" : "0",
+        "shipping_title" : "Free Shipping",
+        "packing_title" : "Default Packaging",
+        "dp" : "0",
+        "tax" : "0",
+        "totalQty" : "22",
+        "vendor_shipping_id" : "0",
+        "vendor_packing_id" : "0",
+        "total" : "2100",
+        "wallet_price" : "0",
+        "coupon_code" : null,
+        "coupon_discount" : null,
+        "coupon_id" : null,
+        "user_id" : null,
+        "txn_stripe": "hwhdfcgiufyoihedf8e6wr7yhekuh89743986y8oh",
+        "currency_code":"USD",
+         "items":[{
+              "id":"213" ,
+            "qty" : 2,
+            "size" : "",
+            "size_qty" : "",
+            "size_key" : 0,
+            "size_price" : "",
+            "color" : "",
+            "keys" : "",
+            "values" : "",
+            "prices" : 50
+          }
+           ,{
+              "id":"194" ,
+            "qty" : 20,
+            "size" : "",
+            "size_qty" : "",
+            "size_key" : 0,
+            "size_price" : "",
+            "color" : "",
+            "keys" : "",
+            "values" : "",
+            "prices" : 50
+          }]
         }
+      dispatch(createOrder(abcd));
+     
+      // let data = {
+      //   ...input,
+      //   products: cartArray,
+      //   total_quantity: totalQuantity,
+      //   total: realPrice,
+      // };
+      // const billingDetails = {
+      //   name: data?.first_name + " " + data?.last_name,
+      //   email: data?.email,
+      //   address: {
+      //     city: data?.city,
+      //     line1: data?.address,
+      //     state: data?.state,
+      //     postal_code: data?.zip_code,
+      //   },
+      // };
+      // setProcessingTo(true);
+      // const cardElement = elements.getElement("card");
+      // try {
+      //   // const { data: clientSecret } = await axios.post(
+      //   //   `${baseURL}checkout`,
+      //   //   {
+      //   //     price: totalPrice,
+      //   //   }
+      //   // );
+      //   const clientSecret = {client_secret : "pi_3MJDJ6EnGM9NxkcQ07KPq3wr_secret_bi5BRmO7o69eX1PJHTRtN2w8p"}
+      //   const paymentMethodReq = await stripe.createPaymentMethod({
+      //     type: "card",
+      //     card: cardElement,
+      //     billing_details: billingDetails,
+      //   });
 
-        // const intent = await stripe.paymentIntents.confirm(clientSecret, {
-        //   payment_method: paymentMethodReq.paymentMethod.id,
-        // });
+      //   if (paymentMethodReq.error) {
+      //     setCheckoutError(paymentMethodReq.error.message);
+      //     setProcessingTo(false);
+      //     console.log(checkoutError)
+      //     return;
+      //   }
 
-        // const { error } = await stripe.confirmCardPayment(
-        //   clientSecret?.client_secret,
-        //   clientSecret,
-        //   {
-        //     payment_method: paymentMethodReq.paymentMethod.id,
-        //   }
-        // );
+      //   // const intent = await stripe.paymentIntents.confirm(clientSecret, {
+      //   //   payment_method: paymentMethodReq.paymentMethod.id,
+      //   // });
 
-        // if (error) {
-        //   setCheckoutError(error.message);
-        //   setProcessingTo(false);
-        //   toast(
-        //     <RequestMessage
-        //       // icon="bi bi-exclamation-triangle"
-        //       message="Payment failed!"
-        //     />
-        //   );
-        //   return;
-        // }
+      //   const { error } = await stripe.confirmCardPayment(
+      //     clientSecret?.client_secret,
+      //     clientSecret,
+      //     {
+      //       payment_method: paymentMethodReq.paymentMethod.id,
+      //     }
+      //   );
 
-        // onSuccessfulCheckout
-        console.log("onSuccessfulCheckout");
-        dispatch(createOrder(data));
-        setFormError({});
-        setInput({
-          first_name: "",
-          last_name: "",
-          country: "",
-          city: "",
-          state: "",
-          zip_code: "",
-          phone_no: "",
-          address: "",
-          company: "",
-          email: "",
-        });
-      } catch (error) {
-        setCheckoutError(error.message);
-        console.log("error", error);
-        setProcessingTo(false);
-        // // console.log("error", error);
-        toast(
-          <RequestMessage
-            // icon="bi bi-exclamation-triangle"
-            message="Payment failed!"
-          />
-        );
-      }
+      //   if (error) {
+      //     setCheckoutError(error.message);
+      //     setProcessingTo(false);
+      //     toast(
+      //       <RequestMessage
+      //         // icon="bi bi-exclamation-triangle"
+      //         message="Payment failed!"
+      //       />
+      //     );
+      //     return;
+      //   }
+
+      //   // onSuccessfulCheckout
+      //   console.log("onSuccessfulCheckout");
+      //   dispatch(createOrder(abcd));
+      //   setFormError({});
+      //   setInput({
+      //     first_name: "",
+      //     last_name: "",
+      //     country: "",
+      //     city: "",
+      //     state: "",
+      //     zip_code: "",
+      //     phone_no: "",
+      //     address: "",
+      //     company: "",
+      //     email: "",
+      //   });
+      // } catch (error) {
+      //   setCheckoutError(error.message);
+      //   console.log("error", error);
+      //   setProcessingTo(false);
+      //   // // console.log("error", error);
+      //   toast(
+      //     <RequestMessage
+      //       // icon="bi bi-exclamation-triangle"
+      //       message="Payment failed!"
+      //     />
+      //   );
+      // }
     }
   };
 
@@ -484,7 +584,7 @@ function Address({ setShow }) {
                         type="submit"
                         // onClick={() => setShow("shipping")}
                       >
-                        {isProcessing ? "Processing..." : `Pay $${totalPrice}`}
+                        {isProcessing ? "Processing..." : `Pay $${realPrice}`}
                       </button>
                     </div>
                   </div>
@@ -671,7 +771,7 @@ function Address({ setShow }) {
             {/* button  */}
 
             {/* <form className=" " onSubmit={handleSubmit}> */}
-            <form className=" mt-[50px]  flex h-[45px] " onSubmit={handleSub}>
+           {!coupanData.price && <form className=" mt-[50px]  flex h-[45px] " onSubmit={handleSub}>
               <input
                 className="w-full p-3 rounded-l-md border outline-none "
                 type="text"
@@ -688,7 +788,8 @@ function Address({ setShow }) {
               >
                 Apply
               </button>
-            </form>
+            </form>}
+            {coupanData.price && <p className="mt-[30px]">Discount Applied</p>}
             {/* </form> */}
             <div className="p-2 text-[12px]">
               <div className="w-full flex justify-between mt-4">
@@ -696,7 +797,8 @@ function Address({ setShow }) {
                   <p className="font-normal">Discount :</p>
                 </div>
                 <div>
-                  <p className="font-bold">10%</p>
+                  <p className="font-bold">{coupanData.type === "0" &&  coupanData.price + "%"|| coupanData.type === "1" && "$" + coupanData.price || coupanData[0] === "no found" && "0" || "0"}</p>
+                  {/* <p className="font-bold">{"0%"}</p> */}
                 </div>
               </div>
               <div className="w-full flex justify-between mt-4">
@@ -704,7 +806,7 @@ function Address({ setShow }) {
                   <p className="font-normal">SUBTOTAL :</p>
                 </div>
                 <div>
-                  <p className="font-bold">${totalPrice}</p>
+                  <p className="font-bold">${realPrice}</p>
                 </div>
               </div>
               <div className="w-full flex justify-between mt-4">
@@ -723,7 +825,7 @@ function Address({ setShow }) {
                   <p className="font-bold">TOTAL :</p>
                 </div>
                 <div>
-                  <p className="font-bold">${totalPrice}</p>
+                  <p className="font-bold">${realPrice}</p>
                 </div>
               </div>
             </div>

@@ -27,16 +27,6 @@ export default function Cart({ showCart, setShowCart }) {
     }
   };
   // console.log("push", coupanData);
-<<<<<<< Updated upstream
-  useEffect(() => {
-    if (coupan.type === "0") {
-      setNewPrice({})
-    }
-    if (coupan.type === "1") {
-      setNewPrice({})
-    };
-  }, [coupan]);
-=======
   // useEffect(() => {
   //   if (coupan.type === "0") {
   //     setNewPrice({})
@@ -45,7 +35,6 @@ export default function Cart({ showCart, setShowCart }) {
   //     setNewPrice({})
   //   };
   // }, [coupan]);
->>>>>>> Stashed changes
 
   const handleDelete = (id) => {
     dispatch(deleteCart(id));

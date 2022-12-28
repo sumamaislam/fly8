@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Footer, Header } from "../../../components/common";
 import Link from "next/link";
 import { cards, delta9o, details, productdetail } from "../../../data";
-import Acordion from "../../../components/common/Acordion";
 import { useDispatch, useSelector } from "react-redux";
 import { Raiting } from "../../../components/Home";
 import Cart from "../../../components/Home/Cart";

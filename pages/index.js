@@ -14,7 +14,6 @@ import {
 import styles from "../styles/Home.module.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Gummies from "../components/Home/Gummies";
 import Commitment from "../components/Home/Commitment";
 import { wrapper } from "../store";
 import { bannerDataRequest, footerDataRequest, gummiesDataRequest, mainDataRequest, navDataRequest, qualityDataRequest } from "../redux/home";
