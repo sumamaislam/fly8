@@ -14,7 +14,10 @@ import { baseURL } from "../../../redux/request";
 import { toast } from "react-toastify";
 import { sentCoupanRequest, setTotalPrice } from "../../../redux/product";
 import Stripe from "stripe";
+import { loadStripe } from "@stripe/stripe-js";
 
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 // async function createPaymentIntent(amount, currency) {
 //   const stripe = await stripePromise;
 //   const { data } = await stripe.createPaymentIntent({
@@ -32,30 +35,52 @@ function Address({ setShow }) {
   const [isProcessing, setProcessingTo] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
   const [coupan, setCoupan] = useState("");
-  const [publishedKey, setPublishedKey] = useState("");
+  const [publishedKey, setPublishedKey] = useState(null);
+  const [message, setMessage] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const dispatch = useDispatch();
   const stripe = useStripe();
   const elements = useElements();
-  const strip = new Stripe(process.env.STRIPE_SECRET_KEY);
-  // const strip = require('stripe')(process.env.STRIPE_SECRET_KEY);
-  // console.log("strip");
+
+  const baseURL2 = `http://localhost:30/`
 
   const { totalPrice, carts, totalQuantity, coupanData } = useSelector(
     (state) => state.product
   );
-  useEffect(() => {
-    fetch("api/keys", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  });
-  // if (!publishedKey){
-  //   return "Loading......"
-  // }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!stripe || !elements) {
+      return;
+    } else {
+      validate(input);
+    }
+  };
+
+  useEffect(() => {
+    setRealPrice(totalPrice);
+  }, [totalPrice]);
+
+  const iframeStyles = {
+    base: {
+      color: "#6e6e6e",
+      fontSize: "15px",
+      // iconColor: "#fff",
+      "::placeholder": {
+        color: "#737373",
+      },
+      padding: "4px 10px",
+      height: "50px",
+    },
+    invalid: {
+      iconColor: "#FFC7EE",
+      color: "#FFC7EE",
+    },
+    complete: {
+      iconColor: "#cbf4c9",
+    },
+  };
   useEffect(() => {
     if (!stripe) {
       return;
@@ -85,48 +110,7 @@ function Address({ setShow }) {
           break;
       }
     });
-  }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!stripe || !elements) {
-      return;
-    } else {
-      validate(input);
-    }
-    // if (session?.user?.user?.id) {
-    // }
-    // setShow("shipping");
-  };
-  useEffect(() => {
-    setRealPrice(totalPrice);
-  }, [totalPrice]);
-
-  const iframeStyles = {
-    base: {
-      color: "#6e6e6e",
-      fontSize: "15px",
-      // iconColor: "#fff",
-      "::placeholder": {
-        color: "#737373",
-      },
-      padding: "4px 10px",
-      height: "50px",
-    },
-    invalid: {
-      iconColor: "#FFC7EE",
-      color: "#FFC7EE",
-    },
-    complete: {
-      iconColor: "#cbf4c9",
-    },
-  };
-  useEffect(() => {
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    );
-    console.log("gooood", clientSecret);
-  });
+  }, [stripe]);
 
   const cardElementOpts = {
     iconStyle: "solid",
@@ -141,20 +125,14 @@ function Address({ setShow }) {
       setCoupan("");
     }
   };
-  // console.log(coupanData)
+
   useEffect(() => {
-    console.log("Hiiiiii", coupanData.type);
     if (coupanData?.type === "0") {
-      // dispatch(setTotalPrice(0));
-      // setRealPrice(totalPrice - coupanData?.price);
       setRealPrice(totalPrice - (totalPrice / 100) * coupanData?.price);
     }
     if (coupanData?.type === "1") {
       setRealPrice(totalPrice - coupanData?.price);
-      // dispatch(setTotalPrice(realPrice - coupanData.price))
     }
-
-    // dispatch(setTotalPrice())
   }, [coupanData, totalPrice]);
 
   useEffect(() => {
@@ -272,170 +250,16 @@ function Address({ setShow }) {
       };
       dispatch(createOrder(abcd));
       // dispatch(createOrderReal(abcd));
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: "card",
-        card: elements.getElement(CardElement),
+      // const { error, paymentMethod } = await stripe.createPaymentMethod({
+      //   type: "card",
+      //   card: elements.getElement(CardElement),
+      // });
+      const stripe = await stripePromise;
+
+      const checkoutSession = await axios.post(`${baseURL2}/api/create-checkout-session`, {
+        items: cartArray,
+        email: "test@gmail.com",
       });
-
-      if (!error) {
-        try {
-          const { id } = paymentMethod;
-          // const paymentIntent = await createPaymentIntent(1099, "usd");
-          // const paymentIntent = await strip.paymentIntents.retrieve(id);
-          const paymentIntend = await strip.paymentIntents.create({
-            paymentMethod: id,
-            amount: totalPrice,
-            currency: "usd",
-            confirm: true,
-          });
-          console.log("NoNO", paymentIntend);
-          // const response = await axios.post
-          // const paymentIntent = await stripe.paymentIntents.create(
-          //   {
-          //   amount: totalPrice,
-          //   currency: 'usd',
-          //   confirm: true,
-          //   payment_method: paymentMethod.id,
-          //   })
-          //   console.log(paymentIntent)
-        } catch (error) {
-          console.log(error);
-        }
-      }
-      // const paymentIntent = await strip.paymentIntents.create({
-      //   amount:
-      //     (coupanData?.type === "1" && totalPrice - coupanData?.price) ||
-      //     (coupanData?.type === "0" &&
-      //       totalPrice - (totalPrice / 100) * coupanData?.price),
-      //   currency: "usd",
-      //   payment_method_types: ["card"],
-      // });
-
-      // console.log("pay");
-      // paymentIntent.then(response => {
-      //   console.log("pay");
-      // console.log("pay", paymentIntent);
-      // }).catch(error => {
-      //   console.log(error)
-      // });
-
-      // let data = {
-      //   ...input,
-      //   products: cartArray,
-      //   total_quantity: totalQuantity,
-      //   total: realPrice,
-      // };
-
-      // const billingDetails = {
-      //   name: data?.first_name + " " + data?.last_name,
-      //   email: data?.email,
-      //   address: {
-      //     city: data?.city,
-      //     line1: data?.address,
-      //     state: data?.state,
-      //     postal_code: data?.zip_code,
-      //   },
-      // };
-      // setProcessingTo(true);
-      // const cardElement = elements.getElement("card");
-      // if (req.method === 'POST') {
-      //   try {
-      //     // Create Checkout Sessions from body params.
-      //     const session = await stripe.checkout.sessions.create({
-      //       line_items: [
-      //         {
-      //           // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-      //           price: coupanData?.type === "1" && totalPrice - coupanData?.price || coupanData?.type === "0" && totalPrice - ( totalPrice / 100 ) * coupanData?.price || totalPrice,
-      //           quantity: totalQuantity,
-      //         },
-      //       ],
-      //       mode: 'payment',
-      //       success_url: `${req.headers.origin}/?success=true`,
-      //       cancel_url: `${req.headers.origin}/?canceled=true`,
-      //     });
-      //     res.redirect(303, session.url);
-      //   } catch (err) {
-      //     res.status(err.statusCode || 500).json(err.message);
-      //   }
-      // } else {
-      //   res.setHeader('Allow', 'POST');
-      //   res.status(405).end('Method Not Allowed');
-      // }
-      // try {
-      //   // const { data: clientSecret } = await axios.post(
-      //   //   `${baseURL}checkout`,
-      //   //   {
-      //   //     price: totalPrice,
-      //   //   }
-      //   // );
-      //   const clientSecret = {client_secret : "pi_3MJDJ6EnGM9NxkcQ07KPq3wr_secret_bi5BRmO7o69eX1PJHTRtN2w8p"}
-      //   const paymentMethodReq = await stripe.createPaymentMethod({
-      //     type: "card",
-      //     card: cardElement,
-      //     billing_details: billingDetails,
-      //   });
-
-      //   if (paymentMethodReq.error) {
-      //     setCheckoutError(paymentMethodReq.error.message);
-      //     setProcessingTo(false);
-      //     console.log(checkoutError)
-      //     return;
-      //   }
-
-      // const intent = await stripe.paymentIntents.create({
-      //   amount: coupanData?.type === "1" && totalPrice - coupanData?.price || coupanData?.type === "0" && totalPrice - ( totalPrice / 100 ) * coupanData?.price,
-      //   currency: "usd",
-      //   payment_method_types: ['card']
-      // });
-
-      // const { error } = await stripe.confirmCardPayment(
-      //   clientSecret?.client_secret,
-      //   clientSecret,
-      //   {
-      //     payment_method: paymentMethodReq.paymentMethod.id,
-      //   }
-      // );
-
-      //   if (error) {
-      //     setCheckoutError(error.message);
-      //     setProcessingTo(false);
-      //     toast(
-      //       <RequestMessage
-      //         // icon="bi bi-exclamation-triangle"
-      //         message="Payment failed!"
-      //       />
-      //     );
-      //     return;
-      //   }
-
-      //   // onSuccessfulCheckout
-      //   console.log("onSuccessfulCheckout");
-      //   dispatch(createOrder(abcd));
-      //   setFormError({});
-      //   setInput({
-      //     first_name: "",
-      //     last_name: "",
-      //     country: "",
-      //     city: "",
-      //     state: "",
-      //     zip_code: "",
-      //     phone_no: "",
-      //     address: "",
-      //     company: "",
-      //     email: "",
-      //   });
-      // } catch (error) {
-      //   setCheckoutError(error.message);
-      //   console.log("error", error);
-      //   setProcessingTo(false);
-      //   // // console.log("error", error);
-      //   toast(
-      //     <RequestMessage
-      //       // icon="bi bi-exclamation-triangle"
-      //       message="Payment failed!"
-      //     />
-      //   );
-      // }
     }
   };
 

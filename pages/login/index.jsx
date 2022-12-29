@@ -6,15 +6,19 @@ import { Footer, Header } from "../../components/common";
 import { Email } from "../../components/Home";
 import { footerDataRequest, navDataRequest } from "../../redux/home";
 import { wrapper } from "../../store";
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/router";
 // import { Footer, Header } from "../common";
 // import { Email } from "../Home";
 
 function login() {
   const [formVal, setFormVal] = useState("");
   const [formErr, setFormErr] = useState("");
-  const fields = { username: "", password: "" };
+  const fields = { email: "", password: "" };
   const [val, setVal] = useState(fields);
   const [err, setErr] = useState("");
+  const router = useRouter();
+
   const handleChanged = (e) => {
     const { name, value } = e.target;
     setVal({ ...val, [name]: value });
@@ -32,8 +36,8 @@ function login() {
   const submit = (e) => {
     e.preventDefault();
     let error = {};
-    if (!val.username) {
-      error.username = "username required *" 
+    if (!val.email) {
+      error.email = "email required *" 
     } 
     if (!val.password) {
       error.password = "password required *"
@@ -42,8 +46,14 @@ function login() {
       setErr(error)
     }else{
       console.log(val)
-      setVal({ username: "", password: "" })
-      setErr({ username: "", password: "" })
+      setVal({ email: "", password: "" })
+      setErr({ email: "", password: "" })
+      console.log({ ...val, redirect: false })
+      signIn("credentials", { ...val, redirect: false }).then((response) => {
+        if (response?.ok) {
+          router.push("/");
+        }
+      });
     }
   };
   return (
@@ -66,12 +76,12 @@ function login() {
                 <input
                   className="w-full border outline-none pl-2 py-2 rounded-xl border-1 border-black"
                   type="text"
-                  name="username"
+                  name="email"
                   onChange={handleChanged}
                   placeholder="Username OR Email Address *"
-                  value={val.username}
+                  value={val.email}
                 />
-                <p className="text-[10px] md:text-[12px] text-red-500 p-1">{err.username}</p>
+                <p className="text-[10px] md:text-[12px] text-red-500 p-1">{err.email}</p>
               </div>
               {/* password */}
               <div className="mt-[15px]  text-[14px]">
@@ -140,6 +150,7 @@ function login() {
                 </button>
               </div>
             </form>
+            {/* <button onClick={()=>signIn()}>oooooooooooo</button> */}
           </div>
         </div>
       </div>

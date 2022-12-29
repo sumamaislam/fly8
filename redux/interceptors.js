@@ -7,7 +7,7 @@ export const requestInterceptor = async (config) => {
   //   let token = session?.user?.token;
   //   if (token) {
   //     try {
-  //       config.headers.common.Authorization = "Bearer " + token;
+  //       config.headers.common.Authorization = token;
   //     } catch (e) {
   //       console.log(e);
   //     }

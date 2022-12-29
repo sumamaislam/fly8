@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 import Cart from "../Home/Cart";
+import { useSession } from "next-auth/react";
 // import { flavours } from "../../data";
 
 function Header() {
@@ -16,9 +17,11 @@ function Header() {
   const { header } = useSelector((state) => state.home);
   const { totalQuantity } = useSelector((state) => state.product);
 
+  const { data: session } = useSession();
+
   useEffect(() => {
-    console.log(header);
-  }, [header]);
+    console.log("session",session);
+  }, [session]);
 
   // const [headerColor, setHeaderColor] = useState(false);
   // const handleColorChange = () => {

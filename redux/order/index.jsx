@@ -18,7 +18,9 @@ export const createOrder = createAsyncThunk(
   "order/createOrder",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post(`${baseURL}checkout`,payload,{mode:'cors'}).then((response) => response.data)
+      const response = await axios
+        .post(`${baseURL}checkout`, payload, { mode: "cors" })
+        .then((response) => response.data);
       // await thunkAPI.dispatch(setTotalPrice(0));
       // await thunkAPI.dispatch(setTotalQuantity(0));
       // await thunkAPI.dispatch(emptyCart());
@@ -39,15 +41,21 @@ export const createOrder = createAsyncThunk(
   }
 );
 
-
 export const createOrderReal = createAsyncThunk(
   "order/createOrderNew",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post(`${baseURL}checkout`,payload,{mode:'cors'}).then((response) => response.data)
-      await thunkAPI.dispatch(setTotalPrice(0));
-      await thunkAPI.dispatch(setTotalQuantity(0));
-      await thunkAPI.dispatch(emptyCart());
+      // const response = await axios.post(`${baseURL}checkout`,payload,{mode:'cors'}).then((response) => response.data)
+      const response = await axios
+        .post(
+          `${baseURL}user/login`,
+          { email: "amran6421@gmail.com", password: "1234" },
+          { mode: "cors" }
+        )
+        .then((response) => response.data);
+      // await thunkAPI.dispatch(setTotalPrice(0));
+      // await thunkAPI.dispatch(setTotalQuantity(0));
+      // await thunkAPI.dispatch(emptyCart());
       localStorage.setItem(
         "localCart",
         JSON.stringify({ carts: [], totalPrice: 0, totalQuantity: 0 })
@@ -71,8 +79,11 @@ export const orderSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action) => {
-        console.log("HYDRATE", action.payload);
-        state.orders = action?.payload?.order?.orders?.data?.length > 0 ? action.payload.order.orders : state.orders;
+      console.log("HYDRATE", action.payload);
+      state.orders =
+        action?.payload?.order?.orders?.data?.length > 0
+          ? action.payload.order.orders
+          : state.orders;
     });
 
     builder.addCase(createOrder.pending, (state) => {
