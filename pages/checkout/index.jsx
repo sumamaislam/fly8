@@ -5,26 +5,26 @@ import Shippings from "../../components/Home/checkout/Shippings";
 import { navDataRequest } from "../../redux/home";
 import { wrapper } from "../../store";
 import Stripe from "stripe";
+import Layout from "../../components/common/Layout";
 
 function index() {
-
   const [show, setShow] = useState("address");
   return (
     <div>
-      {show === "address" && <Address setShow={setShow} />}
-      {show === "shipping" && <Shippings setShow={setShow} />}
-      {show === "payment" && <Payments setShow={setShow} />}
+      <Layout>
+        {show === "address" && <Address setShow={setShow} />}
+        {show === "shipping" && <Shippings setShow={setShow} />}
+        {show === "payment" && <Payments setShow={setShow} />}
+      </Layout>
     </div>
   );
 }
 
 export default index;
 
-
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   await store.dispatch(navDataRequest());
 });
-
 
 // export const getServerSideProps = async () => {
 //   await store.dispatch(navDataRequest());
@@ -38,4 +38,4 @@ export const getStaticProps = wrapper.getStaticProps((store) => async () => {
 //       paymentIntent
 //     }
 //   }
-// } 
+// }
