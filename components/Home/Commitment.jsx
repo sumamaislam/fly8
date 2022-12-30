@@ -15,7 +15,7 @@ function Commitment() {
   return (
     <div className="mt-[100px]">
       <div className="2xl:w-[65%] px-[10px] container  m-auto " >
-        <p className="md:text-[30px]  text-[18px] xl:text-[40px] font-semibold text-center overflow-hidden"  data-aos="fade-down" data-aos-duration="1500">
+        <p className="md:text-[30px]  text-[22px] xl:text-[40px] font-semibold text-center overflow-hidden"  data-aos="fade-down" data-aos-duration="1500">
           Our Commitment to Quality
         </p>
         <div className="md:mt-[76px] ">
