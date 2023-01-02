@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setSecret } from "../../redux/order";
 
 const stripePromise = loadStripe(
   `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`
@@ -11,12 +12,16 @@ const Layout = ({ children }) => {
   const [clientSecret, setClientSecret] = useState("");
   const { totalPrice ,coupanData } = useSelector((state) => state.product);
 
+  const dispatch = useDispatch();
   const price =
     (coupanData?.type === "1" && totalPrice - coupanData?.price) ||
     (coupanData?.type === "0" &&
       totalPrice - (totalPrice / 100) * coupanData?.price) || totalPrice;
 
-  console.log("price",price)
+      useEffect(()=>{
+        console.log("price",clientSecret)
+      },[clientSecret])
+  
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     fetch("/api/create-payment-intent", {
@@ -27,6 +32,9 @@ const Layout = ({ children }) => {
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
   }, []);
+  useEffect(()=>{
+  dispatch(setSecret(clientSecret))
+  },[clientSecret])
 
   const appearance = {
     theme: "stripe",

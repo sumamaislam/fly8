@@ -23,6 +23,7 @@ export default async function handler(req, res) {
     // amount: calculateOrderAmount(items),
     // amount: calculateOrderAmount(items),
     amount: calculateOrderAmount(items),
+    // amount: 100,
     currency: "usd",
     payment_method_types: ['card'],
     // automatic_payment_methods: {

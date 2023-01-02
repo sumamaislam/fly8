@@ -46,6 +46,9 @@ function Address({ setShow }) {
   const { totalPrice, carts, totalQuantity, coupanData } = useSelector(
     (state) => state.product
   );
+  const { secret } = useSelector((state)=>state.order)
+  console.log("important",secret)
+
   const paymentElementOptions = {
     layout: "tabs",
   };
@@ -252,6 +255,7 @@ function Address({ setShow }) {
       try {
         dispatch(createOrder(abcd));
         const cardElement = elements.getElement("card");
+        console.log("please",cardElement)
         const billingDetails = {
           name: abcd?.name,
           email: abcd?.email,
@@ -272,21 +276,24 @@ function Address({ setShow }) {
         //   setProcessingTo(false);
         //   return;
         // }
-        const { error } = await stripe.confirmPayment({
-          elements,
-          confirmParams: {
-            return_url: "http://localhost:30"
-          },
-          // payment_method: paymentMethodReq.paymentMethod.id,
-        });
-        if (error.type === "card_error" || error.type === "validation_error") {
-          setMessage(error.message);
-        } else {
-          setMessage("An unexpected error occurred.");
-        }
-        if (!error) {
-          dispatch(createOrderReal(data));
-        }
+        // const { error } = await stripe.confirmCardPayment(secret, {
+        //   payment_method: paymentMethodReq.paymentMethod.id,
+        // });
+        // const { error } = await stripe.confirmPayment({
+        //   elements,
+        //   confirmParams: {
+        //     return_url: "http://localhost:30"
+        //   },
+        //   // payment_method: paymentMethodReq.paymentMethod.id,
+        // });
+        // if (error.type === "card_error" || error.type === "validation_error") {
+        //   setMessage(error.message);
+        // } else {
+        //   setMessage("An unexpected error occurred.");
+        // }
+        // if (!error) {
+        //   dispatch(createOrderReal(data));
+        // }
       } catch (error) {
         console.log(error);
       }

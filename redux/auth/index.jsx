@@ -103,7 +103,9 @@ export const createOrderReal = createAsyncThunk(
 export const orderSlice = createSlice({
   name: "orders",
   initialState,
-  reducers: {},
+  reducers: {
+
+  },
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action) => {
       console.log("HYDRATE", action.payload);
