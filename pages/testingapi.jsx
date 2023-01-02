@@ -77,7 +77,7 @@ function Testingapi() {
           </button>
         </form>
         {product &&
-          product.map((data, i) => {
+          product?.map((data, i) => {
             return (
               <div key={i} className="mt-[100px]">
                 <img src={data.files} alt="" className="w-[200px]" />
