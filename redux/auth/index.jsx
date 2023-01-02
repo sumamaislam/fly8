@@ -11,8 +11,7 @@ import Router from "next/router";
 const initialState = {
   orders: [],
   loading: false,
-  error: "",
-  orderDetail: {},
+  error: ""
 };
 
 export const createOrder = createAsyncThunk(

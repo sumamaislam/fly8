@@ -79,7 +79,7 @@ function MyApp({ Component, session ,pageProps }) {
   }
 
   return (
-    <Layout>
+    // <Layout>
       <>
         <ToastContainer
           position="top-right"
@@ -116,7 +116,7 @@ function MyApp({ Component, session ,pageProps }) {
           <Component {...pageProps} />
         </SessionProvider>
       </>
-    </Layout>
+    // </Layout>
   );
 }
 

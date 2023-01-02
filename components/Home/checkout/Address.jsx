@@ -6,7 +6,12 @@ import Selectoption from "../../common/Selectoption";
 // import CountrySelect from "../../common/CountrySelect";
 // import StateSelect from "../../common/StateSelect";
 import { useDispatch, useSelector } from "react-redux";
-import { CardElement, useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
+import {
+  CardElement,
+  useStripe,
+  useElements,
+  PaymentElement,
+} from "@stripe/react-stripe-js";
 import axios from "axios";
 import RequestMessage from "../../common/RequestMessage";
 import { createOrder, createOrderReal } from "../../../redux/order";
@@ -107,36 +112,6 @@ function Address({ setShow }) {
       iconColor: "#cbf4c9",
     },
   };
-  useEffect(() => {
-    if (!stripe) {
-      return;
-    }
-
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    );
-
-    if (!clientSecret) {
-      return;
-    }
-
-    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      switch (paymentIntent.status) {
-        case "succeeded":
-          setMessage("Payment succeeded!");
-          break;
-        case "processing":
-          setMessage("Your payment is processing.");
-          break;
-        case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.");
-          break;
-        default:
-          setMessage("Something went wrong.");
-          break;
-      }
-    });
-  }, [stripe]);
 
   const cardElementOpts = {
     iconStyle: "solid",
@@ -274,30 +249,47 @@ function Address({ setShow }) {
         currency_code: "USD",
         items: cartArray,
       };
-      dispatch(createOrder(abcd));
-      // dispatch(createOrderReal(abcd));
-      // const { error, paymentMethod } = await stripe.createPaymentMethod({
-      //   type: "card",
-      //   card: elements.getElement(CardElement),
-      // });
-      const { error } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-          // Make sure to change this to your payment completion page
-          return_url: "http://localhost:30",
-        },
-      });
-      if (error.type === "card_error" || error.type === "validation_error") {
-        setMessage(error.message);
-      } else {
-        setMessage("An unexpected error occurred.");
+      try {
+        dispatch(createOrder(abcd));
+        const cardElement = elements.getElement("card");
+        const billingDetails = {
+          name: abcd?.name,
+          email: abcd?.email,
+          address: {
+            city: abcd?.city,
+            line1: abcd?.shipping_address,
+            state: abcd?.state,
+            postal_code: abcd?.zip,
+          },
+        };
+        // const paymentMethodReq = await stripe.createPaymentMethod({
+        //   type: "card",
+        //   card: cardElement,
+        //   billing_details: billingDetails,
+        // });
+        // if (paymentMethodReq.error) {
+        //   setCheckoutError(paymentMethodReq.error.message);
+        //   setProcessingTo(false);
+        //   return;
+        // }
+        const { error } = await stripe.confirmPayment({
+          elements,
+          confirmParams: {
+            return_url: "http://localhost:30"
+          },
+          // payment_method: paymentMethodReq.paymentMethod.id,
+        });
+        if (error.type === "card_error" || error.type === "validation_error") {
+          setMessage(error.message);
+        } else {
+          setMessage("An unexpected error occurred.");
+        }
+        if (!error) {
+          dispatch(createOrderReal(data));
+        }
+      } catch (error) {
+        console.log(error);
       }
-      // const stripe = await stripePromise;
-
-      // const checkoutSession = await axios.post(`${baseURL2}/api/create-checkout-session`, {
-      //   items: cartArray,
-      //   email: "test@gmail.com",
-      // });
     }
   };
 
@@ -547,13 +539,17 @@ function Address({ setShow }) {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="mt-[10px] stripe-field">
+                <div className="mt-[10px] ">
                   {/* <CardElement
                     options={cardElementOpts}
                     onChange={handleCardDetailsChange}
                   /> */}
 
-                  <PaymentElement id="payment-element" options={paymentElementOptions} onChange={handleCardDetailsChange}/>
+                  <PaymentElement
+                    id="payment-element"
+                    options={paymentElementOptions}
+                    onChange={handleCardDetailsChange}
+                  />
                 </div>
                 {checkoutError ? (
                   <div className="errors">
@@ -574,9 +570,9 @@ function Address({ setShow }) {
                     </div>
                     <div>
                       <button
-                        className="  rounded-md text-white font-semibold mt-[150px]"
+                        className="  rounded-md text-white font-semibold "
                         type="submit"
-                      // onClick={() => setShow("shipping")}
+                        // onClick={() => setShow("shipping")}
                       >
                         {isProcessing ? "Processing..." : `Pay $${realPrice}`}
                       </button>
