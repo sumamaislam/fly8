@@ -18,7 +18,7 @@ function Commitment() {
         <p className="md:text-[30px]  text-[22px] xl:text-[40px] font-semibold text-center overflow-hidden"  data-aos="fade-down" data-aos-duration="1500">
           Our Commitment to Quality
         </p>
-        <div className="md:mt-[76px] ">
+        <div className="md:mt-[76px]">
           <div className="md:mt-[65px] mt-[30px] flex gap-8 md:flex-row flex-col items-center md:items-start  justify-between overflow-hidden"  data-aos="fade-up" data-aos-duration="1500">
             {quality &&
               quality.data &&

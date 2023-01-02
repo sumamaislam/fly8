@@ -23,11 +23,9 @@ export default NextAuth({
           const user = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}user/login`, credentials).then((response) => {
             // let authHeader = response.headers["authorization"];
             // let token = response.data.token["authorization"];
-            let token = response.data.token;
-            console.log("Hammad100",response)
+            let token = response.data.data.token;
             // let token = authHeader.substring(7, authHeader.length);
-            console.log("hello10000ok",response.status)
-            let data = { user: response.data.user, token };
+            let data = { user: response.data.data.user, token };
             return data;
           });
 
@@ -52,7 +50,6 @@ export default NextAuth({
   callbacks: {
     jwt: async ({ token, user }) => {
       user && (token.user = user);
-      console.log("Tokens", token);
       return token;
     },
     session: async ({ session, token }) => {

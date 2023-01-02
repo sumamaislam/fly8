@@ -6,9 +6,25 @@ import Form from "./Form";
 import PaymentCard from "./PaymentCard";
 import Subscription from "./Subscription";
 import User from "./User";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getSession, useSession } from "next-auth/react";
+import { orderHistory } from "../../redux/order";
 
 function Account({ show, setShow }) {
   const [showData, setShowData] = useState(false);
+  const { data: session } = useSession();
+  const { history } = useSelector((state) => state.order);
+
+  console.log("history", history?.data);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (session?.user?.token) {
+      dispatch(orderHistory(session?.user?.token));
+    }
+  }, [session]);
 
   return (
     <div>
@@ -173,7 +189,7 @@ function Account({ show, setShow }) {
 
         {/* order */}
 
-        {!showData && show === "orders" && (
+        {!history?.length > 0 && (
           <div className="mt-[40px] border">
             <div className="my-[200px]">
               <p className="text-center font-bold text-[20px]">
@@ -191,13 +207,13 @@ function Account({ show, setShow }) {
           </div>
         )}
 
-        {showData && show === "orders" && (
+        {history && history?.data?.length > 0 && (
           <div className="mt-[40px]">
             <div class="flex flex-col">
-  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-      <div class="overflow-hidden">
-        <table class="min-w-full border text-center">
+              <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                  <div class="overflow-hidden">
+                    <table class="min-w-full border text-center">
                       <thead className="border-b  bg-black text-white ">
                         <tr>
                           <th
@@ -233,77 +249,27 @@ function Account({ show, setShow }) {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr className="border-b">
-                          <td className="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[8px] ">
-                            01
-                          </td>
-                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                            ABC-234
-                          </td>
-                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                            12-12-2022
-                          </td>
-                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                            15-12-2022
-                          </td>
-                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap md:text-sm  text-[8px] ">
-                            PENDING
-                          </td>
-                        </tr>
-
-                        <tr className="border-b">
-                          <td className="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[8px] ">
-                            01
-                          </td>
-                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                            ABC-234
-                          </td>
-                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                            12-12-2022
-                          </td>
-                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                            15-12-2022
-                          </td>
-                          <td className="  font-light px-2 py-2 whitespace-nowrap md:text-sm  text-green-500 text-[8px] ">
-                            DELIVERED
-                          </td>
-                        </tr>
-
-                        <tr className="border-b">
-                          <td className="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[8px] ">
-                            01
-                          </td>
-                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                            ABC-234
-                          </td>
-                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                            12-12-2022
-                          </td>
-                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                            15-12-2022
-                          </td>
-                          <td className=" text-red-500 font-light px-2 py-2 whitespace-nowrap md:text-sm  text-[8px] ">
-                            NOT DELIVERED
-                          </td>
-                        </tr>
-
-                        <tr className="border-b">
-                          <td className="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[8px] ">
-                            01
-                          </td>
-                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                            ABC-234
-                          </td>
-                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                            12-12-2022
-                          </td>
-                          <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                            15-12-2022
-                          </td>
-                          <td className=" font-light px-2 py-2 whitespace-nowrap md:text-sm text-green-500 text-[8px] ">
-                            DELIVERED
-                          </td>
-                        </tr>
+                        {history &&
+                          history.data &&
+                          history.data.map((item, i) => {
+                            <tr className="border-b" key={i}>
+                              <td className="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[8px] ">
+                                01
+                              </td>
+                              <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
+                                ABC-234
+                              </td>
+                              <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
+                                12-12-2022
+                              </td>
+                              <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
+                                15-12-2022
+                              </td>
+                              <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap md:text-sm  text-[8px] ">
+                                PENDING
+                              </td>
+                            </tr>;
+                          })}
                       </tbody>
                     </table>
                   </div>

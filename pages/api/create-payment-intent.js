@@ -1,11 +1,10 @@
 // This is your test secret API key.
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-import { useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 
-// const {totalPrice} = useSelector(state=>state.product)
 const calculateOrderAmount = (items) => {
-  const totalPrice = items * 100
-  return totalPrice;
+  const total = items * 100
+  return total;
 };
 
 const MyComponent = () => {
@@ -14,7 +13,6 @@ const MyComponent = () => {
   return {totalPrice}
 };
 
-console.log("Please",MyComponent)
 // const {totalPrice} = useSelector(state => state.product);
 export default async function handler(req, res) {
   const { items } = req.body;
@@ -30,7 +28,6 @@ export default async function handler(req, res) {
     //   enabled: true,
     // },
   });
-
   res.send({
     clientSecret: paymentIntent.client_secret,
   });

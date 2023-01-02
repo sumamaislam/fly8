@@ -8,10 +8,11 @@ import {
   setTotalQuantity,
   updateCart,
 } from "../../../redux/product";
+import Router from "next/router";
 
 export default function Cart({ showCart, setShowCart }) {
   const [coupan, setCoupan] = useState("");
-  const [newPrice, setNewPrice] = useState("");
+  const [newPrice, setNewPrice] = useState(0);
   const dispatch = useDispatch();
   const { carts, totalPrice, coupanData } = useSelector(
     (state) => state.product
@@ -26,7 +27,14 @@ export default function Cart({ showCart, setShowCart }) {
       dispatch(updateCart(update));
     }
   };
-  // console.log("push", coupanData);
+  const handleCheckout = () => {
+    // if (coupanData.type === "1" && coupanData.type === "0" ){
+    //   dispatch(setTotalPrice(newPrice));
+    // }
+    Router.push("/checkout");
+  };
+
+  console.log("push", coupanData);
   // useEffect(() => {
   //   if (coupan.type === "0") {
   //     setNewPrice({})
@@ -35,6 +43,16 @@ export default function Cart({ showCart, setShowCart }) {
   //     setNewPrice({})
   //   };
   // }, [coupan]);
+
+  useEffect(() => {
+    if (coupanData?.type === "0") {
+      setNewPrice(totalPrice - (totalPrice / 100) * coupanData?.price);
+    }
+    if (coupanData?.type === "1") {
+      setNewPrice(totalPrice - coupanData?.price);
+    }
+  }, [coupanData, totalPrice]);
+  console.log("newPrice", newPrice);
 
   const handleDelete = (id) => {
     dispatch(deleteCart(id));
@@ -221,40 +239,54 @@ export default function Cart({ showCart, setShowCart }) {
                   </div>
 
                   <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-                    <div className="flex justify-between text-base font-medium text-gray-900">
-                      <p>Subtotal</p>
-                      {/* {coupanData } */}
-                      <p>${totalPrice}</p>
-                    </div>
-                    {/* <form onSubmit={coupanSubmit}>
+                    {carts && carts.length > 0 ? (
                       <div>
-                        <input
-                          className="w-full border h-10 rounded-md text-[12px] font-bold pl-3 outline-none"
-                          placeholder="Coupon Code"
-                          type="text"
-                          onChange={(e) => setCoupan(e.target.value)}
-                          name="coupan"
-                          value={coupan}
-                        />
+                        <div className="flex justify-between text-base font-medium text-gray-900">
+                          <p>Subtotal</p>
+                          {/* {coupanData } */}
+                          <p>
+                            $
+                            {coupanData && coupanData.price
+                              ? newPrice
+                              : totalPrice}
+                          </p>
+                        </div>
+                        <form onSubmit={coupanSubmit}>
+                          <div>
+                            <input
+                              className="w-full border h-10 rounded-md text-[12px] font-bold pl-3 outline-none"
+                              placeholder="Coupon Code"
+                              type="text"
+                              onChange={(e) => setCoupan(e.target.value)}
+                              name="coupan"
+                              value={coupan}
+                            />
+                          </div>
+                          <div className="w-full  mt-[8px]">
+                            <button
+                              type="submit"
+                              className="w-full border h-10 rounded-md bg-gray-300 text-[14px] disabled:opacity-25"
+                              disabled={coupan.length > 0 ? false : true}
+                            >
+                              Apply coupon
+                            </button>
+                          </div>
+                        </form>
                       </div>
-                      <div className="w-full  mt-[8px]">
-                        <button
-                          type="submit"
-                          className="w-full border h-10 rounded-md bg-gray-300 text-[14px] disabled:opacity-25"
-                          disabled={coupan.length > 0 ? false : true}
-                        >
-                          Apply coupon
-                        </button>
-                      </div>
-                    </form> */}
+                    ) : (
+                      ""
+                    )}
 
                     <div className="mt-6">
-                      <Link
-                        href="/checkout"
-                        className="flex items-center justify-center rounded-md md:text-[14px] text-[9px] bg-black border px-6 py-3 text-base font-medium text-white "
+                      {/* <Link href="/checkout" className=""> */}
+                      <button
+                        onClick={handleCheckout}
+                        disabled={carts && carts.length > 0 ? false : true}
+                        className="disabled:opacity-25  flex items-center justify-center rounded-md md:text-[14px] text-[9px] bg-black border px-6 py-3 text-base font-medium text-white w-full"
                       >
                         PROCEED TO CHECKOUT
-                      </Link>
+                      </button>
+                      {/* </Link> */}
                     </div>
                   </div>
                 </div>

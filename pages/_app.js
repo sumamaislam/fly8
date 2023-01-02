@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import Layout from "../components/common/Layout";
 import "react-toastify/dist/ReactToastify.css";
 import { SessionProvider } from "next-auth/react";
+import { setDataCoupans } from "../redux/product";
 
 function MyApp({ Component, session ,pageProps }) {
   const [isSSR, setIsSSR] = useState(true);
@@ -25,7 +26,7 @@ function MyApp({ Component, session ,pageProps }) {
     recentCheck,
   } = useSelector((state) => state.product);
 
-  const { slugData } = useSelector((state) => state.product);
+  const { coupanData , dataCoupans } = useSelector((state) => state.product);
 
   useEffect(() => {
     const handleStart = (url) => {
@@ -49,12 +50,38 @@ function MyApp({ Component, session ,pageProps }) {
           carts: carts,
           totalPrice: totalPrice,
           totalQuantity: totalQuantity,
+          dataCoupans: dataCoupans
         })
       );
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [carts, totalPrice, totalQuantity]);
+  }, [carts, totalPrice, totalQuantity, dataCoupans]);
+
+  useEffect(()=>{
+    if (coupanData && coupanData.price === "1" && coupanData.price === "0" ){
+      dispatch(setDataCoupans(coupanData))
+      console.log(coupanData) 
+    }
+  },[coupanData])
+
+  
+  // useEffect(() => {
+  //   if (coupanData?.price){
+  //     if (typeof localStorage !== "undefined") {
+  //       localStorage.setItem(
+  //         "localCart",
+  //         JSON.stringify({
+  //           carts: carts,
+  //           totalPrice: totalPrice,
+  //           totalQuantity: totalQuantity,
+  //           coupanData: coupanData
+  //         })
+  //       );
+  //     }
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [coupanData]);
 
   useEffect(() => {
     if (recentCheck) {

@@ -24,6 +24,7 @@ const recentData =
   localStorage.getItem("recent") &&
   JSON.parse(localStorage.getItem("recent"));
 
+
 const initialState = {
   // carts: localCarts && localCarts?.carts?.length > 0 ? localCarts.carts : [],
   // carts: [],
@@ -34,13 +35,14 @@ const initialState = {
   gummiesData: {},
   selectedProduct: {},
   slugData: {},
-  coupanData: {},
   // detailData: localSlug.length > 0 ? localSlug : {},
   detailData: {},
   shopAll: {},
+  dataCoupans : localCart?.dataCoupans ? localCart.dataCoupans : {},
   recentCheck: false,
   recentProduct: recentData?.length > 0 ? recentData : [],
 
+  coupanData: {},
   carts: localCart?.carts?.length > 0 ? localCart.carts : [],
   totalPrice: localCart?.totalPrice ? localCart.totalPrice : 0,
   totalQuantity: localCart?.totalQuantity ? localCart.totalQuantity : 0,
@@ -186,6 +188,9 @@ export const productSlice = createSlice({
     setDetailData: (state, action) => {
       state.detailData = action.payload;
     },
+    setDataCoupans: (state, action) => {
+      state.dataCoupans = action.payload;
+    },
     setRecentProduct: (state, action) => {
       if (Object.keys(action.payload).length > 0) {
         state.recentProduct = [...state.recentProduct, action.payload];
@@ -284,6 +289,7 @@ export const {
   setDetailData,
   setRecentProduct,
   setRecentCheck,
+  setDataCoupans
 } = productSlice.actions;
 
 export default productSlice.reducer;

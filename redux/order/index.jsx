@@ -9,11 +9,12 @@ import { toast } from "react-toastify";
 import Router from "next/router";
 
 const initialState = {
-  orders: [],
+  orders: {},
   loading: false,
   error: "",
   orderDetail: {},
-  secret: ""
+  secret: "",
+  history: {}
   
 };
 
@@ -49,7 +50,7 @@ export const orderHistory = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await axios
-        .get(`${baseURL}users/orders?token=${payload}`, { mode: "cors" })
+        .get(`${baseURL}user/orders?token=${payload}`, { mode: "cors" })
         .then((response) => response.data);
       // await thunkAPI.dispatch(setTotalPrice(0));
       // await thunkAPI.dispatch(setTotalQuantity(0));
@@ -75,7 +76,7 @@ export const createOrderReal = createAsyncThunk(
   "order/createOrderNew",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post(`${baseURL}checkout`,payload,{mode:'cors'}).then((response) => response.data)
+      const response = await axios.post(`${baseURL}changestatus/${payload}`,payload,{mode:'cors'}).then((response) => response.data)
       // const response = await axios
       //   .post(
       //     `${baseURL}user/login`,
@@ -152,7 +153,7 @@ export const orderSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(orderHistory.fulfilled, (state, action) => {
-      state.orderHistory = action.payload;
+      state.history = action.payload;
       state.loading = false;
       state.error = "";
     });

@@ -17,10 +17,6 @@ const Layout = ({ children }) => {
     (coupanData?.type === "1" && totalPrice - coupanData?.price) ||
     (coupanData?.type === "0" &&
       totalPrice - (totalPrice / 100) * coupanData?.price) || totalPrice;
-
-      useEffect(()=>{
-        console.log("price",clientSecret)
-      },[clientSecret])
   
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads

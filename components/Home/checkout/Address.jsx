@@ -17,7 +17,7 @@ import RequestMessage from "../../common/RequestMessage";
 import { createOrder, createOrderReal } from "../../../redux/order";
 import { baseURL } from "../../../redux/request";
 import { toast } from "react-toastify";
-import { sentCoupanRequest, setTotalPrice } from "../../../redux/product";
+import { sentCoupanRequest, sentslugRequest, setTotalPrice } from "../../../redux/product";
 // async function createPaymentIntent(amount, currency) {
 //   const stripe = await stripePromise;
 //   const { data } = await stripe.createPaymentIntent({
@@ -46,8 +46,7 @@ function Address({ setShow }) {
   const { totalPrice, carts, totalQuantity, coupanData } = useSelector(
     (state) => state.product
   );
-  const { secret } = useSelector((state)=>state.order)
-  console.log("important",secret)
+  const { secret ,orders } = useSelector((state) => state.order);
 
   const paymentElementOptions = {
     layout: "tabs",
@@ -255,7 +254,7 @@ function Address({ setShow }) {
       try {
         dispatch(createOrder(abcd));
         const cardElement = elements.getElement("card");
-        console.log("please",cardElement)
+        console.log("please", cardElement);
         const billingDetails = {
           name: abcd?.name,
           email: abcd?.email,
@@ -266,34 +265,24 @@ function Address({ setShow }) {
             postal_code: abcd?.zip,
           },
         };
-        // const paymentMethodReq = await stripe.createPaymentMethod({
-        //   type: "card",
-        //   card: cardElement,
-        //   billing_details: billingDetails,
-        // });
-        // if (paymentMethodReq.error) {
-        //   setCheckoutError(paymentMethodReq.error.message);
-        //   setProcessingTo(false);
-        //   return;
-        // }
-        // const { error } = await stripe.confirmCardPayment(secret, {
-        //   payment_method: paymentMethodReq.paymentMethod.id,
-        // });
-        // const { error } = await stripe.confirmPayment({
-        //   elements,
-        //   confirmParams: {
-        //     return_url: "http://localhost:30"
-        //   },
-        //   // payment_method: paymentMethodReq.paymentMethod.id,
-        // });
-        // if (error.type === "card_error" || error.type === "validation_error") {
-        //   setMessage(error.message);
-        // } else {
-        //   setMessage("An unexpected error occurred.");
-        // }
-        // if (!error) {
-        //   dispatch(createOrderReal(data));
-        // }
+        const paymentMethodReq = await stripe.createPaymentMethod({
+          type: "card",
+          card: cardElement,
+          billing_details: billingDetails,
+        });
+        if (paymentMethodReq.error) {
+          setCheckoutError(paymentMethodReq.error.message);
+          setProcessingTo(false);
+          return;
+        }
+        const { error } = await stripe.confirmCardPayment(secret, {
+          payment_method: paymentMethodReq.paymentMethod.id,
+        });
+        if (!error) {
+          console.log("success")
+          // console.log(orders.data.data.id)
+          dispatch(createOrderReal(id));
+        }
       } catch (error) {
         console.log(error);
       }
@@ -547,16 +536,19 @@ function Address({ setShow }) {
                   />
                 </div>
                 <div className="mt-[10px] ">
-                  {/* <CardElement
-                    options={cardElementOpts}
-                    onChange={handleCardDetailsChange}
-                  /> */}
-
-                  <PaymentElement
+                  <CardElement
+                    // options={cardElementOpts}
+                    // onChange={handleCardDetailsChange}
                     id="payment-element"
                     options={paymentElementOptions}
                     onChange={handleCardDetailsChange}
                   />
+
+                  {/* <PaymentElement
+                    id="payment-element"
+                    options={paymentElementOptions}
+                    onChange={handleCardDetailsChange}
+                  /> */}
                 </div>
                 {checkoutError ? (
                   <div className="errors">
@@ -768,7 +760,7 @@ function Address({ setShow }) {
             {/* button  */}
 
             {/* <form className=" " onSubmit={handleSubmit}> */}
-            {!coupanData.price && (
+            {/* {!coupanData.price && (
               <form className=" mt-[50px]  flex h-[45px] " onSubmit={handleSub}>
                 <input
                   className="w-full p-3 rounded-l-md border outline-none "
@@ -788,9 +780,8 @@ function Address({ setShow }) {
                 </button>
               </form>
             )}
-            {coupanData.price && <p className="mt-[30px]">Discount Applied</p>}
-            {/* </form> */}
-            <div className="p-2 text-[12px]">
+            {coupanData.price && <p className="mt-[30px]">Discount Applied</p>} */}
+            {/* <div className="p-2 text-[12px]">
               <div className="w-full flex justify-between mt-4">
                 <div>
                   <p className="font-normal">Discount :</p>
@@ -802,7 +793,6 @@ function Address({ setShow }) {
                       (coupanData[0] === "no found" && "0") ||
                       "0"}
                   </p>
-                  {/* <p className="font-bold">{"0%"}</p> */}
                 </div>
               </div>
               <div className="w-full flex justify-between mt-4">
@@ -822,8 +812,8 @@ function Address({ setShow }) {
                 </div>
               </div>
             </div>
-            <hr className="border-black mt-[10px]" />
-            <div className="p-2">
+            <hr className="border-black mt-[10px]" /> */}
+            <div className="p-2 mt-[40px]">
               <div className="w-full flex justify-between mt-4">
                 <div>
                   <p className="font-bold">TOTAL :</p>
