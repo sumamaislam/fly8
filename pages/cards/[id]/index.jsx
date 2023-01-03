@@ -227,19 +227,19 @@ export default function Detail() {
                 alt=""
               />
             </div>
-            <div className="gap-[80px]  justify-center lg:justify-start max-w-[500px] m-auto grid grid-cols-12 overlay  overflow-x-hidden hover:overflow-x-scroll" >
+            <div className="gap-[80px]  justify-center lg:justify-start max-w-[500px] m-auto grid grid-cols-12 overlay cursor-pointer overflow-x-scroll" >
               {mainData?.product?.galleries?.map((items, index) => {
                 return (
                   
                   <div
-                    className=" py-5 w-[76px]"
+                    className=" py-4 w-[76px]"
                     key={index}
                     onClick={() => setShow(items.image)}
                   >
                     <img
                       className={`   p-2 border w-[300px] ${
                         show === items.image
-                          ? "border-2 border-black rounded-md "
+                          ? "border-1 border-black rounded-sm "
                           : ""
                       } `}
                       src={items.image}
