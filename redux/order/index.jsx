@@ -50,7 +50,7 @@ export const orderHistory = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await axios
-        .get(`${baseURL}user/orders?token=${payload}`, { mode: "cors" })
+        .get(`${baseURL}user/orders/${payload}?token=${payload}`, { mode: "cors" })
         .then((response) => response.data);
       // await thunkAPI.dispatch(setTotalPrice(0));
       // await thunkAPI.dispatch(setTotalQuantity(0));
@@ -76,7 +76,7 @@ export const createOrderReal = createAsyncThunk(
   "order/createOrderNew",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post(`${baseURL}changestatus/${payload}`,payload,{mode:'cors'}).then((response) => response.data)
+      const response = await axios.post(`${baseURL}change_status/${payload}`,{mode:'cors'}).then((response) => response.data)
       // const response = await axios
       //   .post(
       //     `${baseURL}user/login`,

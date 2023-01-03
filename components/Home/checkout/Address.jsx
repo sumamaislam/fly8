@@ -14,10 +14,14 @@ import {
 } from "@stripe/react-stripe-js";
 import axios from "axios";
 import RequestMessage from "../../common/RequestMessage";
-import { createOrder, createOrderReal } from "../../../redux/order";
+import order, { createOrder, createOrderReal } from "../../../redux/order";
 import { baseURL } from "../../../redux/request";
 import { toast } from "react-toastify";
-import { sentCoupanRequest, sentslugRequest, setTotalPrice } from "../../../redux/product";
+import {
+  sentCoupanRequest,
+  sentslugRequest,
+  setTotalPrice,
+} from "../../../redux/product";
 // async function createPaymentIntent(amount, currency) {
 //   const stripe = await stripePromise;
 //   const { data } = await stripe.createPaymentIntent({
@@ -38,6 +42,7 @@ function Address({ setShow }) {
   const [publishedKey, setPublishedKey] = useState(null);
   const [message, setMessage] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [ordersData, setOrdersData] = useState({});
 
   const dispatch = useDispatch();
   const stripe = useStripe();
@@ -46,7 +51,13 @@ function Address({ setShow }) {
   const { totalPrice, carts, totalQuantity, coupanData } = useSelector(
     (state) => state.product
   );
-  const { secret ,orders } = useSelector((state) => state.order);
+  const { secret, orders } = useSelector((state) => state.order);
+
+  useEffect(() => {
+    if (orders) {
+      setOrdersData(orders);
+    }
+  }, [orders]);
 
   const paymentElementOptions = {
     layout: "tabs",
@@ -252,37 +263,38 @@ function Address({ setShow }) {
         items: cartArray,
       };
       try {
-        dispatch(createOrder(abcd));
-        const cardElement = elements.getElement("card");
-        console.log("please", cardElement);
-        const billingDetails = {
-          name: abcd?.name,
-          email: abcd?.email,
-          address: {
-            city: abcd?.city,
-            line1: abcd?.shipping_address,
-            state: abcd?.state,
-            postal_code: abcd?.zip,
-          },
-        };
-        const paymentMethodReq = await stripe.createPaymentMethod({
-          type: "card",
-          card: cardElement,
-          billing_details: billingDetails,
-        });
-        if (paymentMethodReq.error) {
-          setCheckoutError(paymentMethodReq.error.message);
-          setProcessingTo(false);
-          return;
-        }
-        const { error } = await stripe.confirmCardPayment(secret, {
-          payment_method: paymentMethodReq.paymentMethod.id,
-        });
-        if (!error) {
-          console.log("success")
-          // console.log(orders.data.data.id)
-          dispatch(createOrderReal(id));
-        }
+        dispatch(createOrder(abcd)).then(async (res)=>{
+          const cardElement = elements.getElement("card");
+          const billingDetails = {
+            name: abcd?.name,
+            email: abcd?.email,
+            address: {
+              city: abcd?.city,
+              line1: abcd?.shipping_address,
+              state: abcd?.state,
+              postal_code: abcd?.zip,
+            },
+          };
+          const paymentMethodReq = await stripe.createPaymentMethod({
+            type: "card",
+            card: cardElement,
+            billing_details: billingDetails,
+          });
+          if (paymentMethodReq.error) {
+            setCheckoutError(paymentMethodReq.error.message);
+            setProcessingTo(false);
+            return;
+          }
+          const { error } = await stripe.confirmCardPayment(secret, {
+            payment_method: paymentMethodReq.paymentMethod.id,
+          });
+          if (!error) {
+            console.log("success");
+            console.log(ordersData);
+            dispatch(createOrderReal(res?.payload?.data?.order_number));
+          }
+        })
+        
       } catch (error) {
         console.log(error);
       }
