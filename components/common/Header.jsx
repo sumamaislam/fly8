@@ -233,6 +233,11 @@ function Header() {
                   </svg>
                 </button>
               </div>
+              <div>
+                <Link href="/notification">
+                <img className="w-[20px]" src="/svg/notification.svg" alt="" />
+                </Link>
+              </div>
             </div>
             {/* <!-- Mobile menu button --> */}
           </div>

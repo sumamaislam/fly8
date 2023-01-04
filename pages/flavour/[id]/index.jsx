@@ -40,6 +40,7 @@ export default function Delta11() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slugData]);
+  const url="https://ecomm.fly8.us/assets/files/"
 
   return (
     <div>
@@ -83,7 +84,7 @@ export default function Delta11() {
         </div>
       </div>
       <div className="mt-[15px]">
-        <img className="h-[300px] w-full" src="/banner/delta9.jpg" alt="" />
+        <img className="h-[300px] w-full" src={`${url}${slugData[0]?.subcategory?.banner}`} alt="" />
       </div>
 
       <div className="text-center font-bold text-[#5FB75D]">
