@@ -14,7 +14,7 @@ export default function Cart({ showCart, setShowCart }) {
   const [coupan, setCoupan] = useState("");
   const [newPrice, setNewPrice] = useState(0);
   const dispatch = useDispatch();
-  const { carts, totalPrice, coupanData } = useSelector(
+  const { carts, totalPrice, dataCoupans } = useSelector(
     (state) => state.product
   );
 
@@ -28,13 +28,13 @@ export default function Cart({ showCart, setShowCart }) {
     }
   };
   const handleCheckout = () => {
-    // if (coupanData.type === "1" && coupanData.type === "0" ){
+    // if (dataCoupans.type === "1" && dataCoupans.type === "0" ){
     //   dispatch(setTotalPrice(newPrice));
     // }
     Router.push("/checkout");
   };
 
-  console.log("push", coupanData);
+  // console.log("push", dataCoupans);
   // useEffect(() => {
   //   if (coupan.type === "0") {
   //     setNewPrice({})
@@ -44,15 +44,15 @@ export default function Cart({ showCart, setShowCart }) {
   //   };
   // }, [coupan]);
 
-  useEffect(() => {
-    if (coupanData?.type === "0") {
-      setNewPrice(totalPrice - (totalPrice / 100) * coupanData?.price);
-    }
-    if (coupanData?.type === "1") {
-      setNewPrice(totalPrice - coupanData?.price);
-    }
-  }, [coupanData, totalPrice]);
-  console.log("newPrice", newPrice);
+  // useEffect(() => {
+  //   if (dataCoupans?.type === "0") {
+  //     setNewPrice(totalPrice - (totalPrice / 100) * dataCoupans?.price);
+  //   }
+  //   if (dataCoupans?.type === "1") {
+  //     setNewPrice(totalPrice - dataCoupans?.price);
+  //   }
+  // }, [dataCoupans, totalPrice]);
+  // console.log("newPrice", newPrice);
 
   const handleDelete = (id) => {
     dispatch(deleteCart(id));
@@ -243,12 +243,15 @@ export default function Cart({ showCart, setShowCart }) {
                       <div>
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <p>Subtotal</p>
-                          {/* {coupanData } */}
+                          {/* {dataCoupans } */}
                           <p>
                             $
-                            {coupanData && coupanData.price
+                            {/* {dataCoupans && dataCoupans.price
                               ? newPrice
-                              : totalPrice}
+                              : totalPrice} */}
+                              {dataCoupans?.type === "0" && totalPrice - (totalPrice / 100) * dataCoupans?.price}
+                              {dataCoupans?.type === "1" && totalPrice - dataCoupans?.price}
+                              {!dataCoupans?.type && totalPrice}
                           </p>
                         </div>
                         <form onSubmit={coupanSubmit}>
@@ -278,15 +281,15 @@ export default function Cart({ showCart, setShowCart }) {
                     )}
 
                     <div className="mt-6">
-                      {/* <Link href="/checkout" className=""> */}
+                      <Link href="/checkout" className="">
                       <button
-                        onClick={handleCheckout}
+                        // onClick={handleCheckout}
                         disabled={carts && carts.length > 0 ? false : true}
                         className="disabled:opacity-25  flex items-center justify-center rounded-md md:text-[14px] text-[9px] bg-black border px-6 py-3 text-base font-medium text-white w-full"
                       >
                         PROCEED TO CHECKOUT
                       </button>
-                      {/* </Link> */}
+                      </Link>
                     </div>
                   </div>
                 </div>

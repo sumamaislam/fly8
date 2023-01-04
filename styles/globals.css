@@ -143,39 +143,55 @@ li > button svg {
   margin-top: 3px;
   margin-bottom: 15px;
 }
-.StripeElement {
+.noerror {
   margin-bottom: 10px;
   padding: 14.41px 10px;
   height: 50px;
   outline: none;
   border-radius: 3px;
   box-shadow: none;
-  border: 1px solid red;
+  border: 1px solid rgb(55 65 81 / 1);
+  border-radius: 0.375rem;
   &:focus {
   }
 }
 .overlay::-webkit-scrollbar {
-  width: 1px;  
-  height: 4px;     
-  
-            /* width of the entire scrollbar */
+  width: 1px;
+  height: 4px;
+
+  /* width of the entire scrollbar */
 }
 .overlay::-webkit-scrollbar-track {
-       
   width: 2px;
-  
 }
 .overlay::-webkit-scrollbar-thumb {
-  background-color: gray;    /* color of the scroll thumb */
-  border-radius: 10px;   
-  width: 1px;    /* roundness of the scroll thumb */
-   /* creates padding around scroll thumb */
+  background-color: gray; /* color of the scroll thumb */
+  border-radius: 10px;
+  width: 1px; /* roundness of the scroll thumb */
+  /* creates padding around scroll thumb */
 }
-body{
+body {
   -webkit-touch-callout: none; /* Disable callout on iOS */
   -webkit-user-select: none; /* Disable selection on iOS */
   -khtml-user-select: none; /* Disable selection on old Konqueror browsers */
   -moz-user-select: none; /* Disable selection on Firefox */
   -ms-user-select: none; /* Disable selection on Internet Explorer */
   user-select: none; /* Disable selection on modern browsers */
+}
+
+.hello select {
+height: 100%;
+}
+
+.error {
+  margin-bottom: 10px;
+  padding: 14.41px 10px;
+  height: 50px;
+  outline: none;
+  border-radius: 3px;
+  box-shadow: none;
+  border: 1px solid red !important;
+  border-radius: 0.375rem;
+  &:focus {
+  }
 }

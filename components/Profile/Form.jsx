@@ -125,7 +125,6 @@ function Form() {
                   onChange={handleChange}
                 />
                 <p className="text-red-500">{formError.first_name}</p>
-
               </div>
               <div className="w-[100%]">
                 <InputField
@@ -136,7 +135,6 @@ function Form() {
                   onChange={handleChange}
                 />
                 <p className="text-red-500">{formError.last_name}</p>
-
               </div>
             </div>
 
@@ -147,7 +145,7 @@ function Form() {
               value={formData.company || ""}
               onChange={handleChange}
             />
-                <p className="text-red-500">{formError.company}</p>
+            <p className="text-red-500">{formError.company}</p>
 
             <InputField
               placeholder="Street Address"
@@ -156,7 +154,7 @@ function Form() {
               value={formData.street_address || ""}
               onChange={handleChange}
             />
-                <p className="text-red-500">{formError.street_address}</p>
+            <p className="text-red-500">{formError.street_address}</p>
 
             <div className="w-[100%]  mt-[10px]">
               <Selectoption
@@ -165,8 +163,7 @@ function Form() {
                 value={formData.country || ""}
                 onChange={handleCountryChange}
               />
-                <p className="text-red-500">{formError.country}</p>
-
+              <p className="text-red-500">{formError.country}</p>
             </div>
             <div className="flex  justify-between gap-4">
               <div className="w-full">
@@ -178,7 +175,6 @@ function Form() {
                   onChange={handleChange}
                 />
                 <p className="text-red-500">{formError.zip_code}</p>
-
               </div>
               <div className="w-full">
                 {/* <StateSelect
@@ -200,7 +196,6 @@ function Form() {
                   onChange={handleChange}
                 />
                 <p className="text-red-500">{formError.state}</p>
-
               </div>
             </div>
             <div className="w-full">
@@ -211,8 +206,7 @@ function Form() {
                 value={formData.town || ""}
                 onChange={handleChange}
               />
-                <p className="text-red-500">{formError.town}</p>
-
+              <p className="text-red-500">{formError.town}</p>
             </div>
             <div className="w-full">
               <InputField
@@ -222,8 +216,7 @@ function Form() {
                 value={formData.phone || ""}
                 onChange={handleChange}
               />
-                <p className="text-red-500">{formError.phone}</p>
-
+              <p className="text-red-500">{formError.phone}</p>
             </div>
 
             <div className="flex justify-center mt-[2rem] pb-[2rem] ">
@@ -272,7 +265,7 @@ function Form() {
                   className="w-full py-[10px] mt-[20px] border border-gray-700  rounded-md p-2 outline-none"
                   onChange={handleChanged}
                 />
-                 <p className="text-red-500">{filedError.lastname}</p>
+                <p className="text-red-500">{filedError.lastname}</p>
               </div>
             </div>
 
@@ -283,7 +276,7 @@ function Form() {
               className="w-full py-[10px] mt-[10px] border border-gray-700 rounded-md p-2 outline-none"
               onChange={handleChanged}
             />
-             <p className="text-red-500">{filedError.company}</p>
+            <p className="text-red-500">{filedError.company}</p>
             <InputField
               placeholder="Street Address"
               name="streetaddress"
@@ -291,7 +284,7 @@ function Form() {
               className="w-full py-[10px] mt-[10px] border border-gray-700 rounded-md p-2 outline-none"
               onChange={handleChanged}
             />
- <p className="text-red-500">{filedError.streetaddress}</p>
+            <p className="text-red-500">{filedError.streetaddress}</p>
             <div className="">
               <Selectoption
                 className=" w-full outline-none  border mt-[10px] rounded-lg border-black pl-2 py-3"
@@ -299,7 +292,7 @@ function Form() {
                 value={field.country}
                 onChange={handleChanged}
               />
-               <p className="text-red-500">{filedError.country}</p>
+              <p className="text-red-500">{filedError.country}</p>
             </div>
 
             <div className="flex  justify-between gap-4">
@@ -311,7 +304,7 @@ function Form() {
                   onChange={handleChanged}
                   value={field.zipcode}
                 />
-                 <p className="text-red-500">{filedError.zipcode}</p>
+                <p className="text-red-500">{filedError.zipcode}</p>
               </div>
               <div className="w-full ">
                 {/* <StateSelect
@@ -329,7 +322,7 @@ function Form() {
                   onChange={handleChanged}
                   value={field.state}
                 />
-                 <p className="text-red-500">{filedError.state}</p>
+                <p className="text-red-500">{filedError.state}</p>
               </div>
             </div>
             <div className="w-full">
@@ -340,7 +333,7 @@ function Form() {
                 onChange={handleChanged}
                 className=" w-full outline-none py-[10px] mt-[10px] border border-gray-700 rounded-md p-2"
               />
-               <p className="text-red-500">{filedError.city}</p>
+              <p className="text-red-500">{filedError.city}</p>
             </div>
             <div className="w-full">
               <InputField
@@ -350,7 +343,7 @@ function Form() {
                 onChange={handleChanged}
                 className=" w-full outline-none py-[10px] mt-[10px] border border-gray-700 rounded-md p-2"
               />
-               <p className="text-red-500">{filedError.phone}</p>
+              <p className="text-red-500">{filedError.phone}</p>
             </div>
 
             <div className="flex justify-center mt-[2rem] pb-[2rem] ">

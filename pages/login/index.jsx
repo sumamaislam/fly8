@@ -8,6 +8,8 @@ import { footerDataRequest, navDataRequest } from "../../redux/home";
 import { wrapper } from "../../store";
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import RequestMessage from "../../components/common/RequestMessage";
 // import { Footer, Header } from "../common";
 // import { Email } from "../Home";
 
@@ -51,7 +53,10 @@ function login() {
       console.log({ ...val, redirect: false })
       signIn("credentials", { ...val, redirect: false }).then((response) => {
         if (response?.ok) {
-          router.push("/");
+          router.push("/profile");
+        }else{
+          toast(<RequestMessage message="Login failed! " />);
+          toast(<RequestMessage message="Invalid Username or password" />);
         }
       });
     }
@@ -61,7 +66,7 @@ function login() {
       <Header />
       <div className="bg-[url('/profile/22.jpg')] bg-cover ">
         <div className="pt-[130px] pb-[50px]">
-          <p className="text-center text-white text-[30px] font-bold">ORDERS</p>
+          <p className="text-center text-white text-[30px] font-bold">LOGIN / SIGNUP</p>
         </div>
       </div>
       <div className="2xl:w-[65%] w-[90%] m-auto">
@@ -97,16 +102,16 @@ function login() {
               </div>
               {/* forget your password */}
               <div>
-                <Link href="">
+                <Link href="/forgotpassword">
                   <p className="underline text-[#EB001B] outline-none mt-[10px] text-[10px] text-right">
-                    Forget your password.?
+                    Forgot your password.?
                   </p>
                 </Link>
               </div>
               {/* checkbox */}
-              <div className="mt-[15px] text-[12px] font-semibold">
+              {/* <div className="mt-[15px] text-[12px] font-semibold">
                 <input type="checkbox" name="" id="" /> Remember me
-              </div>
+              </div> */}
               {/* button */}
               <div className=" bg-black mt-[15px] text-center rounded-xl cursor-pointer">
                 <button className=" w-full text-[14px] text-white fontbold py-3 ">

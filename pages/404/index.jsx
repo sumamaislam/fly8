@@ -14,7 +14,7 @@ function index() {
             <div className='flex justify-center md:mt-[50px] mt-[20px] '>
               <Link href="/">
               <button className='bg-black text-white p-4 font-bold text-[12px] rounded-xl'>
-GO TO BACK
+                GO TO BACK
               </button>
               </Link>
             </div>

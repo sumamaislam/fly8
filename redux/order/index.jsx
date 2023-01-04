@@ -3,10 +3,11 @@ import axios from "axios";
 import { HYDRATE } from "next-redux-wrapper";
 import request, { baseURL } from "../request";
 import { setLoading } from "../global";
-import { emptyCart, setTotalPrice, setTotalQuantity } from "../product";
+import { emptyCart, setDataCoupans, setTotalPrice, setTotalQuantity } from "../product";
 import RequestMessage from "../../components/common/RequestMessage";
 import { toast } from "react-toastify";
 import Router from "next/router";
+import { getSession } from "next-auth/react";
 
 const initialState = {
   orders: {},
@@ -14,14 +15,14 @@ const initialState = {
   error: "",
   orderDetail: {},
   secret: "",
-  history: {}
-  
+  history: {},
 };
 
 export const createOrder = createAsyncThunk(
   "order/createOrder",
   async (payload, thunkAPI) => {
     try {
+      // await thunkAPI.dispatch(setLoading(true));
       const response = await axios
         .post(`${baseURL}checkout`, payload, { mode: "cors" })
         .then((response) => response.data);
@@ -37,6 +38,7 @@ export const createOrder = createAsyncThunk(
       //   autoClose: 8000,
       // });
       // Router.push("/");
+      // await thunkAPI.dispatch(setLoading(false));
       return response;
     } catch (error) {
       console.log("error", error);
@@ -49,8 +51,10 @@ export const orderHistory = createAsyncThunk(
   "order/orderHistory",
   async (payload, thunkAPI) => {
     try {
+      const session = await getSession();
+      thunkAPI.dispatch(setLoading(true));
       const response = await axios
-        .get(`${baseURL}user/orders/${payload}?token=${payload}`, { mode: "cors" })
+        .get(`${baseURL}user/orders?token=${session?.user?.token}`)
         .then((response) => response.data);
       // await thunkAPI.dispatch(setTotalPrice(0));
       // await thunkAPI.dispatch(setTotalQuantity(0));
@@ -64,6 +68,7 @@ export const orderHistory = createAsyncThunk(
       //   autoClose: 8000,
       // });
       // Router.push("/");
+      thunkAPI.dispatch(setLoading(false));
       return response;
     } catch (error) {
       console.log("error", error);
@@ -76,26 +81,32 @@ export const createOrderReal = createAsyncThunk(
   "order/createOrderNew",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post(`${baseURL}change_status/${payload}`,{mode:'cors'}).then((response) => response.data)
-      // const response = await axios
-      //   .post(
-      //     `${baseURL}user/login`,
-      //     { email: "amran6421@gmail.com", password: "1234" },
-      //     { mode: "cors" }
-      //   )
+      // await thunkAPI.dispatch(setLoading(true));
+      const response = await axios
+        .post(`${baseURL}change_status/${payload}`, { mode: "cors" })
+        .then((response) => response.data)
+        // const response = await axios
+        //   .post(
+        //     `${baseURL}user/login`,
+        //     { email: "amran6421@gmail.com", password: "1234" },
+        //     { mode: "cors" }
+        //   )
         .then((response) => response.data);
-      await thunkAPI.dispatch(setTotalPrice(0));
-      await thunkAPI.dispatch(setTotalQuantity(0));
-      await thunkAPI.dispatch(emptyCart());
+      // await thunkAPI.dispatch(setLoading(false));
+      thunkAPI.dispatch(setTotalPrice(0));
+      thunkAPI.dispatch(setTotalQuantity(0));
+      thunkAPI.dispatch(emptyCart());
+      thunkAPI.dispatch(setDataCoupans());
+      thunkAPI.dispatch(setLoading(false));
       localStorage.setItem(
         "localCart",
-        JSON.stringify({ carts: [], totalPrice: 0, totalQuantity: 0 })
+        JSON.stringify({ carts: [], totalPrice: 0, totalQuantity: 0 , dataCoupans: {}})
       );
+      Router.push("/profile");
       toast(<RequestMessage message="Payment Verified!" />);
       toast(<RequestMessage message="Thank you for shopping with us!" />, {
         autoClose: 8000,
       });
-      Router.push("/");
       return response;
     } catch (error) {
       console.log("error", error);
@@ -110,7 +121,7 @@ export const orderSlice = createSlice({
   reducers: {
     setSecret: (state, action) => {
       state.secret = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action) => {
@@ -164,8 +175,6 @@ export const orderSlice = createSlice({
   },
 });
 
-export const {
-  setSecret
-} = orderSlice.actions;
+export const { setSecret } = orderSlice.actions;
 
 export default orderSlice.reducer;

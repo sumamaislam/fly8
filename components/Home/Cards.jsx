@@ -29,7 +29,7 @@ function Cards() {
                 </h1>
                 {/* {JSON.stringify(main[item])} */}
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 justify-items-center ">
-                  {main[item].map((items, index) => {
+                  {main && main[item] && main[item]?.map((items, index) => {
                     return (
                       <div className="max-w-sm overflow-hidden w-full" key={index}>
                         <div className="justify-center flex" data-aos="zoom-out" data-aos-duration="1500" >

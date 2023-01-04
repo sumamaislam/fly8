@@ -7,8 +7,9 @@ import Form from "../../components/Profile/Form";
 import PaymentCard from "../../components/Profile/PaymentCard";
 import Subscription from "../../components/Profile/Subscription";
 import User from "../../components/Profile/User";
-import { navDataRequest } from "../../redux/home";
+import { footerDataRequest, navDataRequest } from "../../redux/home";
 import { wrapper } from "../../store";
+import { getSession } from "next-auth/react";
 
 function Profile() {
   const [show, setShow] = useState("orders");
@@ -30,6 +31,27 @@ function Profile() {
 export default Profile;
 
 
-export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+// export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+ 
+// });
+
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
+  const session = await getSession({ req: context.req });
   await store.dispatch(navDataRequest());
+  await store.dispatch(footerDataRequest());
+  if (session) {
+    return {
+      props: {
+        session,
+      },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: `/login`,
+        permanent: false,
+      },
+    };
+  }
 });

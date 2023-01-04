@@ -39,6 +39,8 @@ import {
   WhatsappShareButton,
   WorkplaceShareButton,
 } from "react-share";
+import { toast } from "react-toastify";
+import RequestMessage from "../../../components/common/RequestMessage";
 
 export default function Detail() {
   const [show, setShow] = useState("");
@@ -80,7 +82,7 @@ export default function Detail() {
 
   const increment = () => {
     if (mainData?.product?.stock <= mainData?.product?.qty) {
-      alert("Not have more stock");
+      toast(<RequestMessage message="Not have more stock" />);
     } else {
       setMainData({
         ...mainData,
@@ -525,27 +527,12 @@ export default function Detail() {
                 );
               })}
             </div>
-            <div className=" mt-[15px] md:text-[20px] text-[16px] flex gap-8 ">
+            {/* <div className=" mt-[15px] md:text-[20px] text-[16px] flex gap-8 ">
               <p className="font-bold ">Share to :</p>
-              {/* <FacebookShareButton><img src="/svg/1.svg" alt="" /></FacebookShareButton> */}
-              {/* <FacebookShareButton> */}
-              {/* <FacebookIcon size={32} round={true} /> */}
-              {/* <img src="/svg/2.svg" alt="" /> */}
-              {/* JHGJGH */}
-              {/* </FacebookShareButton> */}
-              {/* <FacebookShareButton */}
-              {/* url={"https://peing.net/ja/"}
-                quote={"フェイスブックはタイトルが付けれるようです"}
-                hashtag={"#hashtag"}
-                description={"aiueo"}
-                className="Demo__some-network__share-button"
-              >
-                <FacebookIcon size={32} round /> Facebookでshare
-              </FacebookShareButton> */}
               <img src="/svg/2.svg" alt="" />
               <img src="/svg/3.svg" alt="" />
               <img src="/svg/4.svg" alt="" />
-            </div>
+            </div> */}
           </div>
         </div>
         {/* Heading */}
@@ -732,7 +719,7 @@ export default function Detail() {
           )}
         </div>
       </div>
-      <div className="mt-[100px] container m-auto">
+      {/* <div className="mt-[100px] container m-auto">
         <h1 className="text-2xl font-bold ml-5">Recently Viewed</h1>
         <div className="  container m-auto">
           <div className="grid xl:gap-20 gap-12 lg:grid-cols-4 md:grid-cols-2  justify-center">
@@ -787,7 +774,7 @@ export default function Detail() {
             })}
           </div>
         </div>
-      </div>
+      </div> */}
       <Footer />
     </div>
   );

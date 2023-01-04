@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { SessionProvider } from "next-auth/react";
 import { setDataCoupans } from "../redux/product";
 
-function MyApp({ Component, session ,pageProps }) {
+function MyApp({ Component, session, pageProps }) {
   const [isSSR, setIsSSR] = useState(true);
   const { loading } = useSelector((state) => state.global);
 
@@ -26,21 +26,21 @@ function MyApp({ Component, session ,pageProps }) {
     recentCheck,
   } = useSelector((state) => state.product);
 
-  const { coupanData , dataCoupans } = useSelector((state) => state.product);
+  const { coupanData, dataCoupans } = useSelector((state) => state.product);
 
-  useEffect(() => {
-    const handleStart = (url) => {
-      url !== router.pathname
-        ? dispatch(setLoading(true))
-        : dispatch(setLoading(false));
-    };
-    const handleComplete = (url) => dispatch(setLoading(false));
+  // useEffect(() => {
+  //   const handleStart = (url) => {
+  //     url !== router.pathname
+  //       ? dispatch(setLoading(true))
+  //       : dispatch(setLoading(false));
+  //   };
+  //   const handleComplete = (url) => dispatch(setLoading(false));
 
-    router.events.on("routeChangeStart", handleStart);
-    router.events.on("routeChangeComplete", handleComplete);
-    router.events.on("routeChangeError", handleComplete);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
+  //   router.events.on("routeChangeStart", handleStart);
+  //   router.events.on("routeChangeComplete", handleComplete);
+  //   router.events.on("routeChangeError", handleComplete);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [router]);
 
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
@@ -50,7 +50,7 @@ function MyApp({ Component, session ,pageProps }) {
           carts: carts,
           totalPrice: totalPrice,
           totalQuantity: totalQuantity,
-          dataCoupans: dataCoupans
+          dataCoupans: dataCoupans,
         })
       );
     }
@@ -58,14 +58,13 @@ function MyApp({ Component, session ,pageProps }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carts, totalPrice, totalQuantity, dataCoupans]);
 
-  useEffect(()=>{
-    if (coupanData && coupanData.price === "1" && coupanData.price === "0" ){
-      dispatch(setDataCoupans(coupanData))
-      console.log(coupanData) 
+  useEffect(() => {
+    if (coupanData && coupanData.price) {
+      dispatch(setDataCoupans(coupanData));
+      console.log(coupanData);
     }
-  },[coupanData])
+  }, [coupanData]);
 
-  
   // useEffect(() => {
   //   if (coupanData?.price){
   //     if (typeof localStorage !== "undefined") {
@@ -107,21 +106,21 @@ function MyApp({ Component, session ,pageProps }) {
 
   return (
     // <Layout>
-      <>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-        <SessionProvider session={session}>
-          <div className={`${loading ? "spinner" : "spinner-hide"}`}>
-            <div role="status">
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <SessionProvider session={session}>
+        <div className={`${loading ? "spinner" : "spinner-hide"}`}>
+          {/* <div role="status">
               <svg
                 className="inline mr-2 w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-red-700"
                 viewBox="0 0 100 101"
@@ -138,11 +137,16 @@ function MyApp({ Component, session ,pageProps }) {
                 />
               </svg>
               <span className="sr-only">Loading...</span>
-            </div>
+            </div> */}
+          <div class="flex items-center justify-center space-x-2 animate-bounce">
+            <div class="w-8 h-8 bg-blue-400 rounded-full"></div>
+            <div class="w-8 h-8 bg-green-400 rounded-full"></div>
+            <div class="w-8 h-8 bg-black rounded-full"></div>
           </div>
-          <Component {...pageProps} />
-        </SessionProvider>
-      </>
+        </div>
+        <Component {...pageProps} />
+      </SessionProvider>
+    </>
     // </Layout>
   );
 }

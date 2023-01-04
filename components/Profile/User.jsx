@@ -3,6 +3,8 @@ import React from "react";
 import { useState } from "react";
 import InputField from "../common/inputField";
 import Selectoption from "../common/Selectoption";
+import { useRef } from "react";
+import { useSession } from "next-auth/react";
 
 function User() {
   const fields = {
@@ -14,8 +16,19 @@ function User() {
     newpassword: "",
     repeatpassword: "",
   };
-  const [formvalues, setFormvalues] = useState(fields);
   const [errors, setErrors] = useState({});
+  const { data: session } = useSession();
+  const [formvalues, setFormvalues] = useState({
+    name: "",
+    lastname: "",
+    displayName: session?.user?.user.full_name,
+    email: session?.user?.user.email,
+    password: "",
+    newpassword: "",
+    repeatpassword: "",
+  });
+
+  const ref = useRef();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,13 +63,25 @@ function User() {
     } else {
       if (values.newpassword === values.repeatpassword) {
         console.log(formvalues);
-        setFormvalues(fields);
-        setErrors({repeatpassword:""})
+        setFormvalues({
+          name: "",
+          lastname: "",
+          displayName: "",
+          email: "",
+          password: "",
+          newpassword: "",
+          repeatpassword: "",
+        });
+        setErrors({ repeatpassword: "" });
       } else {
-        setErrors({repeatpassword:"Password and Confirm Password must be same"});
+        setErrors({
+          repeatpassword: "Password and Confirm Password must be same",
+        });
       }
     }
   };
+  const handleImgChange = (e) => {};
+  const handleDeleteImg = (e) => {};
 
   return (
     <div className="2xl:w-[65%] w-[90%] m-auto ">
@@ -72,7 +97,17 @@ function User() {
             </div>
             <div>
               <div className="flex justify-center ">
-                <button className="bg-black border text-white px-8  py-2 text-[12px] font-bold rounded-lg md:mt-[30px]">
+                <input
+                  type="file"
+                  className="hidden"
+                  ref={ref}
+                  onChange={handleImgChange}
+                  accept=".jpg , .png ,.jpeg"
+                />
+                <button
+                  className="bg-black border text-white px-8  py-2 text-[12px] font-bold rounded-lg md:mt-[30px]"
+                  onClick={() => ref.current.click()}
+                >
                   CHANGE PROFILE IMAGE
                 </button>
               </div>
@@ -82,7 +117,10 @@ function User() {
                     <img src="/svg/delete.svg" alt="" />
                   </div>
                   <div>
-                    <button className="py-2    text-[12px] font-bold ">
+                    <button
+                      className="py-2    text-[12px] font-bold "
+                      onClick={handleDeleteImg}
+                    >
                       REMOVE PROFILE IMAGE
                     </button>
                   </div>

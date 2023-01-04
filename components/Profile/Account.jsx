@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getSession, useSession } from "next-auth/react";
 import { orderHistory } from "../../redux/order";
+import { logoutRequest } from "../../redux/auth";
 
 function Account({ show, setShow }) {
   const [showData, setShowData] = useState(false);
@@ -22,15 +23,29 @@ function Account({ show, setShow }) {
 
   useEffect(() => {
     if (session?.user?.token) {
-      dispatch(orderHistory(session?.user?.token));
+      dispatch(orderHistory()); 
     }
   }, [session]);
+
+  const handleLogout = () => {
+    console.log("Hi", { token: session?.user?.token });
+    dispatch(logoutRequest());
+  };
+
+  console.log("show", show);
 
   return (
     <div>
       <div className="bg-[url('/profile/22.jpg')] bg-cover ">
         <div className="pt-[130px] pb-[50px]">
-          <p className="text-center text-white text-[30px] font-bold">ORDERS</p>
+          <p className="text-center text-white text-[30px] font-bold">
+            {/* {!session?.user?.user?.id && "LOGIN / SIGNUP" } */}
+            {show === "orders" && "OREDERS"}
+            {show === "address" && "ADDRESS"}
+            {show === "account" && "ACCOUNT"}
+            {show === "payment" && "PAYMENT"}
+            {show === "subscription" && ""}
+          </p>
         </div>
       </div>
       <div className="2xl:w-[65%] w-[90%] m-auto">
@@ -39,7 +54,10 @@ function Account({ show, setShow }) {
             <p>PROFILE</p>
           </div>
           <div className="flex px-4 py-2  gap-2 items-center rounded-xl bg-black">
-            <button className=" text-[12px] md:text-[14px] font-bold text-white">
+            <button
+              className=" text-[12px] md:text-[14px] font-bold text-white"
+              onClick={handleLogout}
+            >
               LOG OUT
             </button>
             <div>
@@ -48,7 +66,7 @@ function Account({ show, setShow }) {
           </div>
         </div>
         <div className="mt-[60px]">
-          <div className="grid md:grid-cols-5 grid-cols-3 justify-between gap-[2px]">
+          <div className="flex justify-between max-w-[750px] m-auto">
             <div
               className={`border md:p-10 p-2 border-black w-[80px] md:w-[130px] lg:w-[170px] xl:w-[200px] m-auto rounded-lg shadow-md  mb-[15px] cursor-pointer ${
                 show === "orders" && "bg-black "
@@ -130,7 +148,7 @@ function Account({ show, setShow }) {
                 </h5>
               </div>
             </div>
-            <div
+            {/* <div
               className={`bg-white border md:p-10 p-2 w-[80px] md:w-[130px] lg:w-[170px] xl:w-[200px] border-black m-auto rounded-lg shadow-md mb-[15px] cursor-pointer  ${
                 show === "payment" && "bg-black text-white"
               }`}
@@ -156,8 +174,8 @@ function Account({ show, setShow }) {
                   Payment
                 </h5>
               </div>
-            </div>
-            <div
+            </div> */}
+            {/* <div
               className={`bg-white border md:p-10 p-2 w-[80px] md:w-[130px] lg:w-[170px] xl:w-[200px] border-black m-auto rounded-lg shadow-md mb-[15px] cursor-pointer ${
                 show === "subscription" && "bg-black text-white"
               }`}
@@ -183,13 +201,13 @@ function Account({ show, setShow }) {
                   Subscription
                 </h5>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
         {/* order */}
 
-        {!history?.length > 0 && (
+        {history?.length > 0 && show === "orders" && (
           <div className="mt-[40px] border">
             <div className="my-[200px]">
               <p className="text-center font-bold text-[20px]">
@@ -207,7 +225,7 @@ function Account({ show, setShow }) {
           </div>
         )}
 
-        {history && history?.data?.length > 0 && (
+        {history && history?.data?.length > 0 && show === "orders" && (
           <div className="mt-[40px]">
             <div class="flex flex-col">
               <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -238,7 +256,7 @@ function Account({ show, setShow }) {
                             scope="col"
                             className="md:text-sm  text-[8px] font-medium  px-2 py-2 "
                           >
-                            Delivery Date
+                            Amount
                           </th>
                           <th
                             scope="col"
@@ -252,23 +270,25 @@ function Account({ show, setShow }) {
                         {history &&
                           history.data &&
                           history.data.map((item, i) => {
-                            <tr className="border-b" key={i}>
-                              <td className="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[8px] ">
-                                01
-                              </td>
-                              <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                                ABC-234
-                              </td>
-                              <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                                12-12-2022
-                              </td>
-                              <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
-                                15-12-2022
-                              </td>
-                              <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap md:text-sm  text-[8px] ">
-                                PENDING
-                              </td>
-                            </tr>;
+                            return (
+                              <tr className="border-b" key={i}>
+                                <td className="px-6 py-2 whitespace-nowrap font-medium text-gray-900 border-r md:text-sm  text-[8px] ">
+                                  {item.id}
+                                </td>
+                                <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
+                                  {item.order_id}
+                                </td>
+                                <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
+                                  {item.created_at.date}
+                                </td>
+                                <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap border-r md:text-sm  text-[8px] ">
+                                  {item.total}
+                                </td>
+                                <td className=" text-gray-900 font-light px-2 py-2 whitespace-nowrap md:text-sm  text-[8px] ">
+                                  {item.status}
+                                </td>
+                              </tr>
+                            );
                           })}
                       </tbody>
                     </table>

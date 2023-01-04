@@ -96,7 +96,7 @@ export default function allproducts() {
                   </Link>
                 </div>
                 <div className="pt-[15px]">
-                  <h1 className="text-[18px] xl:text-[22px] font-bold    text-[black] dark:text-white text-center">
+                  <h1 className="text-[18px] xl:text-[20px] font-bold    text-[black] dark:text-white text-center">
                     {items.name}
                   </h1>
                   <div className="flex justify-center gap-[30px] items-center">

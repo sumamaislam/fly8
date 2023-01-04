@@ -20,7 +20,7 @@ function Header() {
   const { data: session } = useSession();
 
   useEffect(() => {
-    console.log("session",session);
+    console.log("session", session);
   }, [session]);
 
   // const [headerColor, setHeaderColor] = useState(false);
@@ -207,9 +207,12 @@ function Header() {
                   </span>
                 )}
               </div>
-              <Link href="/login">
-                {" "}
-                <img className="w-[20px]" src="/svg/profile.svg" alt="" />
+              <Link href={`${!session?.user?.token ? "/login" : "/profile"}`}>
+                {!session?.user?.token ? (
+                  <img className="w-[20px]" src="/svg/profile.svg" alt="" />
+                ) : (
+                  <img className="w-[22px]" src="/svg/profile1.svg" alt="" />
+                )}
               </Link>
               <div className=" lg:hidden">
                 <button
@@ -241,21 +244,26 @@ function Header() {
             }`}
             style={{ marginLeft: 0 }}
           >
-            <div className={`container flex-col mt-[40px] flex m-auto px-4 ease-in-out duration-1000 `}>
-            {header &&
-              // header.data.length > 0 &&
-              header?.data?.map((item, index) => {
-                return (
-                  <Link
-                    key={index}
-                    href={`/${item.link}`}
-                    className={`py-4 px-2 text-center  lg:text-[16px] text-white ease-in-out hover:border-white duration-1000 ${showHead ? "block" : "hidden" } `}
-                   onClick={()=>setShowHead(false)}>
-                    {item.name}
-                  </Link>
-                );
-              })}
-              </div>
+            <div
+              className={`container flex-col mt-[40px] flex m-auto px-4 ease-in-out duration-1000 `}
+            >
+              {header &&
+                // header.data.length > 0 &&
+                header?.data?.map((item, index) => {
+                  return (
+                    <Link
+                      key={index}
+                      href={`/${item.link}`}
+                      className={`py-4 px-2 text-center  lg:text-[16px] text-white ease-in-out hover:border-white duration-1000 ${
+                        showHead ? "block" : "hidden"
+                      } `}
+                      onClick={() => setShowHead(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                })}
+            </div>
           </div>
         </div>
       </nav>

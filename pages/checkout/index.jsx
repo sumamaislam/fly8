@@ -6,9 +6,12 @@ import { navDataRequest } from "../../redux/home";
 import { wrapper } from "../../store";
 import Stripe from "stripe";
 import Layout from "../../components/common/Layout";
+import { getSession } from "next-auth/react";
+import { useSelector } from "react-redux";
 
 function index() {
   const [show, setShow] = useState("address");
+
   return (
     <div>
       <Layout>
@@ -22,9 +25,9 @@ function index() {
 
 export default index;
 
-export const getStaticProps = wrapper.getStaticProps((store) => async () => {
-  await store.dispatch(navDataRequest());
-});
+// export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+//   await store.dispatch(navDataRequest());
+// });
 
 // export const getServerSideProps = async () => {
 //   await store.dispatch(navDataRequest());
@@ -39,3 +42,21 @@ export const getStaticProps = wrapper.getStaticProps((store) => async () => {
 //     }
 //   }
 // }
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
+    // const localCart =
+    //   typeof localStorage !== "undefined" &&
+    //   localStorage.getItem("localCart") &&
+    //   JSON.parse(localStorage.getItem("localCart"));
+    await store.dispatch(navDataRequest());
+    // if (!localCart?.carts?.length > 0) {
+    //   return {
+    //     redirect: {
+    //       destination: `/`,
+    //       permanent: false,
+    //     },
+    //   };
+    // }
+  }
+);

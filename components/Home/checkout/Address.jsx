@@ -22,6 +22,8 @@ import {
   sentslugRequest,
   setTotalPrice,
 } from "../../../redux/product";
+import { setLoading } from "../../../redux/global";
+import { useSession } from "next-auth/react";
 // async function createPaymentIntent(amount, currency) {
 //   const stripe = await stripePromise;
 //   const { data } = await stripe.createPaymentIntent({
@@ -47,8 +49,9 @@ function Address({ setShow }) {
   const dispatch = useDispatch();
   const stripe = useStripe();
   const elements = useElements();
+  const { data: session } = useSession();
 
-  const { totalPrice, carts, totalQuantity, coupanData } = useSelector(
+  const { totalPrice, carts, totalQuantity, dataCoupans } = useSelector(
     (state) => state.product
   );
   const { secret, orders } = useSelector((state) => state.order);
@@ -58,6 +61,20 @@ function Address({ setShow }) {
       setOrdersData(orders);
     }
   }, [orders]);
+
+  useEffect(() => {
+    if (session?.user?.user) {
+      setInput({
+        email: session?.user?.user?.email,
+        phone_no: session?.user?.user?.phone,
+        country: session?.user?.user?.country,
+        zip_code: session?.user?.user?.zip_code,
+        address: session?.user?.user?.address,
+        city: session?.user?.user?.city,
+        first_name: session?.user?.user?.full_name,
+      });
+    }
+  }, [session]);
 
   const paymentElementOptions = {
     layout: "tabs",
@@ -95,6 +112,8 @@ function Address({ setShow }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(setLoading(true));
+    setProcessingTo(true);
     if (!stripe || !elements) {
       return;
     } else {
@@ -141,13 +160,13 @@ function Address({ setShow }) {
   };
 
   useEffect(() => {
-    if (coupanData?.type === "0") {
-      setRealPrice(totalPrice - (totalPrice / 100) * coupanData?.price);
+    if (dataCoupans?.type === "0") {
+      setRealPrice(totalPrice - (totalPrice / 100) * dataCoupans?.price);
     }
-    if (coupanData?.type === "1") {
-      setRealPrice(totalPrice - coupanData?.price);
+    if (dataCoupans?.type === "1") {
+      setRealPrice(totalPrice - dataCoupans?.price);
     }
-  }, [coupanData, totalPrice]);
+  }, [dataCoupans, totalPrice]);
 
   useEffect(() => {
     if (coupan) {
@@ -193,110 +212,121 @@ function Address({ setShow }) {
     if (Object.keys(error).length > 0) {
       setFormError(error);
       console.log(formError);
+      setProcessingTo(false);
+      dispatch(setLoading(false));
+      toast(<RequestMessage message="Please fill all the required fields" />);
     } else {
-      let cartArray = carts?.map((item) => ({
-        id: item.id,
-        qty: item.qty,
-        size: "",
-        size_qty: "",
-        size_key: 0,
-        size_price: "",
-        color: "",
-        keys: "",
-        values: "",
-        prices: item.price,
-      }));
-      const abcd = {
-        _token: "Xi9Cvk89jQZJHJ7R4Aem9hsPoLey21B6uSonaUZi",
-        personal_name: data.first_name + " " + data.last_name,
-        personal_email: data.email,
-        personal_pass: null,
-        personal_confirm: null,
-        shipping: null,
-        pickup_location: null,
-        name: data.first_name + " " + data.last_name,
-        phone: data.phone_no,
-        email: data.email,
-        address: data.address,
-        customer_country: data.country,
-        state: data.state,
-        city: data.city,
-        zip: data.zip_code,
-        shipping_name: null,
-        shipping_email: null,
-        shipping_phone: null,
-        shipping_address: null,
-        shipping_country: null,
-        shipping_city: null,
-        shipping_state: null,
-        shipping_zip: null,
-        order_notes: null,
-        method: "Stripe",
-        cardNumber: "4000 0566 5566 5556",
-        cardCVC: "123",
-        month: "12",
-        year: "24",
-        shipping_cost: "0",
-        packing_cost: "0",
-        shipping_title: "Free Shipping",
-        packing_title: "Default Packaging",
-        dp: "0",
-        tax: "0",
-        totalQty: totalQuantity,
-        vendor_shipping_id: "0",
-        vendor_packing_id: "0",
-        total:
-          (coupanData?.type === "1" && totalPrice - coupanData?.price) ||
-          (coupanData?.type === "0" &&
-            totalPrice - (totalPrice / 100) * coupanData?.price),
-        wallet_price: "0",
-        coupon_code: coupanData?.code || null,
-        coupon_discount:
-          (coupanData?.type === "1" && coupanData?.price) ||
-          (coupanData?.type === "0" &&
-            (totalPrice / 100) * coupanData?.price) ||
-          null,
-        coupon_id: coupanData?.id || null,
-        user_id: null,
-        txn_stripe: "hwhdfcgiufyoihedf8e6wr7yhekuh89743986y8oh",
-        currency_code: "USD",
-        items: cartArray,
-      };
       try {
-        dispatch(createOrder(abcd)).then(async (res)=>{
-          const cardElement = elements.getElement("card");
-          const billingDetails = {
-            name: abcd?.name,
-            email: abcd?.email,
-            address: {
-              city: abcd?.city,
-              line1: abcd?.shipping_address,
-              state: abcd?.state,
-              postal_code: abcd?.zip,
-            },
+        let cartArray = carts?.map((item) => ({
+          id: item.id,
+          qty: item.qty,
+          size: "",
+          size_qty: "",
+          size_key: 0,
+          size_price: "",
+          color: "",
+          keys: "",
+          values: "",
+          prices: item.price,
+        }));
+        const cardElement = elements.getElement("card");
+        const billingDetails = {
+          name: data.email,
+          email: data.email,
+          address: {
+            city: data.city,
+            line1: data.address,
+            state: data.state,
+            postal_code: data.zip_code,
+          },
+        };
+        const paymentMethodReq = await stripe.createPaymentMethod({
+          type: "card",
+          card: cardElement,
+          billing_details: billingDetails,
+        });
+        if (paymentMethodReq.error) {
+          setCheckoutError(paymentMethodReq.error.message);
+          setProcessingTo(false);
+          dispatch(setLoading(false));
+          return;
+        } else {
+          const abcd = {
+            _token: "Xi9Cvk89jQZJHJ7R4Aem9hsPoLey21B6uSonaUZi",
+            personal_name: data.first_name + " " + data.last_name,
+            personal_email: data.email,
+            personal_pass: null,
+            personal_confirm: null,
+            shipping: null,
+            pickup_location: null,
+            name: data.first_name + " " + data.last_name,
+            phone: data.phone_no,
+            email: data.email,
+            address: data.address,
+            customer_country: data.country,
+            state: data.state,
+            city: data.city,
+            zip: data.zip_code,
+            shipping_name: null,
+            shipping_email: null,
+            shipping_phone: null,
+            shipping_address: null,
+            shipping_country: null,
+            shipping_city: null,
+            shipping_state: null,
+            shipping_zip: null,
+            order_notes: null,
+            method: "Stripe",
+            cardNumber: "4000 0566 5566 5556",
+            cardCVC: "123",
+            month: "12",
+            year: "24",
+            shipping_cost: "0",
+            packing_cost: "0",
+            shipping_title: "Free Shipping",
+            packing_title: "Default Packaging",
+            dp: "0",
+            tax: "0",
+            totalQty: totalQuantity,
+            vendor_shipping_id: "0",
+            vendor_packing_id: "0",
+            total:
+              (dataCoupans?.type === "1" && totalPrice - dataCoupans?.price) ||
+              (dataCoupans?.type === "0" &&
+                totalPrice - (totalPrice / 100) * dataCoupans?.price) ||
+              totalPrice,
+            wallet_price: "0",
+            payment_intend: paymentMethodReq.paymentMethod.id,
+            coupon_code: dataCoupans?.code || null,
+            coupon_discount:
+              (dataCoupans?.type === "1" && dataCoupans?.price) ||
+              (dataCoupans?.type === "0" &&
+                (totalPrice / 100) * dataCoupans?.price) ||
+              null,
+            coupon_id: dataCoupans?.id || null,
+            user_id: session?.user?.user?.id,
+            txn_stripe: "hwhdfcgiufyoihedf8e6wr7yhekuh89743986y8oh",
+            currency_code: "USD",
+            items: cartArray,
           };
-          const paymentMethodReq = await stripe.createPaymentMethod({
-            type: "card",
-            card: cardElement,
-            billing_details: billingDetails,
+          dispatch(createOrder(abcd)).then(async (res) => {
+            const { error } = await stripe.confirmCardPayment(secret, {
+              payment_method: paymentMethodReq.paymentMethod.id,
+            });
+            if (!error) {
+              console.log("success");
+              console.log(ordersData);
+              dispatch(createOrderReal(res?.payload?.data?.order_number));
+            } else {
+              setProcessingTo(false);
+              dispatch(setLoading(false));
+            }
           });
-          if (paymentMethodReq.error) {
-            setCheckoutError(paymentMethodReq.error.message);
-            setProcessingTo(false);
-            return;
-          }
-          const { error } = await stripe.confirmCardPayment(secret, {
-            payment_method: paymentMethodReq.paymentMethod.id,
-          });
-          if (!error) {
-            console.log("success");
-            console.log(ordersData);
-            dispatch(createOrderReal(res?.payload?.data?.order_number));
-          }
-        })
-        
+        }
       } catch (error) {
+        dispatch(setLoading(false));
         console.log(error);
+        setProcessingTo(false);
       }
     }
   };
@@ -334,7 +364,7 @@ function Address({ setShow }) {
         <div>
           <nav className="flex mt-[20px]  " aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
-              <li className="inline-flex items-center">
+              {/* <li className="inline-flex items-center">
                 <div className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                   Cart
                 </div>
@@ -361,8 +391,8 @@ function Address({ setShow }) {
                     Information
                   </Link>
                 </div>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <div className="flex items-center">
                   <svg
                     className="w-6 h-6 text-gray-400"
@@ -409,7 +439,7 @@ function Address({ setShow }) {
                     </span>
                   </Link>
                 </div>
-              </li>
+              </li> */}
             </ol>
           </nav>
         </div>
@@ -420,31 +450,39 @@ function Address({ setShow }) {
           {/* left side */}
           <div className="p-4 md:p-10 w-full">
             <div className="">
-              <p className="text-[20px] font-bold">Contact Information</p>
-              <p className="mt-[16px] text-[12px]">
+              <p className="text-[20px] font-bold mb-[10px]">
+                Contact Information
+              </p>
+              {/* <p className="mt-[16px] text-[12px]">
                 Already have an account?{" "}
                 <Link href="/" className="text-[#2D80CD]">
                   Login For Checkout
                 </Link>
-              </p>
+              </p> */}
             </div>
 
             <form onSubmit={handleSubmit}>
               <div>
-                <InputField
-                  placeholder="Email"
-                  type="email"
-                  className="w-full py-[10px] mt-[10px] border  border-gray-700 rounded-md p-2 outline-none"
-                  name="email"
-                  value={input.email}
-                  onChange={handleChange}
-                />
-                <div className="mt-[10px] text-[12px] text-[#2D80CD] flex items-center gap-2">
+                {session?.user?.user?.email ? (
+                  <label className="font-medium">
+                    {session?.user?.user?.email}
+                  </label>
+                ) : (
+                  <InputField
+                    placeholder="Email"
+                    type="email"
+                    className="w-full py-[10px] mt-[10px] border  border-gray-700 rounded-md p-2 outline-none"
+                    name="email"
+                    value={input.email}
+                    onChange={handleChange}
+                  />
+                )}
+                {/* <div className="mt-[10px] text-[12px] text-[#2D80CD] flex items-center gap-2">
                   <div>
                     <input className="mt-1" type="checkbox" name="" id="" />
                   </div>
                   <p>Email me with new offers and exclusive discounts.!</p>
-                </div>
+                </div> */}
                 <p className="text-[20px] mt-[1rem] font-bold">
                   Shipping Address
                 </p>
@@ -536,6 +574,7 @@ function Address({ setShow }) {
                     name="city"
                     value={input.city}
                     onChange={handleChange}
+                    type="text"
                   />
                 </div>
                 <div className="w-full">
@@ -545,6 +584,7 @@ function Address({ setShow }) {
                     name="phone_no"
                     value={input.phone_no}
                     onChange={handleChange}
+                    type="number"
                   />
                 </div>
                 <div className="mt-[10px] ">
@@ -554,6 +594,7 @@ function Address({ setShow }) {
                     id="payment-element"
                     options={paymentElementOptions}
                     onChange={handleCardDetailsChange}
+                    className={`${checkoutError ? "error" : "noerror"}`}
                   />
 
                   {/* <PaymentElement
@@ -563,17 +604,17 @@ function Address({ setShow }) {
                   /> */}
                 </div>
                 {checkoutError ? (
-                  <div className="errors">
+                  <div className={`text-red-600 text-[14px]`}>
                     {" "}
                     <span>{checkoutError}</span>
                   </div>
                 ) : null}
-                <div className="mt-[10px] text-[12px] text-[#2D80CD] flex items-center gap-2">
+                {/* <div className="mt-[10px] text-[12px] text-[#2D80CD] flex items-center gap-2">
                   <div>
                     <input className="mt-1" type="checkbox" name="" id="" />
                   </div>
                   <p>Save this information for next time</p>
-                </div>
+                </div> */}
                 <div className="flex justify-end mt-[2rem] pb-[2rem] ">
                   <div className="flex bg-[black] text-white justify-center items-center rounded-md shadow-lg px-6 py-2 gap-2">
                     <div>
@@ -772,7 +813,7 @@ function Address({ setShow }) {
             {/* button  */}
 
             {/* <form className=" " onSubmit={handleSubmit}> */}
-            {/* {!coupanData.price && (
+            {/* {!dataCoupans.price && (
               <form className=" mt-[50px]  flex h-[45px] " onSubmit={handleSub}>
                 <input
                   className="w-full p-3 rounded-l-md border outline-none "
@@ -792,7 +833,7 @@ function Address({ setShow }) {
                 </button>
               </form>
             )}
-            {coupanData.price && <p className="mt-[30px]">Discount Applied</p>} */}
+            {dataCoupans.price && <p className="mt-[30px]">Discount Applied</p>} */}
             {/* <div className="p-2 text-[12px]">
               <div className="w-full flex justify-between mt-4">
                 <div>
@@ -800,9 +841,9 @@ function Address({ setShow }) {
                 </div>
                 <div>
                   <p className="font-bold">
-                    {(coupanData.type === "0" && coupanData.price + "%") ||
-                      (coupanData.type === "1" && "$" + coupanData.price) ||
-                      (coupanData[0] === "no found" && "0") ||
+                    {(dataCoupans.type === "0" && dataCoupans.price + "%") ||
+                      (dataCoupans.type === "1" && "$" + dataCoupans.price) ||
+                      (dataCoupans[0] === "no found" && "0") ||
                       "0"}
                   </p>
                 </div>
