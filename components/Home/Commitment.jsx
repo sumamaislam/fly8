@@ -27,7 +27,7 @@ function Commitment() {
                 return (
                   <div className="w-[250px]" key={index}>
                     <img
-                      className="w-[140px] m-auto"
+                      className="w-[120px] m-auto"
                       src={items.photo}
                       alt=""
                     />

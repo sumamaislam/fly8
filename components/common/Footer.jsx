@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
 import Topbtn from "../Home/Topbtn";
@@ -7,7 +8,7 @@ function Footer() {
 
   return (
     <div className="bg-[black] text-white mt-[100px]">
-      <Topbtn/>
+      <Topbtn />
       <div className="container m-auto px-[10px]">
         <div className="grid py-[65px] lg:grid-cols-5 grid-col md:grid-cols-2  gap-12 justify-items-center text-center md:text-left ">
           <div className="max-w-[323px] hidden md:block">
@@ -19,20 +20,30 @@ function Footer() {
           </div>
           <div className="menus">
             <h1 className="text-[20px] font-bold mb-[25px]">Shop</h1>
-            <p>All Products</p>
-            <p>Delta-9o</p>
-            <p>Delta-11</p>
-            <p>Master Blend</p>
-            <p>HHC</p>
+            {footer &&
+              footer?.page &&
+              footer.page.Shop &&
+              footer?.page?.Shop.map((item, i) => {
+                return (
+                  <Link href={`/${item.slug}`}>
+                    <p>{item.title}</p>
+                  </Link>
+                );
+              })}
           </div>
 
           <div className="menus">
             <h1 className="text-[20px] font-bold mb-[25px]">Help</h1>
-            <p>Order Status</p>
-            <p>Return Policy</p>
-            <p>Shipping Information</p>
-            <p>About Us</p>
-            <p>Wholesale</p>
+            {footer &&
+              footer?.page &&
+              footer.page.Help &&
+              footer?.page?.Help?.map((item, i) => {
+                return (
+                  // <Link href="">
+                    <p>{item.title}</p>
+                  // </Link>
+                );
+              })}
           </div>
 
           <div className="menus">
@@ -42,7 +53,6 @@ function Footer() {
                 <img className="w-[22px]" src="/svg/call.svg" alt="" />
               </div>
               <div className="mt-[15px]">
-           
                 <a href="tel: hammadnadir75@gmail.com">123451231545</a>
               </div>
             </div>
@@ -51,7 +61,6 @@ function Footer() {
                 <img className="w-[22px]" src="/svg/email.svg" alt="" />
               </div>
               <div className="mt-[15px]">
-
                 <a href="mailto: 666666666">info@fly8.com</a>
               </div>
             </div>
