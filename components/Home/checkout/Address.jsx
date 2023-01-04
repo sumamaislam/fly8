@@ -75,9 +75,32 @@ function Address({ setShow }) {
       });
     }
   }, [session]);
+  
+  const iframeStyles = {
+    base: {
+      color: "#6e6e6e",
+      fontSize: "15px",
+      // iconColor: "#fff",
+      "::placeholder": {
+        color: "#737373",
+      },
+      padding: "4px 10px",
+      height: "50px",
+    },
+    invalid: {
+      iconColor: "#FFC7EE",
+      color: "#FFC7EE",
+    },
+    complete: {
+      iconColor: "#cbf4c9",
+    },
+  };
 
   const paymentElementOptions = {
-    layout: "tabs",
+    // layout: "tabs",
+    iconStyle: "solid",
+    style: { ...iframeStyles },
+    hidePostalCode: true,
   };
   useEffect(() => {
     if (!stripe) {
@@ -125,25 +148,6 @@ function Address({ setShow }) {
     setRealPrice(totalPrice);
   }, [totalPrice]);
 
-  const iframeStyles = {
-    base: {
-      color: "#6e6e6e",
-      fontSize: "15px",
-      // iconColor: "#fff",
-      "::placeholder": {
-        color: "#737373",
-      },
-      padding: "4px 10px",
-      height: "50px",
-    },
-    invalid: {
-      iconColor: "#FFC7EE",
-      color: "#FFC7EE",
-    },
-    complete: {
-      iconColor: "#cbf4c9",
-    },
-  };
 
   const cardElementOpts = {
     iconStyle: "solid",
@@ -587,7 +591,7 @@ function Address({ setShow }) {
                     type="number"
                   />
                 </div>
-                <div className="mt-[10px] ">
+                <div className="mt-[10px]">
                   <CardElement
                     // options={cardElementOpts}
                     // onChange={handleCardDetailsChange}
@@ -605,7 +609,6 @@ function Address({ setShow }) {
                 </div>
                 {checkoutError ? (
                   <div className={`text-red-600 text-[14px]`}>
-                    {" "}
                     <span>{checkoutError}</span>
                   </div>
                 ) : null}

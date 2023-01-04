@@ -223,7 +223,6 @@ export const getStaticPaths = async () => {
 export const getStaticProps = wrapper.getStaticProps((store) => async (ctx) => {
     if (ctx?.params?.id) {
       await store.dispatch(sentslugRequest(ctx?.params?.id));
-      console.log("Ganab",ctx?.params?.id)
     }
     await store.dispatch(navDataRequest());
     await store.dispatch(footerDataRequest());
