@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { HYDRATE } from "next-redux-wrapper";
-import request, { baseURL } from "../request";
+import request from "../request";
 import { setLoading } from "../global";
 import { emptyCart, setDataCoupans, setTotalPrice, setTotalQuantity } from "../product";
 import RequestMessage from "../../components/common/RequestMessage";
@@ -17,6 +17,9 @@ const initialState = {
   secret: "",
   history: {},
 };
+
+const baseURL = `https://ecomm.fly8.us/api/`
+
 
 export const createOrder = createAsyncThunk(
   "order/createOrder",

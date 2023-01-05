@@ -8,6 +8,8 @@ const initialState = {
   isLoading: false,
 };
 
+const baseURL = `https://ecomm.fly8.us/api/`
+
 export const getPageData = createAsyncThunk("data/getPageData", async (_, thunkAPI) => {
   try {
     let response;

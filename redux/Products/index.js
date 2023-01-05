@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { HYDRATE } from "next-redux-wrapper";
-import request, { request2, baseURL2 } from "../request";
+import request, { request2 } from "../request";
 // import { toast } from "react-toastify";
 // import RequestMessage from "../../src/RequestMessage";
 
@@ -9,6 +9,8 @@ const initialState = {
   productData: [],
   isLoading: false,
 };
+
+const baseURL = `https://ecomm.fly8.us/api/`
 
 export const sentProductRequest = createAsyncThunk(
   "product/sentProductRequest",

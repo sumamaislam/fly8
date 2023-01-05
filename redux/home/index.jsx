@@ -17,6 +17,7 @@ const initialState = {
   footer: {}
 };
 
+const baseURL = `https://ecomm.fly8.us/api/`
 export const navDataRequest = createAsyncThunk(
   "navbar/navDataRequest",
   async (_, thunkAPI) => {

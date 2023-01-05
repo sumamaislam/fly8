@@ -1,8 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getSession, signOut } from "next-auth/react";
 import Router from "next/router";
-import request, { baseURL } from "../request";
+import request from "../request";
 import axios from "axios";
+
+const baseURL = `https://ecomm.fly8.us/api/`
 
 export const signupRequest = createAsyncThunk(
   "signup/signupRequest",

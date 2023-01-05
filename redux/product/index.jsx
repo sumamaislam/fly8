@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import request, { baseURL } from "../request";
+import request from "../request";
 import RequestMessage from "../../components/common/RequestMessage";
 import { setLoading } from "../global";
 import axios from "axios";
@@ -8,6 +8,8 @@ import axios from "axios";
 // import request from "../request";
 // import { toast } from "react-toastify";
 // import RequestMessage from "../../src/RequestMessage";
+
+const baseURL = `https://ecomm.fly8.us/api/`
 
 const localCart =
   typeof localStorage !== "undefined" &&
