@@ -205,17 +205,9 @@ export default function Delta11() {
 
 
 export const getStaticPaths = async () => {
-    // const products = await initStore().dispatch(getProducts());
-    // const paths =
-    //   products?.payload?.data?.length &&
-    //   products?.payload?.data?.map((item) => ({
-    //     params: {
-    //       id: item.id.toString(),
-    //     },
-    //   }));
     return {
       paths: [],
-      fallback: true, // can also be true or 'blocking'
+      fallback: true, 
     };
   };
 
