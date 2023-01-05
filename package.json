@@ -2,7 +2,6 @@
   "name": "binoid",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://ecomm.fly8.us/api/",
   "scripts": {
     "dev": "next dev -p 30",
     "build": "next build",

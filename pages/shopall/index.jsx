@@ -73,7 +73,7 @@ export default function allproducts() {
         </div>
       </div>
       <div className="mt-[15px]">
-        <img className="h-[300px] w-full" src="/banner/delta.png" alt="" />
+        <img className="h-[300px] w-full" src="/banner/all.jpg" alt="" />
       </div>
 
       <div className="text-center font-bold text-[#5FB75D]"  data-aos="flip-up" data-aos-duration="1500" >
