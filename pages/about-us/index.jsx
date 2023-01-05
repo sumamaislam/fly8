@@ -162,6 +162,4 @@ export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   await store.dispatch(navDataRequest());
   await store.dispatch(footerDataRequest());
   await store.dispatch(qualityDataRequest());
-
-
 });
