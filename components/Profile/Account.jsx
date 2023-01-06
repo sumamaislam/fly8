@@ -89,7 +89,7 @@ function Account({ show, setShow }) {
               <div className="flex justify-center">
                 <h5
                   className={`text-[9px] md:text-[14px] pt-[15px] font-semibold text-center  ${
-                    show === "orders" && "text-white"
+                    show === "orders" && "change-bg text-white"
                   }`}
                 >
                   ORDERS
@@ -98,7 +98,7 @@ function Account({ show, setShow }) {
             </div>
             <div
               className={`bg-white border md:p-10 p-2 w-[80px] md:w-[130px] lg:w-[170px] xl:w-[200px] border-black m-auto rounded-lg shadow-md mb-[15px] cursor-pointer ${
-                show === "address" && "bg-black text-white"
+                show === "address" && "change-bg bg-black text-white"
               }`}
               onClick={() => setShow("address")}
             >
@@ -125,7 +125,7 @@ function Account({ show, setShow }) {
             </div>
             <div
               className={`bg-white border md:p-10 p-2 w-[80px] md:w-[130px] lg:w-[170px] xl:w-[200px] border-black m-auto rounded-lg shadow-md mb-[15px] cursor-pointer ${
-                show === "account" && "bg-black text-white"
+                show === "account" && "change-bg text-white"
               }`}
               onClick={() => setShow("account")}
             >
@@ -143,7 +143,7 @@ function Account({ show, setShow }) {
               <div className="flex justify-center ">
                 <h5
                   className={`text-[9px] md:text-[14px] pt-[15px] uppercase font-semibold text-center  ${
-                    show === "account" && "text-white"
+                    show === "account" && "change-bg text-white"
                   }`}
                 >
                   Account
