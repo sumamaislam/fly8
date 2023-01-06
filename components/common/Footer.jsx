@@ -46,9 +46,7 @@ function Footer() {
               footer.page.Help &&
               footer?.page?.Help?.map((item, i) => {
                 return (
-                  // <Link href="">
-                    <p>{session?.user?.data && item.title === "Order Status" ? "" :item.title}</p>
-                  // </Link>
+                    <p>{!session?.user?.user?.id && item.title === "Order Status" ? "" :item.title}</p>
                 );
               })}
           </div>
