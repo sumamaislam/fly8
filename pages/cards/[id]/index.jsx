@@ -319,23 +319,23 @@ export default function Detail() {
                   Quantity :
                 </p>
               </div>
-              <div className="flex gap-[17px] md:gap-[27px] border items-center border-black h-[35px] bg-[#E9EFEE] px-[8px] md:px-[16px]">
+              <div className="flex border items-center border-black h-[35px] bg-[#E9EFEE]">
                 {mainData?.product?.qty > 1 ? (
-                  <div className="cursor-pointer" onClick={decerement}>
+                  <div className="w-[35px] cursor-pointer  flex items-center justify-center h-full" onClick={decerement}>
                     <img src="/svg/arrowleft.svg" alt="" />
                   </div>
                 ) : (
-                  <div className="w-[7.5px]" onClick={decerement}>
-                    <img src="/svg/arrowleftdisable.svg" alt="" />
+                  <div className="w-[35px] flex items-center justify-center h-full" onClick={decerement}>
+                    <img src="/svg/arrowleftdisable.svg" className="h-[15px]" alt="" />
                   </div>
                 )}
-                <div>
+                <div className="h-full flex items-center justify-center">
                   {" "}
-                  <p className="text-[15px] font-bold">
+                  <p className="text-[15px] w-[35px] font-bold flex  items-center justify-center">
                     {mainData?.product?.qty}
                   </p>
                 </div>
-                <div className="cursor-pointer" onClick={increment}>
+                <div className="cursor-pointer w-[35px] flex items-center justify-center h-full" onClick={increment}>
                   <img src="/svg/arrowright.svg" alt="" />
                 </div>
               </div>

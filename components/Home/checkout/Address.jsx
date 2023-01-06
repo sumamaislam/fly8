@@ -642,13 +642,13 @@ function Address({ setShow }) {
             <div className="font-semibold text-[22px] ">
               <p>Product Information</p>
             </div>
-            <div className="mt-8 w-full">
+            <div className="mt-8 pt-8  w-full h-[270px] scrool-adjust overflow-auto">
               <div className="flow-root ">
-                <ul role="list" className="-my-6 divide-y divide-gray-200">
+                <ul role="list" className="-my-6 divide-y divide-gray-200 pb-[30px]">
                   {carts &&
                     carts.map((items, i) => {
                       return (
-                        <li className="flex py-2 justify-between ">
+                        <li className="flex py-2 justify-between pr-[10px]">
                           <div className="flex items-center gap-7">
                             <div className="relative">
                               <img
