@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { Footer, Header } from "../../components/common";
+import RequestMessage from "../../components/common/RequestMessage";
 import { footerDataRequest, navDataRequest } from "../../redux/home";
 import { wrapper } from "../../store";
 
@@ -35,10 +37,15 @@ function ContactUs() {
       setErrors(error);
       console.log(error)
     }else{
-      console.log(values)
-      setInputFields(fields)
+      setErrors(fields);
+      console.log(values);
+      setInputFields(fields);
+      toast(<RequestMessage message="Message Sent Successfully" />, {
+        autoClose: 8000,
+      });
     }
   };
+  
   return (
     <div>
       <Header />
@@ -94,7 +101,7 @@ function ContactUs() {
                   value={inputField.name}
                   onChange={handleChange}
                 />
-                <p className="text-red-500 mt-[5px] pl-2">{errors.name}</p>
+                <p className="text-red-500 mt-[5px] pl-2 text-[13px]">{errors.name}</p>
               </div>
               <div className="w-full   px-[10px] md:px-[50px]  2xl:px-[100px]  mt-[25px] ">
                 <input
@@ -105,7 +112,7 @@ function ContactUs() {
                   value={inputField.email}
                   onChange={handleChange}
                 />
-                 <p className="text-red-500 mt-[5px] pl-2">{errors.email}</p>
+                 <p className="text-red-500 mt-[5px] pl-2 text-[13px]">{errors.email}</p>
               </div>
 
               <div className="w-full  px-[10px] md:px-[50px]  2xl:px-[100px] mt-[25px]   ">
@@ -119,7 +126,7 @@ function ContactUs() {
                   value={inputField.message}
                   onChange={handleChange}
                 ></textarea>
-                 <p className="text-red-500 mt-[5px] pl-2">{errors.message}</p>
+                 <p className="text-red-500 mt-[5px] pl-2 text-[13px]">{errors.message}</p>
               </div>
               <div className="flex justify-center mt-[30px]">
                 <button className="uppercase px-10 py-3 bg-black text-white rounded-lg cursor-pointer" type="submit">

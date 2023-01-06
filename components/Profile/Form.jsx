@@ -11,9 +11,13 @@ function Form() {
   const [formError, setFormError] = useState({});
   const [field, setFiled] = useState(fields);
   const [filedError, setFiledError] = useState({});
+  const [checkedData, setCheckedData] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (checkedData){
+      setFiled({ ...formData, [e.target.name]: e.target.value  })
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,26 +76,26 @@ function Form() {
   };
   const validates = (values) => {
     const error = {};
-    if (!values.firstname) {
-      error.firstname = "Enter a first name*";
+    if (!values.first_name) {
+      error.first_name = "Enter a first name*";
     }
-    if (!values.lastname) {
-      error.lastname = "Enter a last name*";
+    if (!values.last_name) {
+      error.last_name = "Enter a last name*";
     }
     if (!values.country) {
       error.country = "Select country*";
     }
-    if (!error.streetaddress) {
-      error.streetaddress = "Enter Street Address*";
+    if (!error.street_address) {
+      error.street_address = "Enter Street Address*";
     }
     if (!error.state) {
       error.state = "Select a state*";
     }
-    if (!error.zipcode) {
-      error.zipcode = "Enter a PIN code*";
+    if (!error.zip_code) {
+      error.zip_code = "Enter a PIN code*";
     }
-    if (!error.city) {
-      error.city = "select Town*";
+    if (!error.town) {
+      error.town = "select Town*";
     }
     if (!error.phone) {
       error.phone = "Enter a phone number to use this delivery method*";
@@ -102,6 +106,18 @@ function Form() {
 
     console.log(error);
   };
+  const handleSame = () => {
+    if (checkedData) {
+      setFiled({ first_name: "", last_name: "", country: "", street_address: "", state: "", zip_code: "", town: "", phone: "" ,company: ""})
+      setCheckedData(false)
+    } else {
+      setFiled({ ...formData })
+      setCheckedData(true)
+    }
+    // setFiled({...formData})
+    // setCheckedData(!checkedData)
+  }
+
   return (
     <div className="2xl:w-[65%] w-[90%] m-auto">
       <div className="border p-5 mt-[30px]">
@@ -161,7 +177,7 @@ function Form() {
                 className="border border-black outline-none w-full  p-3  rounded-lg "
                 name="country"
                 value={formData.country || ""}
-                onChange={handleCountryChange}
+                onChange={handleChange}
               />
               <p className="text-red-500">{formError.country}</p>
             </div>
@@ -241,8 +257,8 @@ function Form() {
             <div className="mt-[10px] text-[12px]  flex items-center gap-2"></div>
             <p className="text-[20px] mt-[2rem] font-bold">Billing Address</p>
             <div className="mt-[10px] text-[12px] text-[#2D80CD] flex items-center gap-2">
-              <div>
-                <input className="mt-1" type="checkbox" name="" id="" />
+              <div className="cursor-pointer">
+                <input className="mt-1 cursor-pointer" checked={checkedData} onClick={handleSame} type="checkbox" name="" id="" />
               </div>
               <p>Same as Shipping address</p>
             </div>
@@ -250,25 +266,24 @@ function Form() {
               <div className="w-full">
                 <InputField
                   placeholder="First Name"
-                  name="firstname"
-                  value={field.firstname}
+                  name="first_name"
+                  value={field.first_name}
                   onChange={handleChanged}
                   className=" w-full py-[10px] mt-[20px] border border-gray-700 rounded-md p-2 outline-none"
                 />
-                <p className="text-red-500">{filedError.firstname}</p>
+                <p className="text-red-500">{filedError.first_name}</p>
               </div>
               <div className="w-[100%]">
                 <InputField
                   placeholder="Last Name"
-                  name="lastname"
-                  value={field.lastname}
+                  name="last_name"
+                  value={field.last_name}
                   className="w-full py-[10px] mt-[20px] border border-gray-700  rounded-md p-2 outline-none"
                   onChange={handleChanged}
                 />
-                <p className="text-red-500">{filedError.lastname}</p>
+                <p className="text-red-500">{filedError.last_name}</p>
               </div>
             </div>
-
             <InputField
               placeholder="Company (optional)"
               name="company"
@@ -279,13 +294,13 @@ function Form() {
             <p className="text-red-500">{filedError.company}</p>
             <InputField
               placeholder="Street Address"
-              name="streetaddress"
-              value={field.streetaddress}
+              name="street_address"
+              value={field.street_address}
               className="w-full py-[10px] mt-[10px] border border-gray-700 rounded-md p-2 outline-none"
               onChange={handleChanged}
             />
-            <p className="text-red-500">{filedError.streetaddress}</p>
-            <div className="">
+            <p className="text-red-500">{filedError.street_address}</p>
+            <div className=" mb-[10px]">
               <Selectoption
                 className=" w-full outline-none  border mt-[10px] rounded-lg border-black pl-2 py-3"
                 name="country"
@@ -294,17 +309,16 @@ function Form() {
               />
               <p className="text-red-500">{filedError.country}</p>
             </div>
-
             <div className="flex  justify-between gap-4">
               <div className="w-full">
                 <InputField
                   placeholder="Zip Code"
                   className=" w-full outline-none py-[10px] mt-[10px] border border-gray-700 rounded-md p-2"
-                  name="zipcode"
+                  name="zip_code"
                   onChange={handleChanged}
-                  value={field.zipcode}
+                  value={field.zip_code}
                 />
-                <p className="text-red-500">{filedError.zipcode}</p>
+                <p className="text-red-500">{filedError.zip_code}</p>
               </div>
               <div className="w-full ">
                 {/* <StateSelect
@@ -328,12 +342,12 @@ function Form() {
             <div className="w-full">
               <InputField
                 placeholder="Town/City "
-                name="city"
-                value={field.city}
+                name="town"
+                value={field.town}
                 onChange={handleChanged}
                 className=" w-full outline-none py-[10px] mt-[10px] border border-gray-700 rounded-md p-2"
               />
-              <p className="text-red-500">{filedError.city}</p>
+              <p className="text-red-500">{filedError.town}</p>
             </div>
             <div className="w-full">
               <InputField
