@@ -32,9 +32,9 @@ function Cards() {
                   {main && main[item] && main[item]?.map((items, index) => {
                     return (
                       <div className="max-w-sm overflow-hidden w-full" key={index}>
-                        <div className="justify-center flex" data-aos="zoom-out" data-aos-duration="1500" >
+                        <div className="justify-center flex relative overflow-hidden bg-no-repeat bg-cover" data-aos="zoom-out" data-aos-duration="1500" >
                           <img
-                            className="rounded-t-lg"
+                            className="rounded-t-lg hover:scale-110 transition duration-500 ease-in-out "
                             src={items.image}
                             alt=""
                           />

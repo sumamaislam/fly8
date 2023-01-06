@@ -42,7 +42,7 @@ function Commitment() {
               })}
           </div>
         </div>
-        <hr className="mt-[10px]" />
+        {/* <hr className="mt-[10px]" /> */}
       </div>
     </div>
   );

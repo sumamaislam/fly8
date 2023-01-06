@@ -86,10 +86,10 @@ export default function allproducts() {
           {shopAll.map && shopAll?.map((items, index) => {
             return (
               <div className="   " key={index}>
-                <div className="justify-center flex  " data-aos="zoom-in" data-aos-duration="1500">
+                <div className="justify-center flex  relative overflow-hidden bg-no-repeat bg-cover" data-aos="zoom-in" data-aos-duration="1500">
                   <Link href={`/cards/${items.id}`}>
                     <img
-                      className="rounded-t-lg   " 
+                      className="rounded-t-lg  hover:scale-110 transition duration-500 ease-in-out  " 
                       src={items.thumbnail}
                       alt=""
                     />

@@ -179,29 +179,29 @@ export default function Cart({ showCart, setShowCart }) {
                                         </p>
                                       </div>
                                       <div className="mt-[10px] flex gap-2 md:gap-[25px] items-center justify-between ">
-                                        <div className="flex gap-[20px] border items-center rounded-md h-[25px] bg-[ #E9EFEE] px-[16px]">
-                                          <div className="cursor-pointer w-[5px] ">
+                                        <div className="flex  border items-center rounded-md h-[25px] bg-[ #E9EFEE]">
+                                          <div className="cursor-pointer w-[30px] flex h-full justify-center items-center" onClick={() =>
+                                                decerement(item, index)
+                                              }>
                                             <img
-                                              className=""
+                                              className="h-fit  flex items-center"
                                               src="/svg/arrowleft.svg"
                                               alt=""
-                                              onClick={() =>
-                                                decerement(item, index)
-                                              }
                                             />
                                           </div>
-                                          <div>
+                                          <div className="w-[30px] flex items-center justify-center">
                                             <p className=" font-bold text-[12px] md:text-[16px]">
                                               {item.qty}
                                             </p>
                                           </div>
-                                          <div className="cursor-pointer w-[5px]">
+                                          <div className="cursor-pointer w-[30px] flex justify-center h-full  items-center" onClick={() =>
+                                                increment(item, index)
+                                              }>
                                             <img
                                               src="/svg/arrowright.svg"
                                               alt=""
-                                              onClick={() =>
-                                                increment(item, index)
-                                              }
+                                              className="h-fit flex items-center"
+                                              
                                             />
                                           </div>
                                         </div>

@@ -12,7 +12,10 @@ function Footer() {
       <div className="container m-auto px-[10px]">
         <div className="grid py-[65px] lg:grid-cols-5 grid-col md:grid-cols-2  gap-12 justify-items-center text-center md:text-left ">
           <div className="max-w-[323px] hidden md:block">
+            <Link href="/">
+
             <img src={footer?.logo} alt="Logo" className="w-[100px]" />
+            </Link>
 
             <p className="pt-[25px] xl:text-[16px] text-[12px]">
               {footer && footer?.footer_text}
