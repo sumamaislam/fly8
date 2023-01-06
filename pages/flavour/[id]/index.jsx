@@ -84,9 +84,9 @@ export default function Delta11() {
         </div>
         {/* "url('/img/hero-pattern.svg')", */}
       </div>
-      {/* <div className="mt-[15px] md:hidden h-[300px] bg-left bg-no-repeat bg-cover w-[100%]" style={{ backgroundImage: `url(${url}${slugData[0]?.subcategory?.banner})` }} > */}
+      {/* <div className=" md:hidden h-[300px] bg-left bg-no-repeat bg-cover w-[100%]" style={{ backgroundImage: `url(${url}${slugData[0]?.subcategory?.banner})` }} > */}
        <div>
-        <img className=" w-full " src={`${url}${slugData[0]?.subcategory?.banner}`} alt="" />
+        <img className="mt-[15px] w-full " src={`${url}${slugData[0]?.subcategory?.banner}`} alt="" />
         
         {/* <div className="mt-[15px] hidden md:block h-[300px] bg-left bg-no-repeat bg-cover w-[100%]" style={{ backgroundImage: `url(${url}${slugData[0]?.subcategory?.banner})` }} > */}
      {/* <div className="mt-[15px] hidden md:block h-[300px] bg-left bg-no-repeat bg-cover w-[100%]" ><img src="/images/aboutbg.png" alt="" /></div> */}
@@ -104,10 +104,10 @@ export default function Delta11() {
           {slugData && slugData.length > 0 && slugData?.map((items, index) => {
             return (
               <div className="" key={index}>
-                <div className="justify-center flex" data-aos="zoom-out" data-aos-duration="1500">
+                <div className="justify-center flex relative overflow-hidden bg-no-repeat bg-cover" data-aos="zoom-out" data-aos-duration="1500">
                   <Link href={`/cards/${items.id}`}>
                     <img
-                      className="rounded-t-lg   "
+                      className="rounded-t-lg hover:scale-110 transition duration-500 ease-in-out  "
                       src={items.thumbnail}
                       alt=""
                     />
@@ -155,14 +155,14 @@ export default function Delta11() {
         <div className="bg-[#F7F7F7] w-full overflow-hidden">
           <div
             className="container m-auto flex items-center p-5 flex-col md:flex-row  md:p-8 gap-[75px]
-  " data-aos="fade-down" data-aos-duration="1500"
+  " data-aos="zoom-in" data-aos-duration="1500"
           >
-            <div className="bg-gray-200 font-bold text-[20px]   p-5 md:p-4"  data-aos="fade-left" data-aos-duration="1500">
+            <div className="bg-gray-200 font-bold text-[20px]   p-5 md:p-4"  data-aos="zoom-in" data-aos-duration="1500">
               <p className="min-w-[150px] min-h-[150px] text-center flex items-center">
                 What is <br /> Delta-9o Vapes.?
               </p>
             </div>
-            <div className="2xl:text-[20px] lg:text-[20px] text-[14px] text-[#7A7A7A]" data-aos="fade-right" data-aos-duration="1500" >
+            <div className="2xl:text-[20px] lg:text-[20px] text-[14px] text-[#7A7A7A]" data-aos="zoom-in" data-aos-duration="1500" >
               <p>
                 When it comes to puffing THC, it doesn’t get better than fly8
                 Delta 9 vapes. Our vapes offer the perfect Balance of potency,
@@ -182,14 +182,14 @@ export default function Delta11() {
         <div className="bg-[#F7F7F7] w-full overflow-hidden">
           <div
             className="container m-auto flex items-center p-5 flex-col md:flex-row  md:p-8 gap-[75px]
-  " data-aos="fade-up" data-aos-duration="1500"
+  " data-aos="zoom-in" data-aos-duration="1500"
           >
-            <div className="bg-gray-200 font-bold text-[20px]   p-5 md:p-4" data-aos="fade-left" data-aos-duration="1500">
+            <div className="bg-gray-200 font-bold text-[20px]   p-5 md:p-4" data-aos="zoom-in" data-aos-duration="1500">
               <p className="min-w-[150px] min-h-[150px] text-center flex items-center" >
                 What is <br /> Delta-9o Vapes.?
               </p>
             </div>
-            <div className="2xl:text-[20px] lg:text-[20px] text-[14px] text-[#7A7A7A]" data-aos="fade-right" data-aos-duration="1500">
+            <div className="2xl:text-[20px] lg:text-[20px] text-[14px] text-[#7A7A7A]" data-aos="zoom-in" data-aos-duration="1500">
               <p>
                 When it comes to puffing THC, it doesn’t get better than fly8
                 Delta 9 vapes. Our vapes offer the perfect Balance of potency,

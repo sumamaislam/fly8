@@ -169,11 +169,15 @@ function ContactUs() {
                   FOLLOW US ON
                 </p>
                 <div className=" mt-[15px] gap-2 flex justify-center">
-                  <img src="/socialimages/fb.png" alt="" />
-                  <img src="/socialimages/insta.png" alt="" />
-                  <img src="/socialimages/twitter.png" alt="" />
 
-                  <img src="/socialimages/whatsapp.png" alt="" />
+                <a href="https://www.facebook.com/" target="_blank"><img src="/socialimages/fb.png" alt="" /></a>
+                <a href="https://www.instagram.com/" target="_blank">  <img src="/socialimages/insta.png" alt="" /></a>
+                <a href="https://www.twitter.com/" target="_blank">  <img src="/socialimages/twitter.png" alt="" /></a>
+
+                  <a
+                target="_blank"
+                href="https://web.whatsapp.com/send?phone=+923209463770&amp;text=Hi ,Sumama how are you.."
+              >   <img src="/socialimages/whatsapp.png" alt="" /></a>
                 </div>
               </div>
             </div>

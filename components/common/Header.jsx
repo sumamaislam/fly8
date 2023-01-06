@@ -193,7 +193,7 @@ function Header() {
               </div>
             </div>
             {/* <!-- Secondary Navbar items --> */}
-            <div className=" flex mt-[20px] space-x-6 cursor-pointer">
+            <div className=" flex  items-center space-x-6 cursor-pointer">
               <div className="relative">
                 <img
                   className="w-[20px] "
@@ -209,9 +209,9 @@ function Header() {
               </div>
               <Link href={`${!session?.user?.token ? "/login" : "/profile"}`}>
                 {!session?.user?.token ? (
-                  <img className="w-[20px]" src="/svg/profile2.svg" alt="" />
+                  <img className="w-[24px]" src="/svg/profile2.svg" alt="" />
                 ) : (
-                  <img className="w-[22px]" src="/svg/profile2.svg" alt="" />
+                  <img className="w-[24px]" src="/svg/profile2.svg" alt="" />
                 )}
               </Link>
               <div className=" lg:hidden">
