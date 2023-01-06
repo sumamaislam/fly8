@@ -36,8 +36,10 @@ function Account({ show, setShow }) {
 
   return (
     <div>
-      <div className="bg-[url('/profile/22.png')] bg-cover ">
-        <div className="pt-[130px] pb-[50px]">
+      <div className=" ">
+      <img className="hidden md:block" src="/profile/2.jpg" alt="" />
+        <img className=" md:hidden" src="/profile/3.jpg" alt="" />
+        <div className="">
           <p className="text-center text-white text-[30px] font-bold">
             {/* {!session?.user?.user?.id && "LOGIN / SIGNUP" } */}
             {show === "orders" && "ORDERS"}
@@ -49,7 +51,7 @@ function Account({ show, setShow }) {
         </div>
       </div>
       <div className="2xl:w-[65%] w-[90%] m-auto">
-        <div className="flex justify-between gap-4 items-center md:mt-[100px] mt-[50px]">
+        <div className="flex justify-between gap-4 items-center  mt-[50px]">
           <div className="font-bold md:text-[16px] text-[14px] ">
             <p>PROFILE</p>
           </div>

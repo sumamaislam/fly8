@@ -31,11 +31,6 @@ function Profile() {
 export default Profile;
 
 
-// export const getStaticProps = wrapper.getStaticProps((store) => async () => {
- 
-// });
-
-
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   const session = await getSession({ req: context.req });
   await store.dispatch(navDataRequest());

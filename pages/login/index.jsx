@@ -64,15 +64,18 @@ function login() {
   return (
     <div>
       <Header />
-      <div className="bg-[url('/profile/22.png')] bg-cover ">
-        <div className="pt-[130px] pb-[50px]">
+      <div className="">
+        <img className="hidden md:block" src="/profile/2.jpg" alt="" />
+        <img className=" md:hidden" src="/profile/3.jpg" alt="" />
+
+        <div >
           <p className="text-center text-white text-[30px] font-bold">LOGIN / SIGNUP</p>
         </div>
       </div>
       <div className="2xl:w-[65%] w-[90%] m-auto">
         <div className="flex md:justify-between md:gap-[100px] md:flex-row flex-col-reverse  ">
           {/* left side log in form */}
-          <div className="mt-[100px]  md:w-[550px] w-[270px] m-auto">
+          <div className="mt-[50px]  md:w-[550px] w-[270px] m-auto">
             <p className="font-bold">LOG IN</p>
             {/* log in form */}
             <form className="" onSubmit={submit}>
@@ -123,7 +126,7 @@ function login() {
           {/* line */}
           <div className="seperator 2xl:h-[35%] xl:h-[43%] lg:h-[57%] md:h-[25%]"></div>
           {/* right side registration form  */}
-          <div className="mt-[100px] md:w-[550px] w-[270px] m-auto">
+          <div className="mt-[50px] md:w-[550px] w-[270px] m-auto">
             <p className="font-bold">REGISTER</p>
             {/* log in form */}
             <form className="" onSubmit={handleSubmit}>

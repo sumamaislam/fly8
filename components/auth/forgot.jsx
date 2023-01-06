@@ -31,7 +31,7 @@ function ForgotPassword() {
 
   return (
     <div>
-      <div className="bg-[url('/profile/22.png')] bg-cover ">
+      <div className="bg-[url('/profile/2.jpg')] bg-cover ">
         <div className="pt-[130px] pb-[50px]">
           <p className="text-center text-white text-[30px] font-bold">
             Forgot Password

@@ -209,7 +209,7 @@ function Header() {
               </div>
               <Link href={`${!session?.user?.token ? "/login" : "/profile"}`}>
                 {!session?.user?.token ? (
-                  <img className="w-[24px]" src="/svg/profile2.svg" alt="" />
+                  <img className="w-[24px]" src="/svg/profile1.svg" alt="" />
                 ) : (
                   <img className="w-[24px]" src="/svg/profile2.svg" alt="" />
                 )}
