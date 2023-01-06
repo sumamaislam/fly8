@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -5,6 +6,9 @@ import Topbtn from "../Home/Topbtn";
 
 function Footer() {
   const { footer } = useSelector((state) => state.home);
+
+  const { data: session } = useSession();
+  console.log("Hi",session)
 
   return (
     <div className="bg-[black] text-white mt-[100px]">
@@ -40,7 +44,7 @@ function Footer() {
               footer?.page?.Help?.map((item, i) => {
                 return (
                   // <Link href="">
-                    <p>{item.title}</p>
+                    <p>{session?.user?.data && item.title === "Order Status" ? "" :item.title}</p>
                   // </Link>
                 );
               })}
