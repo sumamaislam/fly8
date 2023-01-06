@@ -7,10 +7,12 @@ function Banner() {
   
   return (
     <div className="">
-      {image && image?.data?.map((items ,index) => {
-        return <img className="  md:h-[100vh] w-full " key={index} src={items.image} alt="" />;
-        // <p>{items.body}</p>
-      })}
+      {/* {image && image?.data?.slice(0,1).map((items ,index) => { */}
+        {/* return */}
+         <img className="lg:hidden w-full " src={image?.data[0]?.image} alt="" />
+         <img className=" hidden lg :block md:h-[100vh] w-full " src={image?.data[1]?.image} alt="" />
+         {/* <img className="  md:h-[100vh] w-full " src={image?.data?.image[1]} alt="" /> */}
+      {/* })} */}
     </div>
   );
 }
