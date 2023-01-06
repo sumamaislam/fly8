@@ -41,7 +41,7 @@ export default function Delta11() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slugData]);
   const url="https://ecomm.fly8.us/assets/files/"
-
+  // const bgurl = productData && JSON.stringify(productData[3]?.background_image);
   return (
     <div>
       <Header />
@@ -82,9 +82,16 @@ export default function Delta11() {
             </ol>
           </nav>
         </div>
+        {/* "url('/img/hero-pattern.svg')", */}
       </div>
-      <div className="mt-[15px]">
-        <img className="h-[300px] w-full" src={`${url}${slugData[0]?.subcategory?.banner}`} alt="" />
+      {/* <div className="mt-[15px] md:hidden h-[300px] bg-left bg-no-repeat bg-cover w-[100%]" style={{ backgroundImage: `url(${url}${slugData[0]?.subcategory?.banner})` }} > */}
+       <div>
+        <img className=" w-full " src={`${url}${slugData[0]?.subcategory?.banner}`} alt="" />
+        
+        {/* <div className="mt-[15px] hidden md:block h-[300px] bg-left bg-no-repeat bg-cover w-[100%]" style={{ backgroundImage: `url(${url}${slugData[0]?.subcategory?.banner})` }} > */}
+     {/* <div className="mt-[15px] hidden md:block h-[300px] bg-left bg-no-repeat bg-cover w-[100%]" ><img src="/images/aboutbg.png" alt="" /></div> */}
+     {/* <div className="mt-[15px] md:hidden block h-[300px] bg-left bg-no-repeat bg-cover w-[100%]" ><img src="/images/1.jpg" alt="" /></div> */}
+
       </div>
 
       <div className="text-center font-bold text-[#5FB75D]">

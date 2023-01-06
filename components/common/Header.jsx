@@ -209,9 +209,9 @@ function Header() {
               </div>
               <Link href={`${!session?.user?.token ? "/login" : "/profile"}`}>
                 {!session?.user?.token ? (
-                  <img className="w-[20px]" src="/svg/profile.svg" alt="" />
+                  <img className="w-[20px]" src="/svg/profile2.svg" alt="" />
                 ) : (
-                  <img className="w-[22px]" src="/svg/profile1.svg" alt="" />
+                  <img className="w-[22px]" src="/svg/profile2.svg" alt="" />
                 )}
               </Link>
               <div className=" lg:hidden">
@@ -233,11 +233,11 @@ function Header() {
                   </svg>
                 </button>
               </div>
-              <div>
+              {/* <div>
                 <Link href="/notification">
                 <img className="w-[20px]" src="/svg/notification.svg" alt="" />
                 </Link>
-              </div>
+              </div> */}
             </div>
             {/* <!-- Mobile menu button --> */}
           </div>

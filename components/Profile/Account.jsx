@@ -40,7 +40,7 @@ function Account({ show, setShow }) {
         <div className="pt-[130px] pb-[50px]">
           <p className="text-center text-white text-[30px] font-bold">
             {/* {!session?.user?.user?.id && "LOGIN / SIGNUP" } */}
-            {show === "orders" && "OREDERS"}
+            {show === "orders" && "ORDERS"}
             {show === "address" && "ADDRESS"}
             {show === "account" && "ACCOUNT"}
             {show === "payment" && "PAYMENT"}
