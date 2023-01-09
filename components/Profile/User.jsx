@@ -137,7 +137,7 @@ function User() {
   const handleImgChange = (e) => {
     // console.log(URL.createObjectURL(e.target.files[0]))
     setUserImg(URL.createObjectURL(e.target.files[0]))
-    console.log(e.target.files[0])
+    console.log(e.target.files)
     // const data2 = {
     //   name: session?.user?.user?.full_name,
     //   email: session?.user?.user?.email,
