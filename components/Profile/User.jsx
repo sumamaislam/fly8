@@ -92,7 +92,7 @@ function User() {
           console.log(formvalues);
           dispatch(updatedUser({
             ...mainData,
-            current_password: mainData.password,
+            current_password: values.password,
             newpassword: values.newpassword ? values.newpassword : null,
             repeatpassword: values.repeatpassword ? values.repeatpassword : null,
             photo: checked,
