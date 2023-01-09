@@ -137,7 +137,7 @@ function User() {
   const handleImgChange = (e) => {
     // console.log(URL.createObjectURL(e.target.files[0]))
     setUserImg(URL.createObjectURL(e.target.files[0]))
-    console.log(e.target.files)
+    const data1 = e.target.files[0]
     // const data2 = {
     //   name: session?.user?.user?.full_name,
     //   email: session?.user?.user?.email,
@@ -158,7 +158,7 @@ function User() {
       country: session?.user?.user?.country,
       zip: session?.user?.user?.zip_code,
       address: session?.user?.user?.address,
-      photo: e.target.files[0]
+      photo: data1
     }));
   };
   const handleDeleteImg = (e) => {
