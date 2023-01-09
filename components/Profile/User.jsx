@@ -96,7 +96,7 @@ function User() {
             newpassword: values.newpassword ? values.newpassword : null,
             repeatpassword: values.repeatpassword ? values.repeatpassword : null,
             photo: checked,
-          }))
+          }));
           // .then((res) => {
           //   const data = {
           //     email: res?.data?.email,
