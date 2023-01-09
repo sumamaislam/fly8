@@ -82,27 +82,34 @@ function User() {
     if (Object.keys(error).length > 0) {
       setErrors(error);
     } else {
-      if (values.newpassword === values.repeatpassword) {
-        console.log(formvalues);
+      if (checked) {
+        if (values.newpassword === values.repeatpassword) {
+          console.log(formvalues);
+          dispatch(updatedUser({
+            ...mainData,
+            newpassword: values.newpassword ? values.newpassword : null,
+            repeatpassword: values.repeatpassword ? values.repeatpassword : null,
+          }))
+          setFormvalues({
+            first_name: "",
+            lastname: "",
+            email: "",
+            password: "",
+            newpassword: "",
+            repeatpassword: "",
+          });
+          setErrors({ repeatpassword: "" });
+        } else {
+          setErrors({
+            repeatpassword: "Password and Confirm Password must be same",
+          });
+        }
+      }else{
         dispatch(updatedUser({
-          ...mainData,
-          newpassword: values.newpassword ? values.newpassword : null,
-          repeatpassword: values.repeatpassword ? values.repeatpassword : null,
+          ...mainData
         }))
-        setFormvalues({
-          first_name: "",
-          lastname: "",
-          email: "",
-          password: "",
-          newpassword: "",
-          repeatpassword: "",
-        });
-        setErrors({ repeatpassword: "" });
-      } else {
-        setErrors({
-          repeatpassword: "Password and Confirm Password must be same",
-        });
       }
+
     }
   };
   const handleImgChange = (e) => {
