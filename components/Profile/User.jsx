@@ -30,6 +30,8 @@ function User() {
     lastname: names && names.length > 1 ? names[1] : "",
     newpassword: "",
     repeatpassword: "",
+    name: session?.user?.user?.first_name,
+    zip: session?.user?.user?.zip_code,
   });
 
   // console.log(data1.split(" ")[0])
@@ -90,14 +92,14 @@ function User() {
             newpassword: values.newpassword ? values.newpassword : null,
             repeatpassword: values.repeatpassword ? values.repeatpassword : null,
           }))
-          setFormvalues({
-            first_name: "",
-            lastname: "",
-            email: "",
-            password: "",
-            newpassword: "",
-            repeatpassword: "",
-          });
+          // setFormvalues({
+          //   first_name: "",
+          //   lastname: "",
+          //   email: "",
+          //   password: "",
+          //   newpassword: "",
+          //   repeatpassword: "",
+          // });
           setErrors({ repeatpassword: "" });
         } else {
           setErrors({
