@@ -161,7 +161,8 @@ function User() {
       city: session?.user?.user?.city,
       country: session?.user?.user?.country,
       zip: session?.user?.user?.zip,
-      address: session?.user?.user?.address, "photo": null
+      address: session?.user?.user?.address, 
+      photo: null
     }));
   };
   // useEffect(() => {
