@@ -171,8 +171,8 @@ function Header() {
             <div className="flex space-x-7">
               <div>
                 {/* <!-- Website Logo --> */}
-                <Link href="/" className="flex  py-4 px-2">
-                  <img src={header?.logo} alt="Logo" className="w-[65px]" />
+                <Link href="/" className="flex  py-2 px-2">
+                  <img src={header?.logo} alt="Logo" className="w-[60px]" />
                 </Link>
               </div>
               {/* <!-- Primary Navbar items --> */}
@@ -214,7 +214,7 @@ function Header() {
                   <img className="w-[24px]" src="/svg/profile2.svg" alt="" />
                 )}
               </Link>
-              <div className=" lg:hidden">
+              <div className=" lg:hidden mt-1">
                 <button
                   className="outline-none mobile-menu-button"
                   onClick={() => setShowHead(!showHead)}
