@@ -176,7 +176,7 @@ function Header() {
                 </Link>
               </div>
               {/* <!-- Primary Navbar items --> */}
-              <div className="hidden lg:block z-10  mt-[20px]  gap-[20px]">
+              <div className="hidden lg:block  mt-[20px]  gap-[20px]">
                 {header &&
                   // header.data.length > 0 &&
                   header?.data?.map((item, index) => {
