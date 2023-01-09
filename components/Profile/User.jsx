@@ -92,7 +92,7 @@ function User() {
           console.log(formvalues);
           dispatch(updatedUser({
             ...mainData,
-            current_password: mainData.password, 
+            current_password: mainData.password,
             newpassword: values.newpassword ? values.newpassword : null,
             repeatpassword: values.repeatpassword ? values.repeatpassword : null,
             photo: checked,
@@ -122,8 +122,8 @@ function User() {
   const handleImgChange = (e) => {
     // console.log(URL.createObjectURL(e.target.files[0]))
     setUserImg(URL.createObjectURL(e.target.files[0]))
-    dispatch(updatedUser({
-      name: session?.user?.user?.first_name,
+    const data2 = {
+      name: session?.user?.user?.full_name,
       email: session?.user?.user?.email,
       phone: session?.user?.user?.phone,
       fax: session?.user?.user?.fax,
@@ -132,13 +132,14 @@ function User() {
       zip: session?.user?.user?.zip,
       address: session?.user?.user?.address,
       photo: URL.createObjectURL(e.target.files[0])
-    }));
+    }
+    dispatch(updatedUser(data2));
     // dispatch(updatedUser()); 
   };
   const handleDeleteImg = (e) => {
     setUserImg("")
     dispatch(updatedUser({
-      name: session?.user?.user?.first_name,
+      name: session?.user?.user?.full_name,
       email: session?.user?.user?.email,
       phone: session?.user?.user?.phone,
       fax: session?.user?.user?.fax,
