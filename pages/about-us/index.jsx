@@ -9,8 +9,8 @@ function AboutUs() {
   return (
     <div>
       <Header />
-      <div className="w-[90%] 2xl:w-[80%] m-auto">
-        <div>
+       
+        <div className="w-[90%] 2xl:w-[80%] m-auto">
           <nav className="flex mt-[5rem] " aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
               <li className="inline-flex items-center">
@@ -45,10 +45,22 @@ function AboutUs() {
             </ol>
           </nav>
         </div>
-        <div>
-          <p className="mt-[70px] text-[24px] md:text-[30px] text-center font-bold ">
+        <div className="mt-[10px]">
+          <div className="bg-[url('/profile/2.jpg')] hidden md:block h-[210px]" >
+          <p className=" text-[24px] md:text-[30px] items-center h-full text-center font-bold flex justify-center text-white">
             ABOUT US
           </p>
+          </div>
+      <div className="bg-[url('/profile/3.jpg')] bg-center bg-no-repeat md:hidden h-[150px]">
+      <p className=" text-[24px] md:text-[30px] items-center h-full text-center font-bold flex justify-center text-white">
+            ABOUT US
+          </p>
+      </div>
+       
+        </div>
+        <div className="w-[90%] 2xl:w-[80%] m-auto">
+        <div>
+          
           <p className="text-[16px] text-center mt-[30px] text-[#7A7A7A]">
             When it comes to puffing THC, it doesn’t get better than fly8 Delta
             9 vapes. Our vapes offer the perfect Balance of potency,

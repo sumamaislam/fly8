@@ -49,8 +49,8 @@ function ContactUs() {
   return (
     <div>
       <Header />
-      <div className="container m-auto w-[95%] ">
-        <div>
+     
+        <div className="container m-auto w-[95%]">
           <nav className="flex mt-[5rem] " aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
               <li className="inline-flex items-center">
@@ -83,6 +83,20 @@ function ContactUs() {
             </ol>
           </nav>
         </div>
+        <div className="mt-[10px]">
+          <div className="bg-[url('/profile/2.jpg')] hidden md:block h-[210px]" >
+          <p className=" text-[24px] md:text-[30px] items-center h-full text-center font-bold flex justify-center text-white">
+           CONTACT US
+          </p>
+          </div>
+      <div className="bg-[url('/profile/3.jpg')] bg-center bg-no-repeat md:hidden h-[150px]">
+      <p className=" text-[24px] md:text-[30px] items-center h-full text-center font-bold flex justify-center text-white">
+           CONTACT US
+          </p>
+      </div>
+       
+        </div>
+        <div className="container m-auto w-[95%] ">
         <div className="lg:w-[80%] mt-[15px] md:mt-[50px] border m-auto flex flex-col lg:flex-row lg:rounded-[30px]  lg:shadow-lg ">
           <div className="text-[12px] md:text-[16px]  w-full py-[50px] bg-[#EDEDED]   lg:rounded-l-[30px] ">
             <p className=" 2xl:pl-[100px] md:pl-[50px] pl-[10px]">
