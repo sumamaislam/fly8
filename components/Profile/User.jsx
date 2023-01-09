@@ -234,45 +234,6 @@ function User() {
                 PASSWORD CHANGE
               </p>
 
-            <div className="w-full">
-              <p className="text-[11px]  mt-[10px]">Current Password</p>
-              <input
-                placeholder="Type Current Password...."
-                className=" w-full outline-none py-[10px] border border-gray-700 rounded-md p-2"
-                onChange={handleChange}
-                name="password"
-                type="password"
-                value={formvalues.password}
-              />
-              <p className="text-red-600">{errors.password}</p>
-            </div>
-
-            <div className="w-full">
-              <p className="text-[11px] mt-[10px]">New Password</p>
-              <input
-                placeholder="Type New Password...."
-                type="password"
-                className=" w-full outline-none py-[10px]  border border-gray-700 rounded-md p-2"
-                onChange={handleChange}
-                name="newpassword"
-                value={formvalues.newpassword}
-              />
-              <p className="text-red-600">{errors.newpassword}</p>
-            </div>
-
-            <div className="w-full">
-              <p className="text-[11px] mt-[10px] ">Confirm Password</p>
-              <input
-                // type="password"
-                placeholder="Type Confirm Password...."
-                className=" w-full outline-none py-[10px] border border-gray-700 rounded-md p-2"
-                onChange={handleChange}
-                name="repeatpassword"
-                value={formvalues.repeatpassword}
-                type="password"
-              />
-              <p className="text-red-600">{errors.repeatpassword}</p>
-            </div>
               <div className="w-full">
                 <p className="text-[11px]  mt-[10px]">Current Password</p>
                 <input
@@ -280,6 +241,7 @@ function User() {
                   className=" w-full outline-none py-[10px] border border-gray-700 rounded-md p-2"
                   onChange={handleChange}
                   name="password"
+                  type="password"
                   value={formvalues.password}
                 />
                 <p className="text-red-600">{errors.password}</p>
@@ -289,6 +251,7 @@ function User() {
                 <p className="text-[11px] mt-[10px]">New Password</p>
                 <input
                   placeholder="Type New Password...."
+                  type="password"
                   className=" w-full outline-none py-[10px]  border border-gray-700 rounded-md p-2"
                   onChange={handleChange}
                   name="newpassword"
@@ -306,6 +269,7 @@ function User() {
                   onChange={handleChange}
                   name="repeatpassword"
                   value={formvalues.repeatpassword}
+                  type="password"
                 />
                 <p className="text-red-600">{errors.repeatpassword}</p>
               </div>
