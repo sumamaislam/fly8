@@ -138,18 +138,28 @@ function User() {
     // console.log(URL.createObjectURL(e.target.files[0]))
     setUserImg(URL.createObjectURL(e.target.files[0]))
     console.log(e.target.files[0])
-    const data2 = {
+    // const data2 = {
+    //   name: session?.user?.user?.full_name,
+    //   email: session?.user?.user?.email,
+    //   phone: session?.user?.user?.phone,
+    //   fax: session?.user?.user?.fax,
+    //   city: session?.user?.user?.city,
+    //   country: session?.user?.user?.country,
+    //   zip: session?.user?.user?.zip_code,
+    //   address: session?.user?.user?.address,
+    //   photo: e.target.files[0]
+    // }
+    dispatch(updatedUser({
       name: session?.user?.user?.full_name,
       email: session?.user?.user?.email,
       phone: session?.user?.user?.phone,
       fax: session?.user?.user?.fax,
       city: session?.user?.user?.city,
       country: session?.user?.user?.country,
-      zip: session?.user?.user?.zip,
+      zip: session?.user?.user?.zip_code,
       address: session?.user?.user?.address,
       photo: e.target.files[0]
-    }
-    dispatch(updatedUser(data2));
+    }));
   };
   const handleDeleteImg = (e) => {
     setUserImg("")
@@ -160,7 +170,7 @@ function User() {
       fax: session?.user?.user?.fax,
       city: session?.user?.user?.city,
       country: session?.user?.user?.country,
-      zip: session?.user?.user?.zip,
+      zip: session?.user?.user?.zip_code,
       address: session?.user?.user?.address, 
       photo: null
     }));
