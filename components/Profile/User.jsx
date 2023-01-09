@@ -35,7 +35,7 @@ function User() {
     city: session?.user?.user?.city,
     country: session?.user?.user?.country,
     address: session?.user?.user?.address,
-    photo: session?.user?.user?.photo,
+    // photo: session?.user?.user?.photo,
   });
 
   // console.log(data1.split(" ")[0])
@@ -61,7 +61,7 @@ function User() {
     country: formvalues?.country,
     zip: formvalues?.zip,
     address: formvalues?.address,
-    photo: formvalues?.photo
+    // photo: formvalues?.photo
   }
 
   const validate = (values) => {
@@ -95,7 +95,7 @@ function User() {
             current_password: values.password,
             newpassword: values.newpassword ? values.newpassword : null,
             repeatpassword: values.repeatpassword ? values.repeatpassword : null,
-            photo: userImg,
+            // photo: userImg,
           }));
           // .then((res) => {
           //   const data = {
@@ -146,7 +146,7 @@ function User() {
       country: session?.user?.user?.country,
       zip: session?.user?.user?.zip,
       address: session?.user?.user?.address,
-      photo: URL.createObjectURL(e.target.files[0])
+      photo: e.target.files[0]
     }
     dispatch(updatedUser(data2));
     // dispatch(updatedUser()); 
