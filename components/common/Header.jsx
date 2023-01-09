@@ -166,7 +166,7 @@ function Header() {
         className="fixed z-10 top-0 shadow-lg w-full bg-black bg-opacity-[60%]"
       >
         <Cart showCart={showCart} setShowCart={setShowCart} />
-        <div className="container m-auto px-4 h-[64px]  ">
+        <div className="container m-auto px-4 md:h-[64px] h-[70px]  ">
           <div className="flex justify-between ">
             <div className="flex space-x-7">
               <div>
@@ -214,7 +214,7 @@ function Header() {
                   <img className="w-[24px]" src="/svg/profile2.svg" alt="" />
                 )}
               </Link>
-              <div className=" lg:hidden mt-1">
+              <div className=" lg:hidden flex">
                 <button
                   className="outline-none mobile-menu-button"
                   onClick={() => setShowHead(!showHead)}

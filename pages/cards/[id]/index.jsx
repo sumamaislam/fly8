@@ -253,11 +253,11 @@ export default function Detail() {
             </div>
           </div>
           <div>
-            <button className="text-[15px] bg-[#5FB75D] px-[7px]  rounded-md text-white uppercase">
+            <button className="">
               {mainData?.product?.stock > 0 ? (
-                <p className="">IN STOCK</p>
+                <p className="bg-[#5FB75D] px-[7px] text-[15px]   rounded-md  uppercase text-white">IN STOCK</p>
               ) : (
-                <p>OUT OF STOCK</p>
+                <p className="px-[7px] text-white bg-red-500 text-[15px]   rounded-md  uppercase">OUT OF STOCK</p>
               )}
             </button>
 
@@ -521,7 +521,7 @@ export default function Detail() {
               <p className="md:text-[15px] text-[12px] pt-[5px]">DELTA-9o</p> */}
               {mainData?.product?.meta_tag?.map((items, index) => {
                 return (
-                  <p className="md:text-[10px] text-[8px] pt-[5px]">
+                  <p className="md:text-[10px] text-[10px] pt-[5px]">
                     {items}
                   </p>
                 );
