@@ -28,7 +28,7 @@ export const updatedUser = createAsyncThunk("user/updateUser", async (payload, t
   try {
     const session = await getSession();
     const response = await axios
-      .post(`${baseURL}user/update?token=${session?.user?.token}`, payload)
+      .post(`${baseURL}user/profile/update?token=${session?.user?.token}`, payload)
       .then((response) => response.data);
     toast(<RequestMessage message="Successful Update Account!" />, { autoClose: 8000 });
     // Router.push("/");
