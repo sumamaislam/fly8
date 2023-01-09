@@ -15,15 +15,15 @@ function Profile() {
   const [show, setShow] = useState("orders");
   return (
     <div>
-        <Header />
-      
-        <Account show={show} setShow={setShow} />
-        {show === "address" && <Form />}
-        {show === "account" && <User/>}
-        {show === "payment" &&<PaymentCard />}
-        {show === "subscription" && <Subscription />}
-        <Email />
-        <Footer />
+      <Header />
+
+      <Account show={show} setShow={setShow} />
+      {show === "address" && <Form />}
+      {show === "account" && <User />}
+      {show === "payment" && <PaymentCard />}
+      {show === "subscription" && <Subscription />}
+      <Email />
+      <Footer />
     </div>
   );
 }
@@ -35,18 +35,18 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   const session = await getSession({ req: context.req });
   await store.dispatch(navDataRequest());
   await store.dispatch(footerDataRequest());
-  // if (session) {
-  //   return {
-  //     props: {
-  //       session,
-  //     },
-  //   };
-  // } else {
-  //   return {
-  //     redirect: {
-  //       destination: `/login`,
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  if (session) {
+    return {
+      props: {
+        session,
+      },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: `/login`,
+        permanent: false,
+      },
+    };
+  }
 });
