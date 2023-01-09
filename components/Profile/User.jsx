@@ -95,6 +95,7 @@ function User() {
             current_password: mainData.password, 
             newpassword: values.newpassword ? values.newpassword : null,
             repeatpassword: values.repeatpassword ? values.repeatpassword : null,
+            photo: checked,
           }))
           // setFormvalues({
           //   first_name: "",
