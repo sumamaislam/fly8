@@ -160,6 +160,7 @@ function User() {
       address: session?.user?.user?.address,
       photo: data1
     }));
+    console.log("111")
   };
   const handleDeleteImg = (e) => {
     setUserImg("")
