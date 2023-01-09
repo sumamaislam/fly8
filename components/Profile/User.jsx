@@ -137,18 +137,19 @@ function User() {
   const handleImgChange = (e) => {
     // console.log(URL.createObjectURL(e.target.files[0]))
     setUserImg(URL.createObjectURL(e.target.files[0]))
-    const data2 = {
-      name: session?.user?.user?.full_name,
-      email: session?.user?.user?.email,
-      phone: session?.user?.user?.phone,
-      fax: session?.user?.user?.fax,
-      city: session?.user?.user?.city,
-      country: session?.user?.user?.country,
-      zip: session?.user?.user?.zip,
-      address: session?.user?.user?.address,
-      photo: e.target.files[0]
-    }
-    dispatch(updatedUser(data2));
+    console.log(e.target.files[0])
+    // const data2 = {
+    //   name: session?.user?.user?.full_name,
+    //   email: session?.user?.user?.email,
+    //   phone: session?.user?.user?.phone,
+    //   fax: session?.user?.user?.fax,
+    //   city: session?.user?.user?.city,
+    //   country: session?.user?.user?.country,
+    //   zip: session?.user?.user?.zip,
+    //   address: session?.user?.user?.address,
+    //   photo: e.target.files[0]
+    // }
+    // dispatch(updatedUser(data2));
     // dispatch(updatedUser()); 
   };
   const handleDeleteImg = (e) => {
