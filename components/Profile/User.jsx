@@ -96,7 +96,21 @@ function User() {
             newpassword: values.newpassword ? values.newpassword : null,
             repeatpassword: values.repeatpassword ? values.repeatpassword : null,
             photo: checked,
-          }))
+          })).then((res) => {
+            const data = {
+              email: res?.data?.email,
+              // email: res?.data?.email,
+            }
+          });
+          // const data = {
+          //   email: session?.user?.user?.email,
+          //   password: session?.user?.user?.password,
+          // }
+          // signIn("credentials", { ...data, redirect: false }).then((response) => {
+          //   // if (response?.ok) {
+          //   //   Router.push("/");
+          //   // }
+          // });
           // setFormvalues({
           //   first_name: "",
           //   lastname: "",

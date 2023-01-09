@@ -32,15 +32,6 @@ export const updatedUser = createAsyncThunk("user/updateUser", async (payload, t
       .then((response) => response.data);
     toast(<RequestMessage message="Successful Update Account!" />, { autoClose: 8000 });
     // Router.push("/");
-    const data = {
-      "email": session?.user?.user?.email,
-      "password": session?.user?.user?.password,
-    }
-    signIn("credentials", { ...data, redirect: false }).then((response) => {
-      // if (response?.ok) {
-      //   Router.push("/");
-      // }
-    });
     return response;
   } catch (error) {
     console.log("Error", error);
