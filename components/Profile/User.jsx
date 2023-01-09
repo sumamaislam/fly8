@@ -25,13 +25,17 @@ function User() {
   const { data: session } = useSession();
   const names = session?.user?.user?.full_name?.split(" ")
   const [formvalues, setFormvalues] = useState({
-    ...session?.user?.user,
     first_name: names ? names[0] : "",
     lastname: names && names.length > 1 ? names[1] : "",
-    newpassword: "",
-    repeatpassword: "",
-    name: session?.user?.user?.first_name,
+    // name: session?.user?.user?.first_name,
     zip: session?.user?.user?.zip_code,
+    email: session?.user?.user?.email,
+    phone: session?.user?.user?.phone,
+    fax: session?.user?.user?.fax,
+    city: session?.user?.user?.city,
+    country: session?.user?.user?.country,
+    address: session?.user?.user?.address,
+    photo: session?.user?.user?.photo,
   });
 
   // console.log(data1.split(" ")[0])
@@ -48,7 +52,6 @@ function User() {
     validate(formvalues);
   };
 
-  const data1 = session?.user?.user?.full_name.split(" ")
   const mainData = {
     name: formvalues?.first_name + " " + formvalues?.lastname,
     email: formvalues?.email,
@@ -106,7 +109,7 @@ function User() {
             repeatpassword: "Password and Confirm Password must be same",
           });
         }
-      }else{
+      } else {
         dispatch(updatedUser({
           ...mainData
         }))
@@ -117,12 +120,31 @@ function User() {
   const handleImgChange = (e) => {
     // console.log(URL.createObjectURL(e.target.files[0]))
     setUserImg(URL.createObjectURL(e.target.files[0]))
-    dispatch(updatedUser({ ...session?.user?.user, "photo": URL.createObjectURL(e.target.files[0]) }));
+    dispatch(updatedUser({
+      name: session?.user?.user?.first_name,
+      email: session?.user?.user?.email,
+      phone: session?.user?.user?.phone,
+      fax: session?.user?.user?.fax,
+      city: session?.user?.user?.city,
+      country: session?.user?.user?.country,
+      zip: session?.user?.user?.zip,
+      address: session?.user?.user?.address,
+      photo: URL.createObjectURL(e.target.files[0])
+    }));
     // dispatch(updatedUser()); 
   };
   const handleDeleteImg = (e) => {
     setUserImg("")
-    dispatch(updatedUser({ ...session?.user?.user, "photo": null }));
+    dispatch(updatedUser({
+      name: session?.user?.user?.first_name,
+      email: session?.user?.user?.email,
+      phone: session?.user?.user?.phone,
+      fax: session?.user?.user?.fax,
+      city: session?.user?.user?.city,
+      country: session?.user?.user?.country,
+      zip: session?.user?.user?.zip,
+      address: session?.user?.user?.address, "photo": null
+    }));
   };
   // useEffect(() => {
   //   console.log(userImg)
