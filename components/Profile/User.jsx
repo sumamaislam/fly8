@@ -96,12 +96,13 @@ function User() {
             newpassword: values.newpassword ? values.newpassword : null,
             repeatpassword: values.repeatpassword ? values.repeatpassword : null,
             photo: checked,
-          })).then((res) => {
-            const data = {
-              email: res?.data?.email,
-              // email: res?.data?.email,
-            }
-          });
+          }))
+          // .then((res) => {
+          //   const data = {
+          //     email: res?.data?.email,
+          //     // email: res?.data?.email,
+          //   }
+          // });
           // const data = {
           //   email: session?.user?.user?.email,
           //   password: session?.user?.user?.password,
