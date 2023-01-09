@@ -95,7 +95,7 @@ function User() {
             current_password: values.password,
             newpassword: values.newpassword ? values.newpassword : null,
             repeatpassword: values.repeatpassword ? values.repeatpassword : null,
-            photo: checked,
+            photo: userImg,
           }));
           // .then((res) => {
           //   const data = {
