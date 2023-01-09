@@ -15,15 +15,15 @@ function Profile() {
   const [show, setShow] = useState("orders");
   return (
     <div>
-        <Header />
-      
-        <Account show={show} setShow={setShow} />
-        {show === "address" && <Form />}
-        {show === "account" && <User/>}
-        {show === "payment" &&<PaymentCard />}
-        {show === "subscription" && <Subscription />}
-        <Email />
-        <Footer />
+      <Header />
+
+      <Account show={show} setShow={setShow} />
+      {show === "address" && <Form />}
+      {show === "account" && <User />}
+      {show === "payment" && <PaymentCard />}
+      {show === "subscription" && <Subscription />}
+      <Email />
+      <Footer />
     </div>
   );
 }

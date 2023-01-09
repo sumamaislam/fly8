@@ -1,10 +1,17 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getSession, signOut } from "next-auth/react";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getSession, signIn, signOut } from "next-auth/react";
 import Router from "next/router";
 import request from "../request";
 import axios from "axios";
+import RequestMessage from "../../components/common/RequestMessage";
+import { toast } from "react-toastify";
 
 const baseURL = `https://ecomm.fly8.us/api/`
+
+const initialState = {
+  updateUser: {},
+  isLoadingUser: false,
+};
 
 export const signupRequest = createAsyncThunk(
   "signup/signupRequest",
@@ -15,6 +22,23 @@ export const signupRequest = createAsyncThunk(
     return response;
   }
 );
+
+
+export const updatedUser = createAsyncThunk("user/updateUser", async (payload, thunkAPI) => {
+  try {
+    const session = await getSession();
+    const response = await axios
+      .post(`${baseURL}user/profile/update?token=${session?.user?.token}`, payload)
+      .then((response) => response.data);
+    toast(<RequestMessage message="Successful Update Account!" />, { autoClose: 8000 });
+    // Router.push("/");
+    return response;
+  } catch (error) {
+    console.log("Error", error);
+    toast(<RequestMessage message="Update Failed!" />);
+    return null;
+  }
+});
 
 export const logoutRequest = createAsyncThunk(
   "login/logoutRequest",
@@ -50,3 +74,27 @@ export const forgotPassword = createAsyncThunk(
     }
   }
 );
+
+export const userSlice = createSlice({
+  name: "user",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(HYDRATE, (state, action) => {
+      console.log("HYDRATE", action.payload);
+      // state.selectedUser = action?.payload?.user?.selectedUser?.id ? action.payload.user.selectedUser : state?.selectedUser;
+      state.updateUser = action?.payload?.auth?.updateUser ? action.payload.auth.updateUser : state?.updateUser;
+    });
+    builder.addCase(updatedUser.pending, (state) => {
+      state.isLoadingUser = true;
+    });
+    builder.addCase(updatedUser.fulfilled, (state, action) => {
+      state.updateUser = action.payload;
+      state.isLoadingUser = false;
+    });
+    builder.addCase(updatedUser.rejected, (state, action) => {
+      state.isLoadingUser = false;
+      console.log("Error:", { message: action.payload.message });
+    });
+  },
+});
