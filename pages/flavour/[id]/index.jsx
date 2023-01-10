@@ -86,7 +86,7 @@ export default function Delta11() {
       </div>
       {/* <div className="mt-[15px] md:hidden h-[300px] bg-left bg-no-repeat bg-cover w-[100%]" style={{ backgroundImage: `url(${url}${slugData[0]?.subcategory?.banner})` }} > */}
        <div>
-        <img className=" w-full " src={`${url}${slugData[0]?.subcategory?.banner}`} alt="" />
+        <img className=" w-full mt-[10px]" src={`${url}${slugData[0]?.subcategory?.banner}`} alt="" />
         
         {/* <div className="mt-[15px] hidden md:block h-[300px] bg-left bg-no-repeat bg-cover w-[100%]" style={{ backgroundImage: `url(${url}${slugData[0]?.subcategory?.banner})` }} > */}
      {/* <div className="mt-[15px] hidden md:block h-[300px] bg-left bg-no-repeat bg-cover w-[100%]" ><img src="/images/aboutbg.png" alt="" /></div> */}
@@ -131,7 +131,7 @@ export default function Delta11() {
                   <div className="flex justify-center mt-[24px] w-full overflow-hidden">
                     <Link href={`/cards/${items.id}`}>
                       <button
-                        className=" items-center flex gap-2 h text-[14px] xl:text-[15px] font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "
+                        className=" items-center flex gap-2 h text-[14px] xl:text-[15px] hover:bg-yellow-500 hover:italic hover:font-extrabold font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "
                       >
                         <span>
                           <img

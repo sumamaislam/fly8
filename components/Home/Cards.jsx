@@ -46,14 +46,16 @@ function Cards() {
                           <h5 className=" text-[14px]  xl:text-[14px]  font-normal  pt-[15px] text-[#535353]  text-center ">
                             {items.description}
                           </h5>
-                          <div className="flex justify-center mt-[32px]">
+                          <button className="flex justify-center mt-[32px] m-auto  "
+                       >
                             <Link
                               href={`flavour/${items.slug}`}
-                              className=" items-center  text-[14px] xl:text-[18px] font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "
+                              className=" items-center  text-[14px] hover:bg-yellow-500 hover:italic hover:font-extrabold xl:text-[18px] font-[700px] rounded-[8px] shadow-md bg-black text-center px-4 py-3 text-[white]  outline-none cursor-pointer  hover:text-white "
                             >
                               Get Your Flavour
                             </Link>
-                          </div>
+                          </button>
+                          
                         </div>
                       </div>
                     );
