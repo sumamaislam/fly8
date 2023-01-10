@@ -51,7 +51,7 @@ function ContactUs() {
           });
         }, (error) => {
           console.log(error.text);
-          alert("error")
+          // alert("error")
         });
       //         EmailJS_SERVICE_ID=service_ojeihpn
       // EmailJS_TEMPLATE_ID=template_1z1s2hr

@@ -5,7 +5,6 @@ import emailjs from '@emailjs/browser';
 import { toast } from "react-toastify";
 import RequestMessage from "../common/RequestMessage";
 
-
 function Email() {
   
   const [emailData, setEmailData] = useState({});
@@ -25,7 +24,7 @@ function Email() {
        setEmailData({email: ""});
      }, (error) => {
        console.log(error.text);
-       alert("error")
+      //  alert("error")
      });
     }
   }

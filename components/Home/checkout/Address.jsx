@@ -450,7 +450,7 @@ function Address({ setShow }) {
         <div className="font-semibold text-[22px] mt-[25px]">
           <p>Information</p>
         </div>
-        <div className="mt-[20px] border-black border flex gap-[20px]">
+        <div className="mt-[20px] border-black border flex md:flex-row flex-col-reverse gap-[20px]">
           {/* left side */}
           <div className="p-4 md:p-10 w-full">
             <div className="">
@@ -638,7 +638,7 @@ function Address({ setShow }) {
             </form>
           </div>
           {/* right side */}
-          <div className="p-10 w-full hidden md:block">
+          <div className="p-10 w-full md:flex-col">
             <div className="font-semibold text-[22px] ">
               <p>Product Information</p>
             </div>

@@ -134,14 +134,18 @@ export default function Detail() {
       setShow("")
     }
     
-  },[mainData?.product?.galleries[0]?.image])
+  },[selectedProduct?.product?.galleries[0]?.image])
 
   useEffect(() => {
-    setMainData(selectedProduct);
+    const data2 = carts?.find((item) => item.id === selectedProduct?.product?.id);
+    // console.log("Fuhhh",data2)
+    const quantity = data2 && data2.qty ? data2.qty : "1"
+    setMainData({...selectedProduct,product: {...selectedProduct.product,qty:quantity}});
+    // console.log("selectedProduct",selectedProduct)
     dispatch(setRecentProduct(selectedProduct));
     dispatch(setRecentCheck(true));
     return () => setRecentCheck(false);
-  }, [selectedProduct]);
+  }, [selectedProduct,carts]);
 
   useEffect(() => {
     if (selectedProduct?.product) {
@@ -332,7 +336,7 @@ export default function Detail() {
                 <div className="h-full flex items-center justify-center">
                   {" "}
                   <p className="text-[15px] w-[35px] font-bold flex  items-center justify-center">
-                    {mainData?.product?.qty}
+                    {mainData?.product?.stock > 0 ? mainData?.product?.qty : 0}
                   </p>
                 </div>
                 <div className="cursor-pointer w-[35px] flex items-center justify-center h-full" onClick={increment}>
@@ -479,7 +483,7 @@ export default function Detail() {
             {/* BUTTON ADD TO CART */}
             {/* <Link href="/add_to_cart"> */}
             <div className="">
-              {mainData?.product?.stock?.length > 0 ? (
+              {mainData?.product?.stock > 0 ? (
                 added ? (
                   <button
                     className="disabled:opacity-25 w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md"
