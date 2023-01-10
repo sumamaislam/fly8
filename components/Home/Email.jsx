@@ -1,17 +1,32 @@
 import React from "react";
+import { useRef } from "react";
 import { useState } from "react";
+import emailjs from '@emailjs/browser';
+import { toast } from "react-toastify";
+import RequestMessage from "../common/RequestMessage";
 
 
 function Email() {
   
   const [emailData, setEmailData] = useState({});
+  const ref = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!emailData.email){
     }else{
      console.log(emailData)
-     setEmailData({email: ""});
+     emailjs.sendForm("service_ojeihpn", "template_f4lia6n", ref.current, "tRRATwKkMHYiurDaS")
+     .then((result) => {
+       console.log(result.text);
+       toast(<RequestMessage message="Subscription Added" />, {
+         autoClose: 8000,
+       });
+       setEmailData({email: ""});
+     }, (error) => {
+       console.log(error.text);
+       alert("error")
+     });
     }
   }
 
@@ -38,7 +53,7 @@ function Email() {
             <p className="text-[20px] pt-[28px] font-medium text-center md:text-left">
               Sign up to take this offer
             </p>
-            <form onSubmit={handleSubmit} className="flex gap-1 mt-[30px] justify-center flex-col md:flex-row ">
+            <form ref={ref} onSubmit={handleSubmit} className="flex gap-1 mt-[30px] justify-center flex-col md:flex-row ">
               <div className="flex justify-center md:justify-start">
                 <input
                   className=" 2xl:w-[700px] md:w-[500px] w-[250px]   h-[48px] md:rounded-tl-[10px] md:rounded-bl-[10px] outline-1 pl-4 outline-black outline"
