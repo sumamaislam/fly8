@@ -168,7 +168,7 @@ function Header() {
         <Cart showCart={showCart} setShowCart={setShowCart} />
         <div className="container m-auto px-4 md:h-[64px] h-[70px]  ">
           <div className="flex justify-between ">
-            <div className="flex space-x-7">
+            <div className="flex space-x-7 z-[-10px]">
               <div>
                 {/* <!-- Website Logo --> */}
                 <Link href="/" className="flex  py-2 px-2">

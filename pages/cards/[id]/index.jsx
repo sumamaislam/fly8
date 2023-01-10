@@ -490,7 +490,7 @@ export default function Detail() {
                   </button>
                 ) : (
                   <button
-                    className="w-full  bg-black text-white py-[11px] text-[15px]  text-center mt-[20px] rounded-md cursor-pointer"
+                    className="w-full  bg-black text-white py-[11px] text-[15px]   hover:bg-yellow-500 hover:italic hover:font-extrabold text-center mt-[20px] rounded-md cursor-pointer"
                     onClick={handleAdd}
                   >
                     ADD TO CART

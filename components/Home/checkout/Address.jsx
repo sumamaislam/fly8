@@ -358,8 +358,8 @@ function Address({ setShow }) {
         <div>
           <Link href="/">
             <img
-              className="w-[100px] pt-[20px]"
-              src="/images/logo.png"
+              className="w-[80px] pt-[20px]"
+              src="/banner/logo.png"
               alt=""
             />
           </Link>
@@ -642,7 +642,7 @@ function Address({ setShow }) {
             <div className="font-semibold text-[22px] ">
               <p>Product Information</p>
             </div>
-            <div className="mt-8 pt-8  w-full h-[270px] scrool-adjust overflow-auto">
+            <div className="mt-8 pt-8  w-full h-[290px] scrool-adjust overflow-auto">
               <div className="flow-root ">
                 <ul role="list" className="-my-6 divide-y divide-gray-200 pb-[30px]">
                   {carts &&
@@ -652,7 +652,7 @@ function Address({ setShow }) {
                           <div className="flex items-center gap-7">
                             <div className="relative">
                               <img
-                                className="w-[70px]"
+                                className="w-[80px]"
                                 src={items.thumbnail}
                                 alt=""
                               />
@@ -664,13 +664,13 @@ function Address({ setShow }) {
                             </div>
                             <div>
                               <div>
-                                <p className="text-[10px] ">
+                                <p className="text-[14px] ">
                                   <span className="font-bold">
                                     {" "}
                                     {items.name}
                                   </span>
                                   <br />
-                                  <span className="text-[10px]">
+                                  <span className="text-[12px]">
                                     {items.slug}
                                   </span>{" "}
                                 </p>
@@ -685,7 +685,7 @@ function Address({ setShow }) {
                                 alt=""
                               />
                             </div> */}
-                            <p className="text-right font-semibold text-[14px] pt-2">
+                            <p className="text-right font-semibold text-[16px] pt-2">
                               ${items.price}
                             </p>
                           </div>
