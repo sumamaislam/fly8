@@ -28,7 +28,7 @@ function Account({ show, setShow }) {
   }, [session]);
 
   const handleLogout = () => {
-    console.log("Hi", { token: session?.user?.token });
+    // console.log("Hi", { token: session?.user?.token });
     dispatch(logoutRequest());
   };
 

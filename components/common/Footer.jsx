@@ -8,7 +8,7 @@ function Footer() {
   const { footer } = useSelector((state) => state.home);
 
   const { data: session } = useSession();
-  console.log("Hi",session)
+  // console.log("Hi",session)
 
   return (
     <div className="bg-[black] text-white mt-[100px]">
